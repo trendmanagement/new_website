@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif; 
+  background-color: #f3f3f3;
+}
+
+.mdl-data-table {
+  margin: auto;  
+}
+
+.mdl-data-table td {
+  cursor: pointer; 
+}
+
+/*.top-bar {
+    margin-top: -16px;
+    position: absolute;
+    width: 100%;
+    margin-left: -16px; 
+    background-color: rgba(255, 206, 117, 0.9); 
+}*/
+
+.filter-label {
+    display: block;
+}
+
+.heading {
+  color: red;
+}
+
+th .mdl-checkbox {
+  display: none; 
+}
+
+.react-datepicker__input-container input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px; 
+    outline: none; 
+    color: #c1c1c1; 
+}
+
+.filter-input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px; 
+    outline: none;
+}
+
+.filter-btn {
+  background-color: rgb(63,81,181); 
+  border: 2px solid  rgb(63,81,181); 
+}
+
+.filter-btn:hover {
+  background-color: rgb(63,81,181); 
+  border: 2px solid  rgb(63,81,181); 
+}
+
+
+.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range {
+    background-color: rgb(63,81,181); 
+}
