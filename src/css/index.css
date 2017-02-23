@@ -1,8 +1,9 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif; 
-  background-color: #f3f3f3;
+  font-family: Roboto,Helvetica,Arial,sans-serif!important; 
+  background-color: #f3f3f3; 
+
 }
 
 .mdl-data-table {
@@ -26,7 +27,11 @@ body {
 }
 
 .heading {
-  color: red;
+  font-weight: 700;
+}
+
+.subheading {
+  padding-bottom: 30px; 
 }
 
 th .mdl-checkbox {
@@ -38,7 +43,6 @@ th .mdl-checkbox {
     border-radius: 4px;
     padding: 5px; 
     outline: none; 
-    color: #c1c1c1; 
 }
 
 .filter-input {
@@ -51,14 +55,109 @@ th .mdl-checkbox {
 .filter-btn {
   background-color: rgb(63,81,181); 
   border: 2px solid  rgb(63,81,181); 
+  outline: none;  
+  color: #fff; 
+  margin-left: -15px;
 }
 
 .filter-btn:hover {
   background-color: rgb(63,81,181); 
   border: 2px solid  rgb(63,81,181); 
+  outline: none; 
 }
 
+.filter-btn:active:hover {
+  background-color: rgb(59, 73, 154);
+  border: 2px solid rgb(59, 73, 154);
+  outline: none; 
+}
+
+.filter-btn:focus {
+  background-color: rgb(63,81,181); 
+  border: 2px solid  rgb(63,81,181);
+  outline: none; 
+}
 
 .react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range {
     background-color: rgb(63,81,181); 
+} 
+
+.filter-btn-container {
+    padding-top: 30px; 
+    margin-bottom: 75px; 
+    box-sizing: border-box; 
+}
+
+.filter-panel {
+  text-align: center;
+  box-sizing: border-box; 
+}
+
+.filter-form {
+  text-align: right; 
+}
+
+.filter-label {
+  /*text-align: center;*/
+  padding-left: 10px;
+} 
+
+.label-dummy {
+  color: #fff; 
+}
+
+.filter-btn-sm {
+    width: 93%; 
+    float: right; 
+}
+
+tr.is-selected td {
+  background-color: rgba(204, 204, 218, 0.5); 
+}
+
+.checkbox-wrap {
+  margin-top: 30px; 
+}
+
+.label-span {
+    margin-left: -35px;
+    color: #2c3e50; 
+    font-weight: 700; 
+
+}
+
+.no-margin-bottom {
+  margin-bottom: 0; 
+} 
+
+.datepicker-wrap {
+  margin-bottom: 30px; 
+}
+
+@media screen and (max-width: 991px) {
+  .filter-label {
+    padding-top: 20px;
+    padding-left: 0;
+  }
+
+  .filter-panel {
+    padding-bottom: 40px;
+  }
+
+  td.instrument {
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+  .filter-panel {
+    text-align: center; 
+  }
+  .filter-form {
+    text-align: center; 
+  }
+  .filter-btn {
+    float: none; 
+  }
 }
