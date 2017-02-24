@@ -9,7 +9,8 @@ export default class Container extends Component {
 
       this.state = {
           campaignDataRetrieved: false,
-		  campaign_detail: [] 
+		  campaign_detail: [], 
+          err: null 
       } 
 
       this.viewCampaign = this.viewCampaign.bind(this); 
@@ -20,42 +21,60 @@ export default class Container extends Component {
         var d1 = formData.startDate.format('YYYY MM DD'), 
         d2 = formData.endDate.format('YYYY MM DD'); 
 
-        d1 = d1.replace(' ', '-');
-        d1 = d1.replace(' ', '-');
-
-        d2 = d2.replace(' ', '-'); 
-        d2 = d2.replace(' ', '-'); 
+        d1 = d1.replace(/ /g, '-');
+        d2 = d2.replace(/ /g, '-'); 
 
         campaign = encodeURI(campaign);
 
         var uri = `http://149.56.126.25:28864/api/campaigns/series/?campaign=${campaign}&amp;starting_date=${d1}&amp;end_date=${d2}&amp;include_price=${formData.include_price}&amp;starting_capital=${formData.starting_capital}&amp;performance_fee=${formData.performance_fee}&amp;commission=${formData.commission}`;
-							
-        request({
+
+        var self = this; 
+
+        var req = request({
             type: 'GET',
             uri: uri
         }, (err, res, body) => {
 
-            console.log('-------err-------')
-            console.log(err);
+            if (err) {
+                self.setState({
+                    err: {message: 'Api error'}
+                })
+                return;
+            }
 
-            console.log('-------res-------')
-            console.log(res); 
+            body = JSON.parse(body); 
 
-            console.log('-------body-------')
-            console.log(JSON.parse(body)); 
+            if (body.status == 'error') {
+                self.setState({
+                    err: {message: body.message}
+                }); 
 
-            
+                hashHistory.push('error'); 
+            }
+
+            if (body.status == 'OK') {  
+
+                for (let i = 0; i < body.series.length; i++) {
+                    body.series[i].date = body.series[i].date.replace('T00:00:00', ''); 
+                }
+                self.setState({
+                    campaign_detail: body
+                })
+
+                self.setState({campaignDataRetrieved: true})
+                hashHistory.push('campaign'); 
+            }
         }) 
 
-        this.setState({campaignDataRetrieved: true})
-        hashHistory.push('campaign'); 
+        console.log(req)
+
     
 
     }
 		render () {
 		return (
 			<div>
-				{React.cloneElement(this.props.children, { viewCampaign: this.viewCampaign, campaign_detail: this.state.campaign_detail })}
+				{React.cloneElement(this.props.children, { viewCampaign: this.viewCampaign, campaign_detail: this.state.campaign_detail, series_err: this.state.err })}
 			</div>
 		)
 	}
