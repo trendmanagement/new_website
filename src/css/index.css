@@ -73,7 +73,10 @@ th .mdl-checkbox {
 
 .filter-panel.panel {
     margin-left: -30px;
-    box-sizing: content-box;
+    box-sizing: content-box; 
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(135,135,135,1);
+    -moz-box-shadow: 0px 0px 6px 0px rgba(135,135,135,1);
+    box-shadow: 0px 0px 6px 0px rgba(135,135,135,1);
 }
 
 .filter-btn {
@@ -193,7 +196,10 @@ tr.is-selected td {
 
 .series-container { 
   background: #fff; 
-  height: 100%; 
+  min-height: 100%;  
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(135,135,135,1);
+  -moz-box-shadow: 0px 0px 6px 0px rgba(135,135,135,1);
+  box-shadow: 0px 0px 6px 0px rgba(135,135,135,1);
 }
 
 .series-table {
@@ -212,7 +218,6 @@ tr.is-selected td {
 } 
 
 .series-detail-table {
-    margin-left: 65px;
     border-bottom: 2px solid #e4e4e4;
     padding-left: 20px; 
     margin-bottom: 80px; 
