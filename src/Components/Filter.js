@@ -96,7 +96,7 @@ export default class Filter extends Component {
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12">
                            
-                              <button disabled={this.props.btnDisabled} onClick={() => this.viewCampaign(this.state.formData, this.props.campaign)} className="filter-input filter-btn filter-btn-sm hidden-sm hidden-xs">Filter data</button> 
+                              <button disabled={this.props.btnDisabled} onClick={() => this.props.viewCampaign(this.state.formData, this.props.campaign)} className="filter-input filter-btn filter-btn-sm hidden-sm hidden-xs">Filter data</button> 
                               <button disabled={this.props.btnDisabled} className="btn btn-info filter-btn hidden-md hidden-lg" onClick={() => this.props.viewCampaign(this.state.formData, this.props.campaign)}>Filter data</button>
                         </div>
                         {/*<div className="col-lg-2 col-md-2 col-sm-3">
