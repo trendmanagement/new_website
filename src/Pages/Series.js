@@ -1,6 +1,8 @@
 import React, {Component} from 'react';  
 
-import DatePicker from 'react-datepicker';
+import DatePicker from 'react-datepicker'; 
+import {Tabs, Tab} from 'react-mdl'; 
+
 import moment from 'moment';  
 import request from 'request'; 
 
@@ -30,7 +32,8 @@ export default class Series extends Component {
             payoffData: [], 
             deltaData: [], 
             payoff_msg: '', 
-            positions: []
+            positions: [], 
+            activeTab: 0
         }
         
         this.props.campaign_detail.end_date = this.props.campaign_detail.end_date.replace('T00:00:00', ''); 
@@ -171,14 +174,18 @@ export default class Series extends Component {
 
     render() {
         return (
-            <div className="container series-container">
+            <div className="container series-container">  
+                <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
+                    <Tab>Overview</Tab>
+                    <Tab>Performance</Tab>
+                </Tabs>
+                
                 <div className="row">
                     <div className="col-lg-12">
-                        <h4 className="series-heading">Campaign series detail</h4>
                         <h5 className="series-chart-heading">Campaign: {this.props.campaign_detail.campaign}</h5>
                     </div>
                 </div>
-                <div className="row">
+                <div className={"row " + (this.state.activeTab == 0 ? "visible" : "hidden") }>
                     <div className="col-lg-12">
                         <table className="table table-striped table-hover series-table">
                             <thead>
@@ -194,7 +201,7 @@ export default class Series extends Component {
 
                     </div>
                 </div>
-
+                <div className={this.state.activeTab == 1 ? "visible" : "hidden"}>
                 <div className="row">
                     <div className="col-lg-12">
                         <Chart data={this.props.campaign_detail.series} width={this.state.chart_width} height={this.state.chart_height}/>
@@ -237,18 +244,19 @@ export default class Series extends Component {
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
-                        {this.state.showPayoff ? <PayoffChart data={this.state.payoffData} width={this.state.chart_width} height={this.state.chart_height } title={"Payoff series"}/> : <p className="series-chart-heading">No data</p>}
+                        {this.state.showPayoff ? <PayoffChart data={this.state.payoffData} width={this.state.chart_width} height={this.state.chart_height } title={"Payoff series"}/> : <p className="series-chart-heading">No payoff series data</p>}
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
-                        {this.state.showPayoff ? <PayoffChart data={this.state.deltaData} width={this.state.chart_width} height={this.state.chart_height / 2 } title={"Delta series"}/> : <p className="series-chart-heading">No data</p>}
+                        {this.state.showPayoff ? <PayoffChart data={this.state.deltaData} width={this.state.chart_width} height={this.state.chart_height / 2 } title={"Delta series"}/> : <p className="series-chart-heading">No delta series data</p>}
                     </div>
                 </div>
                 <div className="row">
                       <div className="col-lg-12">
                             {this.state.showPayoff ? <PositionsTable data={this.state.positions} /> : ''} 
                       </div>
+                </div>
                 </div>
             </div>
         )

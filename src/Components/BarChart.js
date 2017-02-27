@@ -11,8 +11,8 @@ export default class EquityBarChart extends Component {
                 height={this.props.height}
                 data={this.props.data}>
                     <Bar dataKey="delta" fill="#8884d8" />
-                    <YAxis type="number" dataKey="delta" />
-                    <XAxis dataKey="date" tick={{ transform: 'translate(0, 10)' }} interval="preserveStartEnd" minTickGap={800} />
+                    <YAxis type="number" dataKey="delta" tickLine={false}/>
+                    <XAxis dataKey="date" tick={{ transform: 'translate(0, 10)' }} interval="preserveStartEnd" minTickGap={800} tickLine={false}/>
                     <Legend />
                     <Tooltip />
                 </BarChart>

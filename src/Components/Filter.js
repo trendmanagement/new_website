@@ -16,9 +16,6 @@ export default class Filter extends Component {
             formData: {
                 startDate: moment(),
                 endDate: moment(),
-                starting_capital: 0,
-                performance_fee: 3,
-                commission: 0,
                 include_price: 1
             }
         }
@@ -95,7 +92,11 @@ export default class Filter extends Component {
                                 onChange={this.handleEndDateChange} />
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12">
-                           
+                       
+                            <span className="label-span">Include price &nbsp; &nbsp;</span>
+                            <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + (this.state.include_price ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" value={this.state.include_price} onChange={this.checkHandler} />
+                                <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label><br />
+                    
                               <button disabled={this.props.btnDisabled} onClick={() => this.props.viewCampaign(this.state.formData, this.props.campaign)} className="filter-input filter-btn filter-btn-sm hidden-sm hidden-xs">Filter data</button> 
                               <button disabled={this.props.btnDisabled} className="btn btn-info filter-btn hidden-md hidden-lg" onClick={() => this.props.viewCampaign(this.state.formData, this.props.campaign)}>Filter data</button>
                         </div>

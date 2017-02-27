@@ -21,7 +21,7 @@ export default class PositionsTable extends Component {
                        </thead>
                        <tbody>
                         {this.props.data.map(i => {
-                            return (<tr>
+                            return (<tr key={Math.random() * 10000}>
                                 <td>{i.asset}</td>
                                 <td>{i.open_price}</td>
                                 <td>{i.price}</td>
