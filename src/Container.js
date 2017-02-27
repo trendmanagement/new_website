@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 
+import moment from 'moment'
 import request from 'request'; 
 import {hashHistory} from 'react-router'; 
 
@@ -10,7 +11,8 @@ export default class Container extends Component {
       this.state = {
           campaignDataRetrieved: false,
 		  campaign_detail: [], 
-          err: null 
+          err: null, 
+          date: '' 
       } 
 
       this.viewCampaign = this.viewCampaign.bind(this); 
@@ -24,6 +26,10 @@ export default class Container extends Component {
         d1 = d1.replace(/ /g, '-');
         d2 = d2.replace(/ /g, '-'); 
 
+        var d3 = d2.split('-'); 
+
+
+        console.log(this.state.date)
         campaign = encodeURI(campaign);
 
         var uri = `http://149.56.126.25:28864/api/campaigns/series/?campaign=${campaign}&amp;starting_date=${d1}&amp;end_date=${d2}&amp;include_price=${formData.include_price}&amp;starting_capital=${formData.starting_capital}&amp;performance_fee=${formData.performance_fee}&amp;commission=${formData.commission}`;
@@ -56,6 +62,15 @@ export default class Container extends Component {
 
                 for (let i = 0; i < body.series.length; i++) {
                     body.series[i].date = body.series[i].date.replace('T00:00:00', ''); 
+
+                    if (i == body.series.length - 1) {
+
+                        var d4 = body.series[i].date.split('-'); 
+                        console.log(d4)
+                        self.setState({
+                            date: moment({year: d4[0], month: d4[1] - 1, day: d4[2]})
+                        })
+                    }
                 }
                 self.setState({
                     campaign_detail: body
@@ -74,7 +89,7 @@ export default class Container extends Component {
 		render () {
 		return (
 			<div>
-				{React.cloneElement(this.props.children, { viewCampaign: this.viewCampaign, campaign_detail: this.state.campaign_detail, series_err: this.state.err })}
+				{React.cloneElement(this.props.children, { viewCampaign: this.viewCampaign, campaign_detail: this.state.campaign_detail, series_err: this.state.err, date: this.state.date })}
 			</div>
 		)
 	}

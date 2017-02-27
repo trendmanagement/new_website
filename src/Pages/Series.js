@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';  
 import request from 'request'; 
 
-import {Chart, BarChart, RecentDataTable, PayoffChart } from '../Components';
+import {Chart, BarChart, RecentDataTable, PayoffChart, PositionsTable } from '../Components';
 
 export default class Series extends Component {
 
@@ -12,7 +12,7 @@ export default class Series extends Component {
         super(props) 
         
         this.state = {
-            date: moment(), 
+            date: this.props.date, 
             table_data: {
                 max_drawdown: '', 
                 starting_date: '', 
@@ -27,7 +27,10 @@ export default class Series extends Component {
             }, 
             chart_width: 1170,
             chart_height: 600, 
-            payoffData: [] 
+            payoffData: [], 
+            deltaData: [], 
+            payoff_msg: '', 
+            positions: []
         }
         
         this.props.campaign_detail.end_date = this.props.campaign_detail.end_date.replace('T00:00:00', ''); 
@@ -42,11 +45,7 @@ export default class Series extends Component {
         var container = document.querySelector('.container'); 
         var w = parseInt(window.getComputedStyle(container, null).width);
 
-        var d = this.props.campaign_detail.end_date; 
-        d = d.split('-'); 
-
         this.setState({
-             date: moment({year: d[0], month: d[1], day: d[2]}), 
              chart_width: w - 100, 
              chart_height: window.innerHeight / 2.5 
         }) 
@@ -105,6 +104,9 @@ export default class Series extends Component {
         var d = this.state.date; 
         var d1 = d.format('YYYY MM DD'); 
         d = d1.replace(/ /g, '-'); 
+        var d2 = d; 
+        console.log('-----d2------'); 
+        console.log(d2)
 
         request({
             type: 'GET', 
@@ -135,10 +137,19 @@ export default class Series extends Component {
                         }
                         if (body.status == "OK") {
 
+
+                            // var d2 = body.date; 
+                            // d2 = d2.split('-'); 
+
+                            
+                            console.log('----body-----'); 
                             console.log(body)
                             this.setState({
+                                payoff_msg: 'Couldn\'t show data for ' + d + '. Showing data for ' + body.date, 
                                 showPayoff: true, 
-                                payoffData: body.delta_series
+                                payoffData: body.payoff_series, 
+                                deltaData: body.delta_series, 
+                                positions: body.positions
                             })
                         }
                     })
@@ -147,8 +158,11 @@ export default class Series extends Component {
 
             if (body.status == "OK") {
                 this.setState({
+                    payoff_msg: 'Showing data for ' + d, 
                     showPayoff: true, 
-                    payoffData: body
+                    payoffData: body.payoff_series, 
+                    deltaData: body.delta_series, 
+                    positions: body.positions
                 })
             }
         })
@@ -188,7 +202,7 @@ export default class Series extends Component {
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
-                        <BarChart data={this.props.campaign_detail.series} width={this.state.chart_width} height={this.state.chart_height}/>
+                        <BarChart data={this.props.campaign_detail.series} width={this.state.chart_width} height={this.state.chart_height /1.5}/>
                     </div>
                 </div>
                 <div className="row">
@@ -198,7 +212,8 @@ export default class Series extends Component {
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
-                    <h5 className="series-chart-heading">Equity payoff</h5>
+                    <h5 className="series-chart-heading">Equity payoff</h5> 
+
                         <form>
                             <div className="row">
                                 <div className="col-lg-2 col-md-2 col-sm-3">
@@ -213,12 +228,27 @@ export default class Series extends Component {
                                 </div>
                             </div>
                         </form>
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <p className="series-info">{this.state.payoff_msg}</p>
+                            </div>
+                       </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-lg-12">
-                        {this.state.showPayoff ? <PayoffChart data={this.state.payoffData} width={this.state.chart_width} height={this.state.chart_height } /> : <p className="series-chart-heading">No data</p>}
+                        {this.state.showPayoff ? <PayoffChart data={this.state.payoffData} width={this.state.chart_width} height={this.state.chart_height } title={"Payoff series"}/> : <p className="series-chart-heading">No data</p>}
                     </div>
+                </div>
+                <div className="row">
+                    <div className="col-lg-12">
+                        {this.state.showPayoff ? <PayoffChart data={this.state.deltaData} width={this.state.chart_width} height={this.state.chart_height / 2 } title={"Delta series"}/> : <p className="series-chart-heading">No data</p>}
+                    </div>
+                </div>
+                <div className="row">
+                      <div className="col-lg-12">
+                            {this.state.showPayoff ? <PositionsTable data={this.state.positions} /> : ''} 
+                      </div>
                 </div>
             </div>
         )

@@ -72,29 +72,34 @@ export default class Filter extends Component {
     }
 
     render() {
-        return (<div>
+        return (<div className="container">
             <div className="row">
-                <div>
+                <div className="col-lg-12">
                     <h4 className="heading">Campaigns list</h4>
                     <p className="subheading">Select a campaign from the list below to see details</p>
                 </div>
             </div>
-            <div className="container">
-                <div className="row filter-form">
-                    <form>
-                        <div className="col-lg-2 col-md-2 col-sm-3 col-sm-offset-1 col-md-offset-0 col-lg-offset-0">
+
+                <div className="row form-container">
+                   
+                        <div className="col-lg-3 col-md-3 col-sm-12 col-lg-offset-1 col-md-offset-1">
                             <label className="filter-label">Start date</label>
                             <DatePicker
                                 selected={this.state.formData.startDate}
                                 onChange={this.handleStartDateChange} />
                         </div>
-                        <div className="col-lg-2 col-md-2 col-sm-3">
+                        <div className="col-lg-3 col-md-3 col-sm-12">
                             <label className="filter-label">End date</label>
                             <DatePicker
                                 selected={this.state.formData.endDate}
                                 onChange={this.handleEndDateChange} />
                         </div>
-                        <div className="col-lg-2 col-md-2 col-sm-3">
+                        <div className="col-lg-3 col-md-3 col-sm-12">
+                           
+                              <button disabled={this.props.btnDisabled} onClick={() => this.viewCampaign(this.state.formData, this.props.campaign)} className="filter-input filter-btn filter-btn-sm hidden-sm hidden-xs">Filter data</button> 
+                              <button disabled={this.props.btnDisabled} className="btn btn-info filter-btn hidden-md hidden-lg" onClick={() => this.props.viewCampaign(this.state.formData, this.props.campaign)}>Filter data</button>
+                        </div>
+                        {/*<div className="col-lg-2 col-md-2 col-sm-3">
                             <label className="filter-label">Starting capital</label>
                             <input type="number" value={this.state.formData.starting_capital} onChange={(e) => this.onFormChange(e, 'starting_capital')} className="filter-input" placeholder="Example: $50000" />
                         </div>
@@ -112,10 +117,10 @@ export default class Filter extends Component {
                                     <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label>
                             </label>
                             <button disabled={this.props.btnDisabled} onClick={this.viewCampaign} className="filter-input filter-btn filter-btn-sm">Filter data</button>
-                        </div>
-                    </form>
-                </div>
-                <div className="row hidden-sm" >
+                        </div>*/}
+                   
+          
+                {/*<div className="row hidden-sm" >
                     <div className="col-lg-12">
                         <div className="checkbox-wrap">
                             <span className="label-span">Include price &nbsp; &nbsp;</span>
@@ -123,13 +128,13 @@ export default class Filter extends Component {
                                 <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label>
                         </div>
                     </div>
-                </div>
-                <div className="row hidden-sm">
+                </div>*/}
+                {/*<div className="row">
 
                     <div className="col-lg-12 filter-btn-container">
                         <button disabled={this.props.btnDisabled} className="btn btn-info filter-btn" onClick={() => this.props.viewCampaign(this.state.formData, this.props.campaign)}>Filter data</button>
                     </div>
-                </div>
+                </div>*/}
             </div>
 
         </div>

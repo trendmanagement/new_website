@@ -22,16 +22,22 @@ body {
     background-color: rgba(255, 206, 117, 0.9); 
 }*/
 
+.container-fluid {
+    overflow: hidden;
+}
+
 .filter-label {
     display: block;
 }
 
 .heading {
-  font-weight: 700;
+  font-weight: 700;  
+  margin-left: -15px;
 }
 
 .subheading {
   padding-bottom: 30px; 
+  margin-left: -15px;
 }
 
 th .mdl-checkbox {
@@ -52,19 +58,25 @@ th .mdl-checkbox {
     outline: none;
 }
 
+.filter-panel.panel {
+    margin-left: -30px;
+    box-sizing: content-box;
+}
+
 .filter-btn {
   background-color: rgb(63,81,181); 
   border: 2px solid  rgb(63,81,181); 
   outline: none;  
   color: #fff; 
-  margin-left: -15px;
+  margin-top: 30px; 
 }
 
 .filter-btn:hover {
   background-color: rgb(63,81,181); 
   border: 2px solid  rgb(63,81,181); 
   outline: none; 
-}
+} 
+
 
 .filter-btn:active:hover {
   background-color: rgb(59, 73, 154);
@@ -76,6 +88,11 @@ th .mdl-checkbox {
   background-color: rgb(63,81,181); 
   border: 2px solid  rgb(63,81,181);
   outline: none; 
+}
+
+.form-container {
+  text-align: center;  
+  margin-bottom: 30px;
 }
 
 .react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range {
@@ -95,7 +112,7 @@ th .mdl-checkbox {
   color: #fff; 
   margin-left: 60px;  
   margin-bottom: 60px; 
-}
+} 
 
 .payoff-btn:hover {
   background-color: rgb(63,81,181); 
@@ -130,8 +147,11 @@ th .mdl-checkbox {
 }
 
 .filter-btn-sm {
-    width: 93%; 
+
     float: right; 
+    margin-top: 23px;
+    width: 65%;
+
 }
 
 tr.is-selected td {
@@ -174,6 +194,9 @@ tr.is-selected td {
     width: 50%; 
 }
 
+.series-info {
+  margin-left: 60px; 
+}
 
 .series-th {
   padding-left:10px!important; 
