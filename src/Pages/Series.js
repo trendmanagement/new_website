@@ -50,7 +50,7 @@ export default class Series extends Component {
              chart_height: window.innerHeight / 2.5 
         }) 
 
-        this.updatePayoffChart(); 
+        this.updatePayoffChart(this.state.date); 
     }
 
     generateTable() {
@@ -86,7 +86,7 @@ export default class Series extends Component {
             date: date
         })
 
-        this.updatePayoffChart(); 
+        this.updatePayoffChart(date); 
     }
 
     getRecentData() {
@@ -99,9 +99,9 @@ export default class Series extends Component {
         }
     } 
 
-    updatePayoffChart() { 
+    updatePayoffChart(date) { 
 
-        var d = this.state.date; 
+        var d = date; 
         var d1 = d.format('YYYY MM DD'); 
         d = d1.replace(/ /g, '-'); 
         var d2 = d; 
@@ -145,7 +145,7 @@ export default class Series extends Component {
                             console.log('----body-----'); 
                             console.log(body)
                             this.setState({
-                                payoff_msg: 'Couldn\'t show data for ' + d + '. Showing data for ' + body.date, 
+                                payoff_msg: 'Couldn\'t show data for ' + d + '. Showing data for ' + body.date.replace('T00:00:00', ''), 
                                 showPayoff: true, 
                                 payoffData: body.payoff_series, 
                                 deltaData: body.delta_series, 
@@ -158,7 +158,7 @@ export default class Series extends Component {
 
             if (body.status == "OK") {
                 this.setState({
-                    payoff_msg: 'Showing data for ' + d, 
+                    payoff_msg: 'Showing data for ' + body.date.replace('T00:00:00', ''), 
                     showPayoff: true, 
                     payoffData: body.payoff_series, 
                     deltaData: body.delta_series, 
