@@ -5,7 +5,7 @@ export default class PositionsTable extends Component {
         return (
             <div>
                 <h5 className="series-chart-heading">Positions</h5> 
-                <table className="table table-striped table-hover series-detail-table">
+                <table className="table table-striped table-hover series-detail-table positions">
                        <thead>
                             <tr>
                                 <th>asset</th>

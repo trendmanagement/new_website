@@ -253,7 +253,7 @@ export default class Series extends Component {
                     </div>
                 </div>
                 <div className="row">
-                      <div className="col-lg-12">
+                      <div className="col-lg-12 positions-container">
                             {this.state.showPayoff ? <PositionsTable data={this.state.positions} /> : ''} 
                       </div>
                 </div>
