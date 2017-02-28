@@ -4,7 +4,10 @@ import './App.css';
 import Container from './Container'; 
 import {List, Series, Error} from './Pages'; 
 
-import {Router, Route, IndexRoute, hashHistory} from 'react-router'; 
+import {Router, Route, IndexRoute, hashHistory} from 'react-router';  
+
+import 'amcharts3'; 
+import "amstock3/amcharts/amstock"; 
 
 class App extends Component {
 

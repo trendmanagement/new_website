@@ -8,7 +8,7 @@ export default class Table extends Component {
         for (let i = 0; i < d.length; i++) {
             
             rows.push(<tr key={Math.random() * 100000}>
-                <td>{d[i].date.replace('T00:00:00', '')}</td>
+                <td>{d[i].date.toString()}</td>
                 <td>{d[i].trade_count}</td>
                 <td>{d[i].change}</td>
                 <td>{d[i].equity}</td>

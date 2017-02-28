@@ -5,7 +5,7 @@ export default class EquityBarChart extends Component {
     render() {
         return (
             <div className="barchart-container">
-                <h5 className="series-chart-heading">Campaign delta</h5>
+               {/* <h5 className="series-chart-heading">Campaign delta</h5>
                 <BarChart 
                 width={this.props.width} 
                 height={this.props.height}
@@ -15,7 +15,7 @@ export default class EquityBarChart extends Component {
                     <XAxis dataKey="date" tick={{ transform: 'translate(0, 10)' }} interval="preserveStartEnd" minTickGap={800} tickLine={false}/>
                     <Legend />
                     <Tooltip />
-                </BarChart>
+                </BarChart> */} 
             </div>
         )
     }

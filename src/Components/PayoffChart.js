@@ -9,7 +9,7 @@ export default class PayoffChart extends Component {
     render() {
         return (
             <div className="series-chart-container">
-                <h5 className="series-chart-heading">{this.props.title}</h5>
+                {/*<h5 className="series-chart-heading">{this.props.title}</h5>
                 <LineChart
                 data={this.props.data}
                 width={this.props.width} 
@@ -21,7 +21,7 @@ export default class PayoffChart extends Component {
                 <Line type="monotone" dot={false} dataKey={this.props.data[0].exp ? "exp" : "expir"} stroke="#c13ba3" />
                 <XAxis tick={{ transform: 'translate(0, 10)' }} dataKey="px" interval="preserveStartEnd" />
                 <YAxis/>
-                </LineChart>
+                </LineChart>*/}
             </div>
         )
     }

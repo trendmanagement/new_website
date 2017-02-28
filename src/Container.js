@@ -61,8 +61,8 @@ export default class Container extends Component {
             if (body.status == 'OK') {  
 
                 for (let i = 0; i < body.series.length; i++) {
+ 
                     body.series[i].date = body.series[i].date.replace('T00:00:00', ''); 
-
                     if (i == body.series.length - 1) {
 
                         var d4 = body.series[i].date.split('-'); 
@@ -70,7 +70,13 @@ export default class Container extends Component {
                         self.setState({
                             date: moment({year: d4[0], month: d4[1] - 1, day: d4[2]})
                         })
-                    }
+                    } 
+
+                    
+                    let d = body.series[i].date.split('-'); 
+                    body.series[i].date = new Date(d[0], d[1] - 1, d[2], 0, 0, 0, 0); 
+
+
                 }
                 self.setState({
                     campaign_detail: body
