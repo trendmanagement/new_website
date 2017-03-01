@@ -14,10 +14,11 @@ export default class Filter extends Component {
         this.state = {
 
             formData: {
-                startDate: moment(),
+                startDate: moment().subtract(1, 'months'),
                 endDate: moment(),
-                include_price: 1
-            }
+            }, 
+            use_default: 1, 
+            btns_disabled: true
         }
 
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
@@ -60,11 +61,17 @@ export default class Filter extends Component {
     }
 
     checkHandler(e) {
-        if (this.state.include_price == 0) {
-            this.setState({ include_price: 1 })
+        if (this.state.use_default == 0) {
+            this.setState({ 
+                use_default: 1, 
+                btns_disabled: true    
+              })
         }
-        if (this.state.include_price == 1) {
-            this.setState({ include_price: 0 })
+        if (this.state.use_default == 1) {
+            this.setState({ 
+                use_default: 0,
+                btns_disabled: false        
+          })
         }
     }
 
@@ -81,61 +88,29 @@ export default class Filter extends Component {
                    
                         <div className="col-lg-3 col-md-3 col-sm-12 col-lg-offset-1 col-md-offset-1">
                             <label className="filter-label">Start date</label>
-                            <DatePicker
+                            <DatePicker 
+                                disabled={this.state.btns_disabled}
                                 selected={this.state.formData.startDate}
                                 onChange={this.handleStartDateChange} />
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12">
                             <label className="filter-label">End date</label>
+                           
                             <DatePicker
+                                disabled={this.state.btns_disabled}
                                 selected={this.state.formData.endDate}
                                 onChange={this.handleEndDateChange} />
+                      
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12">
                        
-                            <span className="label-span">Include price &nbsp; &nbsp;</span>
-                            <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + (this.state.include_price ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" value={this.state.include_price} onChange={this.checkHandler} />
+                            <span className="label-span">Use default date settings &nbsp; &nbsp;</span>
+                            <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded "}><input type="checkbox" className="mdl-checkbox__input" checked={this.state.use_default} onChange={this.checkHandler} />
                                 <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label><br />
                     
-                              <button disabled={this.props.btnDisabled} onClick={() => this.props.viewCampaign(this.state.formData, this.props.campaign)} className="filter-input filter-btn filter-btn-sm hidden-sm hidden-xs">Filter data</button> 
-                              <button disabled={this.props.btnDisabled} className="btn btn-info filter-btn hidden-md hidden-lg" onClick={() => this.props.viewCampaign(this.state.formData, this.props.campaign)}>Filter data</button>
+                              <button disabled={this.props.btnDisabled} onClick={() => this.props.viewCampaign(this.state.formData, this.props.campaign, this.state.use_default)} className="filter-input filter-btn filter-btn-sm hidden-sm hidden-xs">Display Campaign</button> 
+                              <button disabled={this.props.btnDisabled} className="btn btn-info filter-btn hidden-md hidden-lg" onClick={() => this.props.viewCampaign(this.state.formData, this.props.campaign, this.state.use_default)}>Display Campaign</button>
                         </div>
-                        {/*<div className="col-lg-2 col-md-2 col-sm-3">
-                            <label className="filter-label">Starting capital</label>
-                            <input type="number" value={this.state.formData.starting_capital} onChange={(e) => this.onFormChange(e, 'starting_capital')} className="filter-input" placeholder="Example: $50000" />
-                        </div>
-                        <div className="col-lg-2 col-md-2 col-sm-3 col-sm-offset-1 col-md-offset-0 col-lg-offset-0">
-                            <label className="filter-label">Comission per side</label>
-                            <input type="number" value={this.state.formData.commission} onChange={(e) => this.onFormChange(e, 'commission')} className="filter-input" placeholder="Example: $3" />
-                        </div>
-                        <div className="col-lg-2 col-md-2 col-sm-3">
-                            <label className="filter-label">Performance fee</label>
-                            <input type="number" value={this.state.formData.performance_fee} onChange={(e) => this.onFormChange(e, 'performance_fee')} className="filter-input" placeholder="Example: $5" />
-                        </div>
-                        <div className="col-sm-3 hidden-md hidden-lg hidden-xs">
-                            <label className="filter-label no-margin-bottom">Include price &nbsp; &nbsp;
-                            <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + (this.state.include_price ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" value={this.state.include_price} onChange={this.checkHandler} />
-                                    <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label>
-                            </label>
-                            <button disabled={this.props.btnDisabled} onClick={this.viewCampaign} className="filter-input filter-btn filter-btn-sm">Filter data</button>
-                        </div>*/}
-                   
-          
-                {/*<div className="row hidden-sm" >
-                    <div className="col-lg-12">
-                        <div className="checkbox-wrap">
-                            <span className="label-span">Include price &nbsp; &nbsp;</span>
-                            <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + (this.state.include_price ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" value={this.state.include_price} onChange={this.checkHandler} />
-                                <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label>
-                        </div>
-                    </div>
-                </div>*/}
-                {/*<div className="row">
-
-                    <div className="col-lg-12 filter-btn-container">
-                        <button disabled={this.props.btnDisabled} className="btn btn-info filter-btn" onClick={() => this.props.viewCampaign(this.state.formData, this.props.campaign)}>Filter data</button>
-                    </div>
-                </div>*/}
             </div>
 
         </div>

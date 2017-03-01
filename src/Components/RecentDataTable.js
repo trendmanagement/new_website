@@ -7,8 +7,14 @@ export default class Table extends Component {
         let rows = []; 
         for (let i = 0; i < d.length; i++) {
             
+        var day = d[i].date.getDate();
+        var month = d[i].date.getMonth() + 1;
+        var year = d[i].date.getFullYear(); 
+
+
+
             rows.push(<tr key={Math.random() * 100000}>
-                <td>{d[i].date.toString()}</td>
+                <td>{`${day}-${month}-${year}`}</td>
                 <td>{d[i].trade_count}</td>
                 <td>{d[i].change}</td>
                 <td>{d[i].equity}</td>
@@ -26,7 +32,7 @@ export default class Table extends Component {
                 <table className="table table-striped table-hover series-detail-table">
                     <thead><tr>
                         <th>date</th>
-                        <th>trade_count</th>
+                        <th>trade count</th>
                         <th>change</th>
                         <th>equity</th>
                         <th>delta</th>

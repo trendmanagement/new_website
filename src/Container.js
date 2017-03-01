@@ -17,7 +17,7 @@ export default class Container extends Component {
 
       this.viewCampaign = this.viewCampaign.bind(this); 
   }
-     viewCampaign(data, campaign) { 
+     viewCampaign(data, campaign, use_default) { 
 
         var formData = Object.assign({}, data); 
         var d1 = formData.startDate.format('YYYY MM DD'), 
@@ -32,7 +32,11 @@ export default class Container extends Component {
         console.log(this.state.date)
         campaign = encodeURI(campaign);
 
-        var uri = `http://149.56.126.25:28864/api/campaigns/series/?campaign=${campaign}&amp;starting_date=${d1}&amp;end_date=${d2}&amp;include_price=${formData.include_price}&amp;starting_capital=${formData.starting_capital}&amp;performance_fee=${formData.performance_fee}&amp;commission=${formData.commission}`;
+
+        var uri = `http://149.56.126.25:28864/api/campaigns/series/?campaign=${campaign}&amp;starting_date=${d1}&amp;end_date=${d2}&amp;include_price=1`
+        if (use_default) {
+            uri = `http://149.56.126.25:28864/api/campaigns/series/?campaign=${campaign}&include_price=1`
+        }
 
         var self = this; 
 
@@ -60,8 +64,20 @@ export default class Container extends Component {
 
             if (body.status == 'OK') {  
 
+                //the starting_value, end_value and max_drawdown should be rounded to 0 d 
+                body.starting_value = Math.floor(body.starting_value); 
+                body.end_value = Math.floor(body.end_value);  
+                body.max_drawdown = Math.floor(body.max_drawdown); 
+
+                //in the Overview table, the decimal numbers (max_delta, average delta) should be rounded to 4 decimal places.
+                body.max_delta = body.max_delta.toFixed(4); 
+                body.average_delta = body.average_delta.toFixed(4); 
+
                 for (let i = 0; i < body.series.length; i++) {
- 
+
+                    body.series[i].equity = Math.floor(body.series[i].equity);  
+                    body.series[i].delta =  body.series[i].delta.toFixed(4); 
+                    body.series[i].change = body.series[i].change.toFixed(4); 
                     body.series[i].date = body.series[i].date.replace('T00:00:00', ''); 
                     if (i == body.series.length - 1) {
 

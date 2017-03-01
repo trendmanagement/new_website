@@ -1,6 +1,6 @@
 import Filter from './Filter'
 import Chart from './MainChart' 
-import BarChart from './BarChart'  
+import BarChart from './DeltaChart'  
 import RecentDataTable from './RecentDataTable' 
 import PayoffChart from './PayoffChart' 
 import PositionsTable from './PositionsTable' 
