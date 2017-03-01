@@ -48,11 +48,20 @@ export default class Container extends Component {
             if (err) {
                 self.setState({
                     err: {message: 'Api error'}
-                })
+                }) 
+                hashHistory.push('error'); 
                 return;
             }
 
-            body = JSON.parse(body); 
+            try {
+                body = JSON.parse(body); 
+            } catch (err) {
+                self.setState({
+                    err: {message: 'Api error. Invalid response data.'} 
+                })  
+                hashHistory.push('error'); 
+                return; 
+            }
 
             if (body.status == 'error') {
                 self.setState({
@@ -64,12 +73,10 @@ export default class Container extends Component {
 
             if (body.status == 'OK') {  
 
-                //the starting_value, end_value and max_drawdown should be rounded to 0 d 
+          
                 body.starting_value = Math.floor(body.starting_value); 
                 body.end_value = Math.floor(body.end_value);  
                 body.max_drawdown = Math.floor(body.max_drawdown); 
-
-                //in the Overview table, the decimal numbers (max_delta, average delta) should be rounded to 4 decimal places.
                 body.max_delta = body.max_delta.toFixed(4); 
                 body.average_delta = body.average_delta.toFixed(4); 
 

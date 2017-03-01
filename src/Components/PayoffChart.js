@@ -26,6 +26,7 @@ export default class PayoffChart extends Component {
                 "balloonText": "[[title]]: [[value]]",
                 "bullet": "round",
                 "bulletBorderAlpha": 1,
+                "precision": 4,
                 "bulletColor": "#FFFFFF",
                 "hideBulletsCount": 50,
                 "title": "Current",
@@ -37,7 +38,8 @@ export default class PayoffChart extends Component {
                 }
             },{
                 "id": "g5",
-                "balloonText": "[[title]]: [[value]]",
+                "balloonText": "[[title]]: [[value]]", 
+                "precision": 4,
                 "bullet": "round",
                 "bulletBorderAlpha": 1,
                 "bulletColor": "#FFFFFF",

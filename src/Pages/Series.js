@@ -27,13 +27,12 @@ export default class Series extends Component {
                 average_delta: '',
 
             },
-            chart_width: 1170,
-            chart_height: 600,
             payoffData: [],
             deltaData: [],
             payoff_msg: '',
             positions: [],
-            activeTab: 0
+            activeTab: 0, 
+            include_price: 1
         }
 
         this.props.campaign_detail.end_date = this.props.campaign_detail.end_date.replace('T00:00:00', '');
@@ -41,25 +40,30 @@ export default class Series extends Component {
         this.generateTable = this.generateTable.bind(this);
         this.getRecentData = this.getRecentData.bind(this);
         this.updatePayoffChart = this.updatePayoffChart.bind(this);
-        this.setDate = this.setDate.bind(this);
+        this.setDate = this.setDate.bind(this); 
+        this.checkHandler = this.checkHandler.bind(this); 
     }
 
     componentDidMount() {
-        var container = document.querySelector('.container');
-        var w = parseInt(window.getComputedStyle(container, null).width);
-
-        this.setState({
-            chart_width: w - 100,
-            chart_height: window.innerHeight / 2.5
-        })
-
         this.updatePayoffChart(this.state.date);
+    } 
+
+    checkHandler(e) {
+        if (this.state.include_price == true) {
+            this.setState({
+                include_price: 0
+            })
+        } else {
+            this.setState({
+                include_price: 1
+            })
+        }
     }
 
     generateTable() {
 
         let rows = [];
-        console.log(this.props.campaign_detail)
+     
         for (let prop in this.props.campaign_detail) {
             if (this.props.campaign_detail[prop]) {
 
@@ -83,8 +87,6 @@ export default class Series extends Component {
 
             }
         }
-
-        console.log(rows)
 
         return rows;
     }
@@ -113,8 +115,6 @@ export default class Series extends Component {
         var d1 = d.format('YYYY MM DD');
         d = d1.replace(/ /g, '-');
         var d2 = d;
-        console.log('-----d2------');
-        console.log(d2)
 
         request({
             type: 'GET',
@@ -145,13 +145,6 @@ export default class Series extends Component {
                     }
                     if (body.status == "OK") {
 
-
-                        // var d2 = body.date; 
-                        // d2 = d2.split('-'); 
-
-
-                        console.log('----body-----');
-                        console.log(body)
                         this.setState({
                             payoff_msg: 'Couldn\'t show data for ' + d + '. Showing data for ' + body.date.replace('T00:00:00', ''),
                             showPayoff: true,
@@ -213,13 +206,18 @@ export default class Series extends Component {
                 </div>
                 <div className={this.state.activeTab == 1 ? "visible" : "hidden"}>
                     <div className="row">
-                        <div className="col-lg-12">
-                            <Chart data={this.props.campaign_detail.series} width={this.state.chart_width} height={this.state.chart_height} />
+                        <div className="col-lg-12"> 
+                        <h5 className="series-chart-heading">Equity series</h5> 
+                           <span className="label-span series-span">Include price &nbsp; &nbsp;</span>
+                            <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + (this.state.include_price ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" checked={this.state.include_price} onChange={this.checkHandler} />
+                                <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label><br />
+                 
+                            <Chart data={this.props.campaign_detail.series} include_price={this.state.include_price} />
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            <BarChart data={this.props.campaign_detail.series} width={this.state.chart_width} height={this.state.chart_height / 1.5} />
+                            <BarChart data={this.props.campaign_detail.series} />
                         </div>
                     </div>
                     <div className="row">
@@ -254,12 +252,12 @@ export default class Series extends Component {
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            {this.state.showPayoff ? <PayoffChart data={this.state.payoffData} width={this.state.chart_width} height={this.state.chart_height} title={"Payoff series"} /> : <p className="series-chart-heading">No payoff series data</p>}
+                            {this.state.showPayoff ? <PayoffChart data={this.state.payoffData}  title={"Payoff series"} /> : <p className="series-chart-heading">No payoff series data</p>}
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            {this.state.showPayoff ? <PayoffChart data={this.state.deltaData} width={this.state.chart_width} height={this.state.chart_height / 2} title={"Delta series"} /> : <p className="series-chart-heading">No delta series data</p>}
+                            {this.state.showPayoff ? <PayoffChart data={this.state.deltaData} title={"Delta series"} /> : <p className="series-chart-heading">No delta series data</p>}
                         </div>
                     </div>
                     <div className="row">

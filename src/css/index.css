@@ -232,6 +232,9 @@ tr.is-selected td {
     width: 80%; 
 } 
 
+.series-span {
+  margin-left: 65px; 
+}
 /*.positions {
     margin-left: 0; 
     width: 100%; 
