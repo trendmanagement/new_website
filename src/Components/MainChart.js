@@ -44,16 +44,27 @@ export default class Chart extends Component {
             "chartScrollbar": {
                 "autoGridCount": true,
                 "graph": graph_id,
-                "scrollbarHeight": 40
+                "scrollbarHeight": 40, 
+                "backgroundColor": "#f3f3f3", 
+                "selectedBackgroundColor":"#b7b9bb" 
             },
             "chartCursor": {
-                "limitToGraph": graph_id,
-                "cursorAlpha": 0,
                 "valueLineEnabled": true,
                 "valueLineBalloonEnabled": true,
-                "valueLineAlpha": 0.5,
-                "fullWidth": true
-
+                "cursorAlpha": 0,
+                "zoomable": false,
+                "valueZoomable": true,
+                "valueLineAlpha": 0.5
+            },
+            "valueScrollbar": {
+                "scrollbarHeight":2,
+                "offset":-1,
+                "backgroundAlpha":0.1,
+                "backgroundColor":"#cacaca",
+                "autoGridCount": true,
+                "color": "#000000", 
+                "selectedBackgroundColor":"#a5a5a5",
+                "selectedBackgroundAlpha":1
             },
             "balloon": {
                 "cornerRadius": 5,
@@ -121,7 +132,9 @@ export default class Chart extends Component {
             "chartScrollbar": {
                 "autoGridCount": true,
                 "graph":  "eq",
-                "scrollbarHeight": 40
+                "scrollbarHeight": 40, 
+                "backgroundColor": "#f3f3f3", 
+                "selectedBackgroundColor":"#b7b9bb", 
             },
             "chartCursor": {
                 "valueLineEnabled": true,
@@ -132,9 +145,14 @@ export default class Chart extends Component {
                 "valueLineAlpha": 0.5
             },
             "valueScrollbar": {
+                "scrollbarHeight":2,
+                "offset":-1,
+                "backgroundAlpha":0.1,
+                "backgroundColor":"#cacaca",
                 "autoGridCount": true,
                 "color": "#000000",
-                "scrollbarHeight": 50
+                "selectedBackgroundColor":"#a5a5a5",
+                "selectedBackgroundAlpha":1
             },
             "balloon": {
                 "cornerRadius": 5,
@@ -162,10 +180,11 @@ export default class Chart extends Component {
     
         return (
             <div className="equity-chart-container">
-                <div id="main-chart" style={{ width: "95%", height: "600px" }}>
+                <div id="main-chart" style={{ width: "95%", height: "500px" }}>
                     <AmCharts.React {...config} /> 
                 </div>
-                <div id="main-chart-price" style={{ width: "95%", height: "400px" }} className={this.props.include_price ? "visible" : "hidden"}>
+                <div id="main-chart-price" style={{ width: "95%", height: "400px" }} className={this.props.include_price ? "visible" : "hidden"}> 
+                    <h5 className="series-chart-heading">Price</h5>
                     <AmCharts.React {...price_config} />
                 </div>
             </div>
