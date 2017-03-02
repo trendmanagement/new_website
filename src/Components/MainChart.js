@@ -39,26 +39,6 @@ export default class Chart extends Component {
                 "balloon": {
                     "drop": false
                 }
-            }, {
-                "id": "g2",
-                "balloonText": "Open:<b>[[open]]</b><br>Low:<b>[[low]]</b><br>High:<b>[[high]]</b><br>Close:<b>[[close]]</b><br>",
-                "closeField": "c",
-                "fillColors": "#7f8da9",
-                "highField": "h",
-                "lineColor": "#7f8da9",
-                "lineAlpha": 1,
-                "fillAlphas": 0,
-                "lineThickness": 2,
-                "lowField": "l",
-                "negativeFillColors": "#db4c3c",
-                "negativeLineColor": "#db4c3c",
-                "openField": "o",
-                "title": "Price",
-                "type": "ohlc",
-                "valueField": "c",
-                "balloon": {
-                    "drop": false
-                }
             }
             ],
             "chartScrollbar": {
@@ -98,7 +78,7 @@ export default class Chart extends Component {
         }
 
   
-    const priceless_config =  {
+    const price_config =  {
             "path": "",
             "type": "serial",
             "theme": "light",
@@ -116,18 +96,27 @@ export default class Chart extends Component {
             //"mouseWheelZoomEnabled": true,
             "graphs": [
             {
+            
                 "id": "eq",
-                "balloonText": "[[value]]",
-                "bullet": "round",
-                "bulletBorderAlpha": 1,
-                "bulletColor": "#FFFFFF",
-                "hideBulletsCount": 50,
-                "title": "Equity",
-                "valueField": "equity",
-                "useLineColorForBulletBorder": true,
+                "balloonText": "Open:<b>[[open]]</b><br>Low:<b>[[low]]</b><br>High:<b>[[high]]</b><br>Close:<b>[[close]]</b><br>",
+                "closeField": "c",
+                "fillColors": "#7f8da9",
+                "highField": "h",
+                "lineColor": "#7f8da9",
+                "lineAlpha": 1,
+                "fillAlphas": 0,
+                "lineThickness": 2,
+                "lowField": "l",
+                "negativeFillColors": "#db4c3c",
+                "negativeLineColor": "#db4c3c",
+                "openField": "o",
+                "title": "Price",
+                "type": "ohlc",
+                "valueField": "c",
                 "balloon": {
                     "drop": false
                 }
+            
             }],
             "chartScrollbar": {
                 "autoGridCount": true,
@@ -135,13 +124,17 @@ export default class Chart extends Component {
                 "scrollbarHeight": 40
             },
             "chartCursor": {
-                "limitToGraph":  "eq",
-                "cursorAlpha": 0,
                 "valueLineEnabled": true,
                 "valueLineBalloonEnabled": true,
-                "valueLineAlpha": 0.5,
-                "fullWidth": true
-
+                "cursorAlpha": 0,
+                "zoomable": false,
+                "valueZoomable": true,
+                "valueLineAlpha": 0.5
+            },
+            "valueScrollbar": {
+                "autoGridCount": true,
+                "color": "#000000",
+                "scrollbarHeight": 50
             },
             "balloon": {
                 "cornerRadius": 5,
@@ -169,11 +162,11 @@ export default class Chart extends Component {
     
         return (
             <div className="equity-chart-container">
-                <div id="main-chart" style={{ width: "95%", height: "600px" }} className={this.props.include_price ? "visible" : "hidden"}>
+                <div id="main-chart" style={{ width: "95%", height: "600px" }}>
                     <AmCharts.React {...config} /> 
                 </div>
-                <div id="main-chart-noprice" style={{ width: "95%", height: "600px" }} className={this.props.include_price ? "hidden" : "visible"}>
-                    <AmCharts.React {...priceless_config} />
+                <div id="main-chart-price" style={{ width: "95%", height: "400px" }} className={this.props.include_price ? "visible" : "hidden"}>
+                    <AmCharts.React {...price_config} />
                 </div>
             </div>
         )

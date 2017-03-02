@@ -252,12 +252,12 @@ export default class Series extends Component {
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            {this.state.showPayoff ? <PayoffChart data={this.state.payoffData}  title={"Payoff series"} /> : <p className="series-chart-heading">No payoff series data</p>}
+                            {this.state.showPayoff ? <PayoffChart data={this.state.payoffData}  title={"Campaign payoff"} /> : <p className="series-chart-heading">No payoff series data</p>}
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            {this.state.showPayoff ? <PayoffChart data={this.state.deltaData} title={"Delta series"} /> : <p className="series-chart-heading">No delta series data</p>}
+                            {this.state.showPayoff ? <PayoffChart data={this.state.deltaData} title={"Campaign delta"} /> : <p className="series-chart-heading">No delta series data</p>}
                         </div>
                     </div>
                     <div className="row">

@@ -54,13 +54,24 @@ export default class Container extends Component {
             }
 
             try {
-                body = JSON.parse(body); 
+                body = JSON.parse(body);
+
+
             } catch (err) {
-                self.setState({
-                    err: {message: 'Api error. Invalid response data.'} 
-                })  
-                hashHistory.push('error'); 
-                return; 
+
+                body = body.replace(/NaN/g, 0.0);
+                try {
+                    body = JSON.parse(body);
+                } catch (err) {
+                    self.setState({
+                        err: { message: 'Api error. Invalid response data.' }
+                    })
+                    hashHistory.push('error');
+                    return;
+                }
+
+
+
             }
 
             if (body.status == 'error') {

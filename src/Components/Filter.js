@@ -104,7 +104,7 @@ export default class Filter extends Component {
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12">
                        
-                            <span className="label-span">Use default date settings &nbsp; &nbsp;</span>
+                            <span className="label-span">Full campaign history &nbsp; &nbsp;</span>
                             <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded "}><input type="checkbox" className="mdl-checkbox__input" checked={this.state.use_default} onChange={this.checkHandler} />
                                 <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label><br />
                     
