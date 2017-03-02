@@ -1,7 +1,21 @@
 import React, { Component } from 'react'
-import { hashHistory } from 'react-router'
 import request from 'request'
 import { Filter } from '../Components'
+
+Array.prototype.unique = function() {
+    var a = [];
+    for (let i = 0; i < this.length; i++ ) {
+        var current = this[i];
+        if (a.indexOf(current) < 0) a.push(current);
+    }
+
+    this.length = 0;
+    for (let i = 0; i < a.length; i++ ) {
+        this.push( a[i] );
+    }
+
+    return this;
+}
 
 export default class List extends Component {
 
@@ -11,13 +25,17 @@ export default class List extends Component {
 
         this.state = {
             campaigns: [{ name: 'no data', description: 'no data', instrument: 'no data' }],
-            selectedCampaign: '',
+            selectedCampaign: '', 
+            selectedDescription: '', 
             checkdata: [false],
-            btnDisabled: true
+            btnDisabled: true, 
+            instr: ['All'], 
+            displayed: 'All'
         }
 
         this.selectCampaign = this.selectCampaign.bind(this);
-        this.fetchList = this.fetchList.bind(this);
+        this.fetchList = this.fetchList.bind(this); 
+        this.filterCampaigns = this.filterCampaigns.bind(this); 
 
     }
 
@@ -39,21 +57,46 @@ export default class List extends Component {
 
         this.setState({
             checkdata: checkdata,
-            selectedCampaign: this.state.campaigns[e.target.value],
+            selectedCampaign: this.state.campaigns[e.target.value], 
+            selectedDescription: this.state.campaigns[e.target.value].description,
             btnDisabled: false
         })
     }
+
+
 
     fetchList() {
 
         var self = this;
 
         request('http://149.56.126.25:28864/api/campaigns/list/', (err, res, body) => {
-            if (err) return;
+            if (err) return; 
+            
+            body = JSON.parse(body); 
+
+            let instr = [], filtered = [];
+
+            
+            for (let i = 0; i < body.campaigns.length; i++) {
+                instr.push(body.campaigns[i].instrument); 
+               
+                
+            } 
+
+            filtered = instr.unique(); 
+            console.log(filtered)
+
             self.setState({
-                campaigns: JSON.parse(body).campaigns,
-                checkdata: new Array(JSON.parse(body).campaigns.length).fill(false)
-            })
+                instr: filtered, 
+                campaigns: body.campaigns,
+                checkdata: new Array(body.campaigns.length).fill(false)
+            }) 
+        })
+    } 
+
+    filterCampaigns(str) {
+        this.setState({
+            displayed: str
         })
     }
 
@@ -62,9 +105,9 @@ export default class List extends Component {
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-lg-12 filter-panel panel">
+                    <div className="col-lg-12 filter-panel panel-tab">
 
-                        <Filter btnDisabled={this.state.btnDisabled} campaign={this.state.selectedCampaign.name} viewCampaign={this.props.viewCampaign} />
+                        <Filter description={this.state.selectedDescription} btnDisabled={this.state.btnDisabled} show_selected={this.filterCampaigns} instrument={this.state.instr} campaign={this.state.selectedCampaign.name} viewCampaign={this.props.viewCampaign} />
 
                     </div>
                 </div>
@@ -77,12 +120,16 @@ export default class List extends Component {
                                         <th></th>
                                         <th>Name</th>
                                         <th>Description</th>
-                                        <th>Instrument</th>
+                                        {/* <th>Instrument</th> */} 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {this.state.campaigns.map((i, j) => {
+
+                                        if (i.instrument == this.state.displayed ||  this.state.displayed == "All") {
                                         return (
+                                            
+                                            
                                             <tr key={Math.random() * 10000} className={this.state.checkdata[j] ? 'is-selected' : ''}>
                                                 <td>
                                                     <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + (this.state.checkdata[j] ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" value={j} onChange={this.selectCampaign} />
@@ -90,9 +137,10 @@ export default class List extends Component {
                                                 </td>
                                                 <td>{i.name}</td>
                                                 <td>{i.description}</td>
-                                                <td>{i.instrument}</td>
+                                               {/* <td>{i.instrument}</td> */}
                                             </tr>
-                                        )
+                                           
+                                        ) } 
                                     })}
                                 </tbody>
                             </table>

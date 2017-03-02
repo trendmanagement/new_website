@@ -3,6 +3,7 @@ body {
   padding: 0;
   font-family: Roboto,Helvetica,Arial,sans-serif!important; 
   background-color: #f3f3f3; 
+  overflow-x: hidden;
 
 }
 
@@ -45,12 +46,10 @@ body {
 
 .heading {
   font-weight: 700;  
-  margin-left: -15px;
 }
 
 .subheading {
-  padding-bottom: 30px; 
-  margin-left: -15px;
+  padding-bottom: 10px; 
 }
 
 th .mdl-checkbox {
@@ -74,10 +73,10 @@ th .mdl-checkbox {
   margin-bottom: 80px; 
 }
 
-.filter-panel.panel { 
+.filter-panel.panel-tab { 
     width: 100%;
-    margin-left: -30px;
     box-sizing: content-box;  
+    background: #fff; 
     position: fixed;
     z-index: 99999;
     -webkit-box-shadow: 0px 0px 6px 0px rgba(135,135,135,1);
@@ -113,11 +112,99 @@ th .mdl-checkbox {
 
 .form-container {
   text-align: center;  
-  margin-bottom: 30px;
+  margin-bottom: 30px; 
+  margin-top: 20px;
+}  
+
+
+.container-lg {
+  margin: 0 auto; 
+  max-width:1500px; 
+}
+
+.filter-tab-container {
+  text-align: center; 
+  padding-top: 15px;
+  /*text-align: left; 
+  padding-left: 80px; */
+}
+
+.filter-tab-container {
+  padding-top: 15px;
+}
+
+.filter-tab-container p {
+  font-size: 18px; 
 } 
 
+
+.date-choice-container p {
+  font-size: 18px; 
+}
+
+.date-choice-container button {
+  background-color: #8398d4; 
+  border: none; 
+  border-radius: 5px; 
+  color: #fff; 
+  outline: none!important; 
+}
+
+.submit-container {
+  text-align: center; 
+}
+
+.custom-date {
+  display: inline-block; 
+} 
+
+.custom-date input {
+  height: 29px; 
+  margin-right: 10px;
+  margin-left: 10px; 
+}
+
+.date-choice {
+  margin: 10px; 
+  margin-top: 0; 
+  margin-bottom: 15px; 
+  transition: background-color .1s ease-in;  
+}
+
+.date-choice:hover {
+  background-color:  rgb(63,81,181); 
+}
+
+.date-choice.selected {
+   background-color:  rgb(63,81,181); 
+}
+
+.filter-tab {
+    width: 50px;
+    height: 50px;
+    background-color: #8398d4;
+    color: #fff;
+    margin-right: 20px; 
+    margin-bottom: 20px; 
+    border: none;
+    border-radius: 5px; 
+    transition: background-color .1s ease-in;  
+    outline: none; 
+}
+.filter-tab:hover {
+  background-color:  rgb(63,81,181); 
+} 
+.filter-tab.selected {
+  background-color:  rgb(63,81,181); 
+}
+
 .list-container {
-  padding-top: 275px;
+  padding-top: 475px;
+} 
+
+.description {
+  margin-left: 65px; 
+  margin-bottom: 50px; 
 }
 
 .react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range {
@@ -162,10 +249,6 @@ th .mdl-checkbox {
   text-align: right; 
 }
 
-.filter-label {
-  /*text-align: center;*/
-  padding-left: 10px;
-} 
 
 .label-dummy {
   color: #fff; 
@@ -223,6 +306,14 @@ tr.is-selected td {
   margin-left: 60px; 
 }
 
+.list-container {
+  text-align: right; 
+} 
+
+.list-container th {
+   text-align: right; 
+}
+
 .series-th {
   padding-left:10px!important; 
 } 
@@ -264,7 +355,7 @@ tr.is-selected td {
 .series-chart-title {
   margin-left: 65px; 
   margin-top:10px;
-  margin-bottom:50px; 
+  margin-bottom:10px; 
 }
 
 .series-chart-heading {
@@ -277,23 +368,51 @@ tr.is-selected td {
     margin-left: 60px;
 } 
 
-@media screen and (max-width: 991px) {
+
+@media screen and (max-width: 991px) { 
+
+
+  .list-container {
+    padding-top: 20px; 
+  }
+
   .filter-label {
     padding-top: 20px;
-    padding-left: 0;
+    padding-left: 0; 
+    margin-left: 10px;
   }
 
   .filter-panel {
     padding-bottom: 40px;
   }
 
+  .filter-panel.panel-tab {
+    position: relative; 
+  }
+
   td.instrument {
     display: none;
+  }
+ 
+   .span-margin {
+    display: inline-block; 
+    margin-top: 20px; 
   }
 
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 767px) { 
+
+  .span-margin {
+    display: inline-block; 
+    margin-top: 20px; 
+  }
+
+  .filter-tab {
+    width:50px; 
+    height: 50px; 
+  } 
+
   .filter-panel {
     text-align: center; 
   }

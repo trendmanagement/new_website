@@ -17,8 +17,12 @@ export default class Container extends Component {
 
       this.viewCampaign = this.viewCampaign.bind(this); 
   }
-     viewCampaign(data, campaign, use_default) { 
+     viewCampaign(data, campaign, use_default, description) { 
 
+        this.setState({
+            description: description
+        }); 
+        
         var formData = Object.assign({}, data); 
         var d1 = formData.startDate.format('YYYY MM DD'), 
         d2 = formData.endDate.format('YYYY MM DD'); 
@@ -129,7 +133,7 @@ export default class Container extends Component {
 		render () {
 		return (
 			<div>
-				{React.cloneElement(this.props.children, { viewCampaign: this.viewCampaign, campaign_detail: this.state.campaign_detail, series_err: this.state.err, date: this.state.date })}
+				{React.cloneElement(this.props.children, { viewCampaign: this.viewCampaign, campaign_detail: this.state.campaign_detail, series_err: this.state.err, date: this.state.date, description: this.state.description })}
 			</div>
 		)
 	}

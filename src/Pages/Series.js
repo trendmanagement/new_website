@@ -171,6 +171,7 @@ export default class Series extends Component {
     }
 
     render() {
+
         return (
             <div className="container series-container">
 
@@ -186,6 +187,7 @@ export default class Series extends Component {
                 <div className="row">
                     <div className="col-lg-12">
                         <h5 className="series-chart-title">Campaign: {this.props.campaign_detail.campaign}</h5>
+                        <p className="description">{this.props.description}</p>
                     </div>
                 </div>
                 <div className={"row " + (this.state.activeTab == 0 ? "visible" : "hidden")}>
