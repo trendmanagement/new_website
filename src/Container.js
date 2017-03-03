@@ -100,7 +100,13 @@ export default class Container extends Component {
                     body.series[i].equity = Math.floor(body.series[i].equity);  
                     body.series[i].delta =  body.series[i].delta.toFixed(4); 
                     body.series[i].change = body.series[i].change.toFixed(4); 
-                    body.series[i].date = body.series[i].date.replace('T00:00:00', ''); 
+                    body.series[i].date = body.series[i].date.replace('T00:00:00', '');  
+ 
+                    body.series[i].o = body.series[i].o.toFixed(4); 
+                    body.series[i].h = body.series[i].h.toFixed(4); 
+                    body.series[i].l = body.series[i].l.toFixed(4); 
+                    body.series[i].c = body.series[i].c.toFixed(4);  
+                    
                     if (i == body.series.length - 1) {
 
                         var d4 = body.series[i].date.split('-'); 

@@ -120,7 +120,7 @@ export default class List extends Component {
                                         <th></th>
                                         <th>Name</th>
                                         <th>Description</th>
-                                        {/* <th>Instrument</th> */} 
+                                        <th>Instrument</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -137,7 +137,7 @@ export default class List extends Component {
                                                 </td>
                                                 <td>{i.name}</td>
                                                 <td>{i.description}</td>
-                                               {/* <td>{i.instrument}</td> */}
+                                                <td>{i.instrument}</td> 
                                             </tr>
                                            
                                         ) } 

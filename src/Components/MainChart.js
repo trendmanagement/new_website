@@ -8,7 +8,29 @@ export default class Chart extends Component {
 
         let graph_id = 'g1'; 
 
-        console.log(this.props.data)
+        console.log(this.props.data) 
+
+        function formatY(v, text, axis) {
+           
+                if (v >= 0) {
+                    return '$' + v 
+                } else {
+                    return '-$' + v.toString().replace('-', '');  
+                }
+        
+        }   
+
+        function formatBalloon(v) { 
+            
+              if (parseFloat(v) >= 0) {
+                    return '$' + parseInt(v).toString()
+              } else {
+                return '-$' + parseInt(v).toString().replace('-', '');  
+              }
+             
+        }
+
+
         const config = {
             "path": "",
             "type": "serial",
@@ -22,7 +44,9 @@ export default class Chart extends Component {
                 "axisAlpha": 0.2,
                 "axisThickness": 2,
                 "axisAlpha": 1,
-                "position": "left"
+                "position": "left", 
+                "labelFunction": formatY, 
+                "balloonTextFunction": formatBalloon
             }],
             //"mouseWheelZoomEnabled": true,
             "graphs": [
@@ -39,8 +63,8 @@ export default class Chart extends Component {
                 "balloon": {
                     "drop": false
                 }
-            }
-            ],
+            
+            }],
             "chartScrollbar": {
                 "autoGridCount": true,
                 "graph": graph_id,
@@ -79,6 +103,7 @@ export default class Chart extends Component {
                 "minorGridEnabled": true
             },
             "legend": {
+                "switchable": true, 
                 "useGraphSettings": true,
                 "valueWidth": 100,
                 "valueAlign": "left"
@@ -102,10 +127,25 @@ export default class Chart extends Component {
                 "axisAlpha": 0.2,
                 "axisThickness": 2,
                 "axisAlpha": 1,
-                "position": "left"
+                "position": "left", 
+                "labelFunction": formatY, 
+                "balloonTextFunction": formatBalloon
             }],
             //"mouseWheelZoomEnabled": true,
-            "graphs": [
+            "graphs": [   {
+                "id": graph_id,
+                "balloonText": "[[value]]",
+                "bullet": "round",
+                "bulletBorderAlpha": 1,
+                "bulletColor": "#FFFFFF",
+                "hideBulletsCount": 50,
+                "title": "Equity",
+                "valueField": "equity",
+                "useLineColorForBulletBorder": true,
+                "balloon": {
+                    "drop": false
+                }
+            }, 
             {
             
                 "id": "eq",
@@ -121,7 +161,7 @@ export default class Chart extends Component {
                 "negativeFillColors": "#db4c3c",
                 "negativeLineColor": "#db4c3c",
                 "openField": "o",
-                "title": "Price",
+                "title": "Underlying future",
                 "type": "ohlc",
                 "valueField": "c",
                 "balloon": {
@@ -131,10 +171,10 @@ export default class Chart extends Component {
             }],
             "chartScrollbar": {
                 "autoGridCount": true,
-                "graph":  "eq",
+                "graph": graph_id,
                 "scrollbarHeight": 40, 
                 "backgroundColor": "#f3f3f3", 
-                "selectedBackgroundColor":"#b7b9bb", 
+                "selectedBackgroundColor":"#b7b9bb" 
             },
             "chartCursor": {
                 "valueLineEnabled": true,
@@ -180,11 +220,10 @@ export default class Chart extends Component {
     
         return (
             <div className="equity-chart-container">
-                <div id="main-chart" style={{ width: "95%", height: "500px" }}>
+                <div id="main-chart" style={{ width: "95%", height: "500px" }}  className={this.props.include_price ? "hidden" : "visible"}>
                     <AmCharts.React {...config} /> 
                 </div>
-                <div id="main-chart-price" style={{ width: "95%", height: "400px" }} className={this.props.include_price ? "visible" : "hidden"}> 
-                    <h5 className="series-chart-heading">Price</h5>
+                <div id="main-chart-price" style={{ width: "95%", height: "500px" }} className={this.props.include_price ? "visible" : "hidden"}> 
                     <AmCharts.React {...price_config} />
                 </div>
             </div>

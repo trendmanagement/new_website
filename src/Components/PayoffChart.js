@@ -6,19 +6,47 @@ export default class PayoffChart extends Component {
 
     render() {
 
+        var self = this;
+        function formatY(v, text, axis) {
+            if (typeof self.props.data[0].expir == 'undefined') {
+                if (v >= 0) {
+                    return '$' + v 
+                } else {
+                    return '-$' + v.toString().replace('-', '');  
+                }
+            } else {
+                return v; 
+            }
+
+        } 
+
+        function formatBalloon(v) { 
+             if (typeof self.props.data[0].expir == 'undefined') {
+              if (parseFloat(v) >= 0) {
+                    return '$' + parseInt(v).toString()
+              } else {
+                return '-$' + parseInt(v).toString().replace('-', '');  
+              }
+             } else {
+                 return v.toFixed(4); 
+             }
+        }
+
         const config = {
             "path": "",
             "type": "serial",
             "theme": "light",
             "marginRight": 80,
-            "autoMarginOffset": 20,
+            "autoMarginOffset": 30,
             "marginTop": 7,
             "dataProvider": this.props.data,
             "valueAxes": [{
                 "axisAlpha": 0.2,
                 "axisThickness": 2,
                 "axisAlpha": 1,
-                "position": "left"
+                "position": "left", 
+                "labelFunction": formatY, 
+                "balloonTextFunction": formatBalloon
             }],
             //"mouseWheelZoomEnabled": true, 
             "graphs": [{
@@ -87,19 +115,6 @@ export default class PayoffChart extends Component {
              <div id="equity-payoff-chart" style={{width: "95%", height: "300px"}}>
                      <AmCharts.React {...config} />
              </div>
-                {/*<h5 className="series-chart-heading">{this.props.title}</h5>
-                <LineChart
-                data={this.props.data}
-                width={this.props.width} 
-                height={this.props.height} 
-                >
-                <Legend /> 
-                <Tooltip />
-                <Line type="monotone" dot={false} dataKey="curr" stroke="#8884d8" />
-                <Line type="monotone" dot={false} dataKey={this.props.data[0].exp ? "exp" : "expir"} stroke="#c13ba3" />
-                <XAxis tick={{ transform: 'translate(0, 10)' }} dataKey="px" interval="preserveStartEnd" />
-                <YAxis/>
-                </LineChart>*/}
             </div>
         )
     }

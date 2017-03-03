@@ -8,6 +8,15 @@ import request from 'request';
 
 import { Chart, BarChart, RecentDataTable, PayoffChart, PositionsTable } from '../Components';
 
+function numberWithCommas(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        return parts.join(".");
+    
+}
+
+
 export default class Series extends Component {
 
     constructor(props) {
@@ -48,16 +57,20 @@ export default class Series extends Component {
         this.updatePayoffChart(this.state.date);
     } 
 
-    checkHandler(e) {
+    checkHandler(e) { 
+        
         if (this.state.include_price == true) {
             this.setState({
                 include_price: 0
-            })
+            }) 
+
+
         } else {
             this.setState({
                 include_price: 1
             })
-        }
+        } 
+
     }
 
     generateTable() {
@@ -70,10 +83,23 @@ export default class Series extends Component {
                 if (prop in this.state.table_data) {
 
                     let val = this.props.campaign_detail[prop];
-                    let prop_str = prop.replace(/_/g, ' ');
+                    let prop_str = prop.replace(/_/g, ' '); 
 
+                    
                     if (prop == 'starting_date' || prop == 'end_date') {
                         this.props.campaign_detail[prop] = this.props.campaign_detail[prop].replace('T00:00:00', '');
+                    } 
+
+                    if (prop == 'total_cost' || prop == 'total_number_of_trades' || prop == 'max_drawdown' || prop == 'end_value' ||prop == 'starting_value' ) {
+                        val = numberWithCommas(val); 
+                    } 
+
+                    if (prop == 'total_cost' || prop == 'max_drawdown' || prop == 'end_value' ||prop == 'starting_value') {
+                        if  (val.search('-') != -1) {
+                            val = '-$' + val.replace('-', '');    
+                        } else {
+                            val = '$' + val;  
+                        }
                     }
 
 
@@ -210,7 +236,7 @@ export default class Series extends Component {
                     <div className="row">
                         <div className="col-lg-12"> 
                         <h5 className="series-chart-heading">Equity series</h5> 
-                           <span className="label-span series-span">Include price &nbsp; &nbsp;</span>
+                           <span className="label-span series-span">Include underlying future for comparison &nbsp; &nbsp;</span>
                             <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + (this.state.include_price ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" checked={this.state.include_price} onChange={this.checkHandler} />
                                 <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label><br />
                  
@@ -224,7 +250,7 @@ export default class Series extends Component {
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            <RecentDataTable data={this.getRecentData()} />
+                            <RecentDataTable format_num={numberWithCommas} data={this.getRecentData()} />
                         </div>
                     </div>
                     <div className="row">
@@ -264,7 +290,7 @@ export default class Series extends Component {
                     </div>
                     <div className="row">
                         <div className="col-lg-12 positions-container">
-                            {this.state.showPayoff ? <PositionsTable data={this.state.positions} /> : ''}
+                            {this.state.showPayoff ? <PositionsTable format_num={numberWithCommas} data={this.state.positions} /> : ''}
                         </div>
                     </div>
                 </div>
