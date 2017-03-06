@@ -118,6 +118,8 @@ export default class Container extends Component {
 
                     
                     let d = body.series[i].date.split('-'); 
+
+                   
                     body.series[i].date = new Date(d[0], d[1] - 1, d[2], 0, 0, 0, 0); 
 
 
@@ -126,6 +128,8 @@ export default class Container extends Component {
                     campaign_detail: body
                 })
 
+                console.log('--------');
+                console.log(body)
                 self.setState({campaignDataRetrieved: true})
                 hashHistory.push('campaign'); 
             }

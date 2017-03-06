@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 export default class Table extends Component {
 
-    generateBody(d, self) { 
-
+    generateBody(d, self) {  
+        let a = {}; 
         let rows = []; 
         for (let i = 0; i < d.length; i++) {
             
@@ -20,29 +20,30 @@ export default class Table extends Component {
         } 
 
       
-       d[i].trade_count = self.props.format_num(d[i].trade_count); 
+       a.trade_count = self.props.format_num(d[i].trade_count); 
        if (d[i].change >= 0) {
-            d[i].change =self.props.format_num(parseInt(d[i].change)); 
+            a.change =self.props.format_num(parseInt(d[i].change)); 
        } else {
-           d[i].change = self.props.format_num(parseInt(d[i].change)); 
+           a.change = self.props.format_num(parseInt(d[i].change)); 
        } 
 
        if (d[i].equity >= 0) {
-            d[i].equity = self.props.format_num(d[i].equity); 
+            a.equity = self.props.format_num(d[i].equity); 
        } else {
-            d[i].equity = self.props.format_num(d[i].equity); 
+            a.equity = self.props.format_num(d[i].equity); 
        }
      
 
             rows.push(<tr key={Math.random() * 100000}>
                 <td>{`${day}-${month}-${year}`}</td>
-                <td>{d[i].trade_count}</td>
-                <td>{d[i].change >= 0 ? ('$' + d[i].change) : ('-$' + d[i].change.replace('-', ''))}</td>
-                <td>{d[i].equity >= 0 ? ('$' + d[i].equity) : ('-$' + d[i].equity.replace('-', ''))}</td>
+                <td>{a.trade_count}</td>
+                <td>{a.change >= 0 ? ('$' + a.change) : ('-$' + a.change.replace('-', ''))}</td>
+                <td>{a.equity >= 0 ? ('$' + a.equity) : ('-$' + a.equity.replace('-', ''))}</td>
                 <td>{d[i].delta}</td>
             </tr>)
         }
-
+        
+        
         return rows; 
     }
      

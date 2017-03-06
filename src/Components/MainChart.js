@@ -80,16 +80,6 @@ export default class Chart extends Component {
                 "valueZoomable": true,
                 "valueLineAlpha": 0.5
             },
-            "valueScrollbar": {
-                "scrollbarHeight":2,
-                "offset":-1,
-                "backgroundAlpha":0.1,
-                "backgroundColor":"#cacaca",
-                "autoGridCount": true,
-                "color": "#000000", 
-                "selectedBackgroundColor":"#a5a5a5",
-                "selectedBackgroundAlpha":1
-            },
             "balloon": {
                 "cornerRadius": 5,
                 "fillColor": "#FFFFFF",
@@ -120,20 +110,30 @@ export default class Chart extends Component {
             "theme": "light",
             "marginRight": 80,
             "autoMarginOffset": 20,
-            "marginTop": 7,
+            "marginTop": 7, 
+            "synchronizeGrid": true, 
             "dataProvider": this.props.data,
             "valueAxes": [{
-
+                "id": "v1", 
                 "axisAlpha": 0.2,
                 "axisThickness": 2,
                 "axisAlpha": 1,
                 "position": "left", 
                 "labelFunction": formatY, 
                 "balloonTextFunction": formatBalloon
+            }, {
+                 
+                "id": "v2",
+                "axisColor": "#FCD202",
+                "axisThickness": 2,
+                "axisAlpha": 1,
+                "position": "right"
+            
             }],
             //"mouseWheelZoomEnabled": true,
             "graphs": [   {
                 "id": graph_id,
+                "valueAxis": "v1", 
                 "balloonText": "[[value]]",
                 "bullet": "round",
                 "bulletBorderAlpha": 1,
@@ -149,6 +149,7 @@ export default class Chart extends Component {
             {
             
                 "id": "eq",
+                "valueAxis": "v2", 
                 "balloonText": "Open:<b>[[open]]</b><br>Low:<b>[[low]]</b><br>High:<b>[[high]]</b><br>Close:<b>[[close]]</b><br>",
                 "closeField": "c",
                 "fillColors": "#7f8da9",
@@ -183,16 +184,6 @@ export default class Chart extends Component {
                 "zoomable": false,
                 "valueZoomable": true,
                 "valueLineAlpha": 0.5
-            },
-            "valueScrollbar": {
-                "scrollbarHeight":2,
-                "offset":-1,
-                "backgroundAlpha":0.1,
-                "backgroundColor":"#cacaca",
-                "autoGridCount": true,
-                "color": "#000000",
-                "selectedBackgroundColor":"#a5a5a5",
-                "selectedBackgroundAlpha":1
             },
             "balloon": {
                 "cornerRadius": 5,

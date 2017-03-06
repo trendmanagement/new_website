@@ -126,7 +126,9 @@ export default class Series extends Component {
     }
 
     getRecentData() {
-        var all = this.props.campaign_detail.series;
+
+        var obj = Object.assign({}, this.props.campaign_detail); 
+        var all = obj.series.slice(0);
 
         if (all.length > 5) {
             return all.slice(Math.max(all.length - 5, 1))

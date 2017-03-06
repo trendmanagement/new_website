@@ -297,14 +297,14 @@ tr.is-selected td {
 .series-info {
   margin-left: 60px; 
 }
-
+/*
 .list-container {
   text-align: right; 
 } 
 
 .list-container th {
    text-align: right; 
-}
+}*/
 
 .series-th {
   padding-left:10px!important; 
@@ -412,6 +412,28 @@ tr.is-selected td {
     text-align: center; 
   }
   .filter-btn {
-    float: none; 
+    float: none;  
+    
+  }  
+
+  .filter-tab-container {
+    padding-left: 32px; 
+  }
+
+  .filter-tab-container p {
+    margin-left: -10px; 
+  }
+
+  .list-container {
+    font-size: 11px; 
+  } 
+
+  .list-container th {
+    font-size: 11px;  
+  } 
+
+  .container-fluid {
+      padding-left: 0;
+      padding-right: 30px;
   }
 }
