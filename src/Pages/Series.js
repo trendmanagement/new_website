@@ -80,10 +80,12 @@ export default class Series extends Component {
     generateTable() {
 
         let rows = [];
-     
+		
+		
         for (let prop in this.props.campaign_detail) {
-            if (this.props.campaign_detail[prop]) {
-
+				
+            if (this.props.campaign_detail[prop] || this.props.campaign_detail[prop] === 0) {
+				
                 if (prop in this.state.table_data) {
 
                     let val = this.props.campaign_detail[prop];
@@ -94,18 +96,20 @@ export default class Series extends Component {
                         this.props.campaign_detail[prop] = this.props.campaign_detail[prop].replace('T00:00:00', '');
                     } 
 
-                    if (prop == 'total_cost' || prop == 'total_number_of_trades' || prop == 'max_drawdown' || prop == 'end_value' ||prop == 'starting_value' ) {
-                        val = numberWithCommas(val); 
+                    if (prop == 'total_cost' || prop == 'total_number_of_trades' || prop == 'max_drawdown' || prop == 'end_value' || prop == 'starting_value' ) {
+                        if (val != 0 ) { val = numberWithCommas(val) };
+						
+					
                     } 
 
                     if (prop == 'total_cost' || prop == 'max_drawdown' || prop == 'end_value' ||prop == 'starting_value') {
-                        if  (val.search('-') != -1) {
+                        if  (val.toString().search('-') != -1) {
                             val = '-$' + val.replace('-', '');    
                         } else {
                             val = '$' + val;  
                         }
                     }
-
+				
 
                     rows.push(
                         <tr key={Math.random() * 10000}>
