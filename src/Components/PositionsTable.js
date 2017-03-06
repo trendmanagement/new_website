@@ -7,7 +7,7 @@ export default class PositionsTable extends Component {
         return (
             <div>
                 <h5 className="series-chart-heading">Positions</h5> 
-                <table className="table table-striped table-hover series-detail-table positions">
+                <table className="table table-striped table-hover series-detail-table positions" style={window.innerWidth > 600 ? {display: "table"} : {display: "none"}}>
                        <thead>
                             <tr>
                                 <th>asset</th>
@@ -25,7 +25,8 @@ export default class PositionsTable extends Component {
                         {this.props.data.map(i => { 
 
                         var v = i.pnl; 
-                        i.pnl = self.props.format_num(i.pnl.toFixed(4)); 
+                     
+                        i.pnl = self.props.format_num(parseFloat(i.pnl).toFixed(4)); 
 
                             return (<tr key={Math.random() * 10000}>
                                 <td>{i.asset}</td>
@@ -40,7 +41,27 @@ export default class PositionsTable extends Component {
                             </tr>)
                             })}
                        </tbody>
-                </table>
+                </table> 
+                <div style={window.innerWidth < 600 ? {display: "block"} : {display: "none"}}> 
+                
+                        {this.props.data.map(i => { 
+
+                        var v = i.pnl; 
+                        i.pnl = self.props.format_num(parseFloat(i.pnl).toFixed(4)); 
+
+                            return (<div className="panel well" key={Math.random() * 10000}>
+                                <div>asset: {i.asset}</div>
+                                <div>open price: {i.open_price >= 0 ? ('$' + i.open_price.toFixed(4).toString()) : ('-$' + i.open_price.toFixed(4).toString().replace('-', ''))}</div>
+                                <div>price: {i.price >= 0 ? ('$' + i.price.toFixed(4).toString()) : ('-$' + i.price.toFixed(4).toString().replace('-', ''))}</div>
+                                <div>underlying price: {i.ulprice >= 0 ? ('$' + i.ulprice.toFixed(4).toString()) : ('-$' + i.ulprice.toFixed(4).toString().replace('-', ''))}</div>
+                                <div>qty: {i.qty}</div>
+                                <div>pnl: {v >= 0 ? ("$" + i.pnl) : ("-$" + i.pnl.replace('-', ''))}</div>
+                                <div>implied vol: {i.iv.toFixed(4)}</div>
+                                <div>days to expiration: {i.days_to_expiration}</div>
+                                <div>riskfree rate: {i.riskfreerate.toFixed(4)}</div>
+                            </div>)
+                            })}
+                </div>
             </div>
         )
     }

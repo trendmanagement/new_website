@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
-import AmCharts from "amcharts3-react";
+import AmCharts from "../../lib/amcharts3-react"; 
+import "../../lib/responsive";
 import "amstock3/amcharts/amstock";
 
 export default class Chart extends Component {
-
+ 
     render() {
 
         let graph_id = 'g1'; 
-
-        console.log(this.props.data) 
-
         function formatY(v, text, axis) {
-           
+
                 if (v >= 0) {
                     return '$' + v 
                 } else {
                     return '-$' + v.toString().replace('-', '');  
                 }
+ 
         
         }   
 
         function formatBalloon(v) { 
-            
+
               if (parseFloat(v) >= 0) {
                     return '$' + parseInt(v).toString()
               } else {
@@ -30,24 +29,34 @@ export default class Chart extends Component {
              
         }
 
-
         const config = {
             "path": "",
             "type": "serial",
             "theme": "light",
-            "marginRight": 80,
             "autoMarginOffset": 20,
             "marginTop": 7,
             "dataProvider": this.props.data,
             "valueAxes": [{
-
                 "axisAlpha": 0.2,
                 "axisThickness": 2,
                 "axisAlpha": 1,
                 "position": "left", 
                 "labelFunction": formatY, 
                 "balloonTextFunction": formatBalloon
-            }],
+            }], 
+            "responsive": {
+                "enabled": true,  
+                "rules": [{
+                    "maxWidth": 700, 
+                    "overrides": {
+                    "valueAxes": {
+                        "inside": true, 
+                        "fontSize": 10
+                        }
+                    }   
+                }]
+
+            }, 
             //"mouseWheelZoomEnabled": true,
             "graphs": [
             {
@@ -91,6 +100,14 @@ export default class Chart extends Component {
                 "axisColor": "#DADADA",
                 "dashLength": 1,
                 "minorGridEnabled": true
+            },        
+            "valueScrollbar": {
+                "scrollbarHeight":2,
+                "offset":-1,
+                "backgroundAlpha":0.1,
+                "backgroundColor":"#cacaca",
+                "selectedBackgroundColor":"#a5a5a5",
+                "selectedBackgroundAlpha":1
             },
             "legend": {
                 "switchable": true, 
@@ -98,6 +115,7 @@ export default class Chart extends Component {
                 "valueWidth": 100,
                 "valueAlign": "left"
             },
+
             "export": {
                 "enabled": true
             }
@@ -108,11 +126,10 @@ export default class Chart extends Component {
             "path": "",
             "type": "serial",
             "theme": "light",
-            "marginRight": 80,
             "autoMarginOffset": 20,
             "marginTop": 7, 
             "synchronizeGrid": true, 
-            "dataProvider": this.props.data,
+            "dataProvider": this.props.data, 
             "valueAxes": [{
                 "id": "v1", 
                 "axisAlpha": 0.2,
@@ -123,9 +140,9 @@ export default class Chart extends Component {
                 "balloonTextFunction": formatBalloon
             }, {
                  
-                "id": "v2",
-                "axisColor": "#FCD202",
-                "axisThickness": 2,
+                "id": "v2", 
+                "axisThickness": 2, 
+                "axisAlpha": 0.2,
                 "axisAlpha": 1,
                 "position": "right"
             
@@ -169,7 +186,20 @@ export default class Chart extends Component {
                     "drop": false
                 }
             
-            }],
+            }], 
+            "responsive": {
+                "enabled": true,  
+                "rules": [{
+                    "maxWidth": 700,
+                    "overrides": {
+                    "valueAxes": {
+                        "inside": true, 
+                        "fontSize": 10
+                        }
+                    }   
+                }]
+
+            }, 
             "chartScrollbar": {
                 "autoGridCount": true,
                 "graph": graph_id,
@@ -184,6 +214,14 @@ export default class Chart extends Component {
                 "zoomable": false,
                 "valueZoomable": true,
                 "valueLineAlpha": 0.5
+            }, 
+            "valueScrollbar": {
+                "scrollbarHeight": 3,
+                "offset":-1,
+                "backgroundAlpha": 1,
+                "backgroundColor": "#f3f3f3",
+                "selectedBackgroundColor":"#b7b9bb",
+                "selectedBackgroundAlpha":1
             },
             "balloon": {
                 "cornerRadius": 5,
@@ -202,12 +240,14 @@ export default class Chart extends Component {
                 "valueWidth": 100,
                 "valueAlign": "left"
             },
+            "listeners": [{"event": "rendered", "method": function(e) {
+                e.chart.invalidateSize(); 
+            }}], 
             "export": {
                 "enabled": true
             }
         }
 
-  
     
         return (
             <div className="equity-chart-container">
@@ -215,7 +255,7 @@ export default class Chart extends Component {
                     <AmCharts.React {...config} /> 
                 </div>
                 <div id="main-chart-price" style={{ width: "95%", height: "500px" }} className={this.props.include_price ? "visible" : "hidden"}> 
-                    <AmCharts.React {...price_config} />
+                    <AmCharts.React {...price_config} /> 
                 </div>
             </div>
         )

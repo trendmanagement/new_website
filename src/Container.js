@@ -32,8 +32,6 @@ export default class Container extends Component {
 
         var d3 = d2.split('-'); 
 
-
-        console.log(this.state.date)
         campaign = encodeURI(campaign);
 
 
@@ -128,8 +126,7 @@ export default class Container extends Component {
                     campaign_detail: body
                 })
 
-                console.log('--------');
-                console.log(body)
+    
                 self.setState({campaignDataRetrieved: true})
                 hashHistory.push('campaign'); 
             }

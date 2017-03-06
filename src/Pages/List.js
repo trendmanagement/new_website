@@ -68,8 +68,10 @@ export default class List extends Component {
     fetchList() {
 
         var self = this;
-
-        request('http://149.56.126.25:28864/api/campaigns/list/', (err, res, body) => {
+        request({
+            method: "GET", 
+            uri: "http://149.56.126.25:28864/api/campaigns/list/"
+        }, (err, res, body) => {
             if (err) return; 
             
             body = JSON.parse(body); 
@@ -120,7 +122,7 @@ export default class List extends Component {
                                         <th></th>
                                         <th>Name</th>
                                         <th>Description</th>
-                                        <th>Instrument</th> 
+                                        <th className="td-instrument">Instrument</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -137,7 +139,7 @@ export default class List extends Component {
                                                 </td>
                                                 <td>{i.name}</td>
                                                 <td>{i.description}</td>
-                                                <td>{i.instrument}</td> 
+                                                <td className="td-instrument">{i.instrument}</td> 
                                             </tr>
                                            
                                         ) } 

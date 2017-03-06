@@ -1,15 +1,16 @@
 import React, { Component } from 'react'; 
-import AmCharts from "amcharts3-react"; 
+import AmCharts from "../../lib/amcharts3-react"; 
+import "../../lib/responsive"; 
 import "amstock3/amcharts/amstock"; 
 
-export default class EquityBarChart extends Component {
+export default class EquityBarChart extends Component { 
+
     render() { 
 
         const config = {
             "path": "", 
             "type": "serial", 
             "theme": "light", 
-            "marginRight": 80,
             "autoMarginOffset": 20,
             "marginTop": 7,
             "dataProvider": this.props.data, 
@@ -52,7 +53,7 @@ export default class EquityBarChart extends Component {
                 "useGraphSettings": true, 
                 "valueWidth": 200, 
                 "valueAlign": "left"
-            },
+            }, 
             //"mouseWheelZoomEnabled": true, 
             "chartCursor": {
                 "cursorAlpha": 0,
@@ -62,6 +63,19 @@ export default class EquityBarChart extends Component {
                 "fullWidth":true
 
             },
+            "responsive": {
+                "enabled": true,  
+                "rules": [{
+                    "maxWidth": 600,
+                    "overrides": {
+                    "valueAxes": {
+                        "inside": true, 
+                        "fontSize": 10
+                        }
+                    }   
+                }]
+
+            }, 
             
             "export": {
                 "enabled": true

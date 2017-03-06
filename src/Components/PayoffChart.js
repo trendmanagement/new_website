@@ -1,8 +1,13 @@
 import React, { Component } from 'react'; 
-import AmCharts from "amcharts3-react"; 
+import AmCharts from "../../lib/amcharts3-react";  
+import "../../lib/responsive";
 import "amstock3/amcharts/amstock"; 
 
 export default class PayoffChart extends Component {
+
+    // componentDidMount() {
+    //     this.props.triggerResize(); 
+    // }
 
     render() {
 
@@ -36,7 +41,6 @@ export default class PayoffChart extends Component {
             "path": "",
             "type": "serial",
             "theme": "light",
-            "marginRight": 80,
             "autoMarginOffset": 30,
             "marginTop": 7,
             "dataProvider": this.props.data,
@@ -79,7 +83,20 @@ export default class PayoffChart extends Component {
                 "balloon": {
                     "drop": false
                 }
-            }], 
+            }],  
+            "responsive": {
+                "enabled": true,  
+                "rules": [{
+                    "maxWidth": 600,
+                    "overrides": {
+                    "valueAxes": {
+                        "inside": true, 
+                        "fontSize": 10
+                        }
+                    }   
+                }]
+
+            }, 
             "categoryField": "px",
             "categoryAxis": {
                 "axisColor": "#DADADA",
@@ -90,7 +107,7 @@ export default class PayoffChart extends Component {
                 "useGraphSettings": true, 
                 "valueWidth": 200, 
                 "valueAlign": "left"
-            }, 
+            },   
             "chartScrollbar": {
                 "scrollbarHeight":2,
                 "offset":-1,
@@ -112,7 +129,7 @@ export default class PayoffChart extends Component {
         return (
             <div className="series-chart-container">
             <h5 className="series-chart-heading">{this.props.title}</h5> 
-             <div id="equity-payoff-chart" style={{width: "95%", height: "300px"}}>
+             <div className="equity-payoff-chart" style={{width: "95%", height: "300px"}}>
                      <AmCharts.React {...config} />
              </div>
             </div>
