@@ -66,7 +66,7 @@ export default class EquityBarChart extends Component {
             "responsive": {
                 "enabled": true,  
                 "rules": [{
-                    "maxWidth": 600,
+                    "maxWidth": 700,
                     "overrides": {
                     "valueAxes": {
                         "inside": true, 

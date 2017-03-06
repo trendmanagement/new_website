@@ -30,7 +30,8 @@ export default class List extends Component {
             checkdata: [false],
             btnDisabled: true, 
             instr: ['All'], 
-            displayed: 'All'
+            displayed: 'All', 
+            response: '' 
         }
 
         this.selectCampaign = this.selectCampaign.bind(this);
@@ -68,11 +69,12 @@ export default class List extends Component {
     fetchList() {
 
         var self = this;
-        request({
-            method: "GET", 
-            uri: "http://149.56.126.25:28864/api/campaigns/list/"
-        }, (err, res, body) => {
-            if (err) return; 
+
+        request('http://149.56.126.25:28864/api/campaigns/list/', (err, res, body) => {
+            if (err) {
+                self.setState({response: err}); 
+                return; 
+            }
             
             body = JSON.parse(body); 
 
@@ -126,6 +128,7 @@ export default class List extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
+                              
                                     {this.state.campaigns.map((i, j) => {
 
                                         if (i.instrument == this.state.displayed ||  this.state.displayed == "All") {

@@ -87,7 +87,7 @@ export default class PayoffChart extends Component {
             "responsive": {
                 "enabled": true,  
                 "rules": [{
-                    "maxWidth": 600,
+                    "maxWidth": 700,
                     "overrides": {
                     "valueAxes": {
                         "inside": true, 

@@ -7,7 +7,7 @@ export default class PositionsTable extends Component {
         return (
             <div>
                 <h5 className="series-chart-heading">Positions</h5> 
-                <table className="table table-striped table-hover series-detail-table positions" style={window.innerWidth > 600 ? {display: "table"} : {display: "none"}}>
+                <table className="table table-striped table-hover series-detail-table positions hidden-xs">
                        <thead>
                             <tr>
                                 <th>asset</th>
@@ -42,14 +42,14 @@ export default class PositionsTable extends Component {
                             })}
                        </tbody>
                 </table> 
-                <div style={window.innerWidth < 600 ? {display: "block"} : {display: "none"}}> 
+                <div className="hidden-sm hidden-md hidden-lg"> 
                 
                         {this.props.data.map(i => { 
 
                         var v = i.pnl; 
                         i.pnl = self.props.format_num(parseFloat(i.pnl).toFixed(4)); 
 
-                            return (<div className="panel well" key={Math.random() * 10000}>
+                            return (<div className="panel well table-pos" key={Math.random() * 10000}>
                                 <div>asset: {i.asset}</div>
                                 <div>open price: {i.open_price >= 0 ? ('$' + i.open_price.toFixed(4).toString()) : ('-$' + i.open_price.toFixed(4).toString().replace('-', ''))}</div>
                                 <div>price: {i.price >= 0 ? ('$' + i.price.toFixed(4).toString()) : ('-$' + i.price.toFixed(4).toString().replace('-', ''))}</div>
