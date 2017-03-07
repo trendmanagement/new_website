@@ -80,6 +80,7 @@ export default class Series extends Component {
     generateTable() {
 
         let rows = [];
+		let first_rows = []; 
 		
 		
         for (let prop in this.props.campaign_detail) {
@@ -111,18 +112,26 @@ export default class Series extends Component {
                     }
 				
 
+					if (prop != "starting_value" && prop != "end_value") {
                     rows.push(
                         <tr key={Math.random() * 10000}>
                             <td>{prop_str}</td>
                             <td>{val}</td>
                         </tr>
-                    )
+                    ) } else {
+						first_rows.push(
+						<tr key={Math.random() * 10000}>
+                            <td>{prop_str}</td>
+                            <td>{val}</td>
+                        </tr>
+						)
+					}
                 }
 
             }
         }
 
-        return rows;
+        return first_rows.concat(rows);
     }
 
     setDate(date) {
