@@ -38,7 +38,7 @@ export default class Table extends Component {
                 <td>{`${day}-${month}-${year}`}</td>
                 <td>{a.trade_count}</td>
                 <td>{a.change >= 0 ? ('$' + a.change) : ('-$' + a.change.replace('-', ''))}</td>
-                <td>{a.equity >= 0 ? ('$' + a.equity) : ('-$' + a.equity.replace('-', ''))}</td>
+                <td>{parseFloat(a.equity.replace(',')) >= 0 ? ('$' + a.equity) : ('-$' + a.equity.replace('-', ''))}</td>
                 <td>{d[i].delta}</td>
             </tr>)
         }
