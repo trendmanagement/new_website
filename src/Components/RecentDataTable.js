@@ -37,7 +37,7 @@ export default class Table extends Component {
             rows.push(<tr key={Math.random() * 100000}>
                 <td>{`${day}-${month}-${year}`}</td>
                 <td>{a.trade_count}</td>
-                <td>{a.change >= 0 ? ('$' + a.change) : ('-$' + a.change.replace('-', ''))}</td>
+                <td>{parseFloat(a.change.replace(',')) >= 0 ? ('$' + a.change) : ('-$' + a.change.replace('-', ''))}</td>
                 <td>{parseFloat(a.equity.replace(',')) >= 0 ? ('$' + a.equity) : ('-$' + a.equity.replace('-', ''))}</td>
                 <td>{d[i].delta}</td>
             </tr>)
