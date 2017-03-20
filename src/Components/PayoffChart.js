@@ -25,7 +25,9 @@ export default class PayoffChart extends Component {
 
         } 
 
-        function formatBalloon(v) { 
+        function formatBalloon(v) {  
+		
+			console.log(v)
              if (typeof self.props.data[0].expir == 'undefined') {
               if (parseFloat(v) >= 0) {
                     return '$' + parseInt(v).toString()
@@ -33,16 +35,16 @@ export default class PayoffChart extends Component {
                 return '-$' + parseInt(v).toString().replace('-', '');  
               }
              } else {
-                 return v.toFixed(4); 
+                 return v.toFixed(2); 
              }
         }
 
         const config = {
             "path": "",
-            "type": "serial",
+            "type": "serial", 
             "theme": "light",
-            "autoMarginOffset": 30,
-            "marginTop": 7,
+            "autoMarginOffset": 40,
+            "marginTop": 7, 
             "dataProvider": this.props.data,
             "valueAxes": [{
                 "axisAlpha": 0.2,
@@ -84,6 +86,9 @@ export default class PayoffChart extends Component {
                     "drop": false
                 }
             }],  
+			"balloon": {
+				"fontSize": 10
+			}, 
             "responsive": {
                 "enabled": true,  
                 "rules": [{
