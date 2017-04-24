@@ -312,27 +312,34 @@
     }
 } 
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 767px) { 
+
+    .bg-container {
+        height: 400px;   
+    }
+
     .main-title {
         font-size: 30px
     } 
 
     .description-container {
-        height: 60%; 
+        height: 500px; 
+        top: 400px; 
     }
 
     .footer-container {
-        top: 120%; 
+        top: 900px; 
     }
 } 
 
 @media screen and (max-width: 500px) {
     .description-container {
-        height: 80%; 
+        height: 600px; 
+        top: 400px; 
     }
 
     .footer-container {
-        top: 140%; 
+        top: 1000px; 
     }
 
     .who-we-are .container-grid {
@@ -354,5 +361,35 @@
     .who-title {
         padding: 20px 0px; 
         padding-bottom: 0; 
+    }
+} 
+
+@media screen and (max-width: 375px) {
+    .description-container {
+        height: 800px; 
+        top: 400px; 
+    }
+
+    .footer-container {
+        top: 1200px; 
+    }
+} 
+
+@media screen and (max-height: 800px) and (min-width: 600px) {
+    .bg-container {
+        height: 400px;   
+    }
+
+    .main-title {
+        font-size: 30px
+    } 
+
+    .description-container {
+        height: 500px; 
+        top: 400px; 
+    }
+
+    .footer-container {
+        top: 900px; 
     }
 }

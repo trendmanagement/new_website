@@ -72,4 +72,18 @@
     border: none;
     padding: 10px 20px;
     
+} 
+
+@media screen and (max-width: 500px) {
+    .disclaimer-container {
+        width: 95%;
+        height: 95%;
+        position: fixed;
+        left: 2.5%;
+        top: 2.5%;
+    } 
+
+    .disclaimer-text {
+        height: 70%; 
+    }
 }
