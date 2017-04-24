@@ -50,12 +50,12 @@ class Navigation extends Component {
                     </div>
                 </div>
                 <div className="nav-middle">
-                    <div onClick={() => {this.switchTab('products')}} className={"nav-item " + (this.state.activeTab == 'products' ? 'active' : '' )}>
+                    <div onMouseOut={()=> {this.switchTab('home')}} onMouseOver={() => {this.switchTab('products')}} className={"nav-item " + (this.state.activeTab == 'products' ? 'active' : '' )}>
                         <a>
                             products
                         </a>
                     </div>
-                    <div onClick={() => {this.switchTab('services')}} className={"nav-item " + (this.state.activeTab == 'services' ? 'active' : '' )}>
+                    <div onMouseOut={()=> {this.switchTab('home')}} onMouseOver={() => {this.switchTab('services')}} className={"nav-item " + (this.state.activeTab == 'services' ? 'active' : '' )}>
                         <a>
                             services
                         </a>

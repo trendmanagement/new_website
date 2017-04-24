@@ -170,14 +170,15 @@
 }
 
 .bg-container {
-    background-image: url('../../../public/images/bg.png'); 
+    
     background-size: cover; 
     background-repeat: no-repeat; 
     height: 60%;   
     position: absolute;
     left: 0;
     right: 0; 
-    background-position: 0 100%;
+    background-position: 0 100%; 
+    transition: all .3s ease-in-out; 
 }   
 
 .title-container {
@@ -285,6 +286,33 @@
     padding-bottom: 25px; 
 }
 
+.slider-controls-wrap {
+    position: absolute; 
+    bottom: 30px; 
+    width: 100%; 
+    display: flex;  
+    justify-content: space-around; 
+}
+
+
+.slider-controls {
+    justify-content: space-around;
+
+}
+
+.slider-controls div {
+    border-radius: 50%; 
+    height: 10px;
+    width: 10px; 
+    background: #979796; 
+    display: inline-block; 
+    margin: 10px; 
+    box-sizing: border-box; 
+}
+
+.slider-controls div.active {
+     background: #fff; 
+}
 
 @media screen and (max-width: 1600px) {
     .nav-item {

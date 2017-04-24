@@ -9,7 +9,13 @@ class Home extends Component {
         super()  
 
         this.state = {
-            showDisclaimer: false 
+            showDisclaimer: false,
+            activeSlide: 0, 
+            slides: [
+                `${process.env.PUBLIC_URL}/images/bg.png`, 
+                `${process.env.PUBLIC_URL}/images/bg1.png`, 
+                `${process.env.PUBLIC_URL}/images/bg.png`
+            ]
         } 
 
         
@@ -28,11 +34,18 @@ class Home extends Component {
             <div className="home-container">    
                 <Disclaimer hideDisclaimer={this.hideDisclaimer} isOpen={this.state.showDisclaimer} />
                 <Navigation activeTab="home"/> 
-                <div className="bg-container">
+                <div className="bg-container" style={{backgroundImage: 'url(' + this.state.slides[this.state.activeSlide] + ')'}}>
                     <div className="title-aligner full-height">
                         <div className="title-container">
                             <h1 className="main-title">Enter the World of Modern Risk Management</h1>
                             <button className="main-btn">get started</button>
+                        </div>
+                        <div className="slider-controls-wrap">
+                        <div className="slider-controls">
+                            <div onClick={() => {this.setState({activeSlide: 0})}} className={this.state.activeSlide == 0 ? 'active' : ''}></div>
+                            <div onClick={() => {this.setState({activeSlide: 1})}} className={this.state.activeSlide == 1 ? 'active' : ''}></div>
+                            <div onClick={() => {this.setState({activeSlide: 2})}} className={this.state.activeSlide == 2 ? 'active' : ''}></div>
+                        </div>
                         </div>
                     </div>
                 </div>
