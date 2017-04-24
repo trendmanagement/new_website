@@ -3,7 +3,22 @@
     text-transform: uppercase; 
     color: #fff!important; 
     white-space: nowrap; 
+    cursor: pointer; 
 } 
+
+.nav-item a:hover {
+    color: #75a7ff!important; 
+}
+
+.nav-item.active {
+    background: rgba(31, 31, 31, 0.42); 
+}
+
+.nav-item.active a {
+    color: #75a7ff!important; 
+}  
+
+
 
 .container-grid {
     width: 80%;
@@ -26,7 +41,8 @@
 
 .nav-item {
     display: inline-block; 
-    padding: 25px;
+    padding: 25px; 
+    cursor: pointer; 
 }
 
 .nav-container {
@@ -36,10 +52,13 @@
         justify-content: space-between; 
     position: absolute;
     width: 100%;
-    z-index: 9999;
+    z-index: 9999; 
+    height: 75px; 
+    box-sizing: border-box; 
     background: rgba(39, 39, 39, 0.5);
 
 }
+ 
 
 .login-btn {
     border: 2px solid #fff; 
@@ -49,6 +68,12 @@
     border-radius: 18px; 
     color: #fff; 
     cursor: pointer; 
+    transition: all .2s ease-in-out; 
+} 
+
+.login-btn:hover {
+    color: #000; 
+    background: #fff; 
 }
 
 .nav-right {
@@ -60,6 +85,80 @@
 .nav-middle {
     display: -ms-flexbox;
     display: flex; 
+}
+
+.nav-options-container {
+    background: #fff;
+    color: #000; 
+    margin-top: 75px;
+    position: absolute;
+    width: 100%;
+    z-index: 9999;
+    display: none; 
+} 
+
+.nav-options-container.active {
+    display: block; 
+}
+
+.nav-option {
+    display: none; 
+}
+
+.qr {
+    font-size: 10px;
+    margin-top: -5px;
+    vertical-align: super;
+    border-bottom: 1px solid black;
+}
+
+.nav-option.active {
+    display: block; 
+} 
+
+.option-sub {
+    width: 33%; 
+    padding-left: 25px;
+    margin-top: 20px; 
+    height: 110px;
+}
+
+.option-sub p {
+    line-height: 1;
+    margin-bottom: 15px;
+} 
+
+.option-sub p::before {
+    content: '\203A';
+    color: #75a7ff;
+    font-size: 20px;
+    line-height: 0px;
+    margin-right: 5px;
+}
+
+.bordered {
+    border-right: 1px solid #ccc;
+
+}
+
+.nav-option h5 {
+    color: #000; 
+    font-weight: 800;  
+    font-size: 14px;   
+    text-transform: uppercase; 
+    margin-top: 0;
+}
+
+.nav-option a {
+    color: #000; 
+    font-weight: 800; 
+    padding-top: 26px;
+    display: block;
+
+}
+
+.nav-option a:hover {
+    color: #000; 
 }
 
 .logo-container {
@@ -79,7 +178,38 @@
     left: 0;
     right: 0; 
     background-position: 0 100%;
-}  
+}   
+
+.title-container {
+    margin: 0 auto; 
+    font-weight: 800; 
+}
+
+.title-aligner {
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.main-title {
+    font-size: 48px; 
+    color: #fff; 
+} 
+
+.main-btn {
+    color: #fff;
+    text-transform: uppercase;
+    background: #2979ff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    transition: all .2s ease-in-out; 
+} 
+
+.main-btn:hover {
+    background: #5896ff; 
+}
 
 .description-container {
     background: #212121;
@@ -108,7 +238,53 @@
     color: #75a7ff;
     margin-right: 10px;
     margin-left: -20px; 
+} 
+
+.footer-container {
+    position: absolute;
+    top: 100%;
+    width: 100%;
 }
+
+.disclaimer {
+    height: 75px; 
+    background: #484848;
+    color: #fff; 
+    text-align: center; 
+    padding-top: 25px;
+    box-sizing: border-box;
+}
+
+.disclaimer a {
+    color: #709cec!important; 
+
+} 
+
+.who-title {
+    padding: 40px 0px; 
+    font-size: 16px; 
+    color: #004ecb;  
+    text-transform: uppercase; 
+    text-decoration: underline; 
+}
+
+.who-detail {
+    padding: 40px 0px; 
+}
+
+.who-detail div {
+    display: inline-block; 
+    padding-left: 20px; 
+}
+
+.who-detail i {
+    color: #004ecb; 
+} 
+
+.copyright {
+    padding-bottom: 25px; 
+}
+
 
 @media screen and (max-width: 1600px) {
     .nav-item {
@@ -133,5 +309,50 @@
 
     .nav-right {
         display: none; 
+    }
+} 
+
+@media screen and (max-width: 767px) {
+    .main-title {
+        font-size: 30px
+    } 
+
+    .description-container {
+        height: 60%; 
+    }
+
+    .footer-container {
+        top: 120%; 
+    }
+} 
+
+@media screen and (max-width: 500px) {
+    .description-container {
+        height: 80%; 
+    }
+
+    .footer-container {
+        top: 140%; 
+    }
+
+    .who-we-are .container-grid {
+        display: block; 
+    } 
+
+     .who-detail div:first-child {
+         padding-left: 0; 
+     }
+
+    .who-detail div:last-child {
+        padding-left: 15px;
+    } 
+
+    .who-detail {
+        padding: 20px 0px; 
+    }
+
+    .who-title {
+        padding: 20px 0px; 
+        padding-bottom: 0; 
     }
 }

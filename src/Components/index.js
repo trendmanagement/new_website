@@ -5,7 +5,8 @@ import RecentDataTable from './RecentDataTable'
 import PayoffChart from './PayoffChart' 
 import PositionsTable from './PositionsTable' 
 import Navigation from './Navigation' 
-import MobileNav from './MobileNav'
+import MobileNav from './MobileNav' 
+import Disclaimer from './Disclaimer'
 
 module.exports = { 
     Filter, 
@@ -15,5 +16,6 @@ module.exports = {
     PayoffChart, 
     PositionsTable, 
     Navigation, 
-    MobileNav
+    MobileNav, 
+    Disclaimer
 } 

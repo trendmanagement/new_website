@@ -16,8 +16,7 @@ class App extends Component {
       <Router history={browserHistory}>
         <Route path="/" component={Container}>
           <IndexRoute component={List}/>
-          <Route path="campaign" component={Series} /> 
-          <Route path="campaign/:id" component={Series} />
+          <Route path="campaign" component={Series} />  
           <Route path="error" component={Error} />
           <Route path="home" component={Home}/>
         </Route>

@@ -8,7 +8,7 @@
     left: 0; 
     right: 0;
     bottom: 0; 
-    background: rgba(39, 39, 39, 0.83); 
+    background: rgba(39, 39, 39, 0.91); 
     z-index: 99999; 
     align-items: center;
     justify-content: center; 
@@ -51,10 +51,17 @@
     border-radius: 18px; 
     color: #fff; 
     cursor: pointer; 
+    transition: all .2s ease-in-out; 
+    outline: none; 
+} 
+
+.mob-login-btn:hover {
+    color: #000; 
+    background: #fff; 
 }
 
 .nav-trigger {
-    position: fixed;
+    position: absolute;
     top: 24px;
     right: 10%;
     width: 50px;
