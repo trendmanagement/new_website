@@ -1,46 +1,49 @@
-import React, {Component} from 'react'
-
+import React, { Component } from 'react'
 import moment from 'moment'
-import request from 'request'; 
-import {hashHistory} from 'react-router'; 
+import request from 'request';
+import { browserHistory } from 'react-router'; 
+import { apiEndpoint } from './config'; 
 
 export default class Container extends Component {
-  constructor(props) {
-      super(props)
+    constructor(props) {
+        super(props)
 
-      this.state = {
-          campaignDataRetrieved: false,
-		  campaign_detail: [], 
-          err: null, 
-          date: '' 
-      } 
-
-      this.viewCampaign = this.viewCampaign.bind(this); 
-  }
-     viewCampaign(data, campaign, use_default, description) { 
-
-        this.setState({
-            description: description
-        }); 
-        
-        var formData = Object.assign({}, data); 
-        var d1 = formData.startDate.format('YYYY MM DD'), 
-        d2 = formData.endDate.format('YYYY MM DD'); 
-
-        d1 = d1.replace(/ /g, '-');
-        d2 = d2.replace(/ /g, '-'); 
-
-        var d3 = d2.split('-'); 
-
-        campaign = encodeURI(campaign);
-
-
-        var uri = `http://149.56.126.25:28864/api/campaigns/series/?campaign=${campaign}&amp;starting_date=${d1}&amp;end_date=${d2}&amp;include_price=1`
-        if (use_default) {
-            uri = `http://149.56.126.25:28864/api/campaigns/series/?campaign=${campaign}&include_price=1`
+        this.state = {
+            campaignDataRetrieved: false,
+            campaign_detail: [],
+            err: null,
+            date: ''
         }
 
-        var self = this; 
+        this.viewCampaign = this.viewCampaign.bind(this);
+    }
+    viewCampaign(data, campaign, use_default, description, query_data) {
+
+        if (typeof query_data == 'undefined') {
+            var formData = Object.assign({}, data);
+
+            var d1 = formData.startDate.format('YYYY MM DD'),
+                d2 = formData.endDate.format('YYYY MM DD');
+
+            d1 = d1.replace(/ /g, '-');
+            d2 = d2.replace(/ /g, '-');
+
+            var d3 = d2.split('-');
+
+            campaign = encodeURI(campaign);
+
+
+            query_data = `?campaign=${campaign}&starting_date=${d1}&end_date=${d2}&include_price=1`;
+
+            if (use_default) {
+                query_data = `?campaign=${campaign}&include_price=1`
+            }
+        }
+
+
+        var uri = `${apiEndpoint}/api/campaigns/series/${query_data}`
+
+        var self = this;
 
         var req = request({
             type: 'GET',
@@ -49,15 +52,14 @@ export default class Container extends Component {
 
             if (err) {
                 self.setState({
-                    err: {message: 'Api error'}
-                }) 
-                hashHistory.push('error'); 
+                    err: { message: 'Api error' }
+                })
+                browserHistory.push('error');
                 return;
             }
 
             try {
                 body = JSON.parse(body);
-
 
             } catch (err) {
 
@@ -68,81 +70,77 @@ export default class Container extends Component {
                     self.setState({
                         err: { message: 'Api error. Invalid response data.' }
                     })
-                    hashHistory.push('error');
+                    browserHistory.push('error');
                     return;
                 }
-
-
 
             }
 
             if (body.status == 'error') {
                 self.setState({
-                    err: {message: body.message}
-                }); 
+                    err: { message: body.message }
+                });
 
-                hashHistory.push('error'); 
+                browserHistory.push('error');
             }
 
-            if (body.status == 'OK') {  
+            if (body.status == 'OK') {
 
-          
-                body.starting_value = Math.floor(body.starting_value); 
-                body.end_value = Math.floor(body.end_value);  
-                body.max_drawdown = Math.floor(body.max_drawdown); 
-                body.max_delta = body.max_delta.toFixed(4); 
-                body.average_delta = body.average_delta.toFixed(4); 
+                console.log(body)
+                body.starting_value = Math.floor(body.starting_value);
+                body.end_value = Math.floor(body.end_value);
+                body.max_drawdown = Math.floor(body.max_drawdown);
+                body.max_delta = body.max_delta.toFixed(4);
+                body.average_delta = body.average_delta.toFixed(4);
 
                 for (let i = 0; i < body.series.length; i++) {
 
-                    body.series[i].equity = Math.floor(body.series[i].equity);  
-                    body.series[i].delta =  body.series[i].delta.toFixed(4); 
-                    body.series[i].change = body.series[i].change.toFixed(4); 
-                    body.series[i].date = body.series[i].date.replace('T00:00:00', '');  
- 
-                    body.series[i].o = body.series[i].o.toFixed(4); 
-                    body.series[i].h = body.series[i].h.toFixed(4); 
-                    body.series[i].l = body.series[i].l.toFixed(4); 
-                    body.series[i].c = body.series[i].c.toFixed(4);  
-                    
+                    body.series[i].equity = Math.floor(body.series[i].equity);
+                    body.series[i].delta = body.series[i].delta.toFixed(4);
+                    body.series[i].change = body.series[i].change.toFixed(4);
+                    body.series[i].date = body.series[i].date.replace('T00:00:00', '');
+
+                    body.series[i].o = body.series[i].o.toFixed(4);
+                    body.series[i].h = body.series[i].h.toFixed(4);
+                    body.series[i].l = body.series[i].l.toFixed(4);
+                    body.series[i].c = body.series[i].c.toFixed(4);
+
                     if (i == body.series.length - 1) {
 
-                        var d4 = body.series[i].date.split('-'); 
+                        var d4 = body.series[i].date.split('-');
                         console.log(d4)
                         self.setState({
-                            date: moment({year: d4[0], month: d4[1] - 1, day: d4[2]})
+                            date: moment({ year: d4[0], month: d4[1] - 1, day: d4[2] })
                         })
-                    } 
+                    }
 
-                    
-                    let d = body.series[i].date.split('-'); 
+                    let d = body.series[i].date.split('-');
 
-                   
-                    body.series[i].date = new Date(d[0], d[1] - 1, d[2], 0, 0, 0, 0); 
+
+                    body.series[i].date = new Date(d[0], d[1] - 1, d[2], 0, 0, 0, 0);
 
 
                 }
+
                 self.setState({
                     campaign_detail: body
                 })
 
-    
-                self.setState({campaignDataRetrieved: true})
-                hashHistory.push('campaign'); 
+
+                self.setState({ campaignDataRetrieved: true })
+
+                browserHistory.push(`campaign${query_data}&d=${description}`);
+
             }
-        }) 
-
-        console.log(req)
-
-    
+        })
 
     }
-		render () {
-		return (
-			<div>
-				{React.cloneElement(this.props.children, { viewCampaign: this.viewCampaign, campaign_detail: this.state.campaign_detail, series_err: this.state.err, date: this.state.date, description: this.state.description })}
-			</div>
-		)
-	}
+    render() {
+        return (
+            <div>
+                {React.cloneElement(this.props.children, { viewCampaign: this.viewCampaign, campaign_detail: this.state.campaign_detail, series_err: this.state.err, date: this.state.date, description: this.state.description })}
+            </div>
+        )
+    }
 
 }

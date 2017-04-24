@@ -1,0 +1,77 @@
+.mobile-nav {
+    display: none; 
+}
+
+.nav-overlay {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0;
+    bottom: 0; 
+    background: rgba(39, 39, 39, 0.83); 
+    z-index: 99999; 
+    align-items: center;
+    justify-content: center; 
+    display: none; 
+    opacity: 0;
+    transition: opacity .2s ease-in-out; 
+    -webkit-transition: opacity .2s ease-in-out; 
+    -moz-transition: opacity .2s ease-in-out; 
+    -o-transition: opacity .2s ease-in-out; 
+} 
+
+.nav-overlay.is-open {
+    display: flex; 
+    opacity: 1; 
+}
+
+.mob-nav-item {
+    width: 100%; 
+    float: left; 
+    padding-left: 0;
+    padding-right: 0; 
+    padding-bottom: 15px; 
+    text-transform: uppercase; 
+}
+
+.mob-nav-item a {
+    color: #fff!important; 
+    text-decoration: none!important; 
+}
+
+.mob-nav-container {
+    text-align: center; 
+}
+
+.mob-login-btn {
+    border: 2px solid #fff; 
+    background: transparent; 
+    text-transform: uppercase; 
+    padding: 10px 20px 10px 20px; 
+    border-radius: 18px; 
+    color: #fff; 
+    cursor: pointer; 
+}
+
+.nav-trigger {
+    position: fixed;
+    top: 24px;
+    right: 10%;
+    width: 50px;
+    height: 50px;
+    z-index: 999999; 
+    cursor: pointer; 
+}
+
+.nav-trigger div {
+    width: 32px;
+    height: 4px;
+    margin-bottom: 6px;
+    background: #fff;
+} 
+
+@media screen and (max-width: 1061px) {
+    .mobile-nav {
+        display: block; 
+    }
+}

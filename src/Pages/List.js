@@ -1,17 +1,19 @@
-import React, { Component } from 'react'
-import request from 'request'
-import { Filter } from '../Components'
+import React, { Component } from 'react';
+import request from 'request';
+import { Filter } from '../Components';
+import { apiEndpoint } from '../config'; 
+import './css/List.css';
 
-Array.prototype.unique = function() {
+Array.prototype.unique = function () {
     var a = [];
-    for (let i = 0; i < this.length; i++ ) {
+    for (let i = 0; i < this.length; i++) {
         var current = this[i];
         if (a.indexOf(current) < 0) a.push(current);
     }
 
     this.length = 0;
-    for (let i = 0; i < a.length; i++ ) {
-        this.push( a[i] );
+    for (let i = 0; i < a.length; i++) {
+        this.push(a[i]);
     }
 
     return this;
@@ -25,18 +27,18 @@ export default class List extends Component {
 
         this.state = {
             campaigns: [{ name: 'no data', description: 'no data', instrument: 'no data' }],
-            selectedCampaign: '', 
-            selectedDescription: '', 
+            selectedCampaign: '',
+            selectedDescription: '',
             checkdata: [false],
-            btnDisabled: true, 
-            instr: ['All'], 
-            displayed: 'All', 
-            response: '' 
+            btnDisabled: true,
+            instr: ['All'],
+            displayed: 'All',
+            response: ''
         }
 
         this.selectCampaign = this.selectCampaign.bind(this);
-        this.fetchList = this.fetchList.bind(this); 
-        this.filterCampaigns = this.filterCampaigns.bind(this); 
+        this.fetchList = this.fetchList.bind(this);
+        this.filterCampaigns = this.filterCampaigns.bind(this);
 
     }
 
@@ -58,7 +60,7 @@ export default class List extends Component {
 
         this.setState({
             checkdata: checkdata,
-            selectedCampaign: this.state.campaigns[e.target.value], 
+            selectedCampaign: this.state.campaigns[e.target.value],
             selectedDescription: this.state.campaigns[e.target.value].description,
             btnDisabled: false
         })
@@ -70,33 +72,33 @@ export default class List extends Component {
 
         var self = this;
 
-        request('http://149.56.126.25:28864/api/campaigns/list/', (err, res, body) => {
+        request(`${apiEndpoint}/api/campaigns/list/`, (err, res, body) => {
             if (err) {
-                self.setState({response: err}); 
-                return; 
+                self.setState({ response: err });
+                return;
             }
-            
-            body = JSON.parse(body); 
+
+            body = JSON.parse(body);
 
             let instr = [], filtered = [];
 
-            
-            for (let i = 0; i < body.campaigns.length; i++) {
-                instr.push(body.campaigns[i].instrument); 
-               
-                
-            } 
 
-            filtered = instr.unique(); 
+            for (let i = 0; i < body.campaigns.length; i++) {
+                instr.push(body.campaigns[i].instrument);
+
+
+            }
+
+            filtered = instr.unique();
             console.log(filtered)
 
             self.setState({
-                instr: filtered, 
+                instr: filtered,
                 campaigns: body.campaigns,
                 checkdata: new Array(body.campaigns.length).fill(false)
-            }) 
+            })
         })
-    } 
+    }
 
     filterCampaigns(str) {
         this.setState({
@@ -124,28 +126,29 @@ export default class List extends Component {
                                         <th></th>
                                         <th>Name</th>
                                         <th>Description</th>
-                                        <th className="td-instrument">Instrument</th> 
+                                        <th className="td-instrument">Instrument</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                              
+
                                     {this.state.campaigns.map((i, j) => {
 
-                                        if (i.instrument == this.state.displayed ||  this.state.displayed == "All") {
-                                        return (
-                                            
-                                            
-                                            <tr key={Math.random() * 10000} className={this.state.checkdata[j] ? 'is-selected' : ''}>
-                                                <td>
-                                                    <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + (this.state.checkdata[j] ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" value={j} onChange={this.selectCampaign} />
-                                                        <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label>
-                                                </td>
-                                                <td>{i.name}</td>
-                                                <td>{i.description}</td>
-                                                <td className="td-instrument">{i.instrument}</td> 
-                                            </tr>
-                                           
-                                        ) } 
+                                        if (i.instrument == this.state.displayed || this.state.displayed == "All") {
+                                            return (
+
+
+                                                <tr key={Math.random() * 10000} className={this.state.checkdata[j] ? 'is-selected' : ''}>
+                                                    <td>
+                                                        <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + (this.state.checkdata[j] ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" value={j} onChange={this.selectCampaign} />
+                                                            <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label>
+                                                    </td>
+                                                    <td>{i.name}</td>
+                                                    <td>{i.description}</td>
+                                                    <td className="td-instrument">{i.instrument}</td>
+                                                </tr>
+
+                                            )
+                                        }
                                     })}
                                 </tbody>
                             </table>

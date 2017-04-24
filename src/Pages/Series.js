@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-
 import DatePicker from 'react-datepicker';
 import { Tabs, Tab } from 'react-mdl';
-
 import moment from 'moment';
-import request from 'request';
+import request from 'request';  
+import { apiEndpoint } from '../config'; 
+import './css/Series.css'; 
 
 import { Chart, BarChart, RecentDataTable, PayoffChart, PositionsTable } from '../Components';
 
@@ -12,8 +12,8 @@ function numberWithCommas(x) {
     var parts = x.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-        return parts.join(".");
-    
+    return parts.join(".");
+
 }
 
 
@@ -21,6 +21,25 @@ export default class Series extends Component {
 
     constructor(props) {
         super(props)
+
+        let campaign_detail = props.campaign_detail;
+        if (props.campaign_detail.length == 0) {
+            let campaign = encodeURI(props.location.query.campaign);
+            let starting_date = props.location.query.starting_date;
+            let end_date = props.location.query.end_date;
+            let include_price = props.location.query.include_price;
+            let description = props.location.query.d;
+
+            let query;
+            if (typeof end_date != 'undefined') {
+                query = `?campaign=${campaign}&starting_date=${starting_date}&end_date=${end_date}&include_price=${include_price}`
+            } else {
+                query = `?campaign=${campaign}&include_price=${include_price}`
+            }
+
+            console.log(query)
+            props.viewCampaign(null, null, null, description, query)
+        }
 
         this.state = {
             date: this.props.date,
@@ -36,96 +55,111 @@ export default class Series extends Component {
                 average_delta: '',
 
             },
+            campaign_detail: campaign_detail,
             payoffData: [],
             deltaData: [],
             payoff_msg: '',
             positions: [],
-            activeTab: 0, 
+            activeTab: 0,
             include_price: 1
         }
 
-        this.props.campaign_detail.end_date = this.props.campaign_detail.end_date.replace('T00:00:00', '');
+
+        // this.props.campaign_detail.end_date = this.props.campaign_detail.end_date.replace('T00:00:00', '');
 
         this.generateTable = this.generateTable.bind(this);
         this.getRecentData = this.getRecentData.bind(this);
         this.updatePayoffChart = this.updatePayoffChart.bind(this);
-        this.setDate = this.setDate.bind(this); 
-        this.checkHandler = this.checkHandler.bind(this); 
+        this.setDate = this.setDate.bind(this);
+        this.checkHandler = this.checkHandler.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.date != this.props.date) {
+            this.setState({
+                date: nextProps.date
+            })
+            this.updatePayoffChart(nextProps.date);
+        }
+
     }
 
     componentDidMount() {
-        this.updatePayoffChart(this.state.date);
-    } 
+        if (this.props.date != '') {
+            this.updatePayoffChart(this.props.date);
+        }
+    }
 
-    checkHandler(e) { 
-        
+    checkHandler(e) {
+
         if (this.state.include_price == true) {
             this.setState({
                 include_price: 0
-            }) 
+            })
 
 
         } else {
             this.setState({
                 include_price: 1
             })
-        } 
+        }
 
     }
 
     triggerResize() {
-        window.resizeTo(window.innerWidth, window.innerHeight); 
+        window.resizeTo(window.innerWidth, window.innerHeight);
     }
 
     generateTable() {
 
         let rows = [];
-		let first_rows = []; 
-		
-		
+        let first_rows = [];
+
+
         for (let prop in this.props.campaign_detail) {
-				
+
             if (this.props.campaign_detail[prop] || this.props.campaign_detail[prop] === 0) {
-				
+
                 if (prop in this.state.table_data) {
 
                     let val = this.props.campaign_detail[prop];
-                    let prop_str = prop.replace(/_/g, ' '); 
+                    let prop_str = prop.replace(/_/g, ' ');
 
-                    
+
                     if (prop == 'starting_date' || prop == 'end_date') {
                         this.props.campaign_detail[prop] = this.props.campaign_detail[prop].replace('T00:00:00', '');
-                    } 
+                    }
 
-                    if (prop == 'total_cost' || prop == 'total_number_of_trades' || prop == 'max_drawdown' || prop == 'end_value' || prop == 'starting_value' ) {
-                        if (val != 0 ) { val = numberWithCommas(val) };
-						
-					
-                    } 
+                    if (prop == 'total_cost' || prop == 'total_number_of_trades' || prop == 'max_drawdown' || prop == 'end_value' || prop == 'starting_value') {
+                        if (val != 0) { val = numberWithCommas(val) };
 
-                    if (prop == 'total_cost' || prop == 'max_drawdown' || prop == 'end_value' ||prop == 'starting_value') {
-                        if  (val.toString().search('-') != -1) {
-                            val = '-$' + val.replace('-', '');    
+
+                    }
+
+                    if (prop == 'total_cost' || prop == 'max_drawdown' || prop == 'end_value' || prop == 'starting_value') {
+                        if (val.toString().search('-') != -1) {
+                            val = '-$' + val.replace('-', '');
                         } else {
-                            val = '$' + val;  
+                            val = '$' + val;
                         }
                     }
-				
 
-					if (prop != "starting_value" && prop != "end_value") {
-                    rows.push(
-                        <tr key={Math.random() * 10000}>
-                            <td>{prop_str}</td>
-                            <td>{val}</td>
-                        </tr>
-                    ) } else {
-						first_rows.push(
-						<tr key={Math.random() * 10000}>
-                            <td>{prop_str}</td>
-                            <td>{val}</td>
-                        </tr>
-						)
-					}
+
+                    if (prop != "starting_value" && prop != "end_value") {
+                        rows.push(
+                            <tr key={Math.random() * 10000}>
+                                <td>{prop_str}</td>
+                                <td>{val}</td>
+                            </tr>
+                        )
+                    } else {
+                        first_rows.push(
+                            <tr key={Math.random() * 10000}>
+                                <td>{prop_str}</td>
+                                <td>{val}</td>
+                            </tr>
+                        )
+                    }
                 }
 
             }
@@ -144,7 +178,7 @@ export default class Series extends Component {
 
     getRecentData() {
 
-        var obj = Object.assign({}, this.props.campaign_detail); 
+        var obj = Object.assign({}, this.props.campaign_detail);
         var all = obj.series.slice(0);
 
         if (all.length > 5) {
@@ -163,7 +197,7 @@ export default class Series extends Component {
 
         request({
             type: 'GET',
-            uri: `http://149.56.126.25:28864/api/campaigns/payoff/?campaign=${encodeURI(this.props.campaign_detail.campaign)}&date=${d}`
+            uri: `${apiEndpoint}/api/campaigns/payoff/?campaign=${encodeURI(this.props.campaign_detail.campaign)}&date=${d}`
         }, (err, res, body) => {
             if (err) {
                 console.log(err)
@@ -176,7 +210,7 @@ export default class Series extends Component {
 
                 request({
                     type: 'GET',
-                    uri: `http://149.56.126.25:28864/api/campaigns/payoff/?campaign=${encodeURI(this.props.campaign_detail.campaign)}`
+                    uri: `${apiEndpoint}/api/campaigns/payoff/?campaign=${encodeURI(this.props.campaign_detail.campaign)}`
                 }, (err, res, body) => {
 
                     if (err) {
@@ -215,9 +249,46 @@ export default class Series extends Component {
 
     }
 
-    render() {
 
-        return (
+    render() {
+        if (this.props.campaign_detail.length == 0) {
+            return <div className="container series-container">
+
+                <div className="row">
+                    <div className="col-lg-12">
+                        <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
+                            <Tab>Overview</Tab>
+                            <Tab>Performance</Tab>
+                        </Tabs>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div style={{ paddingLeft: '65px' }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="rgb(63, 81, 181)">
+                                <path transform="translate(2)" d="M0 12 V20 H4 V12z">
+                                    <animate attributeName="d" values="M0 12 V20 H4 V12z; M0 4 V28 H4 V4z; M0 12 V20 H4 V12z; M0 12 V20 H4 V12z" dur="1.2s" repeatCount="indefinite" begin="0" keytimes="0;.2;.5;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.8 0.4 0.8" calcMode="spline" />
+                                </path>
+                                <path transform="translate(8)" d="M0 12 V20 H4 V12z">
+                                    <animate attributeName="d" values="M0 12 V20 H4 V12z; M0 4 V28 H4 V4z; M0 12 V20 H4 V12z; M0 12 V20 H4 V12z" dur="1.2s" repeatCount="indefinite" begin="0.2" keytimes="0;.2;.5;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.8 0.4 0.8" calcMode="spline" />
+                                </path>
+                                <path transform="translate(14)" d="M0 12 V20 H4 V12z">
+                                    <animate attributeName="d" values="M0 12 V20 H4 V12z; M0 4 V28 H4 V4z; M0 12 V20 H4 V12z; M0 12 V20 H4 V12z" dur="1.2s" repeatCount="indefinite" begin="0.4" keytimes="0;.2;.5;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.8 0.4 0.8" calcMode="spline" />
+                                </path>
+                                <path transform="translate(20)" d="M0 12 V20 H4 V12z">
+                                    <animate attributeName="d" values="M0 12 V20 H4 V12z; M0 4 V28 H4 V4z; M0 12 V20 H4 V12z; M0 12 V20 H4 V12z" dur="1.2s" repeatCount="indefinite" begin="0.6" keytimes="0;.2;.5;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.8 0.4 0.8" calcMode="spline" />
+                                </path>
+                                <path transform="translate(26)" d="M0 12 V20 H4 V12z">
+                                    <animate attributeName="d" values="M0 12 V20 H4 V12z; M0 4 V28 H4 V4z; M0 12 V20 H4 V12z; M0 12 V20 H4 V12z" dur="1.2s" repeatCount="indefinite" begin="0.8" keytimes="0;.2;.5;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.8 0.4 0.8" calcMode="spline" />
+                                </path>
+                            </svg>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else return (
             <div className="container series-container">
 
                 <div className="row">
@@ -232,7 +303,7 @@ export default class Series extends Component {
                 <div className="row">
                     <div className="col-lg-12">
                         <h5 className="series-chart-title">Campaign: {this.props.campaign_detail.campaign}</h5>
-                        <p className="description">{this.props.description}</p>
+                        <p className="description">{this.props.location.query.d}</p>
                     </div>
                 </div>
                 <div className={"row " + (this.state.activeTab == 0 ? "visible" : "hidden")}>
@@ -253,12 +324,12 @@ export default class Series extends Component {
                 </div>
                 <div className={this.state.activeTab == 1 ? "visible" : "hidden"}>
                     <div className="row">
-                        <div className="col-lg-12"> 
-                        <h5 className="series-chart-heading">Equity series</h5> 
-                           <span className="label-span series-span">Include underlying future for comparison &nbsp; &nbsp;</span>
+                        <div className="col-lg-12">
+                            <h5 className="series-chart-heading">Equity series</h5>
+                            <span className="label-span series-span">Include underlying future for comparison &nbsp; &nbsp;</span>
                             <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + (this.state.include_price ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" checked={this.state.include_price} onChange={this.checkHandler} />
                                 <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label><br />
-                 
+
                             <Chart data={this.props.campaign_detail.series} include_price={this.state.include_price} />
                         </div>
                     </div>
@@ -299,7 +370,7 @@ export default class Series extends Component {
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            {this.state.showPayoff ? <PayoffChart triggerResize={this.triggerResize} data={this.state.payoffData}  title={"Campaign payoff"} /> : <p className="series-chart-heading">No payoff series data</p>}
+                            {this.state.showPayoff ? <PayoffChart triggerResize={this.triggerResize} data={this.state.payoffData} title={"Campaign payoff"} /> : <p className="series-chart-heading">No payoff series data</p>}
                         </div>
                     </div>
                     <div className="row">

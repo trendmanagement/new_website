@@ -5,10 +5,6 @@ import "amstock3/amcharts/amstock";
 
 export default class PayoffChart extends Component {
 
-    // componentDidMount() {
-    //     this.props.triggerResize(); 
-    // }
-
     render() {
 
         var self = this;
@@ -27,7 +23,6 @@ export default class PayoffChart extends Component {
 
         function formatBalloon(v) {  
 		
-			console.log(v)
              if (typeof self.props.data[0].expir == 'undefined') {
               if (parseFloat(v) >= 0) {
                     return '$' + parseInt(v).toString()
@@ -37,6 +32,15 @@ export default class PayoffChart extends Component {
              } else {
                  return v.toFixed(2); 
              }
+        } 
+
+        function formatXLabel(v) {
+
+            if (typeof v != 'undefined') {
+                return(parseFloat(v).toFixed(2)); 
+            }
+
+          
         }
 
         const config = {
@@ -106,7 +110,9 @@ export default class PayoffChart extends Component {
             "categoryAxis": {
                 "axisColor": "#DADADA",
                 "dashLength": 1,
-                "minorGridEnabled": true
+                "minorGridEnabled": true, 
+                "labelFunction": formatXLabel, 
+                "balloonTextFunction": formatBalloon
             },
             "legend": {
                 "useGraphSettings": true, 
