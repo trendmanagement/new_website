@@ -14,14 +14,55 @@ class Home extends Component {
             slides: [
                 `${process.env.PUBLIC_URL}/images/bg.png`, 
                 `${process.env.PUBLIC_URL}/images/bg1.png`, 
-                `${process.env.PUBLIC_URL}/images/bg.png`
-            ]
+                `${process.env.PUBLIC_URL}/images/bg2.png`
+            ], 
+            manualControl: false 
         } 
 
         
         this.hideDisclaimer = this.hideDisclaimer.bind(this); 
+        this.initSlider = this.initSlider.bind(this); 
+        this.setManual = this.setManual.bind(this); 
+    } 
+
+    componentDidMount() {
+        this.initSlider(); 
     }
 
+    changeSlide(i) { 
+
+        if (i == 2) i = 0; 
+        else {
+            i = ++i; 
+        }
+
+        return i; 
+    }
+
+    initSlider() {
+
+        let self = this; 
+        setInterval(() => {
+            if (!self.state.manualControl) {
+  
+            let next = self.changeSlide(self.state.activeSlide); 
+            this.setState({
+                activeSlide: next
+            })
+
+            } else {
+                self.setState({
+                    manualControl: false
+                })
+            }
+        }, 3000) 
+    }
+
+    setManual() {
+        this.setState({
+            manualControl: true
+        }); 
+    } 
 
     hideDisclaimer() {
         this.setState({
@@ -42,9 +83,9 @@ class Home extends Component {
                         </div>
                         <div className="slider-controls-wrap">
                         <div className="slider-controls">
-                            <div onClick={() => {this.setState({activeSlide: 0})}} className={this.state.activeSlide == 0 ? 'active' : ''}></div>
-                            <div onClick={() => {this.setState({activeSlide: 1})}} className={this.state.activeSlide == 1 ? 'active' : ''}></div>
-                            <div onClick={() => {this.setState({activeSlide: 2})}} className={this.state.activeSlide == 2 ? 'active' : ''}></div>
+                            <div onClick={() => {this.setManual();this.setState({activeSlide: 0})}} className={this.state.activeSlide == 0 ? 'active' : ''}></div>
+                            <div onClick={() => {this.setManual();this.setState({activeSlide: 1})}} className={this.state.activeSlide == 1 ? 'active' : ''}></div>
+                            <div onClick={() => {this.setManual();this.setState({activeSlide: 2})}} className={this.state.activeSlide == 2 ? 'active' : ''}></div>
                         </div>
                         </div>
                     </div>
