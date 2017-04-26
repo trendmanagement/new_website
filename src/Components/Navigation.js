@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import MobileNav from './MobileNav';
+import MobileNav from './MobileNav'; 
+import './css/Nav.css'; 
 
 import onClickOutside from 'react-onclickoutside';
 
@@ -58,28 +59,39 @@ class Navigation extends Component {
                 <div className="nav-container">
                     <div className="container-grid">
                         <div className="nav-left">
-                            <div className="logo-container">
+                            <Link to="/home"><div className="logo-container">
                                 <img src={process.env.PUBLIC_URL + `/images/logo1.png`} />
-                            </div>
+                            </div></Link>
                         </div>
                         <div className="nav-middle">
-                            <div onMouseOut={(e) => { this.switchTab('home', e) } } onMouseOver={() => { this.switchTab('products') } } className={"nav-item nav-target " + (this.state.activeTab == 'products' ? 'active' : '')}>
+                            {/*<div onMouseOut={(e) => { this.switchTab('home', e) } } onMouseOver={() => { this.switchTab('products') } } className={"nav-item nav-target " + (this.state.activeTab == 'products' ? 'active' : '')}>
                                 <a>
                                     products
-                        </a>
+                                </a>
                             </div>
                             <div onMouseOut={(e) => { this.switchTab('home', e) } } onMouseOver={() => { this.switchTab('services') } } className={"nav-item nav-target " + (this.state.activeTab == 'services' ? 'active' : '')}>
                                 <a>
                                     services
-                        </a>
+                                </a>
 
-                            </div>
-                            <Link to="/"> <div className={"nav-item " + (this.state.activeTab == 'simulations' ? 'active' : '')}>
+                        </div> */ }
+                            <Link to="/"> <div className={"nav-item " + (this.state.activeTab == 'products' ? 'active' : '')}>
+                                <a>
+                                   products
+                            </a>
+                            </div></Link>
+                            <Link to="/"><div className={"nav-item " + (this.state.activeTab == 'services' ? 'active' : '')}>
+
+                                <a> services </a>
+
+                            </div></Link>
+
+                            <Link to="/simulations"> <div className={"nav-item " + (this.state.activeTab == 'simulations' ? 'active' : '')}>
                                 <a>
                                     simulations
-                        </a>
+                            </a>
                             </div></Link>
-                            <Link to="/"><div className={"nav-item " + (this.state.activeTab == 'technology' ? 'active' : '')}>
+                            <Link to="/technology"><div className={"nav-item " + (this.state.activeTab == 'technology' ? 'active' : '')}>
 
                                 <a>  technology </a>
 

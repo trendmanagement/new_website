@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import request from 'request';
 import { Filter } from '../Components';
-import { apiEndpoint } from '../config'; 
+import { apiEndpoint } from '../config';
 import './css/List.css';
 
 Array.prototype.unique = function () {
@@ -26,19 +26,17 @@ export default class List extends Component {
         super(props)
 
         this.state = {
-            campaigns: [{ name: 'no data', description: 'no data', instrument: 'no data' }],
+            campaigns: [{ name: 'no data', description: 'no data', instrument: 'no data', hideCheck: true }],
             selectedCampaign: '',
             selectedDescription: '',
             checkdata: [false],
             btnDisabled: true,
-            instr: ['All'],
-            displayed: 'All',
+            displayed: props.instr,
             response: ''
         }
 
-        this.selectCampaign = this.selectCampaign.bind(this);
-        this.fetchList = this.fetchList.bind(this);
-        this.filterCampaigns = this.filterCampaigns.bind(this);
+        this.fetchList = this.fetchList.bind(this); 
+        this.selectCampaign = props.selectCampaign.bind(this); 
 
     }
 
@@ -49,23 +47,7 @@ export default class List extends Component {
 
     }
 
-    selectCampaign(e) {
-
-        console.log(e.target.value)
-
-        var checkdata = this.state.checkdata.slice();
-        checkdata = checkdata.fill(false);
-
-        checkdata[e.target.value] = true;
-
-        this.setState({
-            checkdata: checkdata,
-            selectedCampaign: this.state.campaigns[e.target.value],
-            selectedDescription: this.state.campaigns[e.target.value].description,
-            btnDisabled: false
-        })
-    }
-
+ 
 
 
     fetchList() {
@@ -79,83 +61,84 @@ export default class List extends Component {
             }
 
             body = JSON.parse(body);
+        
+            let campaigns = body.campaigns; 
 
-            let instr = [], filtered = [];
-
-
-            for (let i = 0; i < body.campaigns.length; i++) {
-                instr.push(body.campaigns[i].instrument);
-
-
+            console.log('campaigns', campaigns)
+            if (body.campaigns.length == 0) {
+                 campaigns = [{ name: 'no data', description: 'no data', instrument: 'no data', hideCheck: true }]
             }
 
-            filtered = instr.unique();
-            console.log(filtered)
-
             self.setState({
-                instr: filtered,
-                campaigns: body.campaigns,
+                campaigns: campaigns,
                 checkdata: new Array(body.campaigns.length).fill(false)
             })
         })
-    }
+    } 
 
-    filterCampaigns(str) {
-        this.setState({
-            displayed: str
-        })
+    componentWillReceiveProps(nextProps) {
+        if (this.props.instr && this.props.instr != nextProps.instr) {
+            this.setState({
+                displayed: nextProps.instr 
+            })
+        }
     }
 
     render() {
-
+        let counter = 0;  
+        let self = this.props.self; 
         return (
-            <div className="container-fluid">
+
+            <div className="list-container">
                 <div className="row">
-                    <div className="col-lg-12 filter-panel panel-tab">
+                    <div className="col-lg-12 list-wrap">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th className="td-instrument" style={{textAlign: 'right'}}>Instrument</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                        <Filter description={this.state.selectedDescription} btnDisabled={this.state.btnDisabled} show_selected={this.filterCampaigns} instrument={this.state.instr} campaign={this.state.selectedCampaign.name} viewCampaign={this.props.viewCampaign} />
+                                {this.state.campaigns.map((i, j) => {
 
-                    </div>
-                </div>
-                <div className="container list-container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <table className="table table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th className="td-instrument">Instrument</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                    if (i.instrument == this.state.displayed || this.state.displayed == "All") { 
+                                        counter++; 
+                                        return (
+                                            <tr key={Math.random() * 10000} className={this.state.checkdata[j] ? 'is-selected' : ''}>
+                                                <td>
+                                                    <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + 
+                                                    (this.state.checkdata[j] ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" 
+                                                    value={j} 
+                                                    onChange={(e) => this.selectCampaign(e, i.name, i.description, self)} 
+                                                    />
+                                                    <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label>
+                                                </td>
+                                                <td>{i.name}</td>
+                                                <td>{i.description}</td>
+                                                <td className="td-instrument" style={{textAlign: 'right'}}>{i.instrument}</td>
+                                            </tr>
 
-                                    {this.state.campaigns.map((i, j) => {
-
-                                        if (i.instrument == this.state.displayed || this.state.displayed == "All") {
-                                            return (
-
-
-                                                <tr key={Math.random() * 10000} className={this.state.checkdata[j] ? 'is-selected' : ''}>
-                                                    <td>
-                                                        <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + (this.state.checkdata[j] ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" value={j} onChange={this.selectCampaign} />
-                                                            <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label>
-                                                    </td>
-                                                    <td>{i.name}</td>
-                                                    <td>{i.description}</td>
-                                                    <td className="td-instrument">{i.instrument}</td>
-                                                </tr>
-
-                                            )
-                                        }
-                                    })}
-                                </tbody>
-                            </table>
-                        </div>
+                                        )
+                                    }
+                                })} 
+                                {counter == 0 ? 
+                                    <tr key={Math.random() * 10000}>
+                                                <td></td>
+                                                <td>{'No data'}</td>
+                                                <td>{'No data'}</td>
+                                                <td className="td-instrument" style={{textAlign: 'right'}}>{'No data'}</td>
+                                            </tr>
+                                    : null}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+
         )
     }
 

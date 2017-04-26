@@ -19,6 +19,7 @@ export default class Container extends Component {
     }
     viewCampaign(data, campaign, use_default, description, query_data) {
 
+
         if (typeof query_data == 'undefined') {
             var formData = Object.assign({}, data);
 
@@ -40,8 +41,11 @@ export default class Container extends Component {
             }
         }
 
+        
 
-        var uri = `${apiEndpoint}/api/campaigns/series/${query_data}`
+        var uri = `${apiEndpoint}/api/campaigns/series/${query_data}` 
+
+        console.log(uri)
 
         var self = this;
 

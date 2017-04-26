@@ -26,7 +26,7 @@ export default class MobileNav extends Component {
             <div className={"nav-overlay " + (this.state.isOpen ? 'is-open' : '')}>
                 <div className="mob-nav-container">
                 <div className="logo-container">
-                  <img src={process.env.PUBLIC_URL  + `/images/logo1.png`} />
+                  <Link to="/home"><img src={process.env.PUBLIC_URL  + `/images/logo1.png`} /></Link>
                 </div>
                 <div className="mobile-nav=main">
                    <div className="mob-nav-item">
@@ -40,12 +40,12 @@ export default class MobileNav extends Component {
                         </Link>
                     </div>
                     <div className="mob-nav-item">
-                        <Link to="/">
+                        <Link to="/simulations">
                             simulations 
                         </Link>
                     </div>
                     <div className="mob-nav-item">
-                        <Link to="/">
+                        <Link to="/technology">
                             technology
                         </Link>
                     </div>

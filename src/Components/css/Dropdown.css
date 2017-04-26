@@ -1,0 +1,31 @@
+.selected-image {
+    padding-right: 10px; 
+}
+
+.selected-text {
+    color: #2979ff; 
+}
+
+.instrument-dropdown-container {
+    width: 16%; 
+}
+
+.Select-clear {
+    display: none; 
+}
+
+.Select {
+    z-index: 9999; 
+}
+
+@media screen and (max-width: 1200px) {
+    .selected-image {
+        padding-right: 5px; 
+    } 
+
+    .instrument-dropdown-container {
+        width: 17%;
+        font-size: 11px;  
+    }
+
+}

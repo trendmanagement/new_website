@@ -3,12 +3,7 @@
 }
 
 
-.react-datepicker__input-container input {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px; 
-    outline: none; 
-}
+
 
 #main-chart-price {
   margin-bottom: 80px; 

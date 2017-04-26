@@ -30,7 +30,7 @@ export default class PayoffChart extends Component {
                 return '-$' + parseInt(v).toString().replace('-', '');  
               }
              } else {
-                 return v.toFixed(2); 
+                 return v.toFixed(1); 
              }
         } 
 
