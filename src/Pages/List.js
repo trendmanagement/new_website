@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import request from 'request';
-import { Check } from '../Components';
 import { apiEndpoint } from '../config';
-import './css/List.css';
+import './css/List.css'; 
+import {ListDesktop, ListMobile} from '../Components'; 
 
 export default class List extends Component {
 
@@ -11,15 +11,17 @@ export default class List extends Component {
         super(props)
 
         this.state = {
-            campaigns: [{ name: 'no data', description: 'no data', instrument: 'no data', hideCheck: true }],
+            campaigns: [{ name: '', description: '', instrument: '', hideCheck: true }],
             checkdata: [false],
             btnDisabled: true,
             displayed: props.instr,
-            response: ''
+            response: '', 
+            isMobile: false
         }
 
         this.fetchList = this.fetchList.bind(this); 
         this.selectCampaign = props.selectCampaign.bind(this); 
+        this.handleResize = this.handleResize.bind(this); 
 
     }
 
@@ -27,11 +29,36 @@ export default class List extends Component {
 
         if (!this.props.location.query.campaign) {
             this.fetchList();
+        } 
+
+        if (window.innerWidth < 600 && !this.state.isMobile) {
+            this.setState({
+                isMobile: true
+            })
+        } else if (window.innerWidth >= 600 && this.state.isMobile) {
+            this.setState({
+                isMobile: false
+            })
         }
+
+        window.addEventListener('resize', this.handleResize); 
+    } 
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize); 
     }
 
- 
-
+    handleResize() {
+        if (window.innerWidth < 600 && !this.state.isMobile) {
+            this.setState({
+                isMobile: true
+            })
+        } else if (window.innerWidth >= 600 && this.state.isMobile) {
+            this.setState({
+                isMobile: false
+            })
+        }
+    }
 
     fetchList() {
 
@@ -68,7 +95,7 @@ export default class List extends Component {
     }
 
     render() {
-        let counter = 0;  
+
         let self = this.props.self;  
 
         return (
@@ -76,49 +103,22 @@ export default class List extends Component {
             <div className="list-container">
                 <div className="row">
                     <div className="col-lg-12 list-wrap">
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th className="td-instrument" style={{textAlign: 'right'}}>Instrument</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                {this.state.campaigns.map((i, j) => {
-
-                                    if (i.instrument == this.state.displayed || this.state.displayed == "All") { 
-                                        counter++; 
-                                        return (
-                                            <tr key={Math.random() * 10000} className={this.state.checkdata[j] ? 'is-selected' : ''}>
-                                                <td> 
-                                                    {(i.hideCheck) ? null :<Check 
-                                                    checked={this.state.checkdata[j] ? true : false} 
-                                                    val={j} 
-                                                    onChange={(e) => this.selectCampaign(e, i.name, i.description, self)} 
-                                                    />}
-                            
-                                                </td>
-                                                <td>{i.name}</td>
-                                                <td>{i.description}</td>
-                                                <td className="td-instrument" style={{textAlign: 'right'}}>{i.instrument}</td>
-                                            </tr>
-
-                                        )
-                                    }
-                                })} 
-                                {counter == 0 ? 
-                                    <tr key={Math.random() * 10000}>
-                                                <td></td>
-                                                <td>{'No data'}</td>
-                                                <td>{'No data'}</td>
-                                                <td className="td-instrument" style={{textAlign: 'right'}}>{'No data'}</td>
-                                            </tr>
-                                    : null}
-                            </tbody>
-                        </table>
+                        { !this.state.isMobile ? 
+                        <ListDesktop 
+                            self = {self}
+                            campaigns={this.state.campaigns}
+                            selectCampaign={this.selectCampaign} 
+                            displayed={this.state.displayed} 
+                            checkdata={this.state.checkdata}
+                        /> : 
+                        <ListMobile 
+                            self = {self}
+                            campaigns={this.state.campaigns}
+                            selectCampaign={this.selectCampaign} 
+                            displayed={this.state.displayed} 
+                            checkdata={this.state.checkdata}
+                        /> 
+                    }
                     </div>
                 </div>
             </div>

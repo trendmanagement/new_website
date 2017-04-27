@@ -14,6 +14,8 @@ import DateFilter from './DateFilter'
 import CustomDateFilter from './CustomDateFilter' 
 import Check from './Check' 
 import Loader from './Loader' 
+import ListMobile from './ListMobile' 
+import ListDesktop from './ListDesktop' 
 
 module.exports = { 
     Chart, 
@@ -31,5 +33,7 @@ module.exports = {
     DateFilter, 
     CustomDateFilter, 
     Check, 
-    Loader 
+    Loader, 
+    ListMobile, 
+    ListDesktop 
 } 

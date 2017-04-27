@@ -27,11 +27,15 @@
 } 
 
 @media screen and (max-width: 768px) {
-
+  .series-detail-table {
+     font-size: 11px;
+  }
 } 
 
 @media scree and (max-width: 500px) {
-   
+  .series-detail-table {
+     font-size: 10px;
+  }
 } 
 
 @media screen and (max-width: 375px) {

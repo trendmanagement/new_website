@@ -36,7 +36,8 @@ export default class Simulations extends Component {
             series_date: null, 
             campaign_description: null, 
             isLoading: false, 
-            campaignShown: false 
+            campaignShown: false, 
+            err: null
         }
 
         this.handleInstrumentFilter = (prop, val) => {
@@ -159,12 +160,18 @@ export default class Simulations extends Component {
                     campaign_description: data.description, 
                     query: data.query, 
                     isLoading: false, 
-                    campaignShown: true
+                    campaignShown: true, 
+                    err: null
                 }); 
 
                
             })
-            .catch(err => { console.log(err) })
+            .catch(err => { 
+                this.setState({
+                    err: 'Failed to load campaign. Please try again.',
+                    isLoading: false
+                })
+             })
         }
     }
 
@@ -219,13 +226,17 @@ export default class Simulations extends Component {
                     campaign_description: data.description, 
                     query: data.query, 
                     isLoading: false, 
-                    campaignShown: true
+                    campaignShown: true, 
+                    err: null
                 }) 
 
                 
             })
             .catch(err => {
-                console.log(err); 
+                this.setState({
+                    err: 'Failed to load campaign. Please try again.',
+                    isLoading: false
+                })
             })
         }
     }
@@ -242,7 +253,7 @@ export default class Simulations extends Component {
                         options={this.state.options}
                         onChange={this.handleInstrumentFilter} 
                         onFocus={() => {
-                            if (this.state.campaignShown) {
+                            if (this.state.campaignShown && !this.state.err) {
                                 browserHistory.push('/simulations')
                             }
                             
@@ -278,7 +289,7 @@ export default class Simulations extends Component {
                 </div>
                 {this.state.isLoading ? 
                     <div className="container-grid-block top-padded"><Loader /></div> : null} 
-                {!this.state.campaignShown ?
+                {!this.state.campaignShown && !this.state.err ?
                 <div className="container-grid-block">
                 <div>
                     <div className="results-container">
@@ -298,7 +309,7 @@ export default class Simulations extends Component {
                     <div className="error">{this.state.msg}</div>
                 </div></div> : null
                 }
-                {this.state.campaign_detail && this.state.campaignShown ? 
+                {this.state.campaign_detail && this.state.campaignShown  && !this.state.err  ? 
                     <div className="container-grid-block top-padded series-block">
                     <Series 
                         campaign_detail={this.state.campaign_detail}
@@ -306,7 +317,7 @@ export default class Simulations extends Component {
                         description={this.state.campaign_description}/> 
                     </div>
                     : null} 
- 
+                {this.state.err ? <Error message={this.state.err} /> : null}
                 <Footer />
             </div>
         )

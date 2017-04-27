@@ -95,7 +95,7 @@ export default class PayoffChart extends Component {
             "responsive": {
                 "enabled": true,  
                 "rules": [{
-                    "maxWidth": 700,
+                    "maxWidth": 950,
                     "overrides": {
                     "valueAxes": {
                         "inside": true, 
@@ -134,12 +134,15 @@ export default class PayoffChart extends Component {
                 "fullWidth": true
 
             },
+            "listeners": [{"event": "rendered", "method": function(e) {
+                e.chart.invalidateSize(); 
+            }}], 
         }
 
         return (
             <div className="series-chart-container">
             <h5 className="series-chart-heading">{this.props.title}</h5> 
-             <div className="equity-payoff-chart" style={{width: "95%", height: "300px"}}>
+             <div className="equity-payoff-chart" style={{width: "100%", height: "300px"}}>
                 <AmCharts.React {...config} />
              </div>
             </div>

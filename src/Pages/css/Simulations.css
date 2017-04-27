@@ -54,7 +54,37 @@
     text-align: center;
     margin-top: -41px;
     color: #e00034;
+} 
+
+.simulations-container {
+    display: block;
+    overflow: hidden;
 }
 
+@media screen and (max-width: 1200px) {
+  .instrument-filter-container {
+    padding: 0; 
+  } 
 
+  table {
+      font-size: 12px; 
+  }
+} 
+
+@media screen and (max-width: 700px) {
+    .results-container {
+        min-height: 0; 
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .series-chart-heading {
+        font-size: 16px; 
+    }
+
+    .series-chart-title {
+        font-size: 16px; 
+    }
+} 
 

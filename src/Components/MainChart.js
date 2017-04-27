@@ -46,7 +46,7 @@ export default class Chart extends Component {
             "responsive": {
                 "enabled": true,  
                 "rules": [{
-                    "maxWidth": 700, 
+                    "maxWidth": 900, 
                     "overrides": {
                     "valueAxes": {
                         "inside": true, 
@@ -114,7 +114,9 @@ export default class Chart extends Component {
                 "valueWidth": 100,
                 "valueAlign": "left"
             },
-
+            "listeners": [{"event": "rendered", "method": function(e) {
+                e.chart.invalidateSize(); 
+            }}], 
             "export": {
                 "enabled": true
             }
@@ -188,7 +190,7 @@ export default class Chart extends Component {
             "responsive": {
                 "enabled": true,  
                 "rules": [{
-                    "maxWidth": 700,
+                    "maxWidth": 900,
                     "overrides": {
                     "valueAxes": {
                         "inside": true, 
@@ -249,10 +251,10 @@ export default class Chart extends Component {
     
         return (
             <div className="equity-chart-container">
-                <div id="main-chart" style={{ width: "95%", height: "500px" }}  className={this.props.include_price ? "hidden" : "visible"}>
+                <div id="main-chart" style={{ width: "100%", height: "500px" }}  className={this.props.include_price ? "hidden" : "visible"}>
                     <AmCharts.React {...config} /> 
                 </div>
-                <div id="main-chart-price" style={{ width: "95%", height: "500px" }} className={this.props.include_price ? "visible" : "hidden"}> 
+                <div id="main-chart-price" style={{ width: "100%", height: "500px" }} className={this.props.include_price ? "visible" : "hidden"}> 
                     <AmCharts.React {...price_config} /> 
                 </div>
             </div>

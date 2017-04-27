@@ -66,7 +66,7 @@ export default class EquityBarChart extends Component {
             "responsive": {
                 "enabled": true,  
                 "rules": [{
-                    "maxWidth": 700,
+                    "maxWidth": 950,
                     "overrides": {
                     "valueAxes": {
                         "inside": true, 
@@ -76,6 +76,9 @@ export default class EquityBarChart extends Component {
                 }]
 
             }, 
+            "listeners": [{"event": "rendered", "method": function(e) {
+                e.chart.invalidateSize(); 
+            }}],
             
             "export": {
                 "enabled": true
@@ -84,7 +87,7 @@ export default class EquityBarChart extends Component {
         return (
             <div className="barchart-container">
                 <h5 className="series-chart-heading">Campaign delta</h5> 
-                 <div id="delta-series-chart" style={{width: "95%", height: "400px"}}>
+                 <div id="delta-series-chart" style={{width: "100%", height: "400px"}}>
                      <AmCharts.React {...config} />
                  </div>
             </div>
