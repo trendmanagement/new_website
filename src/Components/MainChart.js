@@ -30,7 +30,7 @@ export default class Chart extends Component {
         }
 
         const config = {
-            "path": "",
+            "path": `${process.env.PUBLIC_URL}/`,
             "type": "serial",
             "theme": "light",
             "autoMarginOffset": 20,
@@ -123,7 +123,7 @@ export default class Chart extends Component {
 
   
     const price_config =  {
-            "path": "",
+            "path": `${process.env.PUBLIC_URL}/`,
             "type": "serial",
             "theme": "light",
             "autoMarginOffset": 20,

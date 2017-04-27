@@ -3,7 +3,7 @@ import InstrumentDropdown from './InstrumentDropdown';
 
 export default class InstrumentFilter extends Component {
     render() {
-        let {options, onChange} = this.props; 
+        let {options, onChange, onFocus} = this.props; 
         let options_array = []; 
         let keys = Object.keys(options); 
 
@@ -22,7 +22,8 @@ export default class InstrumentFilter extends Component {
                         options={i.items} 
                         logo={i.logo}
                         onChange={onChange} 
-                        selected={i.selected ? i.selected : null}
+                        selected={i.selected ? i.selected : null} 
+                        onOpen={onFocus} 
                     />
                 })}
             </div>

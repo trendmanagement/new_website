@@ -8,7 +8,7 @@ export default class EquityBarChart extends Component {
     render() { 
 
         const config = {
-            "path": "", 
+            "path": `${process.env.PUBLIC_URL}/`, 
             "type": "serial", 
             "theme": "light", 
             "autoMarginOffset": 20,

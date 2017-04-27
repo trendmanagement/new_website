@@ -1,23 +1,8 @@
 import React, { Component } from 'react';
 import request from 'request';
-import { Filter } from '../Components';
+import { Check } from '../Components';
 import { apiEndpoint } from '../config';
 import './css/List.css';
-
-Array.prototype.unique = function () {
-    var a = [];
-    for (let i = 0; i < this.length; i++) {
-        var current = this[i];
-        if (a.indexOf(current) < 0) a.push(current);
-    }
-
-    this.length = 0;
-    for (let i = 0; i < a.length; i++) {
-        this.push(a[i]);
-    }
-
-    return this;
-}
 
 export default class List extends Component {
 
@@ -27,8 +12,6 @@ export default class List extends Component {
 
         this.state = {
             campaigns: [{ name: 'no data', description: 'no data', instrument: 'no data', hideCheck: true }],
-            selectedCampaign: '',
-            selectedDescription: '',
             checkdata: [false],
             btnDisabled: true,
             displayed: props.instr,
@@ -42,9 +25,9 @@ export default class List extends Component {
 
     componentDidMount() {
 
-        window.componentHandler.upgradeDom();
-        this.fetchList();
-
+        if (!this.props.location.query.campaign) {
+            this.fetchList();
+        }
     }
 
  
@@ -86,7 +69,8 @@ export default class List extends Component {
 
     render() {
         let counter = 0;  
-        let self = this.props.self; 
+        let self = this.props.self;  
+
         return (
 
             <div className="list-container">
@@ -109,13 +93,13 @@ export default class List extends Component {
                                         counter++; 
                                         return (
                                             <tr key={Math.random() * 10000} className={this.state.checkdata[j] ? 'is-selected' : ''}>
-                                                <td>
-                                                    <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + 
-                                                    (this.state.checkdata[j] ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" 
-                                                    value={j} 
+                                                <td> 
+                                                    {(i.hideCheck) ? null :<Check 
+                                                    checked={this.state.checkdata[j] ? true : false} 
+                                                    val={j} 
                                                     onChange={(e) => this.selectCampaign(e, i.name, i.description, self)} 
-                                                    />
-                                                    <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label>
+                                                    />}
+                            
                                                 </td>
                                                 <td>{i.name}</td>
                                                 <td>{i.description}</td>

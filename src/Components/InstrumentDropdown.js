@@ -13,7 +13,7 @@ export default class InstrumentDropdown extends Component {
         </span>
     }
     render() {
-        const { title, logo, keyname, options, selected, onChange } = this.props; 
+        const { title, logo, keyname, options, selected, onChange, onOpen } = this.props; 
         return (
             <div className="instrument-dropdown-container">
                 <Select 
@@ -22,7 +22,8 @@ export default class InstrumentDropdown extends Component {
                     options={options} 
                     placeholder={this.renderValue(logo, title, title, true)}
                     onChange={(val) => onChange(keyname, val)} 
-                    valueRenderer={(val) => this.renderValue(logo, title, val, false)}
+                    valueRenderer={(val) => this.renderValue(logo, title, val, false)} 
+                    onOpen={onOpen}
                 />
             </div>
         )

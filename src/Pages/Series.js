@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import { Tabs, Tab } from 'react-mdl';
 import moment from 'moment';
-import request from 'request';  
-import { apiEndpoint } from '../config'; 
-import './css/Series.css'; 
+import request from 'request';
+import { apiEndpoint } from '../config';
+import './css/Series.css';
+import { Loader } from '../Components';
+import '../../node_modules/react-mdl/extra/material.js'
 
 import { Chart, BarChart, RecentDataTable, PayoffChart, PositionsTable } from '../Components';
 
@@ -23,23 +25,6 @@ export default class Series extends Component {
         super(props)
 
         let campaign_detail = props.campaign_detail;
-        if (props.campaign_detail.length == 0) {
-            let campaign = encodeURI(props.location.query.campaign);
-            let starting_date = props.location.query.starting_date;
-            let end_date = props.location.query.end_date;
-            let include_price = props.location.query.include_price;
-            let description = props.location.query.d;
-
-            let query;
-            if (typeof end_date != 'undefined') {
-                query = `?campaign=${campaign}&starting_date=${starting_date}&end_date=${end_date}&include_price=${include_price}`
-            } else {
-                query = `?campaign=${campaign}&include_price=${include_price}`
-            }
-
-            console.log(query)
-            props.viewCampaign(null, null, null, description, query)
-        }
 
         this.state = {
             date: this.props.date,
@@ -85,6 +70,7 @@ export default class Series extends Component {
     }
 
     componentDidMount() {
+
         if (this.props.date != '') {
             this.updatePayoffChart(this.props.date);
         }
@@ -251,8 +237,9 @@ export default class Series extends Component {
 
 
     render() {
+
         if (this.props.campaign_detail.length == 0) {
-            return <div className="container series-container">
+            return <div className="series-container">
 
                 <div className="row">
                     <div className="col-lg-12">
@@ -262,34 +249,11 @@ export default class Series extends Component {
                         </Tabs>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div style={{ paddingLeft: '65px' }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="rgb(63, 81, 181)">
-                                <path transform="translate(2)" d="M0 12 V20 H4 V12z">
-                                    <animate attributeName="d" values="M0 12 V20 H4 V12z; M0 4 V28 H4 V4z; M0 12 V20 H4 V12z; M0 12 V20 H4 V12z" dur="1.2s" repeatCount="indefinite" begin="0" keytimes="0;.2;.5;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.8 0.4 0.8" calcMode="spline" />
-                                </path>
-                                <path transform="translate(8)" d="M0 12 V20 H4 V12z">
-                                    <animate attributeName="d" values="M0 12 V20 H4 V12z; M0 4 V28 H4 V4z; M0 12 V20 H4 V12z; M0 12 V20 H4 V12z" dur="1.2s" repeatCount="indefinite" begin="0.2" keytimes="0;.2;.5;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.8 0.4 0.8" calcMode="spline" />
-                                </path>
-                                <path transform="translate(14)" d="M0 12 V20 H4 V12z">
-                                    <animate attributeName="d" values="M0 12 V20 H4 V12z; M0 4 V28 H4 V4z; M0 12 V20 H4 V12z; M0 12 V20 H4 V12z" dur="1.2s" repeatCount="indefinite" begin="0.4" keytimes="0;.2;.5;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.8 0.4 0.8" calcMode="spline" />
-                                </path>
-                                <path transform="translate(20)" d="M0 12 V20 H4 V12z">
-                                    <animate attributeName="d" values="M0 12 V20 H4 V12z; M0 4 V28 H4 V4z; M0 12 V20 H4 V12z; M0 12 V20 H4 V12z" dur="1.2s" repeatCount="indefinite" begin="0.6" keytimes="0;.2;.5;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.8 0.4 0.8" calcMode="spline" />
-                                </path>
-                                <path transform="translate(26)" d="M0 12 V20 H4 V12z">
-                                    <animate attributeName="d" values="M0 12 V20 H4 V12z; M0 4 V28 H4 V4z; M0 12 V20 H4 V12z; M0 12 V20 H4 V12z" dur="1.2s" repeatCount="indefinite" begin="0.8" keytimes="0;.2;.5;1" keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.8 0.4 0.8" calcMode="spline" />
-                                </path>
-                            </svg>
-
-                        </div>
-                    </div>
-                </div>
+                <Loader />
             </div>
         }
         else return (
-            <div className="container series-container">
+            <div className="series-container">
 
                 <div className="row">
                     <div className="col-lg-12">
@@ -300,10 +264,10 @@ export default class Series extends Component {
                     </div>
                 </div>
 
-                <div className="row">
+                <div className="row offset-tab">
                     <div className="col-lg-12">
                         <h5 className="series-chart-title">Campaign: {this.props.campaign_detail.campaign}</h5>
-                        <p className="description">{this.props.location.query.d}</p>
+                        <p className="description">{this.props.description}</p>
                     </div>
                 </div>
                 <div className={"row " + (this.state.activeTab == 0 ? "visible" : "hidden")}>

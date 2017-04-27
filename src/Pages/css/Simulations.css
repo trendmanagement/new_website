@@ -49,3 +49,9 @@
     margin-bottom: 55px;  
     cursor: pointer; 
 }
+
+.error {
+    text-align: center;
+    margin-top: -41px;
+    color: #e00034;
+}

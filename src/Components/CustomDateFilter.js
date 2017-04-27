@@ -14,6 +14,7 @@ export default class DateFilter extends Component {
                     </div>
                     <DatePicker
                         selected={start}
+                        onFocus={this.props.onFocus}
                         onChange={(e) => onChange(e, 'start')} />
                 </div>
                 <div className="custom-datepicker">
@@ -22,7 +23,8 @@ export default class DateFilter extends Component {
                       <input placeholder="DD/MM/YYYY" value={end_changed ? end.format('L') : ''}></input>
                     </div>
                     <DatePicker
-                        selected={end}
+                        selected={end} 
+                        onFocus={this.props.onFocus}
                         onChange={(e) => onChange(e, 'end')} />
                 </div>
             </div>

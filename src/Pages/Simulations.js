@@ -4,7 +4,10 @@ import './css/Simulations.css';
 import moment from 'moment';
 import request from 'request';
 import List from './List'; 
-import { InstrumentFilter, DateFilter, CustomDateFilter, Navigation, Footer } from '../Components';
+import Series from './Series'; 
+import Error from './Error';  
+import { browserHistory } from 'react-router'; 
+import { InstrumentFilter, DateFilter, CustomDateFilter, Navigation, Footer, Loader } from '../Components';
 
 export default class Simulations extends Component {
 
@@ -25,8 +28,15 @@ export default class Simulations extends Component {
             end: current, 
             desc: '', 
             campaign: '', 
-            changed: false, 
+            start_changed: false, 
+            end_changed: false, 
             campaigns: [{ name: 'no data', description: 'no data', instrument: 'no data' }],
+            msg: null, 
+            campaign_detail: null, 
+            series_date: null, 
+            campaign_description: null, 
+            isLoading: false, 
+            campaignShown: false 
         }
 
         this.handleInstrumentFilter = (prop, val) => {
@@ -49,11 +59,21 @@ export default class Simulations extends Component {
             })
         }
 
-        this.handleDateChange = (e) => {
+        this.handleDateChange = (e) => { 
+
+            if (this.state.campaignShown) {
+                browserHistory.push('/simulations')
+            }
 
             this.setState({
-                sel: e.target.value
-            })
+                start_changed: false, 
+                end_changed: false, 
+                sel: e.target.value, 
+                campaignShown: false
+            }) 
+
+
+            console.log(this.state)
         }
         this.handleCustomDateChange = (val, prop) => {
             let obj = {} 
@@ -65,8 +85,87 @@ export default class Simulations extends Component {
             }
 
             obj[prop] = val; 
-            this.setState(obj);
+            obj.campaignShown = false; 
+
+            this.setState(obj, () => {
+                if (this.state.start_changed && this.state.end_changed) {
+                    this.setState({
+                        msg: null
+                    })
+                }
+            }); 
+
              
+        } 
+
+        this.prepareCampaign = () => {
+
+            let start = this.state.start;  
+            let end = this.state.end;  
+
+            console.log(this.state.sel)
+            switch (this.state.sel) {
+                case '1': 
+                start = this.state.one; 
+                end = this.state.current_date; 
+                break; 
+
+                case '3': 
+                start = this.state.three;
+                end = this.state.current_date; 
+                break; 
+
+                case '12': 
+                start = this.state.year; 
+                end = this.state.current_date; 
+                break; 
+
+                case null: 
+                if (!this.state.start_changed || !this.state.end_changed) {
+                    this.setState({
+                        msg: 'Select a date range'
+                    })    
+                    return
+                }; 
+                break; 
+            } 
+
+            if (this.state.campaign == '') {
+                this.setState({
+                    msg: 'Select a campaign to proceed'
+                })    
+                return
+            }
+
+            this.setState({
+                isLoading: true
+            })
+            this.props.viewCampaign(
+                        {
+                            startDate: start, 
+                            endDate: end
+
+                        }, 
+                        this.state.campaign, 
+                        this.state.sel === '0' ? true : false, 
+                        this.state.desc
+            )
+            .then(data => {
+                console.log('campaign data', data);   
+                
+                browserHistory.push(`simulations/${data.query}`);
+                this.setState({
+                    campaign_detail: data.campaign_detail, 
+                    series_date: data.date, 
+                    campaign_description: data.description, 
+                    query: data.query, 
+                    isLoading: false, 
+                    campaignShown: true
+                }); 
+
+               
+            })
+            .catch(err => { console.log(err) })
         }
     }
 
@@ -80,19 +179,57 @@ export default class Simulations extends Component {
         checkdata[e.target.value] = true;
 
         this.setState({
-            checkdata: checkdata,
-            selectedCampaign: this.state.campaigns[e.target.value],
-            selectedDescription: this.state.campaigns[e.target.value].description,
-            btnDisabled: false
+            checkdata: checkdata 
         }) 
 
         self.setState({
             campaign: name,
-            desc: desc
+            desc: desc, 
+            msg: null
         })
 
-    }
+    } 
 
+    componentDidMount() { 
+        let self = this; 
+        if (!this.state.campaign_detail && this.props.location.query.campaign) { 
+
+            this.setState({
+                isLoading: true
+            }) 
+
+            let campaign = encodeURI(this.props.location.query.campaign);
+            let starting_date = this.props.location.query.starting_date;
+            let end_date = this.props.location.query.end_date;
+            let include_price = this.props.location.query.include_price;
+            let description = this.props.location.query.d;
+
+            let query;
+            if (typeof end_date != 'undefined') {
+                query = `?campaign=${campaign}&starting_date=${starting_date}&end_date=${end_date}&include_price=${include_price}`
+            } else {
+                query = `?campaign=${campaign}&include_price=${include_price}`
+            }
+
+            console.log(query)
+            this.props.viewCampaign(null, null, null, description, query)
+            .then((data) => {
+                self.setState({
+                    campaign_detail: data.campaign_detail, 
+                    series_date: data.date, 
+                    campaign_description: data.description, 
+                    query: data.query, 
+                    isLoading: false, 
+                    campaignShown: true
+                }) 
+
+                
+            })
+            .catch(err => {
+                console.log(err); 
+            })
+        }
+    }
 
     render() {
 
@@ -105,6 +242,13 @@ export default class Simulations extends Component {
                     <InstrumentFilter 
                         options={this.state.options}
                         onChange={this.handleInstrumentFilter} 
+                        onFocus={() => {
+                            if (this.state.campaignShown) {
+                                browserHistory.push('/simulations')
+                            }
+                            
+                            this.setState({campaignShown: false})
+                        }}
                     />
                     <hr className="simulations-line" />
                 </div>
@@ -122,32 +266,48 @@ export default class Simulations extends Component {
                         end={this.state.end} 
                         onChange={this.handleCustomDateChange}
                         end_changed={this.state.end_changed}
-                        start_changed={this.state.start_changed}
+                        start_changed={this.state.start_changed} 
+                        onFocus={() => {
+                            
+                            if (this.state.campaignShown) {
+                                browserHistory.push('/simulations')
+                            }
+
+                            this.setState({sel: null, campaignShown: false})
+                        }}
                     />
                 </div>
+                {this.state.isLoading ? 
+                    <div className="container-grid-block top-padded"><Loader /></div> : null} 
+                {!this.state.campaignShown ?
                 <div className="container-grid-block">
+                <div>
                     <div className="results-container">
-                        <List instr={!this.state.selected ? 'All' : this.state.selected} 
+                        <List 
+                        instr={!this.state.selected ? 'All' : this.state.selected} 
+                        location={this.props.location}
                         selectCampaign={this.selectCampaign}
                         self={this}/>
                     </div>
                 </div>
                 <div className="container-grid-block">  {/*data, campaign, use_default, description, query_data*/}
-                    <div className="display-campaign-btn" 
+                    <button className="display-campaign-btn" 
                   
-                    onClick={() => this.props.viewCampaign(
-                        {
-                            startDate: this.state.start, 
-                            endDate: this.state.end
-
-                        }, 
-                        this.state.campaign, 
-                        this.state.sel == 0 ? true : false, 
-                        this.state.desc
-                    )}>
+                    onClick={this.prepareCampaign}>
                     DISPLAY CAMPAIGN
+                    </button>
+                    <div className="error">{this.state.msg}</div>
+                </div></div> : null
+                }
+                {this.state.campaign_detail && this.state.campaignShown ? 
+                    <div className="container-grid-block top-padded">
+                    <Series 
+                        campaign_detail={this.state.campaign_detail}
+                        date={this.state.series_date} 
+                        description={this.state.campaign_description}/> 
                     </div>
-                </div>
+                    : null} 
+ 
                 <Footer />
             </div>
         )

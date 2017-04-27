@@ -19,7 +19,6 @@ export default class Container extends Component {
     }
     viewCampaign(data, campaign, use_default, description, query_data) {
 
-
         if (typeof query_data == 'undefined') {
             var formData = Object.assign({}, data);
 
@@ -45,98 +44,108 @@ export default class Container extends Component {
 
         var uri = `${apiEndpoint}/api/campaigns/series/${query_data}` 
 
-        console.log(uri)
+        
 
         var self = this;
 
-        var req = request({
-            type: 'GET',
-            uri: uri
-        }, (err, res, body) => {
+        return new Promise((resolve, reject) => {
+            var req = request({
+                type: 'GET',
+                uri: uri
+            }, (err, res, body) => {
 
-            if (err) {
-                self.setState({
-                    err: { message: 'Api error' }
-                })
-                browserHistory.push('error');
-                return;
-            }
-
-            try {
-                body = JSON.parse(body);
-
-            } catch (err) {
-
-                body = body.replace(/NaN/g, 0.0);
-                try {
-                    body = JSON.parse(body);
-                } catch (err) {
+                if (err) {
                     self.setState({
-                        err: { message: 'Api error. Invalid response data.' }
+                        err: { message: 'Api error' }
                     })
                     browserHistory.push('error');
                     return;
                 }
 
-            }
+                try {
+                    body = JSON.parse(body);
 
-            if (body.status == 'error') {
-                self.setState({
-                    err: { message: body.message }
-                });
+                } catch (err) {
 
-                browserHistory.push('error');
-            }
-
-            if (body.status == 'OK') {
-
-                console.log(body)
-                body.starting_value = Math.floor(body.starting_value);
-                body.end_value = Math.floor(body.end_value);
-                body.max_drawdown = Math.floor(body.max_drawdown);
-                body.max_delta = body.max_delta.toFixed(4);
-                body.average_delta = body.average_delta.toFixed(4);
-
-                for (let i = 0; i < body.series.length; i++) {
-
-                    body.series[i].equity = Math.floor(body.series[i].equity);
-                    body.series[i].delta = body.series[i].delta.toFixed(4);
-                    body.series[i].change = body.series[i].change.toFixed(4);
-                    body.series[i].date = body.series[i].date.replace('T00:00:00', '');
-
-                    body.series[i].o = body.series[i].o.toFixed(4);
-                    body.series[i].h = body.series[i].h.toFixed(4);
-                    body.series[i].l = body.series[i].l.toFixed(4);
-                    body.series[i].c = body.series[i].c.toFixed(4);
-
-                    if (i == body.series.length - 1) {
-
-                        var d4 = body.series[i].date.split('-');
-                        console.log(d4)
+                    body = body.replace(/NaN/g, 0.0);
+                    try {
+                        body = JSON.parse(body);
+                    } catch (err) {
                         self.setState({
-                            date: moment({ year: d4[0], month: d4[1] - 1, day: d4[2] })
+                            err: { message: 'Api error. Invalid response data.' }
                         })
+                        browserHistory.push('error');
+                        return;
                     }
-
-                    let d = body.series[i].date.split('-');
-
-
-                    body.series[i].date = new Date(d[0], d[1] - 1, d[2], 0, 0, 0, 0);
-
 
                 }
 
-                self.setState({
-                    campaign_detail: body
-                })
+                if (body.status == 'error') {
+                    self.setState({
+                        err: { message: body.message }
+                    }, () => {
+                        reject(self.state.err)
+                    }); 
+
+                    //browserHistory.push('error');
+                }
+
+                if (body.status == 'OK') {
+
+                    console.log(body)
+                    body.starting_value = Math.floor(body.starting_value);
+                    body.end_value = Math.floor(body.end_value);
+                    body.max_drawdown = Math.floor(body.max_drawdown);
+                    body.max_delta = body.max_delta.toFixed(4);
+                    body.average_delta = body.average_delta.toFixed(4);
+
+                    for (let i = 0; i < body.series.length; i++) {
+
+                        body.series[i].equity = Math.floor(body.series[i].equity);
+                        body.series[i].delta = body.series[i].delta.toFixed(4);
+                        body.series[i].change = body.series[i].change.toFixed(4);
+                        body.series[i].date = body.series[i].date.replace('T00:00:00', '');
+
+                        body.series[i].o = body.series[i].o.toFixed(4);
+                        body.series[i].h = body.series[i].h.toFixed(4);
+                        body.series[i].l = body.series[i].l.toFixed(4);
+                        body.series[i].c = body.series[i].c.toFixed(4);
+
+                        if (i == body.series.length - 1) {
+
+                            var d4 = body.series[i].date.split('-');
+                            console.log(d4)
+                            self.setState({
+                                date: moment({ year: d4[0], month: d4[1] - 1, day: d4[2] })
+                            })
+                        }
+
+                        let d = body.series[i].date.split('-');
 
 
-                self.setState({ campaignDataRetrieved: true })
+                        body.series[i].date = new Date(d[0], d[1] - 1, d[2], 0, 0, 0, 0);
 
-                browserHistory.push(`campaign${query_data}&d=${description}`);
 
-            }
+                    }
+
+                    self.setState({
+                        campaign_detail: body
+                    })
+
+
+                    self.setState({ campaignDataRetrieved: true })
+
+                    resolve({
+                        campaign_detail: body, 
+                        date: moment({ year: d4[0], month: d4[1] - 1, day: d4[2] }), 
+                        description: description, 
+                        query: `${query_data}&d=${description}` 
+                    })
+
+                }
+            })
         })
+
 
     }
     render() {

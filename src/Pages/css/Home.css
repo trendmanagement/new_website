@@ -1,3 +1,36 @@
+.preload-container {
+    position: fixed; 
+    z-index: -100; 
+}
+
+#preload1 {
+    background-image: url('../../../public/slides/bg1.png'); 
+} 
+
+#preload2 {
+    background-image: url('../../../public/slides/bg2.png')   
+} 
+
+#preload3 {
+    background-image: url('../../../public/slides/bg3.png')
+}
+
+#preload4 {
+    background-image: url('../../../public/slides/bg4.png') 
+} 
+
+#preload5 {
+    background-image: url('../../../public/slides/bg5.png')
+}
+
+#preload6 {
+    background-image: url('../../../public/slides/bg6.png')
+}
+
+#preload7 {
+    background-image: url('../../../public/slides/bg7.png')
+}
+
 .full-height {
     height: 100%; 
 }

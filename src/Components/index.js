@@ -1,4 +1,3 @@
-import Filter from './Filter'
 import Chart from './MainChart' 
 import BarChart from './DeltaChart'  
 import RecentDataTable from './RecentDataTable' 
@@ -13,10 +12,10 @@ import InstrumentDropdown from './InstrumentDropdown'
 import InstrumentFilter from './InstrumentFilter' 
 import DateFilter from './DateFilter' 
 import CustomDateFilter from './CustomDateFilter' 
-import Check from './Check'
+import Check from './Check' 
+import Loader from './Loader' 
 
 module.exports = { 
-    Filter, 
     Chart, 
     BarChart, 
     RecentDataTable, 
@@ -31,5 +30,6 @@ module.exports = {
     InstrumentFilter, 
     DateFilter, 
     CustomDateFilter, 
-    Check 
+    Check, 
+    Loader 
 } 

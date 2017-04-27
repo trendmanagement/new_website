@@ -12,13 +12,13 @@ class Home extends Component {
             showDisclaimer: false,
             activeSlide: 0,
             slides: [
-                `${process.env.PUBLIC_URL}/images/bg.png`,
-                `${process.env.PUBLIC_URL}/images/bg1.png`,
-                `${process.env.PUBLIC_URL}/images/bg2.png`,
-                `${process.env.PUBLIC_URL}/images/bg.png`,
-                `${process.env.PUBLIC_URL}/images/bg1.png`,
-                `${process.env.PUBLIC_URL}/images/bg2.png`,
-                `${process.env.PUBLIC_URL}/images/bg1.png`
+                `preload1`,
+                `preload2`,
+                `preload3`,
+                `preload4`,
+                `preload5`,
+                `preload6`,
+                `preload7`
             ],
             manualControl: false, 
             interval: null, 
@@ -97,9 +97,18 @@ class Home extends Component {
     render() {
         return (
             <div className="home-container">
+            <div className="preload-container">
+                <div id="preload1"></div>
+                <div id="preload2"></div>
+                <div id="preload3"></div>
+                <div id="preload4"></div>
+                <div id="preload5"></div>
+                <div id="preload6"></div>
+                <div id="preload7"></div>
+            </div>
                 <Disclaimer hideDisclaimer={this.hideDisclaimer} isOpen={this.state.showDisclaimer} />
                 <Navigation activeTab="home" />
-                <div className="bg-container" style={{ backgroundImage: 'url(' + this.state.slides[this.state.activeSlide] + ')' }}>
+                <div className="bg-container" id={this.state.slides[this.state.activeSlide]}>
                     <div className="title-aligner full-height">
                         <div className="title-container">
                         <h1 className={"main-title " + (this.state.activeSlide == 0 ? '' : 'fadeout')}><span>Enter the World of Modern Risk Management</span></h1>

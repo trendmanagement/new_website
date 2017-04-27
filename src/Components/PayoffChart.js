@@ -44,7 +44,7 @@ export default class PayoffChart extends Component {
         }
 
         const config = {
-            "path": "",
+            "path": `${process.env.PUBLIC_URL}/`,
             "type": "serial", 
             "theme": "light",
             "autoMarginOffset": 40,
