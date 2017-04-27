@@ -272,7 +272,7 @@ export default class Series extends Component {
                 </div>
                 <div className={"row " + (this.state.activeTab == 0 ? "visible" : "hidden")}>
                     <div className="col-lg-12">
-                        <table className="table table-striped table-hover series-table">
+                        <table className="table table-hover series-table">
                             <thead>
                                 <tr>
                                     <th className="series-th">Property</th>

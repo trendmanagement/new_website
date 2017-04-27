@@ -33,7 +33,6 @@ export default class Chart extends Component {
             "path": `${process.env.PUBLIC_URL}/`,
             "type": "serial",
             "theme": "light",
-            "autoMarginOffset": 20,
             "marginTop": 7,
             "dataProvider": this.props.data,
             "valueAxes": [{
@@ -126,7 +125,6 @@ export default class Chart extends Component {
             "path": `${process.env.PUBLIC_URL}/`,
             "type": "serial",
             "theme": "light",
-            "autoMarginOffset": 20,
             "marginTop": 7, 
             "synchronizeGrid": true, 
             "dataProvider": this.props.data, 

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'; 
-import Check from './Check'; 
+import Check from './Check';  
+import 'react-datepicker/dist/react-datepicker.css';
+
 import './css/DateFilter.css'; 
 
 export default class DateFilter extends Component {

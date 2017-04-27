@@ -51,7 +51,7 @@ export default class Table extends Component {
         return(
             <div>
                 <h5 className="series-chart-heading">Recent campaign series values</h5>
-                <table className="table table-striped table-hover series-detail-table">
+                <table className="table series-detail-table table-hover">
                     <thead><tr>
                         <th>date</th>
                         <th>trade count</th>

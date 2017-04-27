@@ -47,7 +47,6 @@ export default class PayoffChart extends Component {
             "path": `${process.env.PUBLIC_URL}/`,
             "type": "serial", 
             "theme": "light",
-            "autoMarginOffset": 40,
             "marginTop": 7, 
             "dataProvider": this.props.data,
             "valueAxes": [{
@@ -141,7 +140,7 @@ export default class PayoffChart extends Component {
             <div className="series-chart-container">
             <h5 className="series-chart-heading">{this.props.title}</h5> 
              <div className="equity-payoff-chart" style={{width: "95%", height: "300px"}}>
-                     <AmCharts.React {...config} />
+                <AmCharts.React {...config} />
              </div>
             </div>
         )

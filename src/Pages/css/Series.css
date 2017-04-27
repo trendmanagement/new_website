@@ -20,4 +20,20 @@
 
 .mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after {
   background: #2979ff!important; 
+} 
+
+@media screen and (max-width: 1200px) {
+
+} 
+
+@media screen and (max-width: 768px) {
+
+} 
+
+@media scree and (max-width: 500px) {
+   
+} 
+
+@media screen and (max-width: 375px) {
+
 }

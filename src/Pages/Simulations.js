@@ -151,8 +151,7 @@ export default class Simulations extends Component {
                         this.state.desc
             )
             .then(data => {
-                console.log('campaign data', data);   
-                
+                console.log('campaign data', data);  
                 browserHistory.push(`simulations/${data.query}`);
                 this.setState({
                     campaign_detail: data.campaign_detail, 
@@ -300,7 +299,7 @@ export default class Simulations extends Component {
                 </div></div> : null
                 }
                 {this.state.campaign_detail && this.state.campaignShown ? 
-                    <div className="container-grid-block top-padded">
+                    <div className="container-grid-block top-padded series-block">
                     <Series 
                         campaign_detail={this.state.campaign_detail}
                         date={this.state.series_date} 
