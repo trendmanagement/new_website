@@ -147,8 +147,8 @@ export default class Simulations extends Component {
                             endDate: end
 
                         }, 
-                        this.state.campaign, 
-                        this.state.sel === '0' ? true : false, 
+                        this.state.campaign,  
+                        this.state.sel == 0 ? true : false, 
                         this.state.desc
             )
             .then(data => {
@@ -318,7 +318,9 @@ export default class Simulations extends Component {
                     </div>
                     : null} 
                 {this.state.err ? <Error message={this.state.err} /> : null}
+                <div className="simulations-footer">
                 <Footer />
+                </div>
             </div>
         )
     }

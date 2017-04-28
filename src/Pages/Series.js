@@ -258,8 +258,8 @@ export default class Series extends Component {
                 <div className="row">
                     <div className="col-lg-12">
                         <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
-                            <Tab>Overview</Tab>
                             <Tab>Performance</Tab>
+                            <Tab>Overview</Tab>
                         </Tabs>
                     </div>
                 </div>
@@ -270,7 +270,7 @@ export default class Series extends Component {
                         <p className="description">{this.props.description}</p>
                     </div>
                 </div>
-                <div className={"row " + (this.state.activeTab == 0 ? "visible" : "hidden")}>
+                <div className={"row " + (this.state.activeTab == 1 ? "visible" : "hidden")}>
                     <div className="col-lg-12">
                         <table className="table table-hover series-table">
                             <thead>
@@ -286,7 +286,7 @@ export default class Series extends Component {
 
                     </div>
                 </div>
-                <div className={this.state.activeTab == 1 ? "visible" : "hidden"}>
+                <div className={this.state.activeTab == 0 ? "visible" : "hidden"}>
                     <div className="row">
                         <div className="col-lg-12">
                             <h5 className="series-chart-heading">Equity series</h5>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import './css/Home.css';
-import { Navigation, Disclaimer, Footer } from '../Components';
+import { Navigation, Footer } from '../Components';
 
 class Home extends Component {
 
@@ -9,7 +9,6 @@ class Home extends Component {
         super()
 
         this.state = {
-            showDisclaimer: false,
             activeSlide: 0,
             slides: [
                 `preload1`,
@@ -21,12 +20,9 @@ class Home extends Component {
                 `preload7`
             ],
             manualControl: false, 
-            interval: null, 
-            disclaimerShown: false 
+            interval: null
         }
 
-
-        this.hideDisclaimer = this.hideDisclaimer.bind(this);
         this.initSlider = this.initSlider.bind(this);
         this.setManual = this.setManual.bind(this); 
         this.slideFunc = this.slideFunc.bind(this); 
@@ -81,11 +77,7 @@ class Home extends Component {
         });
     }
 
-    hideDisclaimer() {
-        this.setState({
-            showDisclaimer: false
-        })
-    }
+
 
     componentWillUnmount() {
         if (this.state.interval) {
@@ -106,7 +98,6 @@ class Home extends Component {
                 <div id="preload6"></div>
                 <div id="preload7"></div>
             </div>
-                <Disclaimer hideDisclaimer={this.hideDisclaimer} isOpen={this.state.showDisclaimer} />
                 <Navigation activeTab="home" />
                 <div className="bg-container" id={this.state.slides[this.state.activeSlide]}>
                     <div className="title-aligner full-height">
@@ -115,8 +106,8 @@ class Home extends Component {
                         <h1 className={"main-title-small " + (this.state.activeSlide == 1 ? '' : 'fadeout')}><span>We are changing the way <br /> the food and beverage industry <br /> thinks about risk management.</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 2 ? '' : 'fadeout')}><span>We are changing the way <br /> the transportation industry <br /> thinks about risk management.</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 3 ? '' : 'fadeout')}><span>We are changing the way <br /> family offices <br /> think about risk management.</span></h1>
-                        <h1 className={"main-title-small " + (this.state.activeSlide == 4 ? '' : 'fadeout')}><span>We are changing the way <br /> the CTAs <br /> think about risk management.</span></h1>
-                        <h1 className={"main-title-small " + (this.state.activeSlide == 5 ? '' : 'fadeout')}><span>We are changing the way <br /> the FCMs <br /> think about risk management.</span></h1>
+                        <h1 className={"main-title-small " + (this.state.activeSlide == 4 ? '' : 'fadeout')}><span>We are changing the way <br /> CTAs <br /> think about risk management.</span></h1>
+                        <h1 className={"main-title-small " + (this.state.activeSlide == 5 ? '' : 'fadeout')}><span>We are changing the way <br /> FCMs <br /> think about risk management.</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 6 ? '' : 'fadeout')}><span>We are changing the way <br /> the proprietary trading groups <br /> think about risk management.</span></h1>
                             <button className="main-btn">get started</button>
                         </div>
@@ -155,12 +146,6 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className="footer-container">
-                    <div style={!this.state.showDisclaimer && this.state.disclaimerShown ? {display: 'none'} : {display: 'block'}}
-                    className="disclaimer">Lorem Ipsum dolor sit amet &nbsp; 
-                    <a onClick={() => { if (!this.state.disclaimerShown) this.setState({ showDisclaimer: true, disclaimerShown: true }) } }>
-                        Link to Disclaimer
-                    </a>
-                    </div>
                     <Footer />
                 </div>
             </div>
