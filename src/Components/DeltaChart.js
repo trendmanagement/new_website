@@ -76,9 +76,6 @@ export default class EquityBarChart extends Component {
                 }]
 
             }, 
-            "listeners": [{"event": "rendered", "method": function(e) {
-                e.chart.invalidateSize(); 
-            }}],
             
             "export": {
                 "enabled": true
