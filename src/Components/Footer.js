@@ -9,7 +9,8 @@ export default class Footer extends Component {
 
         this.state = {
             showDisclaimer: false,
-            disclaimerShown: false
+            disclaimerShown: false, 
+            hideDisclaimer: false
         }
 
         this.hideDisclaimer = this.hideDisclaimer.bind(this);
@@ -34,6 +35,10 @@ export default class Footer extends Component {
 
                 localStorage.setItem('disclaimer_shown', '1'); 
             } 
+        } else {
+            this.setState({
+                hideDisclaimer: true 
+            })
         }
     }
 
@@ -41,11 +46,11 @@ export default class Footer extends Component {
         return (
             <div className="footer" style={this.props.style}  ref="footerContainer">
             <Disclaimer hideDisclaimer={this.hideDisclaimer} isOpen={this.state.showDisclaimer} />
-                <div className="disclaimer">
+               { this.state.hideDisclaimer ? null : <div className="disclaimer">
                     <a onClick={() => { if (!this.state.disclaimerShown) this.setState({ showDisclaimer: true, disalsimerShown: true }) } }>
                         Link to Disclaimer
                         </a>
-                </div>
+               </div>} 
 
                 <div className="who-we-are">
                     <div className="container-grid">

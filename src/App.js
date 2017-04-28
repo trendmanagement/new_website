@@ -9,7 +9,8 @@ import {
   Home, 
   Technology, 
   Simulations, 
-  IndexationApproach
+  IndexationApproach, 
+  EXOFacts 
 } from './Pages'; 
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';  
@@ -31,6 +32,7 @@ class App extends Component {
           <Route path="simulations" component={Simulations} />
           <Route path="technology" component={Technology} /> 
           <Route path="services/indexation" component={IndexationApproach} />
+          <Route path="services/exo-attributes" component={EXOFacts} />
         </Route>
       </Router>
     );

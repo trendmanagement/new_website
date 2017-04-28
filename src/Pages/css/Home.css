@@ -152,6 +152,7 @@
 } 
 
 .slider-controls-wrap {
+	left: 0;
     position: absolute; 
     bottom: 30px; 
     width: 100%; 

@@ -4,7 +4,8 @@ import Error from './Error'
 import Home from './Home' 
 import Technology from './Technology'  
 import Simulations from './Simulations' 
-import IndexationApproach from './IndexationApproach' 
+import IndexationApproach from './IndexationApproach'  
+import EXOFacts from './EXOFacts'
 
 module.exports = { 
     List, 
@@ -13,5 +14,6 @@ module.exports = {
     Home, 
     Technology, 
     Simulations, 
-    IndexationApproach 
+    IndexationApproach, 
+    EXOFacts 
 }
