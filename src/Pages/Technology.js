@@ -34,6 +34,7 @@ export default class Technology extends Component {
     }
 
     componentDidMount() {
+        console.log(this)
         window.addEventListener('resize', this.stickyFooter); 
         this.stickyFooter(); 
     }

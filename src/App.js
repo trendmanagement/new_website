@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Container from './Container'; 
-import {List, Series, Error, Home, Technology, Simulations} from './Pages'; 
+import { 
+  List, 
+  Series, 
+  Error, 
+  Home, 
+  Technology, 
+  Simulations, 
+  IndexationApproach
+} from './Pages'; 
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';  
 
@@ -21,7 +29,8 @@ class App extends Component {
           <Route path="home" component={Home}/> 
           <Route path="simulations/old" component={List} />
           <Route path="simulations" component={Simulations} />
-          <Route path="technology" component={Technology} />
+          <Route path="technology" component={Technology} /> 
+          <Route path="services/indexation" component={IndexationApproach} />
         </Route>
       </Router>
     );

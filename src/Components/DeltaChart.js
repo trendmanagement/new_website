@@ -5,8 +5,31 @@ import "amstock3/amcharts/amstock";
 
 export default class EquityBarChart extends Component { 
 
-    render() { 
+    constructor() {
+        super(); 
+        this.state = {
+            drawn: false 
+        } 
 
+        this.showPayoff = this.showPayoff.bind(this); 
+    }
+
+    showPayoff() {
+
+        if (!this.state.drawn) {
+            this.setState({drawn: true}, () => {
+                const {self} = this.props; 
+                self.updatePayoffChart(self.state.date).then(() => {
+                    self.setState({
+                       isLoading: false
+                    }); 
+                }) 
+            })
+        }
+    }
+
+    render() { 
+       
         const config = {
             "path": `${process.env.PUBLIC_URL}/`, 
             "type": "serial", 
@@ -74,9 +97,9 @@ export default class EquityBarChart extends Component {
                         }
                     }   
                 }]
-
             }, 
-            
+            "processTimeout": 1, 
+            "listeners": [{"event": "drawn", "method": this.showPayoff}], 
             "export": {
                 "enabled": true
             }

@@ -10,8 +10,10 @@
     bottom: 0; 
     background: rgba(39, 39, 39, 0.91); 
     z-index: 99999; 
-    align-items: center;
-    justify-content: center; 
+    -ms-flex-align: center; 
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center; 
     display: none; 
     opacity: 0;
     transition: opacity .2s ease-in-out; 
@@ -21,6 +23,7 @@
 } 
 
 .nav-overlay.is-open {
+    display: -ms-flexbox;
     display: flex; 
     opacity: 1; 
 }

@@ -103,6 +103,7 @@
     width: 100%;
     z-index: 9999;
     display: none; 
+    border-bottom:  1px solid #ccc; 
 } 
 
 .nav-options-container.active {
@@ -179,4 +180,5 @@
 
 .logo-container {
     padding: 25px 25px 25px 0px; 
-}
+} 
+

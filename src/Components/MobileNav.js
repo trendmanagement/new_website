@@ -8,7 +8,7 @@ export default class MobileNav extends Component {
         super() 
 
         this.state = {
-            isOpen: false 
+            isOpen: false
         } 
 
 
@@ -35,9 +35,18 @@ export default class MobileNav extends Component {
                         </Link>
                     </div>
                     <div className="mob-nav-item">
-                        <Link to="/">
+                        <a onClick={()=>{this.setState({showServices: true})}}>
                             services
-                        </Link>
+                        </a>
+    
+                        <div className="nav-service-options">
+                         <hr />
+                            <Link to="/services/indexation">Indexation Approach</Link>
+                            <Link to="/services/portfolio-risk-themes">Portfolio Risk Themes</Link>
+                            <Link to="/services/exo-attributes">TMQR Exo Index Attributes</Link>
+                            <hr />
+                        </div>
+                        
                     </div>
                     <div className="mob-nav-item">
                         <Link to="/simulations">

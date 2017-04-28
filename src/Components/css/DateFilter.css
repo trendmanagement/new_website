@@ -12,8 +12,10 @@
 } 
 
 .date-filter-container {
+    display: -ms-flexbox;
     display: flex; 
-    justify-content: flex-start;  
+    -ms-flex-pack: start; 
+        justify-content: flex-start;  
 }
 
 .date-choice-check {
@@ -28,7 +30,7 @@
     display: block;
 }
 
-.react-datepicker__input-container input {
+.custom-date-filter-container .react-datepicker__input-container input {
     padding: 5px;
     outline: none;
     border: none;
@@ -60,8 +62,6 @@
 
 .react-datepicker {
     border: none; 
-    -webkit-box-shadow: 0px 0px 20px 3px rgba(171, 171, 171, 0.54); 
-    -moz-box-shadow: 0px 0px 20px 3px rgba(171, 171, 171, 0.54); 
     box-shadow: 0px 0px 20px 3px rgba(171, 171, 171, 0.54); 
 }
 
@@ -123,8 +123,10 @@
 }
 
 .custom-date-filter-container {
+    display: -ms-flexbox;
     display: flex; 
-    justify-content: space-between; 
+    -ms-flex-pack: justify; 
+        justify-content: space-between; 
 } 
 
 .mock {
@@ -140,15 +142,22 @@
     padding-left: 0; 
 }
 
-/*.mock::before {
-    content: "\203A";
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(90deg);
-    font-size: 17px;
-    display: block;
-    width: 20px;
-    margin-top: 7px;
-    margin-left: -5px;
-    position: absolute;
-}*/
+.series-datepicker-wrap .react-datepicker__input-container input {
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.series-datepicker-wrap .react-datepicker__input-container input:focus {
+    border-bottom: 1px solid #2979ff;
+}
+
+.series-datepicker-wrap .react-datepicker__input-container input:hover {
+    border-bottom: 1px solid #2979ff;
+}
+
+.series-info {
+    margin-top: 10px; 
+}

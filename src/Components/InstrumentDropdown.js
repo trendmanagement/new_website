@@ -1,30 +1,30 @@
-import React, { Component } from 'react';  
-import Select from 'react-select'; 
+import React, { Component } from 'react';
+import Select from 'react-select';
 
-import 'react-select/dist/react-select.css'; 
-import './css/Dropdown.css'; 
+import 'react-select/dist/react-select.css';
+import './css/Dropdown.css';
 
-export default class InstrumentDropdown extends Component { 
+export default class InstrumentDropdown extends Component {
 
     renderValue(src, alt, val, isPlaceholder) {
         return <span>
-            <span className="selected-image"><img src={isPlaceholder ? src : `${src.replace('.png', '')}_blue.png`} alt={alt}/></span>
+            <span className="selected-image"><img src={isPlaceholder ? src : `${src.replace('.png', '')}_blue.png`} alt={alt} /></span>
             <span className={isPlaceholder ? "" : "selected-text"}>{val.label || val}</span>
         </span>
     }
     render() {
-        const { title, logo, keyname, options, selected, onChange, onOpen } = this.props; 
+        const { title, logo, keyname, options, selected, onChange, onOpen } = this.props;
         return (
             <div className="instrument-dropdown-container">
-                <Select 
+                <Select
                     name={title}
                     value={selected ? selected : title}
-                    options={options} 
+                    options={options}
                     placeholder={this.renderValue(logo, title, title, true)}
-                    onChange={(val) => onChange(keyname, val)} 
-                    valueRenderer={(val) => this.renderValue(logo, title, val, false)} 
+                    onChange={(val) => onChange(keyname, val)}
+                    valueRenderer={(val) => this.renderValue(logo, title, val, false)}
                     onOpen={onOpen}
-                />
+                    />
             </div>
         )
     }

@@ -16,8 +16,10 @@
 
 .instrument-filter-container {
     padding: 0px 15px 0px 25px; 
+    display: -ms-flexbox; 
     display: flex; 
-    justify-content: space-between; 
+    -ms-flex-pack: justify; 
+        justify-content: space-between; 
 }
 
 .simulations-line {
@@ -92,4 +94,3 @@
         font-size: 16px; 
     }
 } 
-

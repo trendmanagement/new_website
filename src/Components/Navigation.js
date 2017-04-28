@@ -68,23 +68,23 @@ class Navigation extends Component {
                                 <a>
                                     products
                                 </a>
-                            </div>
+                            </div>*/}
                             <div onMouseOut={(e) => { this.switchTab('home', e) } } onMouseOver={() => { this.switchTab('services') } } className={"nav-item nav-target " + (this.state.activeTab == 'services' ? 'active' : '')}>
                                 <a>
                                     services
                                 </a>
 
-                        </div> */ }
+                            </div>
                             <Link to="/"> <div className={"nav-item " + (this.state.activeTab == 'products' ? 'active' : '')}>
                                 <a>
                                    products
                             </a>
                             </div></Link>
-                            <Link to="/"><div className={"nav-item " + (this.state.activeTab == 'services' ? 'active' : '')}>
+                            {/*<Link to="/"><div className={"nav-item " + (this.state.activeTab == 'services' ? 'active' : '')}>
 
                                 <a> services </a>
 
-                            </div></Link>
+                            </div></Link>*/}
 
                             <Link to="/simulations"> <div className={"nav-item " + (this.state.activeTab == 'simulations' ? 'active' : '')}>
                                 <a>
@@ -129,9 +129,9 @@ class Navigation extends Component {
                         <div className="container-grid nav-target ">
                             <div className="option-sub bordered nav-target">
                                 <h5><Link to="/">TM<span className="qr">QR</span> exo Index</Link></h5>
-                                <p><Link to="/">Indexation Approach</Link></p>
-                                <p><Link to="/">Portfolio Risk Themes</Link></p>
-                                <p><Link to="/">TMQR Exo Index Attributes</Link></p>
+                                <p><Link to="/services/indexation">Indexation Approach</Link></p>
+                                <p><Link to="/services/portfolio-risk-themes">Portfolio Risk Themes</Link></p>
+                                <p><Link to="/servcies/exo-attributes">TMQR Exo Index Attributes</Link></p>
                             </div>
                             <div className="option-sub bordered nav-target">
                                 <h5><Link to="/">TM<span className="qr">QR</span> Alpha Project</Link></h5>

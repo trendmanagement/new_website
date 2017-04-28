@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Disclaimer from './Disclaimer';
+import Disclaimer from './Disclaimer'; 
 import './css/Footer.css';
 
 export default class Footer extends Component {
@@ -20,11 +20,26 @@ export default class Footer extends Component {
         this.setState({
             showDisclaimer: false
         })
+    } 
+
+    componentDidMount() {
+        console.log(this)
+        if (window.location.pathname == '/' || 
+        window.location.pathname == '/home') {
+            if (!localStorage.getItem('disclaimer_shown')) {
+                this.setState({
+                    showDisclaimer: true,
+                    disclaimerShown: true
+                }) 
+
+                localStorage.setItem('disclaimer_shown', '1'); 
+            } 
+        }
     }
 
     render() {
         return (
-            <div className="footer" ref="footerContainer" style={this.props.style}>
+            <div className="footer" style={this.props.style}  ref="footerContainer">
             <Disclaimer hideDisclaimer={this.hideDisclaimer} isOpen={this.state.showDisclaimer} />
                 <div className="disclaimer">
                     <a onClick={() => { if (!this.state.disclaimerShown) this.setState({ showDisclaimer: true, disalsimerShown: true }) } }>
@@ -60,3 +75,4 @@ export default class Footer extends Component {
         )
     }
 }
+

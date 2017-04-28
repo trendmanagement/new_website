@@ -19,8 +19,10 @@
 
 .full-width-flex {
     width: 100%; 
+    display: -ms-flexbox; 
     display: flex; 
-    justify-content: space-between; 
+    -ms-flex-pack: justify; 
+        justify-content: space-between; 
     position: relative; 
     z-index: 99; 
 } 
@@ -29,9 +31,12 @@
     margin-top: 75px; 
     padding-top: 25px; 
     height: 100%; 
+    display: -ms-flexbox; 
     display: flex; 
-    align-items: center; 
-    justify-content: space-around; 
+    -ms-flex-align: center; 
+        align-items: center; 
+    -ms-flex-pack: distribute; 
+        justify-content: space-around; 
 }
 
 .illustration-container img {

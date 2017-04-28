@@ -51,7 +51,6 @@
     min-height: 10px;
     width: 11px;
     opacity: 0;
-    -webkit-transition: opacity .2s linear;
     transition: opacity .2s linear;
     background: #004ecb;
     background-clip: padding-box;

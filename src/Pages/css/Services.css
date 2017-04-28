@@ -1,0 +1,49 @@
+.indexation-approach-container {
+    padding-top: 75px;
+
+}
+
+.service-title {
+    font-size: 30px; 
+    font-weight: 800; 
+    color: #000; 
+}
+
+.service-list li {
+    list-style-type: none; 
+}
+
+.service-list li::before {
+    content: '■'; 
+    color: #75a7ff; 
+    font-size: 10px; 
+    margin-right: 10px;
+    margin-left: -20px; 
+} 
+
+.service-subtitle {
+    text-transform: uppercase; 
+    color: #000; 
+    font-size: 16px; 
+    font-weight: 800; 
+}
+
+.nav-service-options {
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+}
+
+.nav-service-options a {
+    font-size: 14px; 
+    text-transform: initial; 
+    display: block; 
+    font-weight: 200; 
+}
+
+.nav-service-options hr {
+    width: 53px;
+    color: #fff;
+    margin: 0 auto; 
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+}

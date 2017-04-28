@@ -38,6 +38,7 @@ export default class Series extends Component {
                 total_number_of_trades: '',
                 max_delta: '',
                 average_delta: '',
+                deltaRendered: false
 
             },
             campaign_detail: campaign_detail,
@@ -46,7 +47,8 @@ export default class Series extends Component {
             payoff_msg: '',
             positions: [],
             activeTab: 0,
-            include_price: 1
+            include_price: 1, 
+            isLoading: true
         }
 
 
@@ -62,19 +64,20 @@ export default class Series extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.date != this.props.date) {
             this.setState({
-                date: nextProps.date
+                date: nextProps.date, 
+                isLoading: true
+            }, () => {
+                this.updatePayoffChart(nextProps.date).then(() => {
+                    this.setState({
+                        isLoading: false
+                    })
+                });
             })
-            this.updatePayoffChart(nextProps.date);
+          
         }
 
     }
 
-    componentDidMount() {
-
-        if (this.props.date != '') {
-            this.updatePayoffChart(this.props.date);
-        }
-    }
 
     checkHandler(e) {
 
@@ -90,10 +93,6 @@ export default class Series extends Component {
             })
         }
 
-    }
-
-    triggerResize() {
-        window.resizeTo(window.innerWidth, window.innerHeight);
     }
 
     generateTable() {
@@ -156,10 +155,17 @@ export default class Series extends Component {
 
     setDate(date) {
         this.setState({
-            date: date
+            date: date, 
+            isLoading: true
+        }, () => {
+            this.updatePayoffChart(date).then(() => {
+                    this.setState({
+                        isLoading: false
+                    })
+                });;
         })
 
-        this.updatePayoffChart(date);
+        
     }
 
     getRecentData() {
@@ -181,57 +187,64 @@ export default class Series extends Component {
         d = d1.replace(/ /g, '-');
         var d2 = d;
 
-        request({
-            type: 'GET',
-            uri: `${apiEndpoint}/api/campaigns/payoff/?campaign=${encodeURI(this.props.campaign_detail.campaign)}&date=${d}`
-        }, (err, res, body) => {
-            if (err) {
-                console.log(err)
-                return;
-            }
-
-            body = JSON.parse(body);
-            if (body.status == 'error') {
-                console.log(body.message)
-
-                request({
+        let self = this;
+        return new Promise((resolve, reject) => {
+            request({
                     type: 'GET',
-                    uri: `${apiEndpoint}/api/campaigns/payoff/?campaign=${encodeURI(this.props.campaign_detail.campaign)}`
+                    uri: `${apiEndpoint}/api/campaigns/payoff/?campaign=${encodeURI(self.props.campaign_detail.campaign)}&date=${d}`
                 }, (err, res, body) => {
-
                     if (err) {
                         console.log(err)
                         return;
                     }
+
                     body = JSON.parse(body);
                     if (body.status == 'error') {
                         console.log(body.message)
+
+                        request({
+                            type: 'GET',
+                            uri: `${apiEndpoint}/api/campaigns/payoff/?campaign=${encodeURI(self.props.campaign_detail.campaign)}`
+                        }, (err, res, body) => {
+
+                            if (err) {
+                                console.log(err)
+                                return;
+                            }
+                            body = JSON.parse(body);
+                            if (body.status == 'error') {
+                                console.log(body.message)
+                                return;
+                            }
+                            if (body.status == "OK") {
+
+                                self.setState({
+                                    payoff_msg: 'Couldn\'t show data for ' + d + '. Showing data for ' + body.date.replace('T00:00:00', ''),
+                                    showPayoff: true,
+                                    payoffData: body.payoff_series,
+                                    deltaData: body.delta_series,
+                                    positions: body.positions
+                                })
+                            }
+                        })
                         return;
                     }
-                    if (body.status == "OK") {
 
+                    if (body.status == "OK") {
                         this.setState({
-                            payoff_msg: 'Couldn\'t show data for ' + d + '. Showing data for ' + body.date.replace('T00:00:00', ''),
+                            payoff_msg: 'Showing data for ' + body.date.replace('T00:00:00', ''),
                             showPayoff: true,
                             payoffData: body.payoff_series,
                             deltaData: body.delta_series,
                             positions: body.positions
-                        })
+                        }); 
+                        resolve(); 
+                    } else {
+                        reject(); 
                     }
                 })
-                return;
-            }
-
-            if (body.status == "OK") {
-                this.setState({
-                    payoff_msg: 'Showing data for ' + body.date.replace('T00:00:00', ''),
-                    showPayoff: true,
-                    payoffData: body.payoff_series,
-                    deltaData: body.delta_series,
-                    positions: body.positions
-                })
-            }
         })
+    
 
     }
 
@@ -294,17 +307,26 @@ export default class Series extends Component {
                             <label className={"mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select is-upgraded " + (this.state.include_price ? "is-checked" : "")}><input type="checkbox" className="mdl-checkbox__input" checked={this.state.include_price} onChange={this.checkHandler} />
                                 <span className="mdl-checkbox__focus-helper"></span><span className="mdl-checkbox__box-outline"><span className="mdl-checkbox__tick-outline"></span></span></label><br />
 
-                            <Chart data={this.props.campaign_detail.series} include_price={this.state.include_price} />
+                            <Chart
+                                data={this.props.campaign_detail.series}
+                                include_price={this.state.include_price}
+                                />
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            <BarChart triggerResize={this.triggerResize} data={this.props.campaign_detail.series} />
+                            <BarChart
+                                self={this} 
+                                data={this.props.campaign_detail.series}
+                                />
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            <RecentDataTable format_num={numberWithCommas} data={this.getRecentData()} />
+                            <RecentDataTable
+                                format_num={numberWithCommas}
+                                data={this.getRecentData()}
+                                />
                         </div>
                     </div>
                     <div className="row">
@@ -321,7 +343,6 @@ export default class Series extends Component {
                                                 onChange={this.setDate}
                                                 />
                                         </div>
-                                        {/*<button className="btn btn-info payoff-btn" onClick={this.updatePayoffChart}>Update chart</button>*/}
                                     </div>
                                 </div>
                             </form>
@@ -332,21 +353,41 @@ export default class Series extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-lg-12">
-                            {this.state.showPayoff ? <PayoffChart triggerResize={this.triggerResize} data={this.state.payoffData} title={"Campaign payoff"} /> : <p className="series-chart-heading">No payoff series data</p>}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-12">
-                            {this.state.showPayoff ? <PayoffChart triggerResize={this.triggerResize} data={this.state.deltaData} title={"Campaign delta"} /> : <p className="series-chart-heading">No delta series data</p>}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-12 positions-container">
-                            {this.state.showPayoff ? <PositionsTable format_num={numberWithCommas} data={this.state.positions} /> : ''}
-                        </div>
-                    </div>
+                    {!this.state.isLoading ?
+                        <div>
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    {this.state.showPayoff ?
+                                        <PayoffChart
+                                            triggerResize={this.triggerResize}
+                                            data={this.state.payoffData} title={"Campaign payoff"} /> :
+                                        <p className="series-chart-heading">No payoff series data</p>}
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    {this.state.showPayoff ?
+                                        <PayoffChart triggerResize={this.triggerResize}
+                                            data={this.state.deltaData}
+                                            title={"Campaign delta"} /> :
+                                        <p className="series-chart-heading">No delta series data</p>}
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-12 positions-container">
+                                    {this.state.showPayoff ?
+                                        <PositionsTable
+                                            format_num={numberWithCommas}
+                                            data={this.state.positions}
+                                            /> : ''}
+                                </div>
+                            </div>
+                        </div> :    
+                        <div className="row">
+                            <div className="col-lg-12">
+                                    <Loader />
+                                </div>
+                            </div>}
                 </div>
             </div>
         )
