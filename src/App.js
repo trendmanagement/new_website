@@ -32,7 +32,7 @@ class App extends Component {
           <Route path="simulations" component={Simulations} />
           <Route path="technology" component={Technology} /> 
           <Route path="services/indexation" component={IndexationApproach} />
-          <Route path="services/exo-attributes" component={EXOFacts} />
+          <Route path="services/exo-facts" component={EXOFacts} />
         </Route>
       </Router>
     );

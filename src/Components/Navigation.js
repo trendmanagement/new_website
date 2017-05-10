@@ -131,7 +131,7 @@ class Navigation extends Component {
                                 <h5><Link to="/">TM<span className="qr">QR</span> exo Index</Link></h5>
                                 <p><Link to="/services/indexation">Indexation Approach</Link></p>
                                 <p><Link to="/services/portfolio-risk-themes">Portfolio Risk Themes</Link></p>
-                                <p><Link to="/servcies/exo-attributes">TMQR Exo Index Attributes</Link></p>
+                                <p><Link to="/services/exo-facts">TMQR Exo Index Attributes</Link></p>
                             </div>
                             <div className="option-sub bordered nav-target">
                                 <h5><Link to="/">TM<span className="qr">QR</span> Alpha Project</Link></h5>

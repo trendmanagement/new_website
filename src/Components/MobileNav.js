@@ -43,7 +43,7 @@ export default class MobileNav extends Component {
                          <hr />
                             <Link to="/services/indexation">Indexation Approach</Link>
                             <Link to="/services/portfolio-risk-themes">Portfolio Risk Themes</Link>
-                            <Link to="/services/exo-attributes">TMQR Exo Index Attributes</Link>
+                            <Link to="/services/exo-facts">TMQR Exo Index Attributes</Link>
                             <hr />
                         </div>
                         

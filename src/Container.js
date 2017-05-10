@@ -44,7 +44,7 @@ export default class Container extends Component {
 
         var uri = `${apiEndpoint}/api/campaigns/series/${query_data}` 
 
-        
+        console.log(uri)
 
         var self = this;
 
@@ -84,6 +84,7 @@ export default class Container extends Component {
                     self.setState({
                         err: { message: body.message }
                     }, () => {
+						console.log(body)
                         reject(self.state.err)
                     }); 
 
@@ -135,6 +136,7 @@ export default class Container extends Component {
 
                     self.setState({ campaignDataRetrieved: true })
 
+					
                     resolve({
                         campaign_detail: body, 
                         date: moment({ year: d4[0], month: d4[1] - 1, day: d4[2] }), 

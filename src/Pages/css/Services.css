@@ -18,8 +18,21 @@
     color: #75a7ff; 
     font-size: 10px; 
     margin-right: 10px;
-    margin-left: -20px; 
+
 } 
+
+.service-list.exo li::before {
+    position: absolute;
+    margin-left: -20px; 
+}
+
+.service-list.exo {
+    margin-left: -20px!important; 
+} 
+
+.service-list.exo li {
+    margin-bottom: 10px; 
+}
 
 .service-subtitle {
     text-transform: uppercase; 
@@ -46,4 +59,113 @@
     margin: 0 auto; 
     margin-top: 10px; 
     margin-bottom: 10px; 
+} 
+
+.exo-facts-content-container {
+    padding-top: 75px; 
+} 
+
+
+.service-subtitle-lowercase {
+    margin-top: -20px; 
+    font-weight: 800; 
+}
+
+.exo-table-container {
+    overflow-x: auto; 
+} 
+
+.exo-table-container>div {
+    display: inline-block; 
+    text-align: center; 
+}
+
+.direction {
+    width: 59%; 
+
+}
+
+.volatility {
+    width: 39%; 
+    float: right;
+}
+
+.exo-table-title {
+    color: #000; 
+    font-size: 18px; 
+    font-weight: 800; 
+} 
+
+.tr_mobile_only {
+    display: none; 
+}
+
+.exo-table {
+    background: #fafafa; 
+}
+
+.exo-table thead {
+    border-bottom: 1px solid #ccc; 
+}
+
+.exo-table th {
+    font-weight: 400; 
+}
+
+.exo-table td {
+    text-align: left; 
+}
+
+.exo-table-delimiter {
+    text-align: left; 
+}
+
+.check {
+    background-image: url('../../../public/images/blue_check.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 13px; 
+    height: 20px; 
+    padding-top: 5px; 
+} 
+
+.exo-right {
+    text-align: right!important; 
+} 
+
+.exo-prompt {
+    font-size: 12px; 
+    text-align: center; 
+}
+
+.exo-legend {
+    margin-bottom: 3px; 
+}
+
+
+@media screen and (max-width: 1200px) {
+    .tr_mobile_only {
+        display: block; 
+    }
+
+    .exo-table-container>div {
+        display: block; 
+    }
+
+    .direction {
+        width: 100%; 
+
+    }
+
+    .volatility {
+        width: 100%; 
+        float: none; 
+    }
+
+} 
+
+@media screen and (max-width: 600px) {
+    .exo-table {
+        font-size: 10px;
+    }
 }

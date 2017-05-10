@@ -64,7 +64,7 @@ export default class List extends Component {
 
         var self = this;
 
-        request(`${apiEndpoint}/api/campaigns/list/`, (err, res, body) => {
+        request(`${apiEndpoint}/api/campaigns/list?white_label=DHP`, (err, res, body) => {
             if (err) {
                 self.setState({ response: err });
                 return;
