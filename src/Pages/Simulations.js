@@ -7,7 +7,7 @@ import List from './List';
 import Series from './Series'; 
 import Error from './Error';  
 import { browserHistory } from 'react-router'; 
-import { InstrumentFilter, DateFilter, CustomDateFilter, Navigation, Footer, Loader } from '../Components';
+import { InstrumentFilter, DateFilter, CustomDateFilter, Loader } from '../Components';
 
 export default class Simulations extends Component {
 
@@ -245,8 +245,6 @@ export default class Simulations extends Component {
 
         return (
             <div className="simulations-container">
-                <Navigation activeTab="simulations" />
-                <div className="nav-underlay"></div>
                 <div className="container-grid-block nav-offset">
                     <h1 className="simulations-title">INSTRUMENT</h1>
                     <InstrumentFilter 
@@ -319,7 +317,6 @@ export default class Simulations extends Component {
                     : null} 
                 {this.state.err ? <Error message={this.state.err} /> : null}
                 <div className="simulations-footer">
-                <Footer />
                 </div>
             </div>
         )

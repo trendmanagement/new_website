@@ -20,7 +20,11 @@
 
 .mdl-tabs.is-upgraded .mdl-tabs__tab.is-active:after {
   background: #2979ff!important; 
-} 
+}  
+
+.series-container {
+    padding-bottom: 30px;
+}
 
 @media screen and (max-width: 1200px) {
 

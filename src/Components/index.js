@@ -3,11 +3,6 @@ import BarChart from './DeltaChart'
 import RecentDataTable from './RecentDataTable' 
 import PayoffChart from './PayoffChart' 
 import PositionsTable from './PositionsTable' 
-import Navigation from './Navigation' 
-import MobileNav from './MobileNav' 
-import Disclaimer from './Disclaimer' 
-import Footer from './Footer' 
-import SlideText from './SlideText'
 import InstrumentDropdown from './InstrumentDropdown' 
 import InstrumentFilter from './InstrumentFilter' 
 import DateFilter from './DateFilter' 
@@ -23,11 +18,6 @@ module.exports = {
     RecentDataTable, 
     PayoffChart, 
     PositionsTable, 
-    Navigation, 
-    MobileNav, 
-    Disclaimer, 
-    Footer, 
-    SlideText, 
     InstrumentDropdown, 
     InstrumentFilter, 
     DateFilter, 

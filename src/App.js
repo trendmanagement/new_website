@@ -2,16 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Container from './Container'; 
-import { 
-  List, 
-  Series, 
-  Error, 
-  Home, 
-  Technology, 
-  Simulations, 
-  IndexationApproach, 
-  EXOFacts 
-} from './Pages'; 
+import { Simulations } from './Pages'; 
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';  
 
@@ -24,15 +15,9 @@ class App extends Component {
     return (
       <Router history={browserHistory}>
         <Route path="/" component={Container}>
-          <IndexRoute component={Home}/>
-          <Route path="campaign" component={Series} />  
-          <Route path="error" component={Error} />
-          <Route path="home" component={Home}/> 
-          <Route path="simulations/old" component={List} />
-          <Route path="simulations" component={Simulations} />
-          <Route path="technology" component={Technology} /> 
-          <Route path="services/indexation" component={IndexationApproach} />
-          <Route path="services/exo-facts" component={EXOFacts} />
+          <IndexRoute component={Simulations}/>
+          <Route path="/" component={Simulations} /> 
+          <Route path="/simulations" component={Simulations} />
         </Route>
       </Router>
     );
