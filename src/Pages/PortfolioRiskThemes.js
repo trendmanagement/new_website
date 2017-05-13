@@ -12,21 +12,26 @@ export default class PortfolioRiskThemes extends Component {
             closed_risk_slides: closed_risk_slides, 
             open_risk_slides: open_risk_slides, 
             active_slide: closed_risk_slides[0] 
-        }
-    }
+        } 
+
+
+    } 
+
     render () { 
 
-        const settings = {
+        const settings_close = {
         infinite: false,
         speed: 500,
-        slidesToShow: 10,
+        slidesToShow: 9,
         slidesToScroll: 2,
         responsive: [{ breakpoint: 1000, settings: { slidesToShow: 7 } }, 
         {breakpoint: 600, settings: {slidesToShow: 5}}, 
         {breakpoint: 400, settings: {slidesToShow: 3}}
         ]
 
-        }; 
+        };  
+
+        const settings_open = Object.assign({}, settings_close, {slidesToScroll: 1})
 
         const {closed_risk_slides, open_risk_slides} = this.state; 
 
@@ -93,7 +98,7 @@ export default class PortfolioRiskThemes extends Component {
                             20 Fabian Spreads (Closed Risk)
                         </div>
                         <div className="risk-slides-container first-slides"> 
-                            <Slider {...settings}>
+                            <Slider {...settings_close}>
                                 {closed_risk_slides.map(i => {
                                 return <div className="risk-slide" key={Math.random() * 10000}
                                     onMouseOver={
@@ -117,7 +122,7 @@ export default class PortfolioRiskThemes extends Component {
                             10 Molotov Spreads (Open Risk)
                         </div>
                         <div className="risk-slides-container"> 
-                            <Slider {...settings}>
+                            <Slider {...settings_open}>
                                 {open_risk_slides.map(i => {
                                 return <div className="risk-slide" key={Math.random() * 10000}
                                     onMouseOver={

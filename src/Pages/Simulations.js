@@ -169,6 +169,7 @@ export default class Simulations extends Component {
             .catch(err => { 
                 this.setState({
                     err: 'Failed to load campaign. Please try again.',
+                    campaignShown: true, 
                     isLoading: false
                 })
              })
@@ -234,7 +235,8 @@ export default class Simulations extends Component {
             })
             .catch(err => {
                 this.setState({
-                    err: 'Failed to load campaign. Please try again.',
+                    err: 'Failed to load campaign. Please try again.', 
+                    campaignShown: true, 
                     isLoading: false
                 })
             })
@@ -289,7 +291,7 @@ export default class Simulations extends Component {
                 </div>
                 {this.state.isLoading ? 
                     <div className="container-grid-block top-padded"><Loader /></div> : null} 
-                {!this.state.campaignShown && !this.state.err ?
+                {!this.state.campaignShown ?
                 <div className="container-grid-block">
                 <div>
                     <div className="results-container">
@@ -317,7 +319,7 @@ export default class Simulations extends Component {
                         description={this.state.campaign_description}/> 
                     </div>
                     : null} 
-                {this.state.err ? <Error message={this.state.err} /> : null}
+                {this.state.err && this.state.campaignShown ? <Error message={this.state.err} /> : null}
                 <div className="simulations-footer">
                 <Footer />
                 </div>
