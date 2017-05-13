@@ -10,7 +10,8 @@ import {
   Technology, 
   Simulations, 
   IndexationApproach, 
-  EXOFacts 
+  EXOFacts, 
+  PortfolioRiskThemes
 } from './Pages'; 
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';  
@@ -32,7 +33,8 @@ class App extends Component {
           <Route path="simulations" component={Simulations} />
           <Route path="technology" component={Technology} /> 
           <Route path="services/indexation" component={IndexationApproach} />
-          <Route path="services/exo-facts" component={EXOFacts} />
+          <Route path="services/exo-facts" component={EXOFacts} /> 
+          <Route path="services/portfolio-risk-themes" component={PortfolioRiskThemes} />
         </Route>
       </Router>
     );

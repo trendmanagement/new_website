@@ -6,6 +6,7 @@ import Technology from './Technology'
 import Simulations from './Simulations' 
 import IndexationApproach from './IndexationApproach'  
 import EXOFacts from './EXOFacts'
+import PortfolioRiskThemes from './PortfolioRiskThemes'
 
 module.exports = { 
     List, 
@@ -15,5 +16,6 @@ module.exports = {
     Technology, 
     Simulations, 
     IndexationApproach, 
-    EXOFacts 
+    EXOFacts, 
+    PortfolioRiskThemes 
 }

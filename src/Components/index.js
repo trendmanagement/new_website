@@ -17,6 +17,7 @@ import Loader from './Loader'
 import ListMobile from './ListMobile' 
 import ListDesktop from './ListDesktop' 
 
+
 module.exports = { 
     Chart, 
     BarChart, 
@@ -35,5 +36,5 @@ module.exports = {
     Check, 
     Loader, 
     ListMobile, 
-    ListDesktop 
+    ListDesktop
 } 

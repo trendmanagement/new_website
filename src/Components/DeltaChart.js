@@ -19,11 +19,21 @@ export default class EquityBarChart extends Component {
         if (!this.state.drawn) {
             this.setState({drawn: true}, () => {
                 const {self} = this.props; 
-                self.updatePayoffChart(self.state.date).then(() => {
+                self.updatePayoffChart(self.state.date)
+                .then(() => {
                     self.setState({
-                       isLoading: false
+                       isLoading: false,
+                       err: null
                     }); 
-                }) 
+                })
+                .catch(err => {
+                    console.log('err', err); 
+
+                    self.setState({
+                        isLoading: false, 
+                        err: 'No payoff series data'
+                    })
+                })
             })
         }
     }
