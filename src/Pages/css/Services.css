@@ -175,21 +175,27 @@
     margin-top: 30px; 
 }
 
-.closed-risk-img {
-    background-image: url('../../../public/images/fabian.png'); 
-    background-size: contain; 
+.closed-risk-img div {
+    background-image: url('../../../public/images/portfolio_risk.png'); 
+    background-size: cover; 
     background-repeat: no-repeat; 
     height: 150px; 
     margin-bottom: 30px; 
+    width: 150px;
+    margin-bottom: 30px;
+    background-position-x: 0;
+    
     
 } 
 
-.open-risk-img {
-    background-image: url('../../../public/images/molotov.png'); 
-    background-size: contain; 
+.open-risk-img div {
+    background-image: url('../../../public/images/portfolio_risk.png'); 
+    background-size: cover; 
     background-repeat: no-repeat; 
     height: 150px; 
-    margin-bottom: 30px;
+    margin-bottom: 30px; 
+    width: 150px; 
+    background-position-x: -150px;
 } 
 
 

@@ -11,7 +11,8 @@ import {
   Simulations, 
   IndexationApproach, 
   EXOFacts, 
-  PortfolioRiskThemes
+  PortfolioRiskThemes, 
+  IndustrialCommodityUser 
 } from './Pages'; 
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';  
@@ -34,7 +35,8 @@ class App extends Component {
           <Route path="technology" component={Technology} /> 
           <Route path="services/indexation" component={IndexationApproach} />
           <Route path="services/exo-facts" component={EXOFacts} /> 
-          <Route path="services/portfolio-risk-themes" component={PortfolioRiskThemes} />
+          <Route path="services/portfolio-risk-themes" component={PortfolioRiskThemes} /> 
+          <Route path="industrial-commodity-user" component={IndustrialCommodityUser}/>
         </Route>
       </Router>
     );

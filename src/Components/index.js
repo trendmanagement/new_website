@@ -16,7 +16,7 @@ import Check from './Check'
 import Loader from './Loader' 
 import ListMobile from './ListMobile' 
 import ListDesktop from './ListDesktop' 
-
+import InlineSelect from './InlineSelect'
 
 module.exports = { 
     Chart, 
@@ -36,5 +36,6 @@ module.exports = {
     Check, 
     Loader, 
     ListMobile, 
-    ListDesktop
+    ListDesktop, 
+    InlineSelect
 } 

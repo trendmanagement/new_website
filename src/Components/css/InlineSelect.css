@@ -1,0 +1,57 @@
+.inline-select {
+    padding: 0px 10px;
+    min-width: 265px;
+    box-sizing: border-box;
+    vertical-align: sub;
+    display: inline-block; 
+    font-family: Roboto,Helvetica,Arial,sans-serif!important; 
+}
+
+
+.inline-select .Select-control {
+    background: transparent; 
+    color: #75a7ff;     
+    border-radius: 0; 
+    border: none; 
+    border-bottom: 1px solid #fff; 
+}
+
+.inline-select .Select-menu-outer {
+    border: 1px solid #fff; 
+    font-weight: 300;
+    font-size: 30px;   
+}
+
+.inline-select div {
+    background: #212121;
+    outline: none!important; 
+    box-shadow: none!important; 
+} 
+ 
+
+.inline-select .select-option {
+    border: none;  
+    color: #fff; 
+}
+
+.inline-select .select-option:hover {
+    outline: none; 
+    border: none; 
+}
+
+.inline-select .Select-placeholder {
+    margin-top: 2px; 
+    padding-left: 0; 
+}
+
+.select-arrow_white {
+    color: #fff;
+    width: 18px;
+    position: absolute;
+    height: 20px;
+    background-size: cover;
+    font-size: 14px;
+    font-weight: 100;
+    margin-top: -10px;
+} 
+

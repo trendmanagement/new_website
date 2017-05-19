@@ -47,7 +47,7 @@ export default class Footer extends Component {
             <div className="footer" style={this.props.style}  ref="footerContainer">
             <Disclaimer hideDisclaimer={this.hideDisclaimer} isOpen={this.state.showDisclaimer} />
                { this.state.hideDisclaimer ? null : <div className="disclaimer">
-                    <a onClick={() => { if (!this.state.disclaimerShown) this.setState({ showDisclaimer: true, disalsimerShown: true }) } }>
+                    <a onClick={() => { this.setState({ showDisclaimer: true, disclaimerShown: true }) } }>
                         Link to Disclaimer
                         </a>
                </div>} 

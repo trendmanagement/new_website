@@ -53,6 +53,9 @@ class Navigation extends Component {
     }
     render() {
 
+        let logo_src = (window.location.pathname == '/' || window.location.pathname == '/home') ? 
+        (process.env.PUBLIC_URL + `/images/logo1.png`) : (process.env.PUBLIC_URL + `/images/logo2.png`)
+
         return (
             <div>
                 <MobileNav />
@@ -60,7 +63,7 @@ class Navigation extends Component {
                     <div className="container-grid">
                         <div className="nav-left">
                             <Link to="/home"><div className="logo-container">
-                                <img src={process.env.PUBLIC_URL + `/images/logo1.png`} />
+                                <img src={logo_src} />
                             </div></Link>
                         </div>
                         <div className="nav-middle">

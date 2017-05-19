@@ -22,7 +22,7 @@ export default class PayoffChart extends Component {
         } 
 
         function formatBalloon(v) {  
-		
+             
              if (typeof self.props.data[0].expir == 'undefined') {
               if (parseFloat(v) >= 0) {
                     return '$' + parseInt(v).toString()
@@ -30,13 +30,20 @@ export default class PayoffChart extends Component {
                 return '-$' + parseInt(v).toString().replace('-', '');  
               }
              } else {
-                 return v.toFixed(1); 
+                 return parseFloat(v).toFixed(1); 
              }
-        } 
+        }  
+
+
+        function formatXBalloon(v) {
+            if (typeof v != 'undefined') {
+                return parseFloat(v).toFixed(2); 
+            }
+        }
 
         function formatXLabel(v) {
-
-            if (typeof v != 'undefined') {
+       
+            if (typeof v != 'undefined') { 
                 return(parseFloat(v).toFixed(2)); 
             }
 
@@ -111,7 +118,7 @@ export default class PayoffChart extends Component {
                 "dashLength": 1,
                 "minorGridEnabled": true, 
                 "labelFunction": formatXLabel, 
-                "balloonTextFunction": formatBalloon
+                "labelOffset": 10
             },
             "legend": {
                 "useGraphSettings": true, 
@@ -131,7 +138,8 @@ export default class PayoffChart extends Component {
                 "valueLineEnabled": true,
                 "valueLineBalloonEnabled": true,
                 "valueLineAlpha": 0.5,
-                "fullWidth": true
+                "fullWidth": true, 
+                "categoryBalloonFunction": formatXBalloon
 
             },
             "listeners": [{"event": "rendered", "method": function(e) {
