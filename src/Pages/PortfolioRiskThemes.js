@@ -85,7 +85,7 @@ export default class PortfolioRiskThemes extends Component {
                                             return (<li key={Math.random() * 10000}>{i}</li>)
                                         })}
                                     </ul>
-                                    <div className="service-subtitle risk-subtitle">Index View:</div>
+                                    <div className="service-subtitle risk-subtitle">Index Construction:</div>
                                     <ul className="service-list risk-list">
                                         {this.state.active_slide.index_view2.map(i => {
                                             return (<li key={Math.random() * 10000}>{i}</li>)
@@ -100,7 +100,7 @@ export default class PortfolioRiskThemes extends Component {
                             <div className="col-lg-12 slide-row">
                                 <div className="service-subtitle">
                                     20 Fabian Spreads (Closed Risk)
-                        </div>
+                             </div>
                                 <div className="risk-slides-container first-slides">
                                     <Slider {...settings_close}>
                                         {closed_risk_slides.map(i => {

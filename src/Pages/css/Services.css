@@ -87,6 +87,7 @@
     padding-left: 0!important; 
 }
 
+
 .risk-subtitle {
     margin-top: 20px; 
     margin-bottom: 10px; 
@@ -139,6 +140,10 @@
 
 .exo-table-delimiter {
     text-align: left; 
+}
+
+.delimiter {
+    height: 345px;
 }
 
 .check {
@@ -276,6 +281,7 @@
     text-transform: uppercase; 
     font-size: 16px; 
     width: 200px; 
+    white-space: nowrap; 
     text-align: center; 
 }
 
@@ -316,7 +322,13 @@
         float: none; 
     }
 
-} 
+}  
+
+@media screen and (max-width: 768px) {
+    .delimiter {
+        height: 640px; 
+    }
+}
 
 @media screen and (max-width: 600px) {
     .exo-table {

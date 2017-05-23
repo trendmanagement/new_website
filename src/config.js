@@ -59,166 +59,178 @@ export const options = {
 export const closed_risk_slides = [
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars1.png`, 
-                    name: 'EXO Bearish Collar Broken Wing (Inverse)', 
-                    picname: 'EXO Bullish Collar', 
-                    index_view1: ['Underlying\'s move is negative', 'No view of volatility', 'FX/Currency'], 
-                    index_view2: ['Short future', 'Short OTM put', 'Long OTM call']
+                    name: 'EXO Ratio Put (Inverse)', 
+                    picname: 'EXO Ratio Put', 
+                    index_view1: ['underlying move\'s either direction, preferably negative', 'increase in volatility', 'risk is limited (Fabian)'], 
+                    index_view2: ['short ITM put', 'long 2 OTM puts']
                 }, 
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars2.png`, 
-                    name: 'Test', 
-                    index_view1: ['Test', 'Test', 'Test'], 
-                    index_view2: ['Test', 'Test', 'Test']
+                    name: 'EXO Ratio Call (Inverse)', 
+                    index_view1: ['underlying move\'s either direction, preferably positive', 'increase in volatility', 'risk is limited (Fabian)'], 
+                    index_view2: ['short ITM call', 'long 2 OTM calls']
                 }, 
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars3.png`, 
-                    name: 'Test2', 
-                    index_view1: ['Test2', 'Test2', 'Test2'], 
-                    index_view2: ['Test2', 'Test2', 'Test2']
+                    name: 'EXO Bearish Put Spread (Inverse)', 
+					picname: 'EXO Bearish Put Spread', 
+                    index_view1: ['underlying\'s move is positive', 'neutral view of volatility', 'risk limited (Fabian)'], 
+                    index_view2: ['short ITM put', 'long OTM put']
                 },   
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars4.png`, 
-                    name: 'Test3', 
-                    index_view1: ['Test3', 'Test3', 'Test3'], 
-                    index_view2: ['Test3', 'Test3', 'Test3']
+					name: 'EXO Bearish Put', 
+                    index_view1: ['underlying\'s move is negative', 'increase in volatility', 'risk limited (Fabian)'], 
+                    index_view2: ['long ITM put']
+
                 },     
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars5.png`, 
-                    name: 'Test4', 
-                    index_view1: ['Test4', 'Test4', 'Test4'], 
-                    index_view2: ['Test4', 'Test4', 'Test4']
+                    name: 'EXO Out Of The Money Put', 
+                    index_view1: ['underlying\'s move is negative', 'increase in volatility', 'risk limited (Fabian)'], 
+                    index_view2: ['long out of the money put']
                 }, 
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars6.png`, 
-                    name: 'Test5', 
-                    index_view1: ['Test5', 'Test5', 'Test5'], 
-                    index_view2: ['Test5', 'Test5', 'Test5']
+                    name: 'EXO Bearish Put Spread', 
+                    index_view1: ['underlying\'s move is negative', 'no view of volatility', 'risk limited (Fabian)'], 
+                    index_view2: ['long ITM put', 'short OTM put']
                 },   
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars7.png`, 
-                    name: 'Test6', 
-                    index_view1: ['Test6', 'Test6', 'Test6'], 
-                    index_view2: ['Test6', 'Test6', 'Test6']
+                    name: 'EXO Condor (Inverse)', 
+                    index_view1: ['underlying\'s move is neutral', 'negative to neutral view of volatility', 'risk is limited (Fabian)'], 
+                    index_view2: ['short OTM put', 'long OTM put (lower strike)', 'short OTM call', 'long OTM call (higher strike)']
                 },                     
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars8.png`, 
-                    name: 'Test7', 
-                    index_view1: ['Test7', 'Test7', 'Test7'], 
-                    index_view2: ['Test7', 'Test7', 'Test7']
+                    name: 'EXO Condor', 
+                    index_view1: ['underlying moves in either direction', 'positive to neutral view of volatility', 'risk is limited (Fabian)'], 
+                    index_view2: ['long OTM put', 'short OTM put (lower strike)', 'long OTM call', 'short OTM call (higher strike)']
                 }, 
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars9.png`, 
-                    name: 'Test8', 
-                    index_view1: ['Test8', 'Test8', 'Test9'], 
-                    index_view2: ['Test8', 'Test8', 'Test9']
+                    name: 'EXO Out Of The Money Call', 
+                    index_view1: ['underlying\'s move is positive', 'increase in volatility', 'risk limited (Fabian)'], 
+                    index_view2: ['long out of the money call']
                 },   
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars10.png`, 
-                    name: 'Test9', 
-                    index_view1: ['Test9', 'Test9', 'Test9'], 
-                    index_view2: ['Test9', 'Test9', 'Test9']
-                },                 {
+                    name: 'EXO Bullish Call Spread Inverse', 
+					picname: 'EXO Bullish Call Spread', 
+                    index_view1: ['underlying\'s move is negative', 'no view of volatility', 'risk limited (Fabian)'], 
+                    index_view2: ['short ITM call', 'long OTM call']
+                }, 
+				{
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars11.png`, 
-                    name: 'Test10', 
-                    index_view1: ['Test10', 'Test10', 'Test10'], 
-                    index_view2: ['Test10', 'Test10', 'Test10']
+                    name: 'EXO Call', 
+                    index_view1: ['underlying\'s move is positive', 'increase in volatility', 'risk limited (Fabian)'], 
+                    index_view2: ['long ITM call']
                 }, 
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars12.png`, 
-                    name: 'Test11', 
-                    index_view1: ['Test11', 'Test11', 'Test11'], 
-                    index_view2: ['Test11', 'Test11', 'Test11']
+                    name: 'EXO Bullish Strangle (Inverse)',
+					picname: 'EXO Bullish Strangle', 
+                    index_view1: ['underlying moves in either direction', 'increase in volatility', 'risk is limited (Fabian)'], 
+                    index_view2: ['long OTM put', 'long OTM call']
                 }, 
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars13.png`, 
-                    name: 'Test12', 
-                    index_view1: ['Test12', 'Test12', 'Test12'], 
-                    index_view2: ['Test12', 'Test12', 'Test12']
+                    name: 'EXO Bearish Strangle (Inverse)', 
+					picname: 'EXO Bearish Strangle', 
+                    index_view1: ['underlying moves in either direction', 'increase in volatility', 'risk is limited to premium paid (Fabian)'], 
+                    index_view2: ['long OTM put', 'long OTM call']
                 },   
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars14.png`, 
-                    name: 'Test13', 
-                    index_view1: ['Test13', 'Test13', 'Test13'], 
-                    index_view2: ['Test13', 'Test13', 'Test13']
+                    name: 'EXO Bullish Collar Broken Wing', 
+					picname: 'EXO Bullish Collar', 
+                    index_view1: ['underlying\'s move is positive', 'neutral view of volatility', 'risk limited (Fabian)'], 
+                    index_view2: ['long OTM put', 'long future', 'long OTM call', 'short OTM call (higher strike']
                 },     
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars15.png`, 
-                    name: 'Test14', 
-                    index_view1: ['Test14', 'Test14', 'Test14'], 
-                    index_view2: ['Test14', 'Test14', 'Test14']
+                    name: 'EXO Bullish Collar', 
+                    index_view1: ['underlying\'s move is positive', 'neutral view of volatility', 'risk limited (Fabian)'], 
+                    index_view2: ['long future', 'long OTM put', 'short OTM call']
                 }, 
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars16.png`, 
-                    name: 'Test15', 
-                    index_view1: ['Test15', 'Test15', 'Test15'], 
-                    index_view2: ['Test15', 'Test15', 'Test15']
+                    name: 'EXO Bearish Collar (Inverse)', 
+                    index_view1: ['underlying\'s move is positive', 'no view of volatility', 'risk limited (Fabian)'], 
+                    index_view2: ['long future', 'long OTM put', 'short OTM call']
                 },   
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars17.png`, 
-                    name: 'Test16', 
-                    index_view1: ['Test16', 'Test16', 'Test16'], 
-                    index_view2: ['Test16', 'Test16', 'Test16']
+                    name: 'EXO Bearish Collar Broken Wing (Inverse)', 
+                    picname: 'EXO Bearish Collar', 
+                    index_view1: ['underlying\'s move is neutral, slightly positive', 'decrease in volatility', 'risk is unlimited (Molotov)'], 
+                    index_view2: ['short OTM put', 'long OTM put (lower strike)', 'long future', 'short OTM call']
                 } 
             ] 
 			
 export const open_risk_slides = [
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/open/Collars1.png`, 
-                    name: 'Test', 
-                    index_view1: ['Test', 'Test', 'Test'], 
-                    index_view2: ['Test', 'Test', 'Test']
+                    name: 'EXO Call (Inverse)', 
+                    index_view1: ['underlying\'s move is neutral/negative', 'neutral view of volatility', 'unlimited risk (Molotov)'], 
+                    index_view2: ['short ITM call']
                 }, 
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/open/Collars2.png`, 
-                    name: 'Test2', 
-                    index_view1: ['Test2', 'Test2', 'Test2'], 
-                    index_view2: ['Test2', 'Test2', 'Test2']
+                    name: 'Long Future', 
+                    index_view1: ['underlying\'s move is positive', 'increase in volatility', 'risk is unlimited (Molotov)'], 
+                    index_view2: ['long future']
                 },   
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/open/Collars3.png`, 
-                    name: 'Test3', 
-                    index_view1: ['Test3', 'Test3', 'Test3'], 
-                    index_view2: ['Test3', 'Test3', 'Test3']
+                    name: 'EXO Ratio Call', 
+                    index_view1: ['underlying doesn\'t move', 'neutral volatility', 'risk is unlimited (Molotov)'], 
+                    index_view2: ['long ITM call', 'short 2 OTM calls']
                 },     
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/open/Collars4.png`, 
-                    name: 'Test4', 
-                    index_view1: ['Test4', 'Test4', 'Test4'], 
-                    index_view2: ['Test4', 'Test4', 'Test4']
+                    name: 'Short Future', 
+                    index_view1: ['underlying\'s move is negative', 'increase in volatility', 'risk is unlimited (Molotov)'], 
+                    index_view2: ['short future']
                 }, 
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/open/Collars5.png`, 
-                    name: 'Test5', 
-                    index_view1: ['Test5', 'Test5', 'Test5'], 
-                    index_view2: ['Test5', 'Test5', 'Test5']
+                    name: 'EXO Put (Inverse)', 
+                    index_view1: ['underlying\'s move is neutral/positive', 'neutral view of volatility', 'unlimited risk (Molotov)'], 
+                    index_view2: ['short ITM put']
                 },   
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/open/Collars6.png`, 
-                    name: 'Test6', 
-                    index_view1: ['Test6', 'Test6', 'Test6'], 
-                    index_view2: ['Test6', 'Test6', 'Test6']
+                    name: 'EXO Ratio Put', 
+                    index_view1: ['nderlying doesn\'t move', 'neutral volatility', 'risk is unlimited (Molotov)'], 
+                    index_view2: ['long ITM call', 'short 2 OTM calls']
                 },                     
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/open/Collars7.png`, 
-                    name: 'Test7', 
-                    index_view1: ['Test7', 'Test7', 'Test7'], 
-                    index_view2: ['Test7', 'Test7', 'Test7']
-                }, 
+                    name: 'EXO Bullish Strangle', 
+                    index_view1: ['underlying\'s move is neutral, slightly positive', 'decrease in volatility', 
+									'risk is unlimited (Molotov)'], 
+                    index_view2: ['short OTM put', 'short OTM call']
+                },  
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/open/Collars8.png`, 
-                    name: 'Test8', 
-                    index_view1: ['Test8', 'Test8', 'Test9'], 
-                    index_view2: ['Test8', 'Test8', 'Test9']
-                },   
+                    name: 'EXO Bearish Strangle', 
+                    index_view1: ['underlying\'s move is neutral, slightly negative', 
+					'decrease in volatility', 'risk is unlimited (Molotov)'], 
+                    index_view2: ['short OTM put', 'short OTM call']
+                }, 				
                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/open/Collars9.png`, 
-                    name: 'Test9', 
-                    index_view1: ['Test9', 'Test9', 'Test9'], 
-                    index_view2: ['Test9', 'Test9', 'Test9']
+                    name: 'EXO Bearish Collar Broken Wing (Inverse)', 
+					picname: 'EXO Bearish Collar', 
+                    index_view1: ['underlying\'s move is neutral, slightly positive', 'decrease in volatility', 'risk is unlimited (Molotov)'], 
+                    index_view2: ['short OTM put', 'long OTM put (lower strike)', 'long future', 'short OTM call']
                 },                 {
                     src: `${process.env.PUBLIC_URL}/images/graphs/open/Collars10.png`, 
-                    name: 'Test10', 
-                    index_view1: ['Test10', 'Test10', 'Test10'], 
-                    index_view2: ['Test10', 'Test10', 'Test10']
+                    name: 'EXO Bearish Collar Broken Wing (Inverse)', 
+					picname: 'EXO  Collar', 
+                    index_view1: ['underlying\'s move is neutral, slightly positive', 'decrease in volatility', 'risk is unlimited (Molotov)'], 
+                    index_view2: ['short OTM put', 'long OTM put (lower strike)', 'long future', 'short OTM call']
                 }
 ]

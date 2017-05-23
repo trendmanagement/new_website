@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "amcharts3": "github:amcharts/amcharts3",
-    "amcharts3-react": "/lib/amcharts3-react",
     "amstock3": "github:amcharts/amstock3",
     "classnames": "^2.2.5",
     "moment": "^2.17.1",
@@ -21,7 +20,6 @@
     "react-slick": "^0.14.11",
     "recharts": "^0.20.8",
     "request": "^2.79.0",
-    "responsive": "/lib/responsive",
     "simplebar": "^2.3.2",
     "sweetalert": "^1.1.3"
   },
