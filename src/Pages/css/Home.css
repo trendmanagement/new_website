@@ -96,11 +96,12 @@
     text-transform: uppercase;
     background: #2979ff;
     border-radius: 20px;
-    padding: 10px 20px;
+    padding: 14px 20px 10px 20px;
     border: none;
     outline: none;
     transition: all .2s ease-in-out; 
     margin-top: 25px; 
+    
 } 
 
 .main-btn:hover {

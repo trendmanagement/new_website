@@ -26,16 +26,26 @@ export default class IndustrialCommodityUser extends Component {
             value: 'dollars'
         } 
 
-        this.handleChange = (index, val) => { 
+        this.onChange = (option, index) => {
 
-            let selected = []; 
-            selected[index] = val; 
+            let newSelection = this.state.selected.slice(); 
+            newSelection[index] = option; 
 
-            let value = '';
 
-            if (index == 0) { 
+            this.setState({
+                selected: newSelection
+            }, () => { 
+                if (index == 0) {
+                    this.handleChange(); 
+                }
+            })
+        }
 
-                switch (selected[0].value) {
+        this.handleChange = () => { 
+
+                let value = '';
+
+                switch (this.state.selected[0].value) {
 
                     case 'Crude Oil': 
                     value = 'dollars'; 
@@ -70,14 +80,18 @@ export default class IndustrialCommodityUser extends Component {
                     break; 
                     
                 } 
-            }
+
+
+            this.setState({value: value}); 
         }
+    
+        this.handleChange = this.handleChange.bind(this); 
+        this.onChange= this.onChange.bind(this); 
+
     }
 
 
     render() {  
-
-        this.handleChange = this.handleChange.bind(this); 
 
         const {options} = this.state; 
         return (
@@ -87,23 +101,31 @@ export default class IndustrialCommodityUser extends Component {
                 </div> 
                 <div className="industrial-commodity__content-container">
                     <div className="industrial-text-container">
-                        <p className="industrial-text-container__text">
+                        <div className="industrial-text-container__text">
                             I represent a firm with a pre existing risk in the price of 
-                            <InlineSelect 
+                            <InlineSelect  
+
                                 className="industrial-text-container__select"  
+                                index={0} 
+                                onChange={this.onChange}
+                                selected={this.state.selected[0]}
                                 options={options[0]} />
-                        </p>
-                        <p className="industrial-text-container__text">
+                        </div>
+                        <div className="industrial-text-container__text">
                             This commodity is used as an 
                             <InlineSelect 
+                                index={1}
+                                onChange={this.onChange}
                                 className="industrial-text-container__select"  
+                                selected={this.state.selected[1]}
                                 options={options[1]} /> 
-                            to our ordinary operations. </p>
-                        <p className="industrial-text-container__text">
+                            to our ordinary operations. </div>
+                        <div className="industrial-text-container__text">
                             My firm needs to hedge the price risk on <span className="industrial-text-container__text_select-value">
-                                {this.state.value}.
+                                <span className="underlined">{this.state.value}.</span>
                             </span>
-                        </p>
+                        </div> 
+                        <div className="continue-btn main-btn">CONTINUE</div>
                     </div>
                 </div>
                 <div className="industrial-commodity__footer-container">
