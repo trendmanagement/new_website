@@ -17,6 +17,7 @@ import Loader from './Loader'
 import ListMobile from './ListMobile' 
 import ListDesktop from './ListDesktop' 
 import InlineSelect from './InlineSelect'
+import CircleProgress from './CircleProgress'
 
 module.exports = { 
     Chart, 
@@ -37,5 +38,6 @@ module.exports = {
     Loader, 
     ListMobile, 
     ListDesktop, 
-    InlineSelect
+    InlineSelect,
+    CircleProgress
 } 

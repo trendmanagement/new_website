@@ -12,10 +12,10 @@ export default class Container extends Component {
             campaignDataRetrieved: false,
             campaign_detail: [],
             err: null,
-            date: ''
+            date: '' 
         }
 
-        this.viewCampaign = this.viewCampaign.bind(this);
+        this.viewCampaign = this.viewCampaign.bind(this); 
     }
     viewCampaign(data, campaign, use_default, description, query_data) {
 
@@ -150,10 +150,18 @@ export default class Container extends Component {
 
 
     }
-    render() {
+
+
+    render() { 
+        console.log(this.props.children)
         return (
             <div>
-                {React.cloneElement(this.props.children, { viewCampaign: this.viewCampaign, campaign_detail: this.state.campaign_detail, series_err: this.state.err, date: this.state.date, description: this.state.description })}
+                {React.cloneElement(this.props.children, 
+                { viewCampaign: this.viewCampaign, 
+                campaign_detail: this.state.campaign_detail, 
+                series_err: this.state.err, 
+                date: this.state.date, 
+                description: this.state.description })}
             </div>
         )
     }

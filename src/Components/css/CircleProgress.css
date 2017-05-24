@@ -1,0 +1,119 @@
+.circlewheels__wrapper{
+    background-color: white;
+    border-radius: 5px;
+    padding: 0 10px;
+    height: 460px;
+    text-align: center;
+}
+.circlewheels__wheelWrapper{
+    position: relative;
+    height: 112px;
+    width: 112px;
+    margin: 0 auto 50px;
+}
+.circlewheels__circle-one,
+.circlewheels__circle-two{
+    position: absolute;
+    top:0px;
+    left: 0px;
+}
+.circlewheels__circle-one{z-index: 1}
+.circlewheels__circle-two{z-index: 0}
+
+.circlewheels__circle-zero-digit,
+.circlewheels__circle-one-digit,
+.circlewheels__circle-two-digit{
+    position: absolute;
+}
+.circlewheels__circle-one-digit{    
+    top: 43px;
+    right: -33px;
+}
+.circlewheels__circle-two-digit{    
+    top: 87px;
+    right: 101px;
+}
+.circlewheels__circle-zero-digit{
+    top: -10px;
+    left: -7px;
+}
+.circlewheels__title{
+    font-family: "Roboto",sans-serif;
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: 700;
+    height: 40px;
+    width: 100%;
+    color:black;
+    display: inline-block;
+    margin: 27px auto 36px;
+    text-transform: uppercase;
+}
+.circlewheels__title span{display: block}
+.circlewheels__attributeWrapper{
+    margin-bottom:40px;
+    height: 70px;
+}
+.circlewheels__attrribute{
+    font-family: "Roboto",sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23px;
+    margin-bottom:0px
+}
+.circlewheels__select-btn{
+    height: 50px;
+    width: 135px;
+    border-radius: 25px;
+    margin: 0 auto;
+    background-color: #2979ff;
+    line-height: 50px;
+
+}
+.circlewheels__select-btn a{
+    color:white;
+}
+.circlewheels__select-btn a:focus,
+.circlewheels__select-btn a:hover,
+.circlewheels__select-btn a:active{
+    text-decoration: none;
+}
+@media (min-width:1001px) and (max-width:1090px){
+    .circlewheels__title{
+        font-size: 13px;
+        line-height: 22px;
+    }
+}
+@media (min-width:768px) and (max-width:1000px){
+    .circlewheels__title{
+        font-size: 13px;
+        line-height: 22px;
+        margin: 24px auto 26px;
+    }
+    .circlewheels__attrribute{
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .circlewheels__attributeWrapper{height: 40px;}
+    .circlewheels__wrapper{height: 420px}
+}
+@media (min-width:320px) and (max-width:767px){
+    .circlewheels__wrapper{
+        margin-bottom: 25px;
+    }
+}
+@media (min-width:320px) and (max-width:499px){
+    .circlewheels__title{
+        margin:25px 0 15px;
+        font-size: 15px;
+        line-height: 19px;
+    }
+    .circlewheels__wrapper{height:400px;}
+    .circlewheels__attributeWrapper {
+        margin-bottom: 20px;
+        height: 70px;
+    }
+    .circlewheels__wheelWrapper{
+        margin-bottom:30px;
+    }
+}

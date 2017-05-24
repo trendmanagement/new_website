@@ -7,7 +7,8 @@ import Simulations from './Simulations'
 import IndexationApproach from './IndexationApproach'  
 import EXOFacts from './EXOFacts'
 import PortfolioRiskThemes from './PortfolioRiskThemes' 
-import IndustrialCommodityUser from './IndustrialCommodityUser' 
+import IndustrialCommodityUser from './IndustrialCommodityUser'  
+import Getstarted from './Getstarted';
 
 module.exports = { 
     List, 
@@ -19,5 +20,6 @@ module.exports = {
     IndexationApproach, 
     EXOFacts, 
     PortfolioRiskThemes, 
-    IndustrialCommodityUser 
+    IndustrialCommodityUser, 
+    Getstarted 
 }

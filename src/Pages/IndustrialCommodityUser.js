@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; 
 import {Navigation, Footer, InlineSelect} from '../Components';  
+import {browserHistory} from 'react-router'; 
 import './css/IndustrialCommodity.css'; 
 
 export default class IndustrialCommodityUser extends Component { 
@@ -18,11 +19,11 @@ export default class IndustrialCommodityUser extends Component {
                 {label: 'Ten Year Notes', value: 'Ten Year Notes'}
 
             ], [
-                {label: 'input/natural long', value: 'input'}, 
-                {label: 'output/natural short', value: 'output'}
+                {label: 'input/natural long', value: 'long'}, 
+                {label: 'output/natural short', value: 'short'}
             ]], 
             selected: [{label: 'Crude Oil', value: 'Crude Oil'}, 
-            {label: 'input/natural long', value: 'input'}], 
+            {label: 'input/natural long', value: 'long'}], 
             value: 'dollars'
         } 
 
@@ -35,6 +36,7 @@ export default class IndustrialCommodityUser extends Component {
             this.setState({
                 selected: newSelection
             }, () => { 
+
                 if (index == 0) {
                     this.handleChange(); 
                 }
@@ -87,9 +89,7 @@ export default class IndustrialCommodityUser extends Component {
     
         this.handleChange = this.handleChange.bind(this); 
         this.onChange= this.onChange.bind(this); 
-
     }
-
 
     render() {  
 
@@ -125,7 +125,10 @@ export default class IndustrialCommodityUser extends Component {
                                 <span className="underlined">{this.state.value}.</span>
                             </span>
                         </div> 
-                        <div className="continue-btn main-btn">CONTINUE</div>
+                        <div className="continue-btn main-btn"
+                        onClick={() => {
+                        browserHistory.push('/getstarted?c='+ this.state.selected[1].value )
+                          }  }>CONTINUE</div>
                     </div>
                 </div>
                 <div className="industrial-commodity__footer-container">
