@@ -8,7 +8,7 @@ export default class Disclaimer extends Component {
                 <div className="disclaimer-container">
                     <div className="disclaimer-content">
                         <div className="disclaimer-text" data-simplebar>
-                            <p className="title">Disclaimer</p>
+                            <p className="title">Terms of Use</p>
                             <p className="text">
                             I confirm that I am a Qualified Eligible Person as defined under the (CFTC) Regulation 4.7. Although this summary is intended to offer useful and practical information, CFTC Regulation 4.7 sets forth the complete definition of a Qualified Eligible Person. Should information in this summary be inconsistent with some provision in the Regulations, it is the CFTC Regulation that is the final word.
 
@@ -34,7 +34,7 @@ export default class Disclaimer extends Component {
 
                             The Index returns shown do not represent the results of actual trading of investable assets/securities. Trend Management Limited maintains the Indices and calculates the Index levels and performance shown or discussed, but does not manage actual assets. Index returns do not reflect payment of any sales charges or fees an investor may pay to purchase the securities underlying the Index or investment funds that are intended to track the performance of the Index. The imposition of these fees and charges would cause actual and back-tested performance of the securities/fund to be lower than the Index performance shown. Back-tested performance may not reflect the impact that any material market or economic factors might have had on the advisor's management of actual client assets. The information may be used to create works such as charts and reports. Limited extracts of information and/or data derived from the information may be distributed or redistributed provided this is done infrequently in a non-systematic manner. The information may be used within the framework of investment activities provided that it is not done in connection with the marketing or promotion of any financial instrument or investment product that makes any explicit reference to the trademarks licensed to Trend Management Limited and that is based on, or seeks to match, the performance of the whole, or any part, of a Trend Management Limited Exo index. Such use requires that the Subscriber first enters into a separate license agreement with Trend Management Limited or a participating FCM. The Information may not be used to verify or correct other data or information from other sources.
 
-                            The terms contained in this Disclaimer are in addition to the Terms of Service for users without a subscription applicable to the Trend Management Limited Exo Index website, which are incorporated herein by reference.
+                            The terms contained in this Terms of Use are in addition to the Terms of Service for users without a subscription applicable to the Trend Management Limited Exo Index website, which are incorporated herein by reference.
                            </p>
                         </div>
                     </div>

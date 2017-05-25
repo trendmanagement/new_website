@@ -149,7 +149,7 @@
 
 .disclaimer a {
     color: #709cec!important; 
-
+    cursor: pointer;
 } 
 
 .slider-controls-wrap {
