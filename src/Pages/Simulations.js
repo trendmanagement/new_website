@@ -193,7 +193,9 @@ export default class Simulations extends Component {
             campaign: name,
             desc: desc, 
             msg: null
-        })
+        }, () => {
+			self.prepareCampaign(); 
+		})
 
     } 
 
@@ -303,11 +305,12 @@ export default class Simulations extends Component {
                     </div>
                 </div>
                 <div className="container-grid-block">  {/*data, campaign, use_default, description, query_data*/}
+					{/*
                     <button className="display-campaign-btn" 
                   
                     onClick={this.prepareCampaign}>
                     DISPLAY CAMPAIGN
-                    </button>
+                    </button> */}
                     <div className="error">{this.state.msg}</div>
                 </div></div> : null
                 }

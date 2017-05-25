@@ -49,7 +49,7 @@ class Getstarted extends Component {
                 <Navigation activeTab="technology" />
                 <div className="nav-underlay"></div>
                 <div className="getstarted-content-bgcol">
-                    <div className="container-grid-block" >
+                    <div className="container-grid-block-getstarted" >
                         <div className="row heading">
                             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <h1 className="heading__title-main">Get started by choosing a hedging goal</h1>

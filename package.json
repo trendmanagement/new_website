@@ -9,6 +9,7 @@
     "amcharts3": "github:amcharts/amcharts3",
     "amstock3": "github:amcharts/amstock3",
     "classnames": "^2.2.5",
+    "jquery-circle-progress": "^1.2.2",
     "moment": "^2.17.1",
     "react": "^15.4.2",
     "react-datepicker": "^0.41.1",
@@ -21,8 +22,7 @@
     "recharts": "^0.20.8",
     "request": "^2.79.0",
     "simplebar": "^2.3.2",
-    "sweetalert": "^1.1.3",
-    "jquery-circle-progress":"*"
+    "sweetalert": "^1.1.3"
   },
   "scripts": {
     "start": "react-scripts start",
