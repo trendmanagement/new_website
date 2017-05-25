@@ -1,6 +1,11 @@
 .container-grid-block-getstarted {
     padding-top: 75px;
 }
+
+.getstarted-offset {
+     padding-top: 75px;   
+}
+
 .getstarted-content-bgcol{
     background-color: #212121;
 }
