@@ -103,12 +103,12 @@ class Home extends Component {
                     <div className="title-aligner full-height">
                         <div className="title-container">
                         <h1 className={"main-title " + (this.state.activeSlide == 0 ? '' : 'fadeout')}><span>Enter the World of Modern Risk Management</span></h1>
-                        <h1 className={"main-title-small " + (this.state.activeSlide == 1 ? '' : 'fadeout')}><span>We are changing the way <br /> the food and beverage industry <br /> thinks about risk management.</span></h1>
-                        <h1 className={"main-title-small " + (this.state.activeSlide == 2 ? '' : 'fadeout')}><span>We are changing the way <br /> the transportation industry <br /> thinks about risk management.</span></h1>
+                        <h1 className={"main-title-small " + (this.state.activeSlide == 1 ? '' : 'fadeout')}><span>We are changing the way <br /> food and beverage industry <br /> thinks about risk management.</span></h1>
+                        <h1 className={"main-title-small " + (this.state.activeSlide == 2 ? '' : 'fadeout')}><span>We are changing the way <br /> transportation industry <br /> thinks about risk management.</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 3 ? '' : 'fadeout')}><span>We are changing the way <br /> family offices <br /> think about risk management.</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 4 ? '' : 'fadeout')}><span>We are changing the way <br /> CTAs <br /> think about risk management.</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 5 ? '' : 'fadeout')}><span>We are changing the way <br /> FCMs <br /> think about risk management.</span></h1>
-                        <h1 className={"main-title-small " + (this.state.activeSlide == 6 ? '' : 'fadeout')}><span>We are changing the way <br /> the proprietary trading groups <br /> think about risk management.</span></h1>
+                        <h1 className={"main-title-small " + (this.state.activeSlide == 6 ? '' : 'fadeout')}><span>We are changing the way <br /> proprietary trading groups <br /> think about risk management.</span></h1>
                             <button className="main-btn">get started</button>
                         </div>
                         <div className="slider-controls-wrap">

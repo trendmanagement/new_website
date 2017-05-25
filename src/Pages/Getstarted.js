@@ -1,47 +1,8 @@
 import React, { Component } from 'react';
 import './css/Getstarted.css';
 import { Navigation, Footer, CircleProgress } from '../Components';
-var $ = require('jquery');
-require('jquery-circle-progress');
 
 class Getstarted extends Component {
-
-
-    componentDidMount() { 
-        $('.circlewheels__cirle-one').circleProgress(
-            {
-                size: 112,
-                thickness: 17,
-                startAngle: -Math.PI / 2,
-                fill: {
-                    gradient: ["rgb(0,78,203)", "rgb(117,167,255)"],
-                    gradientAngle: Math.PI * 0.26
-                },
-                lineCap: 'round',
-                animation: {
-                    duration: 1000,
-                    easing: "linear"
-                }
-            }
-        )
-        $('.circlewheels__cirle-two').circleProgress(
-            {
-                size: 111,
-                thickness: 16,
-                startAngle: -Math.PI / 2,
-                fill: {
-                    gradient: ["rgb(255,215,64", "rgb(247,151,30)"],
-                    gradientAngle: Math.PI * 0.83
-                },
-                lineCap: 'round',
-                emptyFill: '#f3f3f3',
-                animation: {
-                    duration: 1000,
-                    easing: "linear"
-                }
-            }
-        )
-    }
 
     render() {
         return (
