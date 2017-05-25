@@ -102,13 +102,13 @@ class Home extends Component {
                 <div className="bg-container" id={this.state.slides[this.state.activeSlide]}>
                     <div className="title-aligner full-height">
                         <div className="title-container">
-                        <h1 className={"main-title " + (this.state.activeSlide == 0 ? '' : 'fadeout')}><span>Enter the World of Modern Risk Management</span></h1>
-                        <h1 className={"main-title-small " + (this.state.activeSlide == 1 ? '' : 'fadeout')}><span>We are changing the way <br /> food and beverage industry <br /> thinks about risk management.</span></h1>
-                        <h1 className={"main-title-small " + (this.state.activeSlide == 2 ? '' : 'fadeout')}><span>We are changing the way <br /> transportation industry <br /> thinks about risk management.</span></h1>
-                        <h1 className={"main-title-small " + (this.state.activeSlide == 3 ? '' : 'fadeout')}><span>We are changing the way <br /> family offices <br /> think about risk management.</span></h1>
-                        <h1 className={"main-title-small " + (this.state.activeSlide == 4 ? '' : 'fadeout')}><span>We are changing the way <br /> CTAs <br /> think about risk management.</span></h1>
-                        <h1 className={"main-title-small " + (this.state.activeSlide == 5 ? '' : 'fadeout')}><span>We are changing the way <br /> FCMs <br /> think about risk management.</span></h1>
-                        <h1 className={"main-title-small " + (this.state.activeSlide == 6 ? '' : 'fadeout')}><span>We are changing the way <br /> proprietary trading groups <br /> think about risk management.</span></h1>
+                        <h1 className={"main-title " + (this.state.activeSlide == 0 ? 'active' : 'fadeout')}><span>Enter the World of<br/>Modern Risk Management</span></h1>
+                        <h1 className={"main-title-small " + (this.state.activeSlide == 1 ? 'active' : 'fadeout')}><span>We are changing the way <br /> food and beverage industry <br /> thinks about risk management.</span></h1>
+                        <h1 className={"main-title-small " + (this.state.activeSlide == 2 ? 'active' : 'fadeout')}><span>We are changing the way <br /> transportation industry <br /> thinks about risk management.</span></h1>
+                        <h1 className={"main-title-small " + (this.state.activeSlide == 3 ? 'active' : 'fadeout')}><span>We are changing the way <br /> family offices <br /> think about risk management.</span></h1>
+                        <h1 className={"main-title-small " + (this.state.activeSlide == 4 ? 'active' : 'fadeout')}><span>We are changing the way <br /> CTAs <br /> think about risk management.</span></h1>
+                        <h1 className={"main-title-small " + (this.state.activeSlide == 5 ? 'active' : 'fadeout')}><span>We are changing the way <br /> FCMs <br /> think about risk management.</span></h1>
+                        <h1 className={"main-title-small " + (this.state.activeSlide == 6 ? 'active' : 'fadeout')}><span>We are changing the way <br /> proprietary trading groups <br /> think about risk management.</span></h1>
                             <button className="main-btn">get started</button>
                         </div>
                         <div className="slider-controls-wrap">
@@ -128,19 +128,50 @@ class Home extends Component {
                     <div className="container-grid-block full-height">
                         <div className="list-aligner">
                             <div className="row">
-                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 full-height">
-                                    <div className="list-container-home">
-                                        <p>TMQR focuses on systematic implementation of trading strategies which humans create through rigorous research.</p>
-                                        <p>TMQR's creative approach to problem solving emphasizes precision, deep thought and thoroughness.</p>
-                                        <p>TMQR relies on the research, analysis and development of trading strategies, as well as the technology, provided by Trend Management Limited.</p>
+                                <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12  full-height">
+                                    <div className="list__item-wrapper">
+                                        <div className="list__itemImage-wrapper">
+                                            <div  className="list__itemImage-img" id="image-content-1"/>
+                                        </div>
+                                        <div className="list_itemText-font">
+                                            TMQR focuses on systematic implementation of trading strategies which humans create through rigorous research.                                        
+                                        </div>
+                                    </div>
+                                    <div className="list__item-wrapper">
+                                        <div className="list__itemImage-wrapper">
+                                            <div  className="list__itemImage-img" id="image-content-2"/>
+                                        </div>
+                                        <div className="list_itemText-font">
+                                            TMQR focuses on systematic implementation of trading strategies which humans create through rigorous research.                                        
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 full-height">
-                                    <div className="list-container-home">
-                                        <p>TMQR searches for "Edge" through indepth and ongoing research. Of utmost importance is our team's ability to efficiently translate this research into actionable trading strategies.</p>
-                                        <p>TMQR employs a scientific method that is aided by technology and specialized math to drive trading decisions. It is our goal to remove much of the subjectivity, arbitrariness and lack of discipline in trade selection, strategy development and assessment found in discretionary trading.</p>
+                                <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 single-col full-height">
+                                   <div className="list__item-wrapper">
+                                        <div className="list__itemImage-wrapper">
+                                            <div  className="list__itemImage-img" id="image-content-3"/>
+                                        </div>
+                                        <div className="list_itemText-font">
+                                            TMQR focuses on systematic implementation of trading strategies which humans create through rigorous research.                                        
+                                        </div>
+                                    </div>                                </div>
+                                <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 full-height">
+                                   <div className="list__item-wrapper">
+                                        <div className="list__itemImage-wrapper">
+                                            <div  className="list__itemImage-img" id="image-content-4"/>
+                                        </div>
+                                        <div className="list_itemText-font">
+                                            TMQR focuses on systematic implementation of trading strategies which humans create through rigorous research.                                        
+                                        </div>
                                     </div>
-                                </div>
+                                    <div className="list__item-wrapper">
+                                        <div className="list__itemImage-wrapper">
+                                            <div  className="list__itemImage-img" id="image-content-5"/>
+                                        </div>
+                                        <div className="list_itemText-font">
+                                            TMQR focuses on systematic implementation of trading strategies which humans create through rigorous research.                                        
+                                        </div>
+                                    </div>                                </div>
                             </div>
                         </div>
                     </div>

@@ -166,6 +166,20 @@ export const closed_risk_slides = [
                     picname: 'EXO Bearish Collar', 
                     index_view1: ['underlying\'s move is neutral, slightly positive', 'decrease in volatility', 'risk is unlimited (Molotov)'], 
                     index_view2: ['short OTM put', 'long OTM put (lower strike)', 'long future', 'short OTM call']
+                } ,   
+                {
+                    src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars18.png`, 
+                    name: 'EXO Bearish Collar', 
+                    picname: 'EXO Bearish Collar', 
+                    index_view1: ['underlying\'s move is negative', 'no view of volatility', 'risk limited (Fabian)'], 
+                    index_view2: ['short future', 'short OTM put', 'long OTM call']
+                } ,   
+                {
+                    src: `${process.env.PUBLIC_URL}/images/graphs/closed/Collars19.png`, 
+                    name: 'EXO Bearish Collar (Inverse)', 
+                    picname: 'EXO Bearish Collar', 
+                    index_view1: ['underlying\'s move is positive', 'no view of volatility', 'risk limited (Fabian)'], 
+                    index_view2: ['long future', 'long OTM put', 'short OTM call']
                 } 
             ] 
 			
