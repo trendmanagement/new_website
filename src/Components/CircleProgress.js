@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import './css/CircleProgress.css';
-
 var $ = require('jquery');
 require('jquery-circle-progress');
 
@@ -95,9 +94,7 @@ export default class CircleProgress extends Component {
                 {title}
                 {circleWheels_content}
                 <div className="circlewheels__select-btn">
-                    <Link to="/">
-                        SELECT
-                    </Link>
+                    <Link to="/">SELECT</Link>
                 </div>
             </div>
         )
