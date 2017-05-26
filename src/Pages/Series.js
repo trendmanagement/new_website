@@ -35,7 +35,6 @@ export default class Series extends Component {
                 starting_value: '',
                 end_value: '',
                 total_cost: '',
-                total_number_of_trades: '',
                 max_delta: '',
                 average_delta: '',
                 deltaRendered: false
@@ -125,7 +124,7 @@ export default class Series extends Component {
                         this.props.campaign_detail[prop] = this.props.campaign_detail[prop].replace('T00:00:00', '');
                     }
 
-                    if (prop == 'total_cost' || prop == 'total_number_of_trades' || prop == 'max_drawdown' || prop == 'end_value' || prop == 'starting_value') {
+                    if (prop == 'total_cost' || prop == 'max_drawdown' || prop == 'end_value' || prop == 'starting_value') {
                         if (val != 0) { val = numberWithCommas(val) };
 
 

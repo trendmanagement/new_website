@@ -127,14 +127,14 @@ class Home extends Component {
                 <div className="description-container">
                     <div className="container-grid-block full-height">
                         <div className="list-aligner">
-                            <div className="row">
+                            <div className="row flexed-row">
                                 <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12  full-height">
                                     <div className="list__item-wrapper">
                                         <div className="list__itemImage-wrapper">
                                             <div  className="list__itemImage-img" id="image-content-1"/>
                                         </div>
                                         <div className="list_itemText-font">
-                                            TMQR focuses on systematic implementation of trading strategies which humans create through rigorous research.                                        
+                                            TMQR focuses on systematic implementation of trading strategies which humans create through rigorous research.                                  
                                         </div>
                                     </div>
                                     <div className="list__item-wrapper">
@@ -142,7 +142,7 @@ class Home extends Component {
                                             <div  className="list__itemImage-img" id="image-content-2"/>
                                         </div>
                                         <div className="list_itemText-font">
-                                            TMQR focuses on systematic implementation of trading strategies which humans create through rigorous research.                                        
+                                            TMQR relies on the research, analysis and development of trading strategies, as well as the technology, provided by Trend Management Limited.                                        
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +152,7 @@ class Home extends Component {
                                             <div  className="list__itemImage-img" id="image-content-3"/>
                                         </div>
                                         <div className="list_itemText-font">
-                                            TMQR focuses on systematic implementation of trading strategies which humans create through rigorous research.                                        
+                                            TMQR employs a scientific method that is aided by technology and specialized math to drive trading decisions. It is our goal to remove much of the subjectivity, arbitrariness and lack of discipline in trade selection, strategy development and assessment found in discretionary trading.                                        
                                         </div>
                                     </div>                                </div>
                                 <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 full-height">
@@ -161,7 +161,7 @@ class Home extends Component {
                                             <div  className="list__itemImage-img" id="image-content-4"/>
                                         </div>
                                         <div className="list_itemText-font">
-                                            TMQR focuses on systematic implementation of trading strategies which humans create through rigorous research.                                        
+                                            TMQR searches for "Edge" through indepth and ongoing research. Of utmost importance is our team's ability to efficiently translate this research into actionable trading strategies.                                      
                                         </div>
                                     </div>
                                     <div className="list__item-wrapper">
@@ -169,14 +169,14 @@ class Home extends Component {
                                             <div  className="list__itemImage-img" id="image-content-5"/>
                                         </div>
                                         <div className="list_itemText-font">
-                                            TMQR focuses on systematic implementation of trading strategies which humans create through rigorous research.                                        
+                                            TMQR's creative approach to problem solving emphasizes precision, deep thought and thoroughness.                                   
                                         </div>
                                     </div>                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="footer-container">
+                <div className="footer-container foo-home">
                     <Footer />
                 </div>
             </div>

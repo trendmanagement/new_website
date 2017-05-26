@@ -156,9 +156,9 @@ export default class Chart extends Component {
                 "bulletBorderAlpha": 1,
                 "bulletColor": "#FFFFFF",
                 "hideBulletsCount": 50,
+                "useLineColorForBulletBorder": true,
                 "title": "Equity",
                 "valueField": "equity",
-                "useLineColorForBulletBorder": true,
                 "balloon": {
                     "drop": false
                 }
@@ -175,12 +175,17 @@ export default class Chart extends Component {
                 "lineAlpha": 1,
                 "fillAlphas": 0,
                 "lineThickness": 2,
+                                "bullet": "round",
+                "bulletBorderAlpha": 1,
+                "bulletColor": "#FFFFFF",
+                "hideBulletsCount": 50,
+                "useLineColorForBulletBorder": true,
                 "lowField": "l",
                 "negativeFillColors": "#db4c3c",
                 "negativeLineColor": "#db4c3c",
                 "openField": "o",
                 "title": "Underlying future",
-                "type": "ohlc",
+
                 "valueField": "c",
                 "balloon": {
                     "drop": false
