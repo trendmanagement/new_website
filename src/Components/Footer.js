@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Disclaimer from './Disclaimer'; 
 import './css/Footer.css';
+import { Link } from 'react-router';
 
 export default class Footer extends Component {
 
@@ -55,7 +56,9 @@ export default class Footer extends Component {
                 <div className="who-we-are">
                     <div className="container-grid">
                         <div className="who-title">
-                            Who we are?
+                            <Link to="/about-us">
+                                Who we are? 
+                            </Link>
                             </div>
                         <div className="who-detail">
                             <div><i className="fa fa-phone" aria-hidden="true"></i>&nbsp; 604-984-7244 </div>

@@ -61,22 +61,21 @@
     line-height: 23px;
     margin-bottom:0px
 }
-.circlewheels__select-btn{
+.circlewheels__select-btn a{
     height: 50px;
     width: 135px;
     border-radius: 25px;
     margin: 0 auto;
     background-color: #2979ff;
     line-height: 50px;
-
-}
-.circlewheels__select-btn a{
+    display: block;
     color:white;
 }
 .circlewheels__select-btn a:focus,
 .circlewheels__select-btn a:hover,
 .circlewheels__select-btn a:active{
     text-decoration: none;
+    color:white;
 }
 @media (min-width:1001px) and (max-width:1090px){
     .circlewheels__title{

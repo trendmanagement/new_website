@@ -109,7 +109,7 @@ class Home extends Component {
                         <h1 className={"main-title-small " + (this.state.activeSlide == 4 ? 'active' : 'fadeout')}><span>We are changing the way <br /> CTAs <br /> think about risk management.</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 5 ? 'active' : 'fadeout')}><span>We are changing the way <br /> FCMs <br /> think about risk management.</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 6 ? 'active' : 'fadeout')}><span>We are changing the way <br /> proprietary trading groups <br /> think about risk management.</span></h1>
-                            <button className="main-btn">get started</button>
+                            <button className="main-btn home-btn">get started</button>
                         </div>
                         <div className="slider-controls-wrap">
                             <div className="slider-controls">

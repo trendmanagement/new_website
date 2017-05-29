@@ -94,7 +94,7 @@ export default class CircleProgress extends Component {
                 {title}
                 {circleWheels_content}
                 <div className="circlewheels__select-btn">
-                    <Link to="/">SELECT</Link>
+                    <Link to={this.props.link.to}>SELECT</Link>
                 </div>
             </div>
         )

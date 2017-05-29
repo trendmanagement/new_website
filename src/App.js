@@ -14,7 +14,9 @@ import {
   PortfolioRiskThemes, 
   IndustrialCommodityUser, 
   Getstarted,
-  WelcomePage
+  WelcomePage,
+  About,
+  TellAbout
 } from './Pages'; 
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';  
@@ -26,7 +28,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router history={browserHistory}>
+      <Router history={browserHistory} onUpdate={() => window.scrollTo(0, 0)}>
         <Route path="/" component={Container}>
           <IndexRoute component={Home}/>
           <Route path="campaign" component={Series} />  
@@ -41,6 +43,8 @@ class App extends Component {
           <Route path="industrial-commodity-user" component={IndustrialCommodityUser}/>
           <Route path="getstarted" component={Getstarted} />
           <Route path="welcome-page" component={WelcomePage} />
+          <Route path="about-us" component={About} />
+          <Route path="tell-about" component={TellAbout}/>
         </Route>
       </Router>
     );

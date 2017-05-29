@@ -7,7 +7,7 @@ class Getstarted extends Component {
     render() {
         return (
             <div className="getstarted-container" >
-                <Navigation activeTab="technology" />
+                <Navigation activeTab="technology" hide_links="true" />
                 <div className="nav-underlay"></div>
                 <div className="getstarted-content-bgcol">
                     <div className="container-grid-block getstarted-offset" >
@@ -22,7 +22,8 @@ class Getstarted extends Component {
                                 <CircleProgress 
                                     radval1="80" 
                                     title={["Training Wheels",false]}
-                                    textPart={this.props.location.query.c} 
+                                    textPart={this.props.location.query.c}
+                                    link={{to:"/"}}
                                 />
                             </div>
                             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -31,6 +32,7 @@ class Getstarted extends Component {
                                     radval2="30" 
                                     title={["Conservative Potential","Cost Savings Hedging"]}
                                     textPart={this.props.location.query.c} 
+                                    link={{to:"/about-us"}}
                                 />
                             </div>
                             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -39,6 +41,7 @@ class Getstarted extends Component {
                                     radval2="30" 
                                     title={["Aggressive Price Potential","Cost Savings Hedging"]}
                                     textPart={this.props.location.query.c} 
+                                    link={{to:"/"}}
                                 />
                             </div>
                         </div>

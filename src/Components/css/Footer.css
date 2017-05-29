@@ -11,12 +11,19 @@
 .who-title {
     padding: 40px 0px; 
     font-size: 16px; 
-    color: #004ecb;   
     font-weight: 800; 
     text-transform: uppercase; 
     text-decoration: underline; 
 }
+.who-title a{
+    color: #004ecb;   
+}
 
+.who-title a:active,
+.who-title a:hover,
+.who-title a:focus{
+    color: #004ecb;   
+}
 .who-detail {
     padding: 40px 0px; 
 }

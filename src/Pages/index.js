@@ -10,6 +10,8 @@ import PortfolioRiskThemes from './PortfolioRiskThemes'
 import IndustrialCommodityUser from './IndustrialCommodityUser'  
 import Getstarted from './Getstarted';
 import WelcomePage from './WelcomePage';
+import About from './About';
+import TellAbout from './TellAbout';
 
 module.exports = { 
     List, 
@@ -23,5 +25,8 @@ module.exports = {
     PortfolioRiskThemes, 
     IndustrialCommodityUser, 
     Getstarted ,
-    WelcomePage
+    WelcomePage,
+    About,
+    TellAbout
+
 }
