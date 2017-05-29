@@ -9,6 +9,7 @@ import EXOFacts from './EXOFacts'
 import PortfolioRiskThemes from './PortfolioRiskThemes' 
 import IndustrialCommodityUser from './IndustrialCommodityUser'  
 import Getstarted from './Getstarted';
+import WelcomePage from './WelcomePage';
 
 module.exports = { 
     List, 
@@ -21,5 +22,6 @@ module.exports = {
     EXOFacts, 
     PortfolioRiskThemes, 
     IndustrialCommodityUser, 
-    Getstarted 
+    Getstarted ,
+    WelcomePage
 }

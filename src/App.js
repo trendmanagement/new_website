@@ -13,7 +13,8 @@ import {
   EXOFacts, 
   PortfolioRiskThemes, 
   IndustrialCommodityUser, 
-  Getstarted
+  Getstarted,
+  WelcomePage
 } from './Pages'; 
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';  
@@ -38,7 +39,8 @@ class App extends Component {
           <Route path="services/exo-facts" component={EXOFacts} /> 
           <Route path="services/portfolio-risk-themes" component={PortfolioRiskThemes} /> 
           <Route path="industrial-commodity-user" component={IndustrialCommodityUser}/>
-          <Route path="Getstarted" component={Getstarted} />
+          <Route path="getstarted" component={Getstarted} />
+          <Route path="welcome-page" component={WelcomePage} />
         </Route>
       </Router>
     );
