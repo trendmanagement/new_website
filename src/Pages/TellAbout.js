@@ -1,88 +1,210 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Navigation, Footer } from '../Components'
+import './css/TellAbout.css'
 
-import Form from 'muicss/lib/react/form';
-import Checkbox from 'muicss/lib/react/checkbox';
-import Input from 'muicss/lib/react/input';
-import Option from 'muicss/lib/react/option';
-import Select from 'muicss/lib/react/select';
-import 'muicss/dist/css/mui.min.css';
-import './css/TellAbout.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import TextField from 'material-ui/TextField';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import Checkbox from 'material-ui/Checkbox';
+import {
+    cyan700,
+    grey600,
+    pinkA100, pinkA200, pinkA400,
+    fullWhite,
+} from 'material-ui/styles/colors'
+import { fade } from 'material-ui/utils/colorManipulator';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
+const styles = {
+    block: {
+        maxWidth: 450,
+    },
+    checkbox: {
+        marginBottom: 16,
+    },
+    errorLabel: {
+        position: "absolute",
+        bottom: -12
+    },
+    floatLabel: {
+        fontWeight: "lighter"
+    },
+    mui_theme: {
+        palette: {
+            primary1Color: cyan700,
+            primary2Color: cyan700,
+            primary3Color: grey600,
+            accent1Color: cyan700,
+            accent2Color: pinkA400,
+            accent3Color: pinkA100,
+            textColor: fullWhite,
+            secondaryTextColor: fade(fullWhite, 0.7),
+            alternateTextColor: '#303030',
+            canvasColor: '#303030',
+            borderColor: fade(fullWhite, 0.5),
+            disabledColor: fade(fullWhite, 0.5),
+            pickerHeaderColor: fade(fullWhite, 0.12),
+            clockCircleColor: fade(fullWhite, 0.12),
+
+        }
+    }
+};
 
 export default class TellAbout extends Component {
+
+    state = {
+        employVal: null,
+        comeFromVal: null,
+        errorTrigger: false,
+        emailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    };
+
+    employselectChange = (event, index, employVal) => this.setState({ employVal });
+    comeFromselectChange = (event, index, comeFromVal) => this.setState({ comeFromVal });
+
+    onFlyValidation = (event, newVal, fieldName) => {
+        if (!newVal) {
+            this.refs[fieldName].setState({ errorText: '! This field is required' })
+        } else {
+            this.refs[fieldName].setState({ errorText: false })
+        }
+        if (event.target.type === "email") {
+            if (!this.state.emailRegex.test(newVal)) {
+                this.refs[fieldName].setState({ errorText: '! Incorrect emai address' })
+            } else {
+                this.refs[fieldName].setState({ errorText: false })
+            }
+        }
+    }
 
     render() {
         return (
             <div className="tellabout-container">
                 <Navigation activeTab="tecnology" />
-                <div className="tellabout-wrapper">
-                    <Form className="mui-container about__form-wrapper">
-                        <legend>Tell Us About Yourself</legend>
-                        <div className="mui-row">
-                            <div className="mui-col-lg-6 mui-col-md-6 mui-col-sm-6 mui-col-xs-12">
-                                <Input className="mui--text-light-secondary" label="First Name*" floatingLabel={true} required={true} />
+                <MuiThemeProvider muiTheme={getMuiTheme(styles.mui_theme)}>
+                    <div className="tellabout__form-wrapper">
+                        <form className="tellabout__form-container container">
+                            <div className="row">
+                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <legend>Tell Us About Yourself</legend>
+                                </div>
                             </div>
-                            <div className="mui-col-lg-6 mui-col-md-6 mui-col-sm-6 mui-col-xs-12">
-                                <Input className="mui--text-light-secondary" label="Company name" floatingLabel={true} />
+                            <div className="row">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <TextField
+                                        ref="firstName"
+                                        floatingLabelText="Fist Name*"
+                                        floatingLabelStyle={styles.floatLabel}
+                                        fullWidth={true}
+                                        errorText={false}
+                                        errorStyle={styles.errorLabel}
+                                        onChange={(event, index) => this.onFlyValidation(event, index, 'firstName')}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <TextField
+                                        floatingLabelText="Company name"
+                                        floatingLabelStyle={styles.floatLabel}
+                                        fullWidth={true}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div className="mui-row">
-                            <div className="mui-col-lg-6 mui-col-md-6 mui-col-sm-6 mui-col-xs-12">
-                                <Input label="First Name*" floatingLabel={true} required={true} />
+                            <div className="row">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <TextField
+                                        ref="lastName"
+                                        floatingLabelText="Last Name*"
+                                        floatingLabelStyle={styles.floatLabel}
+                                        fullWidth={true}
+                                        errorText={false}
+                                        errorStyle={styles.errorLabel}
+                                        onChange={(event, index) => this.onFlyValidation(event, index, 'lastName')}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <TextField
+                                        floatingLabelText="Work email address*"
+                                        floatingLabelStyle={styles.floatLabel}
+                                        fullWidth={true}
+                                        type="email"
+                                        ref="workEmail"
+                                        errorText={false}
+                                        errorStyle={styles.errorLabel}
+                                        onChange={(event, index) => this.onFlyValidation(event, index, 'workEmail')}
+                                    />
+                                </div>
                             </div>
-                            <div className="mui-col-lg-6 mui-col-md-6 mui-col-sm-6 mui-col-xs-12">
-                                <Input type="email" label="Work email address*" floatingLabel={true} required={true} />
-                                <span class="form__error-empty">!Empty field</span>
-                                <span class="form__error-invalid">!Invalid email</span>
+                            <div className="row">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <SelectField
+                                        floatingLabelText="How many employees do you have?"
+                                        floatingLabelStyle={styles.floatLabel}
+                                        value={this.state.employVal}
+                                        onChange={this.employselectChange}
+                                        fullWidth={true}
+                                    >
+                                        <MenuItem value={null} primaryText="" />
+                                        <MenuItem value={1} primaryText="Under 20" />
+                                        <MenuItem value={2} primaryText="20 - 100" />
+                                        <MenuItem value={3} primaryText="100 - 500" />
+                                        <MenuItem value={4} primaryText="500 - 2000" />
+                                        <MenuItem value={5} primaryText="Over 2000" />
+                                    </SelectField>
+                                </div>
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <TextField
+                                        floatingLabelText="Phone number"
+                                        floatingLabelStyle={styles.floatLabel}
+                                        fullWidth={true}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div className="mui-row">
-                            <div className="mui-col-lg-6 mui-col-md-6 mui-col-sm-6 mui-col-xs-12">
-                                <Select defaultValue="categoty0">
-                                    <Option value="categoty0" label="How many empoyees do you have?" />
-                                    <Option value="categoty2" label="20 - 100" />
-                                    <Option value="categoty3" label="100 - 500" />
-                                    <Option value="categoty4" label="500 - 2000" />
-                                    <Option value="categoty5" label="Over 2000" />
-                                </Select>
+                            <div className="row">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <SelectField
+                                        floatingLabelText="How did you hear about us?"
+                                        floatingLabelStyle={styles.floatLabel}
+                                        value={this.state.comeFromVal}
+                                        onChange={this.comeFromselectChange}
+                                        fullWidth={true}
+                                    >
+                                        <MenuItem value={null} primaryText="" />
+                                        <MenuItem value={1} primaryText="Banner Ad" />
+                                        <MenuItem value={2} primaryText="Search" />
+                                        <MenuItem value={3} primaryText="Social Media" />
+                                        <MenuItem value={4} primaryText="Podcasts" />
+                                        <MenuItem value={5} primaryText="TV" />
+                                        <MenuItem value={6} primaryText="Online Publication" />
+                                        <MenuItem value={7} primaryText="Current Betterment Customer" />
+                                        <MenuItem value={8} primaryText="Betterment Employee" />
+                                        <MenuItem value={9} primaryText="Friend/Word of Mouth" />
+                                        <MenuItem value={10} primaryText="Other" />
+                                    </SelectField>
+                                </div>
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <TextField
+                                        floatingLabelText="Anything Else we should know?"
+                                        floatingLabelStyle={styles.floatLabel}
+                                        fullWidth={true}
+                                    />
+                                </div>
                             </div>
-                            <div className="mui-col-lg-6 mui-col-md-6 mui-col-sm-6 mui-col-xs-12">
-                                <Input label="Phone number" floatingLabel={true} />
+                            <div className="row">
+                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12" style={styles.block}>
+                                    <Checkbox
+                                        label="Yes, I want to have bouns information on my email"
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div className="mui-row">
-                            <div className="mui-col-lg-6 mui-col-md-6 mui-col-sm-6 mui-col-xs-12">
-                                <Select defaultValue="categoty0">
-                                    <Option value="categoty0" label="How did you hear about us?" />
-                                    <Option value="banner" label="Banner Ad" />
-                                    <Option value="search" label="Search" />
-                                    <Option value="podcast" label="Podcast" />
-                                    <Option value="tv" label="TV" />
-                                    <Option value="publicat" label="Online Publication" />
-                                    <Option value="bet_customer" label="Current Betterment Customer" />
-                                    <Option value="bet_emplo" label="Betterment Employee" />
-                                    <Option value="friend" label="Friend/Word of Moutn" />
-                                    <Option value="other" label="Other" />
-                                </Select>
+                            <div className="row">
+                                <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12"><input type="submit" className="tellForm__submit-btn" value="find out more" /></div>
                             </div>
-                            <div className="mui-col-lg-6 mui-col-md-6 mui-col-sm-6 mui-col-xs-12">
-                                <Input label="Anything else we should know?" floatingLabel={true} />
-                            </div>
-                        </div>
-                        <div className="mui-row">
-                            <div className="mui-col-lg-12 mui-col-md-12 mui-col-sm-12 mui-col-xs-12">
-                                <Checkbox name="subs" label="Yes, I want to have bouns information on my email" />
-                            </div>
-                        </div>
-                        <div className="mui-row">
-                            <div className="mui-col-lg-12 mui-col-md-12 mui-col-sm-12 mui-col-xs-12">
-                                <input type="submit" className="about__submit-btn" value="Find out more"/>
-                            </div>
-                        </div>
-                    </Form>
-                </div>
+                        </form>
+                    </div>
+                </MuiThemeProvider>
                 <Footer ref="footer" />
             </div>
         )
