@@ -59,24 +59,38 @@ export default class TellAbout extends Component {
         employVal: null,
         comeFromVal: null,
         errorTrigger: false,
-        emailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        emailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        wordRegex: /[a-zA-Z]+/,
+        numberRegex: /((\+)|(00[ ]?))(([\d][-. ]{0,1}){1}([-. ]{0,1}\(\d+\)[-. ]{0,1}){0,1}){7,30}/
     };
 
     employselectChange = (event, index, employVal) => this.setState({ employVal });
     comeFromselectChange = (event, index, comeFromVal) => this.setState({ comeFromVal });
 
     onFlyValidation = (event, newVal, fieldName) => {
-        if (!newVal) {
-            this.refs[fieldName].setState({ errorText: '! This field is required' })
-        } else {
-            this.refs[fieldName].setState({ errorText: false })
-        }
         if (event.target.type === "email") {
             if (!this.state.emailRegex.test(newVal)) {
                 this.refs[fieldName].setState({ errorText: '! Incorrect emai address' })
             } else {
                 this.refs[fieldName].setState({ errorText: false })
             }
+        }
+        if (event.target.type === "text") {
+            if (!this.state.wordRegex.test(newVal)) {
+                this.refs[fieldName].setState({ errorText: '! Only characters allowed' })
+            } else {
+                this.refs[fieldName].setState({ errorText: false })
+            }
+        }
+        if (event.target.type === "tel") {
+            if (!this.state.numberRegex.test(newVal)) {
+                this.refs[fieldName].setState({ errorText: '! Incorrect telephone number. Watch text hint' })
+            } else {
+                this.refs[fieldName].setState({ errorText: false })
+            }
+        }
+        if (!newVal) {
+            this.refs[fieldName].setState({ errorText: '! This field is required' })
         }
     }
 
@@ -99,6 +113,7 @@ export default class TellAbout extends Component {
                                         floatingLabelText="Fist Name*"
                                         floatingLabelStyle={styles.floatLabel}
                                         fullWidth={true}
+                                        type="text"
                                         errorText={false}
                                         errorStyle={styles.errorLabel}
                                         onChange={(event, index) => this.onFlyValidation(event, index, 'firstName')}
@@ -118,6 +133,7 @@ export default class TellAbout extends Component {
                                         ref="lastName"
                                         floatingLabelText="Last Name*"
                                         floatingLabelStyle={styles.floatLabel}
+                                        type="text"
                                         fullWidth={true}
                                         errorText={false}
                                         errorStyle={styles.errorLabel}
@@ -143,7 +159,6 @@ export default class TellAbout extends Component {
                                         floatingLabelText="How many employees do you have?"
                                         floatingLabelStyle={styles.floatLabel}
                                         value={this.state.employVal}
-                                        onChange={this.employselectChange}
                                         fullWidth={true}
                                     >
                                         <MenuItem value={null} primaryText="" />
@@ -156,9 +171,15 @@ export default class TellAbout extends Component {
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <TextField
+                                        hintText="+12(34)56-78-912"
                                         floatingLabelText="Phone number"
                                         floatingLabelStyle={styles.floatLabel}
                                         fullWidth={true}
+                                        type="tel"
+                                        ref="Phone"
+                                        errorText={false}
+                                        errorStyle={styles.errorLabel}
+                                        onChange={(event, index) => this.onFlyValidation(event, index, 'Phone')}
                                     />
                                 </div>
                             </div>
