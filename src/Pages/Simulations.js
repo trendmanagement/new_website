@@ -169,6 +169,7 @@ export default class Simulations extends Component {
             .catch(err => { 
                 this.setState({
                     err: 'Failed to load campaign. Please try again.',
+                    campaignShown: true, 
                     isLoading: false
                 })
              })
@@ -192,7 +193,9 @@ export default class Simulations extends Component {
             campaign: name,
             desc: desc, 
             msg: null
-        })
+        }, () => {
+			self.prepareCampaign(); 
+		})
 
     } 
 
@@ -234,7 +237,8 @@ export default class Simulations extends Component {
             })
             .catch(err => {
                 this.setState({
-                    err: 'Failed to load campaign. Please try again.',
+                    err: 'Failed to load campaign. Please try again.', 
+                    campaignShown: true, 
                     isLoading: false
                 })
             })
@@ -245,6 +249,7 @@ export default class Simulations extends Component {
 
         return (
             <div className="simulations-container">
+                <div className="nav-underlay"></div>
                 <div className="container-grid-block nav-offset">
                     <h1 className="simulations-title">INSTRUMENT</h1>
                     <InstrumentFilter 
@@ -287,7 +292,7 @@ export default class Simulations extends Component {
                 </div>
                 {this.state.isLoading ? 
                     <div className="container-grid-block top-padded"><Loader /></div> : null} 
-                {!this.state.campaignShown && !this.state.err ?
+                {!this.state.campaignShown ?
                 <div className="container-grid-block">
                 <div>
                     <div className="results-container">
@@ -299,11 +304,12 @@ export default class Simulations extends Component {
                     </div>
                 </div>
                 <div className="container-grid-block">  {/*data, campaign, use_default, description, query_data*/}
+					{/*
                     <button className="display-campaign-btn" 
                   
                     onClick={this.prepareCampaign}>
                     DISPLAY CAMPAIGN
-                    </button>
+                    </button> */}
                     <div className="error">{this.state.msg}</div>
                 </div></div> : null
                 }
@@ -315,7 +321,7 @@ export default class Simulations extends Component {
                         description={this.state.campaign_description}/> 
                     </div>
                     : null} 
-                {this.state.err ? <Error message={this.state.err} /> : null}
+                {this.state.err && this.state.campaignShown ? <Error message={this.state.err} /> : null}
                 <div className="simulations-footer">
                 </div>
             </div>

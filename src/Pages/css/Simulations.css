@@ -60,7 +60,7 @@
 
 .simulations-container {
     display: block;
-    overflow: hidden;
+    /*overflow: hidden;*/
 } 
 
 .simulations-footer {

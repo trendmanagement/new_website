@@ -48,7 +48,8 @@ export default class Series extends Component {
             positions: [],
             activeTab: 0,
             include_price: 1, 
-            isLoading: true
+            isLoading: true, 
+            err: null
         }
 
 
@@ -67,11 +68,20 @@ export default class Series extends Component {
                 date: nextProps.date, 
                 isLoading: true
             }, () => {
-                this.updatePayoffChart(nextProps.date).then(() => {
+                this.updatePayoffChart(nextProps.date)
+                .then(() => {
                     this.setState({
-                        isLoading: false
+                        isLoading: false, 
+                        err: null
                     })
-                });
+                })
+                .catch(err => {
+                    console.log('err', err); 
+                    this.setState({
+                        isLoading: false, 
+                        err: 'No payoff series data'
+                    })
+                })
             })
           
         }
@@ -158,11 +168,20 @@ export default class Series extends Component {
             date: date, 
             isLoading: true
         }, () => {
-            this.updatePayoffChart(date).then(() => {
+            this.updatePayoffChart(date)
+                .then(() => {
                     this.setState({
-                        isLoading: false
+                        isLoading: false,
+                        err: null
+                    })  
+                })
+                .catch(err => {
+                    console.log('err', err);
+                    this.setState({
+                        isLoading: false, 
+                        err: 'No payoff series data'
                     })
-                });;
+                })
         })
 
         
@@ -200,7 +219,6 @@ export default class Series extends Component {
 
                     body = JSON.parse(body);
                     if (body.status == 'error') {
-                        console.log(body.message)
 
                         request({
                             type: 'GET',
@@ -213,7 +231,7 @@ export default class Series extends Component {
                             }
                             body = JSON.parse(body);
                             if (body.status == 'error') {
-                                console.log(body.message)
+                                reject(body.message); 
                                 return;
                             }
                             if (body.status == "OK") {
@@ -240,7 +258,7 @@ export default class Series extends Component {
                         }); 
                         resolve(); 
                     } else {
-                        reject(); 
+                        reject(body.message); 
                     }
                 })
         })
@@ -382,7 +400,14 @@ export default class Series extends Component {
                                             /> : ''}
                                 </div>
                             </div>
-                        </div> :    
+                        </div> :  
+                        this.state.err ? 
+                        <div className="row">
+                            <div className="col-lg-12">
+                                   <p>{this.state.err}</p>
+                            </div>
+                        </div>
+                        :
                         <div className="row">
                             <div className="col-lg-12">
                                     <Loader />

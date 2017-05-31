@@ -1,0 +1,16 @@
+.campaign-container {
+    margin-bottom: 10px;   
+}
+
+.campaign-mobile-check {
+    display: inline-block; 
+
+}
+
+.campaign-mobile-check div {
+    display: inherit; 
+}
+
+.campaign-mobile-description {
+    padding-left: 24px; 
+}
