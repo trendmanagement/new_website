@@ -13,6 +13,7 @@ import WelcomePage from './WelcomePage';
 import About from './About';
 import TellAbout from './TellAbout'; 
 import Login from './Login'; 
+import MyExos from './MyExos'; 
 
 module.exports = { 
     List, 
@@ -29,6 +30,7 @@ module.exports = {
     WelcomePage,
     About,
     TellAbout, 
-    Login
+    Login, 
+    MyExos
 
 }
