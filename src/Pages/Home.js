@@ -171,7 +171,8 @@ class Home extends Component {
                                         <div className="list_itemText-font">
                                             TMQR's creative approach to problem solving emphasizes precision, deep thought and thoroughness.                                   
                                         </div>
-                                    </div>                                </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

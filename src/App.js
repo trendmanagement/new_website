@@ -16,7 +16,8 @@ import {
   Getstarted,
   WelcomePage,
   About,
-  TellAbout
+  TellAbout, 
+  Login
 } from './Pages'; 
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';  
@@ -44,7 +45,8 @@ class App extends Component {
           <Route path="getstarted" component={Getstarted} />
           <Route path="welcome-page" component={WelcomePage} />
           <Route path="about-us" component={About} />
-          <Route path="tell-about" component={TellAbout}/>
+          <Route path="tell-about" component={TellAbout}/> 
+          <Route path="login" component={Login} />
         </Route>
       </Router>
     );

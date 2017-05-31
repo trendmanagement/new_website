@@ -40,11 +40,15 @@ export default class MobileNav extends Component {
                         </a>
     
                         <div className="nav-service-options">
-                         <hr />
+                            <hr />
                             <Link to="/services/indexation">Indexation Approach</Link>
                             <Link to="/services/portfolio-risk-themes">Portfolio Risk Themes</Link>
                             <Link to="/services/exo-facts">TMQR Exo Index Attributes</Link>
+                            <hr /> 
+                            <Link to="/industrial-commodity-user">Alpha Project</Link>
+                            <Link to="/industrial-commodity-user">Robo Hedger / TMQR Robo Manager</Link>
                             <hr />
+                            <Link to="tell-about">Technology Serivces</Link>
                         </div>
                         
                     </div>
@@ -69,8 +73,8 @@ export default class MobileNav extends Component {
                         </Link>
                     </div>
                 </div>
-                <div className="login-container">
-                  <button className="mob-login-btn">login</button>
+                <div className="login-container login-btn-container">
+                  <Link to="/login"><button className="mob-login-btn">login</button></Link>
                 </div>
             </div>
             </div>

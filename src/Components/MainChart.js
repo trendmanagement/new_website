@@ -175,7 +175,7 @@ export default class Chart extends Component {
                 "lineAlpha": 1,
                 "fillAlphas": 0,
                 "lineThickness": 2,
-                                "bullet": "round",
+                "bullet": "round",
                 "bulletBorderAlpha": 1,
                 "bulletColor": "#FFFFFF",
                 "hideBulletsCount": 50,

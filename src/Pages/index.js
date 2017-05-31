@@ -11,7 +11,8 @@ import IndustrialCommodityUser from './IndustrialCommodityUser'
 import Getstarted from './Getstarted';
 import WelcomePage from './WelcomePage';
 import About from './About';
-import TellAbout from './TellAbout';
+import TellAbout from './TellAbout'; 
+import Login from './Login'; 
 
 module.exports = { 
     List, 
@@ -27,6 +28,7 @@ module.exports = {
     Getstarted ,
     WelcomePage,
     About,
-    TellAbout
+    TellAbout, 
+    Login
 
 }

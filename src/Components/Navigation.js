@@ -108,8 +108,8 @@ class Navigation extends Component {
                 </div>
             )
             right_menu = (
-                <div className="nav-right">
-                    <div className="login-btn">login</div>
+                <div className="nav-right login-btn-container">
+                     <Link to="/login"><div className="login-btn">login</div></Link>
                 </div>
             )
         }
@@ -149,11 +149,11 @@ class Navigation extends Component {
                                 <p><Link to="/services/exo-facts">TMQR Exo Index Attributes</Link></p>
                             </div>
                             <div className="option-sub bordered nav-target">
-                                <h5><Link to="/">TM<span className="qr">QR</span> Alpha Project</Link></h5>
-                                <h5><Link to="/">TM<span className="qr">QR</span> Robo Hedger / TMQR Robo Manager</Link></h5>
+                                <h5><Link to="/industrial-commodity-user">TM<span className="qr">QR</span> Alpha Project</Link></h5>
+                                <h5><Link to="/industrial-commodity-user">TM<span className="qr">QR</span> Robo Hedger / TMQR Robo Manager</Link></h5>
                             </div>
                             <div className="option-sub nav-target">
-                                <h5><Link to="/">TM<span className="qr">QR</span> Technology Serivces</Link></h5>
+                                <h5><Link to="/tell-about">TM<span className="qr">QR</span> Technology Serivces</Link></h5>
                             </div>
                         </div>
                     </div>

@@ -159,7 +159,8 @@ export default class TellAbout extends Component {
                                         floatingLabelText="How many employees do you have?"
                                         floatingLabelStyle={styles.floatLabel}
                                         value={this.state.employVal}
-                                        fullWidth={true}
+                                        fullWidth={true} 
+                                        onChange={this.employselectChange}
                                     >
                                         <MenuItem value={null} primaryText="" />
                                         <MenuItem value={1} primaryText="Under 20" />

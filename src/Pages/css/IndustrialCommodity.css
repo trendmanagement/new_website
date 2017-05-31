@@ -61,6 +61,7 @@
     display: block; 
     margin-top: 35px; 
     cursor: pointer; 
+    padding: 15px 12px 13px 12px; 
 } 
 
 @media screen and (max-width: 1250px) {
