@@ -48,7 +48,8 @@
     width: 102px;
     white-space: nowrap;
     margin: 0 auto;
-    padding: 17px 30px 14px; 
+    padding: 14px 30px 14px; 
+    line-height: 1; 
 }
 
 .login-form input {
