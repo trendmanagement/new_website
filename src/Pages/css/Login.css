@@ -71,4 +71,10 @@
 .login-form__signup-prompt__blue-label {
     color: #2979ff; 
     cursor: pointer; 
+} 
+
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .login__content {
+        margin-top: 110px;
+    }
 }

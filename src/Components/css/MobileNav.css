@@ -4,6 +4,10 @@
 
 .nav-overlay {
     position: fixed; 
+    overflow: scroll;
+    margin-right: -20px;
+    margin-bottom: -20px;
+    padding-bottom: 20px;
     top: 0; 
     left: 0; 
     right: 0;
