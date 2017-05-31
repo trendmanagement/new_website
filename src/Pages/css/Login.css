@@ -78,4 +78,8 @@
     .login__content {
         margin-top: 110px;
     }
+
+    .login__footer {
+        top: 145%;
+    }
 }
