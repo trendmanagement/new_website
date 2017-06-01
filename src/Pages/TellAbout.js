@@ -70,7 +70,7 @@ export default class TellAbout extends Component {
     onFlyValidation = (event, newVal, fieldName) => {
         if (event.target.type === "email") {
             if (!this.state.emailRegex.test(newVal)) {
-                this.refs[fieldName].setState({ errorText: '! Incorrect emai address' })
+                this.refs[fieldName].setState({ errorText: '! Incorrect email address' })
             } else {
                 this.refs[fieldName].setState({ errorText: false })
             }

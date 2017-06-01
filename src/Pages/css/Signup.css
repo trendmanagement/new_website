@@ -27,10 +27,6 @@
     margin-right: 15px;
 }
 
-.login a {
-    text-decoration: none!important; 
-}
-
 .login__footer {
     position: absolute; 
     top: 100%; 
@@ -53,8 +49,7 @@
     white-space: nowrap;
     margin: 0 auto;
     padding: 14px 30px 14px; 
-    line-height: 1;  
-    cursor: pointer; 
+    line-height: 1; 
 }
 
 .login-form input {

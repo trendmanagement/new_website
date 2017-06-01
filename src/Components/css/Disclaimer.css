@@ -85,6 +85,24 @@
     } 
 
     .disclaimer-text {
-        height: 70%; 
+        height: 65%; 
+    }
+} 
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+        .disclaimer-container {
+        width: 95%;
+        height: 95%;
+        position: fixed;
+        left: 2.5%;
+        top: 2.5%;
+    } 
+
+    .disclaimer-btn-container {
+        bottom: 30px; 
+    }
+
+    .disclaimer-text {
+        height: 50%; 
     }
 }

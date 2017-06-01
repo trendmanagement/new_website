@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {Navigation, Footer} from '../Components'; 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import TextField from 'material-ui/TextField';
+import TextField from 'material-ui/TextField'; 
+import {Link} from 'react-router'; 
 import {
     cyan700,
     grey600,
@@ -64,6 +65,31 @@ export default class Login extends Component {
     constructor() {
         super(); 
 
+        this.state = {
+            pass: '',
+            email: ''
+        }
+
+        this.handleChange = (val, ref, name) => {
+
+             let obj = {}; 
+             obj[name] = val; 
+
+            if (!val) {
+                ref.setState({
+                    errorText: 'Field is required'
+                })
+
+
+            } else {
+                ref.setState({
+                    errorText: false 
+                })
+            } 
+
+            this.setState(obj); 
+        }
+
     }
     render() {
         return (
@@ -80,30 +106,37 @@ export default class Login extends Component {
                             floatingLabelText="Email"
                             fullWidth={true}
                             type="email"
+                            ref="email"
                             floatingLabelStyle={styles.floatLabel}
                             floatingLabelFocusStyle={styles.floatLabelFocus}
                             floatingLabelShrinkStyle={styles.floatLabelShrink}
                             errorText={false}
                             errorStyle={styles.errorLabel}
+                            onChange={(e) => {this.handleChange(e.target.value, this.refs.email, 'email')}}
                             />
                             <TextField 
                             floatingLabelText="Password"
                             fullWidth={true}
-                            type="email"
+                            type="password" 
+                            ref="pass"
                             floatingLabelStyle={styles.floatLabel}
                             floatingLabelFocusStyle={styles.floatLabelFocus}
                             floatingLabelShrinkStyle={styles.floatLabelShrink}
                             errorText={false}
-                            errorStyle={styles.errorLabel}
+                            errorStyle={styles.errorLabel} 
+                            onChange={(e) => {this.handleChange(e.target.value, this.refs.pass, 'pass')}}
                             />
                             <p className="login-form__forgot-password">Forgot Your Password?</p>
                             <div className="login-form__btn-container">
                                 <div className="login-form__btn-container_btn main-btn">
-                                 LOG IN
+                                 LOG In
                                 </div>
                            </div>
                            <p className="login-form__signup-prompt">Don't have an account? 
-                           <span className="login-form__signup-prompt__blue-label"> Sign Up</span></p>
+                           <Link to="/signup">
+                           <span className="login-form__signup-prompt__blue-label"> Sign Up</span>
+                           </Link>
+                           </p>
                         </form>
                         </MuiThemeProvider>
                     </div>

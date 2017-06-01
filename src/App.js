@@ -18,7 +18,8 @@ import {
   About,
   TellAbout, 
   Login, 
-  MyExos
+  MyExos, 
+  Signup
 } from './Pages'; 
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';  
@@ -47,8 +48,9 @@ class App extends Component {
           <Route path="welcome-page" component={WelcomePage} />
           <Route path="about-us" component={About} />
           <Route path="tell-about" component={TellAbout}/> 
-          <Route path="login" component={Login} /> 
-          <Route path="my-exos" component={MyExos} />
+          <Route path="login" component={Login} />  
+          <Route path="my-exos" component={MyExos} /> 
+          <Route path="signup" component={Signup} />
         </Route>
       </Router>
     );

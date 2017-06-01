@@ -286,13 +286,16 @@
 
 
 @media screen and (max-width: 767px) { 
-    .flexed-row{
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-                flex-direction: column;
-        padding: 0 20%;
+
+    .list-aligner {
+        height: 100%;
+        display: block;
+        padding-left: 10px; 
     }
+    .flexed-row{
+        display: block;
+    }
+
     .bg-container {
         height: 500px;   
     }
@@ -315,7 +318,8 @@
 
     .title-container {
         padding-top: 15px; 
-    }
+    } 
+    
 } 
 
 @media screen and (max-width: 500px) {
