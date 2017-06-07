@@ -98,7 +98,8 @@ class Home extends Component {
                 <div id="preload6"></div>
                 <div id="preload7"></div>
             </div>
-                <Navigation activeTab="home" />
+                <Navigation activeTab="home" 
+                self={this.props.self}/>
                 <div className="bg-container" id={this.state.slides[this.state.activeSlide]}>
                     <div className="title-aligner full-height">
                         <div className="title-container">
@@ -109,7 +110,7 @@ class Home extends Component {
                         <h1 className={"main-title-small " + (this.state.activeSlide == 4 ? 'active' : 'fadeout')}><span>We are changing the way <br /> CTAs <br /> think about risk management.</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 5 ? 'active' : 'fadeout')}><span>We are changing the way <br /> FCMs <br /> think about risk management.</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 6 ? 'active' : 'fadeout')}><span>We are changing the way <br /> proprietary trading groups <br /> think about risk management.</span></h1>
-                            <button className="main-btn home-btn">get started</button>
+                            <Link to="/industrial-commodity-user"><button className="main-btn home-btn">get started</button></Link>
                         </div>
                         <div className="slider-controls-wrap">
                             <div className="slider-controls">

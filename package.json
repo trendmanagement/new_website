@@ -9,6 +9,8 @@
     "amcharts3": "github:amcharts/amcharts3",
     "amstock3": "github:amcharts/amstock3",
     "classnames": "^2.2.5",
+    "connect": "^3.6.2",
+    "connect-session-sequelize": "^4.1.0",
     "jquery-circle-progress": "^1.2.2",
     "material-ui": "^0.18.1",
     "moment": "^2.17.1",
@@ -24,7 +26,8 @@
     "recharts": "^0.20.8",
     "request": "^2.79.0",
     "simplebar": "^2.3.2",
-    "sweetalert": "^1.1.3"
+    "sweetalert": "^1.1.3",
+    "sweetalert2": "^6.6.4"
   },
   "scripts": {
     "start": "react-scripts start",

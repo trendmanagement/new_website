@@ -46,7 +46,7 @@ export default class Technology extends Component {
     render() {
         return (
             <div className="tech-container" style={this.state.height ? {height: this.state.height + 'px'} : {height: 'unset'}}>
-                <Navigation activeTab="technology" />
+                <Navigation activeTab="technology" self={this.props.self}/>
                 <div className="nav-underlay"></div>
                 <div>
                     <div className="container-grid-block" ref="techContainer">

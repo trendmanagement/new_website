@@ -15,6 +15,7 @@ import TellAbout from './TellAbout';
 import Login from './Login'; 
 import MyExos from './MyExos'; 
 import Signup from './Signup'; 
+import Services from './Services'; 
 
 module.exports = { 
     List, 
@@ -33,6 +34,7 @@ module.exports = {
     TellAbout, 
     Login, 
     MyExos, 
-    Signup
+    Signup, 
+    Services
 
 }

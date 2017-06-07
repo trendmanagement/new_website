@@ -7,22 +7,82 @@
     position: absolute; 
     width: 100%; 
     height: 100%; 
-    left: 0;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box; 
-    display: -webkit-box; 
-    display: -ms-flexbox; 
-    display: flex; 
-    -webkit-box-align: center; 
-        -ms-flex-align: center; 
-            align-items: center; 
-    -ms-flex-pack: distribute; 
-        justify-content: space-around; 
+    left: 0; 
     padding-bottom: 75px;
     background: #fff; 
 }
 
-.my_exos__footer {
+.my-exos__content_title {
+    font-size: 30px; 
+    font-weight: 800; 
+    color: #000; 
+    margin-bottom: 35px; 
+    margin-top: 35px;  
+}
+
+.my-exos__footer {
     position: absolute; 
     top: 100%; 
 } 
+
+.exo-td-right {
+    text-align: right; 
+}
+
+.exo-del {
+    cursor: pointer; 
+}
+
+.my-exos-table-desktop {
+    display: table;
+}
+
+.my-exos-table-mobile {
+    display: none; 
+}
+
+.my-exos-item {
+    margin-bottom: 15px;
+}
+
+.exo-item-content {
+    padding: 15px;
+    background: #ecf0f1;
+    border-radius: 7px;
+}
+
+.exo-item-content p {
+    margin: 0; 
+}
+
+
+@media screen and (max-width: 1500px) {
+    .my-exos-table-desktop {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 1350px) {
+    .my-exos__content .container-grid-block {
+        width: 95%; 
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .my-exos-table-desktop { 
+        display: none; 
+    }
+
+    .my-exos-table-mobile {
+        display: block; 
+    }
+
+    .my-exos__content {
+        position: relative; 
+    }
+    
+    .my-exos__footer {
+        position: relative; 
+    } 
+}
+

@@ -7,7 +7,7 @@ class Getstarted extends Component {
     render() {
         return (
             <div className="getstarted-container" >
-                <Navigation activeTab="technology" hide_links="true" />
+                <Navigation activeTab="technology" self={this.props.self} hide_links="true" />
                 <div className="nav-underlay"></div>
                 <div className="getstarted-content-bgcol">
                     <div className="container-grid-block getstarted-offset" >

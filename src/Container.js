@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import request from 'request';
 import { browserHistory } from 'react-router'; 
-import { apiEndpoint } from './config'; 
+import { apiEndpoint, clientEndpoint } from './config'; 
 
 export default class Container extends Component {
     constructor(props) {
@@ -12,11 +12,45 @@ export default class Container extends Component {
             campaignDataRetrieved: false,
             campaign_detail: [],
             err: null,
-            date: '' 
+            date: ''
         }
 
+        this.token = ''; 
         this.viewCampaign = this.viewCampaign.bind(this); 
+
+        // this.getAuthState = () => { 
+            
+        //     return new Promise((resolve, reject) => {
+        //         // var host = location.protocol + '//' + location.hostname + (
+        //         //     location.port ? ':' + location.port : ''); 
+
+        //         request({
+        //             method: 'GET', 
+        //             uri: clientEndpoint + '/check-auth'
+        //         }, (err, res, body) => {
+        //             if (err) reject(false); 
+        //             if (res.statusCode != 200) reject(false); 
+                    
+        //             body = JSON.parse(body); 
+        //             let uid = body.uid; 
+                    
+        //             resolve(uid); 
+
+        //         })
+        //     })
+        // }
     }
+
+    
+    // componentWillMount() {
+    //     this.getAuthState().then(uid => {
+    //         this.isAuth = true; 
+    //     })
+    //     .catch(err => {
+    //         this.isAuth = false; 
+    //     })
+    // }
+
     viewCampaign(data, campaign, use_default, description, query_data) {
 
         if (typeof query_data == 'undefined') {
@@ -48,7 +82,7 @@ export default class Container extends Component {
 
         var self = this;
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => { 
             var req = request({
                 type: 'GET',
                 uri: uri
@@ -158,6 +192,7 @@ export default class Container extends Component {
             <div>
                 {React.cloneElement(this.props.children, 
                 { viewCampaign: this.viewCampaign, 
+                self: this, 
                 campaign_detail: this.state.campaign_detail, 
                 series_err: this.state.err, 
                 date: this.state.date, 

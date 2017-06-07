@@ -3,7 +3,9 @@ import {Navigation, Footer} from '../Components';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField'; 
-import {Link} from 'react-router'; 
+import {Link, browserHistory} from 'react-router';  
+import {clientEndpoint} from '../config'; 
+import request from 'request'; 
 import {
     cyan700,
     grey600,
@@ -67,10 +69,18 @@ export default class Login extends Component {
 
         this.state = {
             pass: '',
-            email: ''
+            email: '', 
+            emailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         }
 
         this.handleChange = (val, ref, name) => {
+
+            if (ref.state.errorText == 'Wrong password' || 
+            ref.state.errorText == 'Email not found') {
+                ref.setState({
+                    errorText: false
+                })
+            }
 
              let obj = {}; 
              obj[name] = val; 
@@ -79,15 +89,63 @@ export default class Login extends Component {
                 ref.setState({
                     errorText: 'Field is required'
                 })
-
-
             } else {
                 ref.setState({
-                    errorText: false 
+                    errorText: false
+                })
+            }
+
+            if (!this.state.emailRegex.test(val) && name == 'email') {
+                ref.setState({
+                    errorText: 'Wrong email format'
+                })
+            } else if (name == 'email') {
+                ref.setState({
+                    errorText: false
                 })
             } 
 
             this.setState(obj); 
+        } 
+
+        this.submitForm = () => {
+
+            let data = {
+                pass: this.state.pass, 
+                email: this.state.email
+            }
+
+            request({
+                method: 'POST', 
+                url: clientEndpoint + '/login', 
+                json: true,
+                body: data
+            }, (err, res, body) => {
+                console.log('LOGIN', err, res, body); 
+                    if (res.statusCode == 404) {
+                        console.log('login error. user not found'); 
+                    } else if (res.statusCode == 400) {
+                        console.log('bad request');  
+ 
+                    } else if (res.statusCode == 200) {
+                        if (body && body.error) { 
+
+                            if (body.error == 'password') {
+                                this.refs.pass.setState({
+                                    errorText: 'Wrong password'
+                                }); 
+                            } else if (body.error == 'email') {
+                                this.refs.email.setState({
+                                    errorText: 'Email not found'
+                                }); 
+                            }
+
+                        } else if (body) {
+                            browserHistory.push('/my-exos'); 
+                        } 
+        
+                    }
+                })
         }
 
     }
@@ -95,7 +153,7 @@ export default class Login extends Component {
         return (
             <div className="login">
                 <div className="login__nav-container">
-                    <Navigation />
+                    <Navigation self={this.props.self}/>
                 </div>  
                 <div className="login__content">
                     <div className="login-form">
@@ -128,7 +186,7 @@ export default class Login extends Component {
                             />
                             <p className="login-form__forgot-password">Forgot Your Password?</p>
                             <div className="login-form__btn-container">
-                                <div className="login-form__btn-container_btn main-btn">
+                                <div className="login-form__btn-container_btn main-btn" onClick={this.submitForm}>
                                  LOG In
                                 </div>
                            </div>

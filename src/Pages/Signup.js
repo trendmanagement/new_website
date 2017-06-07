@@ -3,7 +3,9 @@ import { Navigation, Footer } from '../Components';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField'; 
-import {Link} from 'react-router'; 
+import {Link, browserHistory} from 'react-router';  
+import {clientEndpoint} from '../config'; 
+import request from 'request'; 
 import {
     cyan700,
     grey600,
@@ -73,6 +75,36 @@ export default class Signup extends Component {
         }
 
 
+
+        this.submitForm = () => {
+
+            let data = {
+                pass: this.state.pass, 
+                email: this.state.email
+            }
+
+
+            request({
+                method: 'POST', 
+                url: clientEndpoint + '/signup', 
+                json: true,
+                body: data
+            }, (err, res, body) => {
+                console.log('SIGNUP', err, res, body); 
+                if (res.statusCode == 422) {
+                    console.log('signup error. user already exists'); 
+                } else if (res.statusCode == 400) {
+                    console.log('bad request'); 
+                } else if (res.statusCode == 200) { 
+
+                    browserHistory.push('/my-exos'); 
+                //  console.log('token', body.token); 
+                //   localStorage.setItem('tmqrexo:user', body.token); 
+                //   browserHistory.push('/my-exos'); 
+                }
+            })
+        }
+
         this.handleChange = (val, ref, name) => {
 
 
@@ -123,7 +155,7 @@ render() {
     return (
         <div className="login">
             <div className="login__nav-container">
-                <Navigation />
+                <Navigation self={this.props.self}/>
             </div>
             <div className="login__content">
                 <div className="login-form">
@@ -167,7 +199,8 @@ render() {
                                 onChange={(e) => {this.handleChange(e.target.value, this.refs.pass2, 'pass2')}}
                                 />
                             <div className="login-form__btn-container">
-                                <div className="login-form__btn-container_btn main-btn" style={{width: 112}}>
+                                <div className="login-form__btn-container_btn main-btn" style={{width: 112}}
+                                onClick={this.submitForm}>
                                     SIGN UP
                                 </div>
                             </div>

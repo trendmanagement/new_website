@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import 'sweetalert2/dist/sweetalert2.css'; 
 
 import Container from './Container'; 
 import { 
@@ -19,7 +20,8 @@ import {
   TellAbout, 
   Login, 
   MyExos, 
-  Signup
+  Signup, 
+  Services
 } from './Pages'; 
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';  
@@ -50,7 +52,11 @@ class App extends Component {
           <Route path="tell-about" component={TellAbout}/> 
           <Route path="login" component={Login} />  
           <Route path="my-exos" component={MyExos} /> 
-          <Route path="signup" component={Signup} />
+          <Route path="signup" component={TellAbout} /> 
+          <Route path="robo-hedger" component={Services} /> 
+          <Route path="value-propositions" component={Services} />
+          <Route path="alpha-project" component={Services} /> 
+          <Route path="tech-services" component={Services} />
         </Route>
       </Router>
     );

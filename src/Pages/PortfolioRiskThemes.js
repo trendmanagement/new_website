@@ -37,7 +37,7 @@ export default class PortfolioRiskThemes extends Component {
 
         return (
             <div>
-                <Navigation activeTab="services" />
+                <Navigation activeTab="services" self={this.props.self}/>
                 <div className="nav-underlay"></div>
                 <div className="container-grid-block portfolio-risk-themes-container">
                     <h1 className="service-title">Portfolio Risk Themes</h1>

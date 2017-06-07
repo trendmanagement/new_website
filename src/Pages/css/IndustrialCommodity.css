@@ -56,12 +56,12 @@
 } 
 
 .continue-btn {
-    width: 90px;
-    margin: 0 auto; 
-    display: block; 
-    margin-top: 35px; 
-    cursor: pointer; 
-    padding: 15px 12px 13px 12px; 
+    width: 115px;
+    margin: 0 auto;
+    display: block;
+    margin-top: 35px;
+    cursor: pointer;
+    padding: 15px 17px;
 } 
 
 @media screen and (max-width: 1250px) {

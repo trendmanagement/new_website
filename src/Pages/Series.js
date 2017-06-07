@@ -3,8 +3,9 @@ import DatePicker from 'react-datepicker';
 import { Tabs, Tab } from 'react-mdl';
 import moment from 'moment';
 import request from 'request';
-import { apiEndpoint } from '../config';
+import { apiEndpoint, clientEndpoint } from '../config';
 import './css/Series.css';
+import swal from 'sweetalert2'; 
 import { Loader } from '../Components';
 import '../../node_modules/react-mdl/extra/material.js'
 
@@ -28,18 +29,6 @@ export default class Series extends Component {
 
         this.state = {
             date: this.props.date,
-            table_data: {
-                max_drawdown: '',
-                starting_date: '',
-                end_date: '',
-                starting_value: '',
-                end_value: '',
-                total_cost: '',
-                max_delta: '',
-                average_delta: '',
-                deltaRendered: false
-
-            },
             campaign_detail: campaign_detail,
             payoffData: [],
             deltaData: [],
@@ -51,6 +40,18 @@ export default class Series extends Component {
             err: null
         }
 
+        this.table_data = {
+            max_drawdown: '',
+            starting_date: '',
+            end_date: '',
+            starting_value: '',
+            end_value: '',
+            total_cost: '',
+            max_delta: '',
+            average_delta: '',
+            deltaRendered: false, 
+            total_number_of_trades: ''
+        }; 
 
         // this.props.campaign_detail.end_date = this.props.campaign_detail.end_date.replace('T00:00:00', '');
 
@@ -58,7 +59,8 @@ export default class Series extends Component {
         this.getRecentData = this.getRecentData.bind(this);
         this.updatePayoffChart = this.updatePayoffChart.bind(this);
         this.setDate = this.setDate.bind(this);
-        this.checkHandler = this.checkHandler.bind(this);
+        this.checkHandler = this.checkHandler.bind(this); 
+        this.addExo = this.addExo.bind(this); 
     }
 
     componentWillReceiveProps(nextProps) {
@@ -87,6 +89,29 @@ export default class Series extends Component {
 
     }
 
+    addExo() {
+       // this.props.campaign_detail; 
+
+        request({
+            method: 'POST', 
+            url: clientEndpoint + '/exos', 
+            json: true,
+            body: Object.assign({}, this.table_data, {
+                name: this.props.campaign_detail.campaign, 
+                description: this.props.description
+            })
+        }, (err, res, body) => {
+            if (err || res.statusCode != 200) {
+                console.log('error adding exo'); 
+            } else {
+                swal({
+                    title: 'Success!',
+                    type: 'success',
+                    confirmButtonText: 'OK'
+                }); 
+            }
+        }) 
+    }
 
     checkHandler(e) {
 
@@ -109,14 +134,16 @@ export default class Series extends Component {
         let rows = [];
         let first_rows = [];
 
-
         for (let prop in this.props.campaign_detail) {
 
             if (this.props.campaign_detail[prop] || this.props.campaign_detail[prop] === 0) {
 
-                if (prop in this.state.table_data) {
+                if (prop in this.table_data) {
 
-                    let val = this.props.campaign_detail[prop];
+
+                    let val = this.props.campaign_detail[prop]; 
+                    this.table_data[prop] = val; 
+
                     let prop_str = prop.replace(/_/g, ' ');
 
 
@@ -270,7 +297,6 @@ export default class Series extends Component {
 
         if (this.props.campaign_detail.length == 0) {
             return <div className="series-container">
-
                 <div className="row">
                     <div className="col-lg-12">
                         <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
@@ -284,7 +310,7 @@ export default class Series extends Component {
         }
         else return (
             <div className="series-container">
-
+            {this.props.auth ? <div className="add-exo-btn" onClick={this.addExo}>add to my EXOs</div> : null}
                 <div className="row">
                     <div className="col-lg-12">
                         <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>

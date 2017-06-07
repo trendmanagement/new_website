@@ -22,6 +22,22 @@
   background: #2979ff!important; 
 } 
 
+.add-exo-btn {
+    padding: 10px 20px;
+    width: 140px;
+    white-space: nowrap;
+    background: #2979ff;
+    border-radius: 27px;
+    color: #fff;
+    margin-bottom: 25px; 
+    cursor: pointer; 
+    transition: background .2s ease-in-out; 
+} 
+
+.add-exo-btn:hover {
+  background: #1e67e0; 
+}
+
 @media screen and (max-width: 1200px) {
 
 } 

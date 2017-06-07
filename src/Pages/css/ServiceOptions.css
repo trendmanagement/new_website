@@ -1,0 +1,127 @@
+.service-options__nav-container {
+    height: 75px;
+    background: #000;
+} 
+
+.service-options__footer {
+    position: absolute; 
+    top: 100%; 
+    width: 100%; 
+} 
+
+.service-options__title {
+    font-size: 28px; 
+    font-weight: 600; 
+    text-align: center; 
+    color: #000; 
+    margin-bottom: 40px; 
+}
+
+.service-options__title_super {
+    font-size: 20px; 
+    vertical-align: super; 
+} 
+
+.service-options__container-grid-block {
+    width: 30%; 
+}
+
+.service-options__container-grid-block p { 
+    margin: 0; 
+}
+
+.service-options__list-description {
+    margin-bottom: 30px; 
+}
+
+.service-options__list-header {
+    font-weight: 600; 
+}
+
+.service-options__content {
+ 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    left: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box; 
+    display: -webkit-box; 
+    display: -ms-flexbox; 
+    display: flex; 
+    -webkit-box-align: center; 
+        -ms-flex-align: center; 
+            align-items: center; 
+    -ms-flex-pack: distribute; 
+        justify-content: space-around; 
+    padding-bottom: 150px;
+    background: #fff; 
+    min-height: 500px; 
+
+}
+
+.service-options__btn-container {
+    text-align: center; 
+    margin-top: 40px; 
+} 
+
+.service-options__btn-container a {
+    text-decoration: none!important; 
+}
+
+.service-options__btn-container_btn {
+    background: #2979ff;
+    width: 170px;
+    color: #fff;
+    font-weight: 500;
+    padding: 15px 20px;
+    border-radius: 25px;
+    margin: 0 auto;
+    cursor: pointer;
+    font-size: 16px; 
+    transition: background .2s ease-in-out;
+}
+
+.service-options__btn-container_btn:hover {
+    background: #5896ff; 
+}
+
+@media screen and (max-width: 1400px) {
+    .service-options__container-grid-block {
+        width: 40%; 
+    }
+
+}
+
+@media screen and (max-width: 1100px) {
+    .service-options__container-grid-block {
+        width: 50%; 
+    }
+} 
+
+@media screen and (max-width: 600px) {
+    .service-options__container-grid-block {
+        width: 80%; 
+    }
+}
+
+
+
+@media screen and (max-height: 600px) {
+
+    .service-options__content {
+        display: block; 
+        position: relative; 
+        padding-bottom: 75px; 
+        
+    }
+
+    .service-options__footer {
+        position: relative; 
+    } 
+
+    .service-options__container-grid-block {
+        margin: 0 auto; 
+    }
+}
+

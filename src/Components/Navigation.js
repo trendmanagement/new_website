@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import MobileNav from './MobileNav';
-import './css/Nav.css';
+import './css/Nav.css'; 
+import request from 'request'; 
+import {clientEndpoint} from '../config'; 
 
 import onClickOutside from 'react-onclickoutside';
 
@@ -10,11 +12,31 @@ class Navigation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeTab: props.activeTab,
+            activeTab: props.activeTab, 
+            isAuth: false, 
             menuOpen: false,
             hide_links:this.props.hide_links ? this.props.hide_links : false 
         }
 
+        this.getAuthState = () => { 
+            
+            return new Promise((resolve, reject) => {
+
+                request({
+                    method: 'GET', 
+                    uri: clientEndpoint + '/check-auth'
+                }, (err, res, body) => {
+                    if (err) reject(false); 
+                    if (res.statusCode != 200) reject(false); 
+                    
+                    body = JSON.parse(body); 
+                    let uid = body.uid; 
+                    resolve(uid); 
+
+                })
+            })
+
+        }
 
         this.switchTab = (tabname, e) => {
 
@@ -48,9 +70,61 @@ class Navigation extends Component {
                 activeTab: this.props.activeTab,
                 menuOpen: false
             })
-        }
+        } 
 
+        this.logout = () => {
+            var host = location.protocol + '//' + location.hostname + (
+                    location.port ? ':' + location.port : ''); 
+
+            request({
+                method: 'GET', 
+                uri: host + '/logout'
+            }, (err, res, body) => {
+                if (err || res.statusCode != 200) {
+                    return false; 
+                } else {
+                    if (window.location.pathname == '/' || 
+                    window.location.pathname == '/home') {
+                        window.location.reload(); 
+                    } else {
+                        this.props.self.isAuth = false; 
+                        this.setState({
+                            isAuth: false
+                        }, () => {
+                            browserHistory.push('/home'); 
+                        })
+                       
+                    }
+                }
+            })
+        } 
+
+        this.logout = this.logout.bind(this); 
+
+    } 
+
+    componentWillMount() { 
+        if (typeof this.props.self != 'undefined' && !this.props.self.isAuth) {
+        this.getAuthState()
+        .then(uid => { 
+            console.log('uid', uid); 
+
+            if (uid) {
+                this.props.self.isAuth = true; 
+                this.setState({isAuth: true}); 
+            } else {
+                this.props.self.isAuth = false;
+                this.setState({isAuth: false}); 
+            }
+
+        })
+        .catch(err => {
+            console.log(err); 
+            this.props.self.isAuth = false;
+        })
+        }
     }
+
     render() {
 
         let logo_src = (window.location.pathname == '/about-us' || window.location.pathname == '/' || window.location.pathname == '/home') ?
@@ -73,7 +147,7 @@ class Navigation extends Component {
                                 </a>
 
                     </div>
-                    <Link to="/"> <div className={"nav-item " + (this.state.activeTab == 'products' ? 'active' : '')}>
+                    <Link to="/industrial-commodity-user"> <div className={"nav-item " + (this.state.activeTab == 'products' ? 'active' : '')}>
                         <a>
                             products
                             </a>
@@ -94,29 +168,36 @@ class Navigation extends Component {
                         <a>  technology </a>
 
                     </div></Link>
-                    <Link to="/"><div className={"nav-item " + (this.state.activeTab == 'valuesprops' ? 'active' : '')}>
+                    <Link to="/value-propositions"><div className={"nav-item " + (this.state.activeTab == 'valuesprops' ? 'active' : '')}>
 
                         <a> value propositions </a>
 
                     </div></Link>
-                    <Link to="/"><div className={"nav-item " + (this.state.activeTab == 'contact' ? 'active' : '')}>
+                    <Link to="/tell-about"><div className={"nav-item " + (this.state.activeTab == 'contact' ? 'active' : '')}>
 
                         <a> contact us </a>
 
-                    </div> </Link>
+                    </div> </Link> 
+                      {this.state.isAuth || this.props.self.isAuth ?  
+                    <Link to="/my-exos"><div className={"nav-item " + (this.state.activeTab == 'contact' ? 'active' : '')}>
 
+                        <a> my exo<span style={{textTransform: 'lowercase'}}>s</span></a>
+
+                      </div> </Link> : null}
                 </div>
             )
             right_menu = (
                 <div className="nav-right login-btn-container">
-                     <Link to="/login"><div className="login-btn">login</div></Link>
+                     {this.state.isAuth || this.props.self.isAuth ?  
+                        <div onClick={this.logout} className="login-btn">log out</div>
+                     :<Link to="/login"><div className="login-btn">login</div></Link>}
                 </div>
             )
         }
 
         return (
             <div>
-                <MobileNav />
+                <MobileNav auth={this.props.self.isAuth} logout={this.logout}/>
                 <div className="nav-container">
                     <div className="container-grid">
                         <div className="nav-left">
@@ -143,17 +224,17 @@ class Navigation extends Component {
                     <div className={"nav-option  nav-target " + (this.state.activeTab == 'services' ? 'active' : '')}>
                         <div className="container-grid nav-target ">
                             <div className="option-sub bordered nav-target">
-                                <h5><Link to="/">TM<span className="qr">QR</span> exo Index</Link></h5>
+                                <h5>TM<span className="qr">QR</span> exo Index</h5>
+                                <p><Link to="/services/exo-facts">TMQR Exo Index Facts / Attributes</Link></p>
                                 <p><Link to="/services/indexation">Indexation Approach</Link></p>
-                                <p><Link to="/services/portfolio-risk-themes">Portfolio Risk Themes</Link></p>
-                                <p><Link to="/services/exo-facts">TMQR Exo Index Attributes</Link></p>
+                                <p><Link to="/services/portfolio-risk-themes">Portfolio Risk Themes</Link></p> 
                             </div>
                             <div className="option-sub bordered nav-target">
-                                <h5><Link to="/industrial-commodity-user">TM<span className="qr">QR</span> Alpha Project</Link></h5>
-                                <h5><Link to="/industrial-commodity-user">TM<span className="qr">QR</span> Robo Hedger / TMQR Robo Manager</Link></h5>
+                                <h5><Link to="/alpha-project">TM<span className="qr">QR</span> Alpha Project</Link></h5>
+                                <h5><Link to="/robo-hedger">TM<span className="qr">QR</span> Robo Hedger / TMQR Robo Manager</Link></h5>
                             </div>
                             <div className="option-sub nav-target">
-                                <h5><Link to="/tell-about">TM<span className="qr">QR</span> Technology Serivces</Link></h5>
+                                <h5><Link to="/tech-services">TM<span className="qr">QR</span> Technology Services</Link></h5>
                             </div>
                         </div>
                     </div>

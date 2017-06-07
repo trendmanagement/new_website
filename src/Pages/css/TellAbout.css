@@ -7,9 +7,12 @@
     display: flex;
     align-items: center;
 }
+.tellForm__submit-container {
+    text-align: center; 
+}
 .tellForm__submit-btn {
     border: 0;
-    background-color: #2979ff;
+    background: #2979ff;
     border-radius: 100px;
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
@@ -18,8 +21,11 @@
     line-height: 1;
     padding: 18px 28px;
     text-transform: uppercase;
-    display: block;
-    margin: 0 auto;
+    display: inline-block;
+    margin: 0 auto; 
+    cursor: pointer; 
+    outline: none!important; 
+    transition: background .2s ease-in-out;
 }
 .tellabout__form-container .row {
     margin-bottom: 15px;
@@ -32,6 +38,12 @@
     margin-bottom: 25px;
     font-size: 30px;
     line-height: 1;
+}
+.tellForm__submit-btn:hover {
+    background: #5896ff; 
+}
+.tellForm__submit-btn:disabled {
+    background: #5d9aff; 
 }
 @media (min-width:500px) and (max-width:768px) {
     .tellabout__form-wrapper{

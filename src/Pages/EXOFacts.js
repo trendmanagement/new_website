@@ -47,7 +47,9 @@ export default class EXOFacts extends Component {
         ]
 
         return <div className="exo-facts-container">
-            <Navigation activeTab="services" /> 
+            <Navigation activeTab="services" 
+            self={this.props.self}
+            /> 
             <div className="nav-underlay"></div>
             <div className="exo-facts-content-container">
             <div className="container-grid-block">

@@ -6,7 +6,7 @@ export default class About extends Component {
     render() {
         return (
             <div className="about-container ">
-                <Navigation activeTab="technology" />
+                <Navigation activeTab="technology" self={this.props.self}/>
                 <div className="about__hero-img"></div>
                 <div className="container-grid-block about-offset">
                     <div className="row">

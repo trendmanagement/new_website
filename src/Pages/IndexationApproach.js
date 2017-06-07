@@ -41,7 +41,8 @@ export default class IndexationApproach extends Component {
     render() {
         return (
             <div>
-            <Navigation activeTab="services" /> 
+            <Navigation activeTab="services"
+            self={this.props.self} /> 
             <div className="nav-underlay"></div>
             <div 
                 className="container-grid-block indexation-approach-container" 

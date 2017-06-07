@@ -30,7 +30,7 @@ export default class MobileNav extends Component {
                 </div>
                 <div className="mobile-nav=main">
                    <div className="mob-nav-item">
-                        <Link to="/">
+                        <Link to="/industrial-commodity-user">
                             products
                         </Link>
                     </div>
@@ -41,14 +41,15 @@ export default class MobileNav extends Component {
     
                         <div className="nav-service-options">
                             <hr />
+                            <Link to="/services/exo-facts">TMQR Exo Index Facts / Attributes</Link>
                             <Link to="/services/indexation">Indexation Approach</Link>
                             <Link to="/services/portfolio-risk-themes">Portfolio Risk Themes</Link>
-                            <Link to="/services/exo-facts">TMQR Exo Index Attributes</Link>
+        
                             <hr /> 
-                            <Link to="/industrial-commodity-user">Alpha Project</Link>
-                            <Link to="/industrial-commodity-user">Robo Hedger / TMQR Robo Manager</Link>
+                            <Link to="/alpha-project">Alpha Project</Link>
+                            <Link to="/robo-hedger">Robo Hedger / TMQR Robo Manager</Link>
                             <hr />
-                            <Link to="tell-about">Technology Serivces</Link>
+                            <Link to="/tech-services">Technology Services</Link>
                         </div>
                         
                     </div>
@@ -63,18 +64,26 @@ export default class MobileNav extends Component {
                         </Link>
                     </div>
                     <div className="mob-nav-item">
-                        <Link to="/">
+                        <Link to="/value-propositions">
                             value propositions
                         </Link>
                     </div>
                     <div className="mob-nav-item">
-                        <Link to="/">
+                        <Link to="/tell-about">
                             contact us
                         </Link>
                     </div>
+                    {this.props.auth ? 
+                    <div className="mob-nav-item">
+                        <Link to="/my-exos">
+                            my exo<span style={{textTransform: 'lowercase'}}>s</span>
+                        </Link>
+                    </div>    
+                    : null}
                 </div>
                 <div className="login-container login-btn-container">
-                  <Link to="/login"><button className="mob-login-btn">login</button></Link>
+                {this.props.auth ? <Link to="/logout" onClick={this.props.logout}><button className="mob-login-btn">log out</button></Link>
+                : <Link to="/login"><button className="mob-login-btn">log in</button></Link>}
                 </div>
             </div>
             </div>
