@@ -1,9 +1,9 @@
 html,body{
     width:100%;
-    background-color: black!important;
 }
 .getstarted-slider-container{
     height:100%;
+    background-color: black;
 }
 .iframe-wrapper{
     padding-top:75px;
