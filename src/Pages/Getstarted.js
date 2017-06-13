@@ -23,7 +23,7 @@ class Getstarted extends Component {
                                     radval1="80" 
                                     title={["Training Wheels",false]}
                                     textPart={this.props.location.query.c}
-                                    link={{to:"/"}}
+                                    link={{to:"/tell-about"}}
                                 />
                             </div>
                             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -32,7 +32,7 @@ class Getstarted extends Component {
                                     radval2="30" 
                                     title={["Conservative Potential","Cost Savings Hedging"]}
                                     textPart={this.props.location.query.c} 
-                                    link={{to:"/about-us"}}
+                                    link={{to:"/tell-about"}}
                                 />
                             </div>
                             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -41,7 +41,7 @@ class Getstarted extends Component {
                                     radval2="30" 
                                     title={["Aggressive Price Potential","Cost Savings Hedging"]}
                                     textPart={this.props.location.query.c} 
-                                    link={{to:"/"}}
+                                    link={{to:"/tell-about"}}
                                 />
                             </div>
                         </div>

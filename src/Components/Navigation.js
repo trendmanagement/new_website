@@ -181,7 +181,7 @@ class Navigation extends Component {
                         <a> value propositions </a>
 
                     </div></Link>
-                    <Link to="/tell-about"><div className={"nav-item " + (this.state.activeTab == 'contact' ? 'active' : '')}>
+                    <Link to="/about-us"><div className={"nav-item " + (this.state.activeTab == 'contact' ? 'active' : '')}>
 
                         <a> contact us </a>
 
@@ -238,7 +238,7 @@ class Navigation extends Component {
                                 <p><Link to="/services/portfolio-risk-themes">Portfolio Risk Themes</Link></p>
                             </div>
                             <div className="option-sub bordered nav-target">
-                                <h5><Link to="/alpha-project">TM<span className="qr">QR</span> Alpha Project</Link></h5>
+                                <h5><Link to="/alpha-project">TM<span className="qr">QR</span> Alpha Project</ Link></h5>
                                 <h5><Link to="/robo-hedger">TM<span className="qr">QR</span> Robo Hedger / TMQR Robo Manager</Link></h5>
                             </div>
                             <div className="option-sub nav-target">

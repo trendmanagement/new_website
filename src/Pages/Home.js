@@ -103,7 +103,7 @@ class Home extends Component {
                 <div className="bg-container" id={this.state.slides[this.state.activeSlide]}>
                     <div className="title-aligner full-height">
                         <div className="title-container">
-                        <h1 className={"main-title " + (this.state.activeSlide == 0 ? 'active' : 'fadeout')}><span>Enter the World of<br/>Modern Risk Management</span></h1>
+                        <h1 className={"main-title " + (this.state.activeSlide == 0 ? 'active' : 'fadeout')}><span>Enter the World of<br/>Modern Algorithmic Investing</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 1 ? 'active' : 'fadeout')}><span>We are changing the way <br /> food and beverage industry <br /> thinks about risk management.</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 2 ? 'active' : 'fadeout')}><span>We are changing the way <br /> transportation industry <br /> thinks about risk management.</span></h1>
                         <h1 className={"main-title-small " + (this.state.activeSlide == 3 ? 'active' : 'fadeout')}><span>We are changing the way <br /> family offices <br /> think about risk management.</span></h1>

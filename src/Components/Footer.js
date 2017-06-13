@@ -61,8 +61,8 @@ export default class Footer extends Component {
                             </Link>
                             </div>
                         <div className="who-detail">
-                            <div><i className="fa fa-phone" aria-hidden="true"></i>&nbsp; 604-984-7244 </div>
-                            <div><i className="fa fa-envelope" aria-hidden="true"></i>&nbsp; abcd@gmail.com</div>
+                            <div><i className="fa fa-phone" aria-hidden="true"></i>&nbsp; (312) 957-7191 </div>
+                            <div><i className="fa fa-envelope" aria-hidden="true"></i>&nbsp; najoyce@tml1.com</div>
                         </div>
                     </div>
                     <div className="container-grid-block">
