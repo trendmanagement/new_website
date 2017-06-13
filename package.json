@@ -1,38 +1,32 @@
 {
-  "name": "trendmanagement",
-  "version": "0.1.0",
+  "name": "traders_main",
+  "version": "0.0.0",
   "private": true,
-  "devDependencies": {
-    "react-scripts": "0.9.0"
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "description": "traders_main",
+  "author": {
+    "name": "Svitlana Timofeyeva"
+  }, 
+  "engines": {
+  "node": "7.10.0"
   },
   "dependencies": {
-    "amcharts3": "github:amcharts/amcharts3",
-    "amstock3": "github:amcharts/amstock3",
-    "classnames": "^2.2.5",
-    "connect": "^3.6.2",
-    "connect-session-sequelize": "^4.1.0",
-    "jquery-circle-progress": "^1.2.2",
-    "material-ui": "^0.18.1",
-    "moment": "^2.17.1",
-    "react": "^15.4.2",
-    "react-datepicker": "^0.41.1",
-    "react-dom": "^15.4.2",
-    "react-mdl": "^1.9.0",
-    "react-onclickoutside": "^5.11.1",
-    "react-router": "^3.0.2",
-    "react-select": "^1.0.0-rc.3",
-    "react-slick": "^0.14.11",
-    "react-tap-event-plugin": "^2.0.1",
-    "recharts": "^0.20.8",
-    "request": "^2.79.0",
-    "simplebar": "^2.3.2",
-    "sweetalert": "^1.1.3",
+    "body-parser": "~1.8.1",
+    "cookie-parser": "~1.3.3",
+    "csurf": "^1.9.0",
+    "debug": "~2.0.0",
+    "express": "~4.9.0",
+    "express-mysql-session": "^1.2.0",
+    "express-session": "^1.15.3",
+    "jade": "~1.6.0",
+    "jsonwebtoken": "^7.4.1",
+    "md5": "^2.2.1",
+    "morgan": "~1.3.0",
+    "mysql": "^2.13.0",
+    "serve-favicon": "~2.1.3",
+    "stylus": "0.42.3",
     "sweetalert2": "^6.6.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
   }
 }
