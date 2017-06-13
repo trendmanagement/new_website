@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 import MobileNav from './MobileNav';
-import './css/Nav.css'; 
-import request from 'request'; 
-import {clientEndpoint} from '../config'; 
+import './css/Nav.css';
+import request from 'request';
+import { clientEndpoint } from '../config';
 
 import onClickOutside from 'react-onclickoutside';
 
@@ -12,26 +12,26 @@ class Navigation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeTab: props.activeTab, 
-            isAuth: false, 
+            activeTab: props.activeTab,
+            isAuth: false,
             menuOpen: false,
-            hide_links:this.props.hide_links ? this.props.hide_links : false 
+            hide_links: this.props.hide_links ? this.props.hide_links : false
         }
 
-        this.getAuthState = () => { 
-            
+        this.getAuthState = () => {
+
             return new Promise((resolve, reject) => {
 
                 request({
-                    method: 'GET', 
+                    method: 'GET',
                     uri: clientEndpoint + '/check-auth'
                 }, (err, res, body) => {
-                    if (err) reject(false); 
-                    if (res.statusCode != 200) reject(false); 
-                    
-                    body = JSON.parse(body); 
-                    let uid = body.uid; 
-                    resolve(uid); 
+                    if (err) reject(false);
+                    if (res.statusCode != 200) reject(false);
+
+                    body = JSON.parse(body);
+                    let uid = body.uid;
+                    resolve(uid);
 
                 })
             })
@@ -70,58 +70,66 @@ class Navigation extends Component {
                 activeTab: this.props.activeTab,
                 menuOpen: false
             })
-        } 
+        }
 
         this.logout = () => {
             var host = location.protocol + '//' + location.hostname + (
-                    location.port ? ':' + location.port : ''); 
+                location.port ? ':' + location.port : '');
 
             request({
-                method: 'GET', 
+                method: 'GET',
                 uri: host + '/logout'
             }, (err, res, body) => {
                 if (err || res.statusCode != 200) {
-                    return false; 
+                    return false;
                 } else {
-                    if (window.location.pathname == '/' || 
-                    window.location.pathname == '/home') {
-                        window.location.reload(); 
+                    if (window.location.pathname == '/' ||
+                        window.location.pathname == '/home') {
+                        window.location.reload();
                     } else {
-                        this.props.self.isAuth = false; 
+                        this.props.self.isAuth = false;
                         this.setState({
                             isAuth: false
                         }, () => {
-                            browserHistory.push('/home'); 
+                            browserHistory.push('/home');
                         })
-                       
+
                     }
                 }
             })
-        } 
+        }
 
-        this.logout = this.logout.bind(this); 
+        this.logout = this.logout.bind(this);
 
-    } 
+    }
 
-    componentWillMount() { 
+    componentWillMount() {
         if (typeof this.props.self != 'undefined' && !this.props.self.isAuth) {
-        this.getAuthState()
-        .then(uid => { 
-            console.log('uid', uid); 
+            this.getAuthState()
+                .then(uid => {
+                    console.log('uid', uid);
 
-            if (uid) {
-                this.props.self.isAuth = true; 
-                this.setState({isAuth: true}); 
-            } else {
-                this.props.self.isAuth = false;
-                this.setState({isAuth: false}); 
+                    if (uid) {
+                        this.props.self.isAuth = true;
+                        this.setState({ isAuth: true });
+                    } else {
+                        this.props.self.isAuth = false;
+                        this.setState({ isAuth: false });
+                    }
+
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.props.self.isAuth = false;
+                })
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.activeTab != nextProps.activeTab) {
+                this.state = {
+                    activeTab: nextProps.activeTab
             }
-
-        })
-        .catch(err => {
-            console.log(err); 
-            this.props.self.isAuth = false;
-        })
         }
     }
 
@@ -132,7 +140,7 @@ class Navigation extends Component {
         let mid_menu, right_menu;
 
         if (this.state.hide_links) {
-            
+
         } else {
             mid_menu = (
                 <div className="nav-middle">
@@ -141,7 +149,7 @@ class Navigation extends Component {
                                     products
                                 </a>
                             </div>*/}
-                    <div onMouseOut={(e) => { this.switchTab('home', e) }} onMouseOver={() => { this.switchTab('services') }} className={"nav-item nav-target " + (this.state.activeTab == 'services' ? 'active' : '')}>
+                    <div onMouseOut={(e) => { this.switchTab('home', e) } } onMouseOver={() => { this.switchTab('services') } } className={"nav-item nav-target " + (this.state.activeTab == 'services' ? 'active' : '')}>
                         <a>
                             services
                                 </a>
@@ -177,27 +185,27 @@ class Navigation extends Component {
 
                         <a> contact us </a>
 
-                    </div> </Link> 
-                      {this.state.isAuth || this.props.self.isAuth ?  
-                    <Link to="/my-exos"><div className={"nav-item " + (this.state.activeTab == 'contact' ? 'active' : '')}>
+                    </div> </Link>
+                    {this.state.isAuth || this.props.self.isAuth ?
+                        <Link to="/my-exos"><div className={"nav-item " + (this.state.activeTab == 'contact' ? 'active' : '')}>
 
-                        <a> my exo<span style={{textTransform: 'lowercase'}}>s</span></a>
+                            <a> my exo<span style={{ textTransform: 'lowercase' }}>s</span></a>
 
-                      </div> </Link> : null}
+                        </div> </Link> : null}
                 </div>
             )
             right_menu = (
                 <div className="nav-right login-btn-container">
-                     {this.state.isAuth || this.props.self.isAuth ?  
+                    {this.state.isAuth || this.props.self.isAuth ?
                         <div onClick={this.logout} className="login-btn">log out</div>
-                     :<Link to="/login"><div className="login-btn">login</div></Link>}
+                        : <Link to="/login"><div className="login-btn">login</div></Link>}
                 </div>
             )
         }
 
         return (
             <div>
-                <MobileNav auth={this.props.self.isAuth} logout={this.logout}/>
+                <MobileNav auth={this.props.self.isAuth} logout={this.logout} />
                 <div className="nav-container">
                     <div className="container-grid">
                         <div className="nav-left">
@@ -213,9 +221,9 @@ class Navigation extends Component {
                 <div className={"nav-options-container nav-target " +
                     (this.state.menuOpen ? 'active' : '')}
                     style={this.state.activeTab == 'products' ? { height: '75px' } : { height: '150px' }}
-                >
+                    >
                     <div className={"nav-option nav-target " + (this.state.activeTab == 'products' ? 'active' : '')}>
-                        <div onMouseOut={(e) => { this.switchTab('home', e) }} className="container-grid nav-target">
+                        <div onMouseOut={(e) => { this.switchTab('home', e) } } className="container-grid nav-target">
                             <div><Link to="/">I represent an industrial commodity user </Link></div>
                             <div><Link to="/">I represent a FCM or Broker Dealer</Link></div>
                             <div><Link to="/">I represent a proprietary trading group</Link></div>
@@ -227,7 +235,7 @@ class Navigation extends Component {
                                 <h5>TM<span className="qr">QR</span> exo Index</h5>
                                 <p><Link to="/services/exo-facts">TMQR Exo Index Facts / Attributes</Link></p>
                                 <p><Link to="/services/indexation">Indexation Approach</Link></p>
-                                <p><Link to="/services/portfolio-risk-themes">Portfolio Risk Themes</Link></p> 
+                                <p><Link to="/services/portfolio-risk-themes">Portfolio Risk Themes</Link></p>
                             </div>
                             <div className="option-sub bordered nav-target">
                                 <h5><Link to="/alpha-project">TM<span className="qr">QR</span> Alpha Project</Link></h5>

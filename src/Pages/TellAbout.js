@@ -237,7 +237,7 @@ export default class TellAbout extends Component {
                                         onChange={(event, index) => this.onFlyValidation(event, index, 'firstName')}
                                     />
                                 </div>
-                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 desktop-only">
                                     <TextField
                                         floatingLabelText="Company name" 
                                         ref="companyName"
@@ -260,6 +260,17 @@ export default class TellAbout extends Component {
                                         onChange={(event, index) => this.onFlyValidation(event, index, 'lastName')}
                                     />
                                 </div>
+                                
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 mob-only">
+                                    <TextField
+                                        floatingLabelText="Company name" 
+                                        ref="companyName"
+                                        floatingLabelStyle={styles.floatLabel}
+                                        fullWidth={true}
+                                        onChange={(event, index) => this.onFlyValidation(event, index, 'companyName')}
+                                    />
+                                </div>
+                                
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <TextField
                                         floatingLabelText="Work email address*"

@@ -45,12 +45,29 @@
 .tellForm__submit-btn:disabled {
     background: #5d9aff; 
 }
+
+.mob-only {
+    display: none; 
+} 
+
+.desktop-only {
+    display: block; 
+}
+
 @media (min-width:500px) and (max-width:768px) {
     .tellabout__form-wrapper{
         padding-top: 120px;
         padding-bottom: 60px; 
         height:auto;
     }
+    .mob-only {
+        display: block;
+    } 
+
+    .desktop-only {
+        display: none; 
+    }
+
     .tellabout__form-container legend {
         font-family: 'Roboto', sans-serif;
         font-weight: 600;
@@ -64,6 +81,14 @@
     }
 }
 @media (min-width:320px) and (max-width:499px) {
+    .mob-only {
+        display: block;
+    } 
+
+    .desktop-only {
+        display: none; 
+    }
+
     .tellabout__form-wrapper{
         padding-top: 120px;
         padding-bottom: 60px; 

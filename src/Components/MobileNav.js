@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import { Link } from 'react-router'; 
+import { Link, browserHistory } from 'react-router'; 
 import './css/MobileNav.css'; 
 
 export default class MobileNav extends Component { 
@@ -46,10 +46,28 @@ export default class MobileNav extends Component {
                             <Link to="/services/portfolio-risk-themes">Portfolio Risk Themes</Link>
         
                             <hr /> 
-                            <Link to="/alpha-project">Alpha Project</Link>
-                            <Link to="/robo-hedger">Robo Hedger / TMQR Robo Manager</Link>
+                            <a onClick={() => {
+                                this.setState({
+                                    isOpen: false
+                                }, () => {
+                                    browserHistory.push('/alpha-project'); 
+                                })
+                            }}>Alpha Project</a>
+                            <a onClick={() => {
+                                this.setState({
+                                    isOpen: false
+                                }, () => {
+                                    browserHistory.push('/robo-hedger');      
+                                })
+                            }}>Robo Hedger / TMQR Robo Manager</a>
                             <hr />
-                            <Link to="/tech-services">Technology Services</Link>
+                            <a onClick={() => {
+                                this.setState({
+                                    isOpen: false
+                                }, () => {
+                                    browserHistory.push('/tech-services'); 
+                                })
+                            }}>Technology Services</a>
                         </div>
                         
                     </div>

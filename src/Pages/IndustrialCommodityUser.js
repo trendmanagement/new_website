@@ -97,7 +97,7 @@ export default class IndustrialCommodityUser extends Component {
         return (
             <div className="industrial-commodity">
                 <div className="industrial-commodity__nav-container">
-                    <Navigation self={this.props.self} />
+                    <Navigation self={this.props.self} activeTab="products" />
                 </div> 
                 <div className="industrial-commodity__content-container">
                     <div className="industrial-text-container">

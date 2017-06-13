@@ -1,6 +1,6 @@
 export const apiEndpoint = 'http://66.70.157.69:28864'; 
-//export const clientEndpoint = 'http://tmqrexo.azurewebsites.net'; 
-export const clientEndpoint = 'http://localhost:3000'; 
+export const clientEndpoint = 'http://tmqrexo.azurewebsites.net'; 
+//export const clientEndpoint = 'http://localhost:9000'; 
 
 // campaign filter dropdown data 
 

@@ -42,19 +42,37 @@ class MyExos extends Component {
             exos: []
         }
 
+        this.handleResize = this.handleResize.bind(this); 
+
 
     }
 
     componentDidMount() {
 
+        this.handleResize(); 
         this.getExos();
 
+        window.addEventListener('resize', this.handleResize); 
+
+    } 
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize); 
     }
 
-    componentWillReceiveNextProps(nextProps) {
-        if (nextProps.self.isAuth != this.props.self.isAuth) {
-            this.getExos();
+    handleResize() {
+
+        let contentHeight = this.refs.contentWrap.offsetHeight; 
+        if (contentHeight <= window.innerHeight - 120) {
+            this.refs.footerWrap.style.position = 'absolute'; 
+            this.refs.footerWrap.style.top = '100%'; 
+        } else {
+
+            this.refs.footerWrap.style.position = 'relative'; 
+            this.refs.footerWrap.style.top = contentHeight + 125; 
         }
+
+
     }
 
     getExos() {
@@ -99,7 +117,7 @@ class MyExos extends Component {
                 <div className="my-exos__navigation">
                     <Navigation self={this.props.self} />
                 </div>
-                <div className="my-exos__content">
+                <div className="my-exos__content" ref="contentWrap">
                     <div className="container-grid-block">
                         <div className="my-exos__content_title">My EXOs</div>
                         {exos.length > 0 ? 
@@ -132,7 +150,7 @@ class MyExos extends Component {
                                             <td>{i.end_date.replace('-', '/').replace('-', '/').replace('T00:00:00', '')}</td>
                                             <td className="exo-td-right">{parseFloat(i.max_delta).toFixed(4)}</td>
                                             <td className="exo-td-right">{numberWithCommas(parseFloat(i.total_number_of_trades), false)}</td>
-                                            <td className="exo-td-right total-cost">{numberWithCommas(parseFloat(i.total_cost), true)}</td>
+                                            <td className="exo-td-right total-cost">({numberWithCommas(parseFloat(i.total_cost), true)})</td>
                                             <td className="exo-td-right">{parseFloat(i.avg_delta).toFixed(4)}</td>
                                             <td className="exo-td-right">{numberWithCommas(parseFloat(i.max_drawdown), true)}</td>
                                             <td className="exo-td-right"><Link to={`/simulations?campaign=${i.exo_name}&starting_date=${i.starting_date.replace('T00:00:00', '')}&end_date=${i.end_date.replace('T00:00:00', '')}&include_price=1&d=${i.description}`}>
@@ -145,7 +163,7 @@ class MyExos extends Component {
                             </table>
                              <div className="hide-scroll"></div>
                             </div>
-                            : <span>No data</span>}
+                            : <span className="my-exos-table-desktop">No data</span>}
                         <div className="my-exos-table-mobile">
                             {exos.length > 0 ?
                                 <div>
@@ -180,11 +198,11 @@ class MyExos extends Component {
                                     })} 
                                
                                 </div>
-                                : <span>No data</span>}
+                                : <span className="my-exos-table-mobile">No data</span>}
                         </div>
                     </div>
                 </div>
-                <div className="my-exos__footer">
+                <div className="my-exos__footer" ref="footerWrap">
                     <Footer />
                 </div>
             </div>
