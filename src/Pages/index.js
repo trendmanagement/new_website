@@ -16,6 +16,7 @@ import Login from './Login';
 import MyExos from './MyExos'; 
 import Signup from './Signup'; 
 import Services from './Services'; 
+import GetstartedSlider from './GetstartedSlider'; 
 
 module.exports = { 
     List, 
@@ -35,6 +36,7 @@ module.exports = {
     Login, 
     MyExos, 
     Signup, 
-    Services
+    Services,
+    GetstartedSlider
 
 }

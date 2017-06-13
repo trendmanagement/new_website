@@ -21,7 +21,8 @@ import {
   Login, 
   MyExos, 
   Signup, 
-  Services
+  Services,
+  GetstartedSlider
 } from './Pages'; 
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';  
@@ -57,6 +58,7 @@ class App extends Component {
           <Route path="value-propositions" component={Services} />
           <Route path="alpha-project" component={Services} /> 
           <Route path="tech-services" component={Services} />
+          <Route path="getstrated-slider" component={GetstartedSlider}/>
         </Route>
       </Router>
     );
