@@ -9,8 +9,6 @@ var pass_handler = require('../utils/password_handler');
 /* GET home page. */
 router.get('*', function (req, res, next) {
 
-    console.log(req.url + ' REQUEST URL');
-
     if (req.url !== '/exos' && req.url !== '/check-auth' && req.url !== '/get-user' && req.url !== '/logout'
 	&& req.url !== '/verify-site') {
 
@@ -26,7 +24,6 @@ router.get('*', function (req, res, next) {
 
 // get auth state 
 router.get('/check-auth', function (req, res) {
-    console.log('CURRENT SESSION', req.session);
 
     if (typeof req.session.user_id == 'undefined' || !req.session.user_id) {
         res.status(401).send('NO AUTH');
@@ -82,7 +79,6 @@ router.post('/login', function (req, res) {
 
     var name = req.body.email;
     var pass = pass_handler.hashPassword(req.body.pass);
-    console.log("NAME + PASS LOGIN", name, pass);
 
     db.loginUser(name, pass).then(function (user) {
         console.log('SUCCESS LOGIN', name, pass, user);
@@ -156,16 +152,5 @@ router.delete('/exos', function (req, res) {
         res.status(400).send('error');
     });
 });
-
-router.get('/verify-site', function(req, res) {
-	return res.sendFile(path.join(__dirname, '../public/google3239afab3055df76.html'));
-})
-// router.get('/close-store', function(req, res) {
-//     db.closeStore().then(function() {
-//         res.status(200).send('OK'); 
-//     }).catch(function(err) {
-//         res.status(400).send('error'); 
-//     })
-// })
 
 module.exports = router;

@@ -71,5 +71,5 @@ app.use(function (err, req, res, next) {
     });
 });
 
-// app.listen(9000, () => console.log('App running on port 9000')); 
-module.exports = app;
+app.listen(9000, () => console.log('App running on port 9000')); 
+//module.exports = app;
