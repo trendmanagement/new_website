@@ -71,10 +71,10 @@ export default class TellAbout extends Component {
             employVal: null, 
             phone: '', 
             detail: '', 
-            want_info: false
+            want_info: true
         }, 
 
-       // btnDisabled: true, 
+        btnDisabled: true, 
         errorTrigger: false,
         emailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         wordRegex: /[a-zA-Z]+/,
@@ -99,9 +99,6 @@ export default class TellAbout extends Component {
         e.preventDefault(); 
 
         let formData = this.state.formData; 
-            
-
-        console.log('FORM DATA', formData);
         request({
             method: 'POST', 
             url: clientEndpoint + '/signup', 
@@ -140,9 +137,9 @@ export default class TellAbout extends Component {
 
     manageBtnState = (disabled) => {
     
-      //  this.setState({
-      //      btnDisabled: disabled
-     //   })
+       this.setState({
+           btnDisabled: disabled
+       })
         
     }
 
@@ -207,7 +204,21 @@ export default class TellAbout extends Component {
         let formData = Object.assign({}, this.state.formData); 
         formData[fieldName] = newVal;
 
-        this.setState({formData: formData});  
+        this.setState({formData: formData}, () => {
+            let formData = this.state.formData; 
+                
+            let keys = Object.keys(formData); 
+            for (let i = 0; i < keys.length; i++) {
+                if (keys[i] != 'companyName' && keys[i] != 'detail' && keys[i] != 'want_info') {
+                    
+                    if (!this.state.formData[keys[i]]) {
+                        this.manageBtnState(true); return; 
+                    } 
+                }
+            }
+
+            this.manageBtnState(false)
+        });  
 
         
     }
@@ -376,10 +387,16 @@ export default class TellAbout extends Component {
                             </div>
                             <div className="row">
                                 <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12" style={styles.block}>
-                                    <Checkbox value={this.state.formData.want_info} 
-                                    onChange={() => {this.setState(Object.assign({}, 
-                                    this.state.formData, 
-                                    {want_info: !this.state.formData.want_info}))}}
+                                    <Checkbox
+                                    defaultChecked={true}
+                                    onClick={() => {
+                                 
+                                        this.setState({formData: Object.assign({}, 
+                                                    this.state.formData, 
+                                                    {want_info: !this.state.formData.want_info})
+                                            })
+                                        }
+                                    }
                                     label="Yes, I want to have bonus information on my email"
                                     />
                                 </div>

@@ -181,7 +181,7 @@ class Navigation extends Component {
                         <a> value propositions </a>
 
                     </div></Link>
-                    <Link to="/about-us"><div className={"nav-item " + (this.state.activeTab == 'contact' ? 'active' : '')}>
+                    <Link to="/tell-about"><div className={"nav-item " + (this.state.activeTab == 'contact' ? 'active' : '')}>
 
                         <a> contact us </a>
 
