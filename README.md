@@ -9,4 +9,3 @@ To update the client:
 
 Node v7.10.0
 NPM : v4.2.0
->>>>>>> f413ad90d56c8c257e7637ff0d8c74789b6cc50c
