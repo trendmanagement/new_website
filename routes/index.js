@@ -15,7 +15,7 @@ router.get('*', function (req, res, next) {
         if (typeof req.session.user_id == 'undefined' && req.url == '/my-exos') {
             return res.redirect('/home');
         } else {
-            return res.sendFile(path.join(__dirname, '../public/index.html'));
+            return res.sendFile(path.join(__dirname, '../client/index.html'));
         }
     } else {
         next();
@@ -106,7 +106,7 @@ router.get('/logout', function (req, res) {
         if (err) {
             return res.status(400).send('failed to logout');
         } else {
-            return res.status(200).sendFile(path.join(__dirname, '../public/index.html'));
+            return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
         }
     });
 });
