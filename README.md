@@ -6,3 +6,7 @@ To update the client:
 
 1. Create a build of react app (see https://github.com/trendmanagement/new_website/blob/master/README.md)
 2. Put the build files into the ```client``` folder (https://github.com/trendmanagement/new_website/tree/node/client) 
+
+Node v7.10.0
+NPM : v4.2.0
+>>>>>>> f413ad90d56c8c257e7637ff0d8c74789b6cc50c
