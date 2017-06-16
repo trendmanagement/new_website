@@ -61,6 +61,10 @@ export default class Series extends Component {
         this.setDate = this.setDate.bind(this);
         this.checkHandler = this.checkHandler.bind(this); 
         this.addExo = this.addExo.bind(this); 
+    } 
+
+    componentDidMount() {
+        this.switchNeg(this.props); 
     }
 
     componentWillReceiveProps(nextProps) {
@@ -85,8 +89,32 @@ export default class Series extends Component {
                 })
             })
           
+        } 
+
+        if (this.props.isNeg != nextProps.isNeg) { 
+            this.switchNeg(nextProps); 
+       
         }
 
+    }
+
+    switchNeg(props) {
+             let style; 
+            if (document.getElementById('chartStyle')) {
+                style = document.getElementById('chartStyle'); 
+            } else {
+                style = document.createElement('style');  
+                style.id="chartStyle"
+                document.getElementsByTagName('head')[0].appendChild(style);
+            }
+            if (props.isNeg) {
+                
+                style.innerHTML = '.equity-chart-container .amChartsLegend>svg>g>g>g:nth-child(2)>g> * {stroke: #db4c3c}';
+            } else {
+                style.innerHTML = '.equity-chart-container .amChartsLegend>svg>g>g>g:nth-child(2)>g> * {stroke: #7f8da9}';
+            }
+
+    
     }
 
     addExo() {

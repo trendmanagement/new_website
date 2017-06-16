@@ -7,6 +7,7 @@ export default class Chart extends Component {
  
     render() {
 
+
         let graph_id = 'g1'; 
         function formatY(v, text, axis) {
 
@@ -185,7 +186,6 @@ export default class Chart extends Component {
                 "negativeLineColor": "#db4c3c",
                 "openField": "o",
                 "title": "Underlying future",
-
                 "valueField": "c",
                 "balloon": {
                     "drop": false

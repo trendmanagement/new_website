@@ -12,44 +12,16 @@ export default class Container extends Component {
             campaignDataRetrieved: false,
             campaign_detail: [],
             err: null,
-            date: ''
+            date: '', 
+            isNeg: false 
         }
 
         this.token = ''; 
         this.viewCampaign = this.viewCampaign.bind(this); 
 
-        // this.getAuthState = () => { 
-            
-        //     return new Promise((resolve, reject) => {
-        //         // var host = location.protocol + '//' + location.hostname + (
-        //         //     location.port ? ':' + location.port : ''); 
-
-        //         request({
-        //             method: 'GET', 
-        //             uri: clientEndpoint + '/check-auth'
-        //         }, (err, res, body) => {
-        //             if (err) reject(false); 
-        //             if (res.statusCode != 200) reject(false); 
-                    
-        //             body = JSON.parse(body); 
-        //             let uid = body.uid; 
-                    
-        //             resolve(uid); 
-
-        //         })
-        //     })
-        // }
     }
 
-    
-    // componentWillMount() {
-    //     this.getAuthState().then(uid => {
-    //         this.isAuth = true; 
-    //     })
-    //     .catch(err => {
-    //         this.isAuth = false; 
-    //     })
-    // }
+
 
     viewCampaign(data, campaign, use_default, description, query_data) {
 
@@ -122,7 +94,7 @@ export default class Container extends Component {
                         reject(self.state.err)
                     }); 
 
-                    //browserHistory.push('error');
+            
                 }
 
                 if (body.status == 'OK') {
@@ -132,7 +104,8 @@ export default class Container extends Component {
                     body.end_value = Math.floor(body.end_value);
                     body.max_drawdown = Math.floor(body.max_drawdown);
                     body.max_delta = body.max_delta.toFixed(4);
-                    body.average_delta = body.average_delta.toFixed(4);
+                    body.average_delta = body.average_delta.toFixed(4); 
+                    let counter = 0;
 
                     for (let i = 0; i < body.series.length; i++) {
 
@@ -141,10 +114,18 @@ export default class Container extends Component {
                         body.series[i].change = body.series[i].change.toFixed(4);
                         body.series[i].date = body.series[i].date.replace('T00:00:00', '');
 
+                        if (body.series[i].c < 0) {
+                            counter--; 
+                        } else {
+                            counter++ 
+                        }
+
                         body.series[i].o = body.series[i].o.toFixed(4);
                         body.series[i].h = body.series[i].h.toFixed(4);
                         body.series[i].l = body.series[i].l.toFixed(4);
-                        body.series[i].c = body.series[i].c.toFixed(4);
+                        body.series[i].c = body.series[i].c.toFixed(4); 
+
+                    
 
                         if (i == body.series.length - 1) {
 
@@ -164,20 +145,17 @@ export default class Container extends Component {
                     }
 
                     self.setState({
-                        campaign_detail: body
-                    })
-
-
-                    self.setState({ campaignDataRetrieved: true })
-
-					
-                    resolve({
                         campaign_detail: body, 
-                        date: moment({ year: d4[0], month: d4[1] - 1, day: d4[2] }), 
-                        description: description, 
-                        query: `${query_data}&d=${description}` 
-                    })
-
+                        isNeg: counter < 0 ? true : false, 
+                        campaignDataRetrieved: true
+                    }, () => {
+                        resolve({
+                                campaign_detail: body, 
+                                date: moment({ year: d4[0], month: d4[1] - 1, day: d4[2] }), 
+                                description: description, 
+                                query: `${query_data}&d=${description}` 
+                            })
+                        })
                 }
             })
         })
@@ -192,7 +170,8 @@ export default class Container extends Component {
             <div>
                 {React.cloneElement(this.props.children, 
                 { viewCampaign: this.viewCampaign, 
-                self: this, 
+                self: this,  
+                isNeg: this.state.isNeg, 
                 campaign_detail: this.state.campaign_detail, 
                 series_err: this.state.err, 
                 date: this.state.date, 

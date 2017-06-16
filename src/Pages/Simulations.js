@@ -357,7 +357,8 @@ export default class Simulations extends Component {
                 }
                 {this.state.campaign_detail && this.state.campaignShown && !this.state.err ?
                     <div className="container-grid-block top-padded series-block">
-                        <Series
+                        <Series 
+                            isNeg={this.props.isNeg}
                             auth={this.state.auth}
                             campaign_detail={this.state.campaign_detail}
                             date={this.state.series_date}
