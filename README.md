@@ -8,3 +8,6 @@ To create a production build:
 
 1. npm install(install the necessary dependencies)
 2. Execute the command ```npm run build```. This will compile the project and output the files into a ```build``` folder. 
+
+Node v7.10.0
+NPM : v4.2.0
