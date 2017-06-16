@@ -5,7 +5,9 @@ html {
     min-height: 100%;
 }
 
-
+.table {
+	margin-bottom: 55px; 
+}
 
 body {
   margin: 0;

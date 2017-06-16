@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import request from 'request';
 import { browserHistory } from 'react-router'; 
-import { apiEndpoint } from './config'; 
+import { apiEndpoint, clientEndpoint } from './config'; 
 
 export default class Container extends Component {
     constructor(props) {
@@ -12,11 +12,17 @@ export default class Container extends Component {
             campaignDataRetrieved: false,
             campaign_detail: [],
             err: null,
-            date: ''
+            date: '', 
+            isNeg: false 
         }
 
-        this.viewCampaign = this.viewCampaign.bind(this);
+        this.token = ''; 
+        this.viewCampaign = this.viewCampaign.bind(this); 
+
     }
+
+
+
     viewCampaign(data, campaign, use_default, description, query_data) {
 
         if (typeof query_data == 'undefined') {
@@ -48,7 +54,7 @@ export default class Container extends Component {
 
         var self = this;
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => { 
             var req = request({
                 type: 'GET',
                 uri: uri
@@ -88,7 +94,7 @@ export default class Container extends Component {
                         reject(self.state.err)
                     }); 
 
-                    //browserHistory.push('error');
+            
                 }
 
                 if (body.status == 'OK') {
@@ -98,7 +104,8 @@ export default class Container extends Component {
                     body.end_value = Math.floor(body.end_value);
                     body.max_drawdown = Math.floor(body.max_drawdown);
                     body.max_delta = body.max_delta.toFixed(4);
-                    body.average_delta = body.average_delta.toFixed(4);
+                    body.average_delta = body.average_delta.toFixed(4); 
+                    let counter = 0;
 
                     for (let i = 0; i < body.series.length; i++) {
 
@@ -107,10 +114,18 @@ export default class Container extends Component {
                         body.series[i].change = body.series[i].change.toFixed(4);
                         body.series[i].date = body.series[i].date.replace('T00:00:00', '');
 
+                        if (body.series[i].c < 0) {
+                            counter--; 
+                        } else {
+                            counter++ 
+                        }
+
                         body.series[i].o = body.series[i].o.toFixed(4);
                         body.series[i].h = body.series[i].h.toFixed(4);
                         body.series[i].l = body.series[i].l.toFixed(4);
-                        body.series[i].c = body.series[i].c.toFixed(4);
+                        body.series[i].c = body.series[i].c.toFixed(4); 
+
+                    
 
                         if (i == body.series.length - 1) {
 
@@ -130,30 +145,37 @@ export default class Container extends Component {
                     }
 
                     self.setState({
-                        campaign_detail: body
-                    })
-
-
-                    self.setState({ campaignDataRetrieved: true })
-
-					
-                    resolve({
                         campaign_detail: body, 
-                        date: moment({ year: d4[0], month: d4[1] - 1, day: d4[2] }), 
-                        description: description, 
-                        query: `${query_data}&d=${description}` 
-                    })
-
+                        isNeg: counter < 0 ? true : false, 
+                        campaignDataRetrieved: true
+                    }, () => {
+                        resolve({
+                                campaign_detail: body, 
+                                date: moment({ year: d4[0], month: d4[1] - 1, day: d4[2] }), 
+                                description: description, 
+                                query: `${query_data}&d=${description}` 
+                            })
+                        })
                 }
             })
         })
 
 
     }
-    render() {
+
+
+    render() { 
+        console.log(this.props.children)
         return (
             <div>
-                {React.cloneElement(this.props.children, { viewCampaign: this.viewCampaign, campaign_detail: this.state.campaign_detail, series_err: this.state.err, date: this.state.date, description: this.state.description })}
+                {React.cloneElement(this.props.children, 
+                { viewCampaign: this.viewCampaign, 
+                self: this,  
+                isNeg: this.state.isNeg, 
+                campaign_detail: this.state.campaign_detail, 
+                series_err: this.state.err, 
+                date: this.state.date, 
+                description: this.state.description })}
             </div>
         )
     }

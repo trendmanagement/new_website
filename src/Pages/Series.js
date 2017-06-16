@@ -5,6 +5,7 @@ import moment from 'moment';
 import request from 'request';
 import { apiEndpoint } from '../config';
 import './css/Series.css';
+import swal from 'sweetalert2'; 
 import { Loader } from '../Components';
 import '../../node_modules/react-mdl/extra/material.js'
 
@@ -28,19 +29,6 @@ export default class Series extends Component {
 
         this.state = {
             date: this.props.date,
-            table_data: {
-                max_drawdown: '',
-                starting_date: '',
-                end_date: '',
-                starting_value: '',
-                end_value: '',
-                total_cost: '',
-                total_number_of_trades: '',
-                max_delta: '',
-                average_delta: '',
-                deltaRendered: false
-
-            },
             campaign_detail: campaign_detail,
             payoffData: [],
             deltaData: [],
@@ -48,9 +36,22 @@ export default class Series extends Component {
             positions: [],
             activeTab: 0,
             include_price: 1, 
-            isLoading: true
+            isLoading: true, 
+            err: null
         }
 
+        this.table_data = {
+            max_drawdown: '',
+            starting_date: '',
+            end_date: '',
+            starting_value: '',
+            end_value: '',
+            total_cost: '',
+            max_delta: '',
+            average_delta: '',
+            deltaRendered: false, 
+            total_number_of_trades: ''
+        }; 
 
         // this.props.campaign_detail.end_date = this.props.campaign_detail.end_date.replace('T00:00:00', '');
 
@@ -58,7 +59,12 @@ export default class Series extends Component {
         this.getRecentData = this.getRecentData.bind(this);
         this.updatePayoffChart = this.updatePayoffChart.bind(this);
         this.setDate = this.setDate.bind(this);
-        this.checkHandler = this.checkHandler.bind(this);
+        this.checkHandler = this.checkHandler.bind(this); 
+
+    } 
+
+    componentDidMount() {
+        this.switchNeg(this.props); 
     }
 
     componentWillReceiveProps(nextProps) {
@@ -67,16 +73,50 @@ export default class Series extends Component {
                 date: nextProps.date, 
                 isLoading: true
             }, () => {
-                this.updatePayoffChart(nextProps.date).then(() => {
+                this.updatePayoffChart(nextProps.date)
+                .then(() => {
                     this.setState({
-                        isLoading: false
+                        isLoading: false, 
+                        err: null
                     })
-                });
+                })
+                .catch(err => {
+                    console.log('err', err); 
+                    this.setState({
+                        isLoading: false, 
+                        err: 'No payoff series data'
+                    })
+                })
             })
           
+        } 
+
+        if (this.props.isNeg != nextProps.isNeg) { 
+            this.switchNeg(nextProps); 
+       
         }
 
     }
+
+    switchNeg(props) {
+             let style; 
+            if (document.getElementById('chartStyle')) {
+                style = document.getElementById('chartStyle'); 
+            } else {
+                style = document.createElement('style');  
+                style.id="chartStyle"
+                document.getElementsByTagName('head')[0].appendChild(style);
+            }
+            if (props.isNeg) {
+                
+                style.innerHTML = '.equity-chart-container .amChartsLegend>svg>g>g>g:nth-child(2)>g> * {stroke: #db4c3c}';
+            } else {
+                style.innerHTML = '.equity-chart-container .amChartsLegend>svg>g>g>g:nth-child(2)>g> * {stroke: #7f8da9}';
+            }
+
+    
+    }
+
 
 
     checkHandler(e) {
@@ -100,14 +140,16 @@ export default class Series extends Component {
         let rows = [];
         let first_rows = [];
 
-
         for (let prop in this.props.campaign_detail) {
 
             if (this.props.campaign_detail[prop] || this.props.campaign_detail[prop] === 0) {
 
-                if (prop in this.state.table_data) {
+                if (prop in this.table_data) {
 
-                    let val = this.props.campaign_detail[prop];
+
+                    let val = this.props.campaign_detail[prop]; 
+                    this.table_data[prop] = val; 
+
                     let prop_str = prop.replace(/_/g, ' ');
 
 
@@ -115,7 +157,7 @@ export default class Series extends Component {
                         this.props.campaign_detail[prop] = this.props.campaign_detail[prop].replace('T00:00:00', '');
                     }
 
-                    if (prop == 'total_cost' || prop == 'total_number_of_trades' || prop == 'max_drawdown' || prop == 'end_value' || prop == 'starting_value') {
+                    if (prop == 'total_cost' || prop == 'max_drawdown' || prop == 'end_value' || prop == 'starting_value') {
                         if (val != 0) { val = numberWithCommas(val) };
 
 
@@ -158,11 +200,20 @@ export default class Series extends Component {
             date: date, 
             isLoading: true
         }, () => {
-            this.updatePayoffChart(date).then(() => {
+            this.updatePayoffChart(date)
+                .then(() => {
                     this.setState({
-                        isLoading: false
+                        isLoading: false,
+                        err: null
+                    })  
+                })
+                .catch(err => {
+                    console.log('err', err);
+                    this.setState({
+                        isLoading: false, 
+                        err: 'No payoff series data'
                     })
-                });;
+                })
         })
 
         
@@ -200,7 +251,6 @@ export default class Series extends Component {
 
                     body = JSON.parse(body);
                     if (body.status == 'error') {
-                        console.log(body.message)
 
                         request({
                             type: 'GET',
@@ -213,7 +263,7 @@ export default class Series extends Component {
                             }
                             body = JSON.parse(body);
                             if (body.status == 'error') {
-                                console.log(body.message)
+                                reject(body.message); 
                                 return;
                             }
                             if (body.status == "OK") {
@@ -240,7 +290,7 @@ export default class Series extends Component {
                         }); 
                         resolve(); 
                     } else {
-                        reject(); 
+                        reject(body.message); 
                     }
                 })
         })
@@ -253,7 +303,6 @@ export default class Series extends Component {
 
         if (this.props.campaign_detail.length == 0) {
             return <div className="series-container">
-
                 <div className="row">
                     <div className="col-lg-12">
                         <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
@@ -267,7 +316,6 @@ export default class Series extends Component {
         }
         else return (
             <div className="series-container">
-
                 <div className="row">
                     <div className="col-lg-12">
                         <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
@@ -382,7 +430,14 @@ export default class Series extends Component {
                                             /> : ''}
                                 </div>
                             </div>
-                        </div> :    
+                        </div> :  
+                        this.state.err ? 
+                        <div className="row">
+                            <div className="col-lg-12">
+                                   <p>{this.state.err}</p>
+                            </div>
+                        </div>
+                        :
                         <div className="row">
                             <div className="col-lg-12">
                                     <Loader />
