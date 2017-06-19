@@ -6,7 +6,7 @@ module.exports = {
         host            : 'localhost',
         port            : 3306,
         user            : 'tmqrexowebuser',
-        password        : 'tml2928',
+        password        : 'B92yVj',
         database        : 'tmqrexo_db'
 
     }   
