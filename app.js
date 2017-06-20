@@ -8,10 +8,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+var app = express();
 var routes = require('./routes/index');
 var store = require('./utils/session_handler').createStore();
 
-var app = express();
 
 app.set('trust proxy', 1);
 app.use(session({
@@ -24,6 +24,8 @@ app.use(session({
     },
     store: store
 }));
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

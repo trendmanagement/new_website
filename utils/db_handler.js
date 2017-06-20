@@ -5,14 +5,14 @@ var dbconfig = require('./db_connection').config;
 var pool = mysql.createPool(dbconfig);
 
 var getUser = function getUser(id) {
-    return new Promise(function (resolve, reject) {
-        pool.getConnection(function (err, connection) {
+    return new Promise(function(resolve, reject) {
+        pool.getConnection(function(err, connection) {
             if (err || typeof connection == 'undefined' || !connection) {
                 return reject(err);
             }
 
             var sql = 'SELECT * FROM `users` WHERE user_id = ?';
-            connection.query(sql, [id], function (err, rows) {
+            connection.query(sql, [id], function(err, rows) {
                 connection.release();
                 if (err) {
                     return reject(err);
@@ -26,21 +26,21 @@ var getUser = function getUser(id) {
 
 module.exports = {
 
-    pool: pool, 
+    pool: pool,
     // get user 
     getUser: getUser,
 
     // get user exos 
     getExos: function getExos(uid) {
 
-        return new Promise(function (resolve, reject) {
-            pool.getConnection(function (err, connection) {
+        return new Promise(function(resolve, reject) {
+            pool.getConnection(function(err, connection) {
                 if (err || typeof connection == 'undefined' || !connection) {
                     return reject(err);
                 }
 
                 var sql = 'SELECT * from `exos` WHERE user_id = ?';
-                connection.query(sql, [uid], function (err, rows) {
+                connection.query(sql, [uid], function(err, rows) {
                     connection.release();
                     if (err) reject(err);
 
@@ -52,16 +52,17 @@ module.exports = {
 
     // add exo to user exos 
     addExo: function addExo(uid, exo_data) {
-        return new Promise(function (resolve, reject) {
-            pool.getConnection(function (err, connection) {
+        return new Promise(function(resolve, reject) {
+            pool.getConnection(function(err, connection) {
                 if (err || typeof connection == 'undefined' || !connection) {
                     return reject(err);
                 }
                 var id = '_' + Math.random().toString(36).substr(2, 9);
                 var sql = 'INSERT INTO `exos` (exo_id, exo_name, starting_date, end_date, max_delta, total_number_of_trades, total_cost, avg_delta, max_drawdown, starting_value, end_value, description, user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)';
-                connection.query(sql, [id, exo_data.name, exo_data.starting_date, exo_data.end_date, exo_data.max_delta, exo_data.total_number_of_trades, exo_data.total_cost, exo_data.average_delta, exo_data.max_drawdown, exo_data.starting_value, exo_data.end_value, exo_data.description, uid], function (err, rows) {
+                connection.query(sql, [id, exo_data.name, exo_data.starting_date, exo_data.end_date, exo_data.max_delta, exo_data.total_number_of_trades, exo_data.total_cost, exo_data.average_delta, exo_data.max_drawdown, exo_data.starting_value, exo_data.end_value, exo_data.description, uid], function(err, rows) {
                     connection.release();
-                    if (err) reject(err);else {
+                    if (err) reject(err);
+                    else {
 
                         resolve(rows);
                     }
@@ -71,14 +72,14 @@ module.exports = {
     },
 
     deleteExo: function deleteExo(id) {
-        return new Promise(function (resolve, reject) {
-            pool.getConnection(function (err, connection) {
+        return new Promise(function(resolve, reject) {
+            pool.getConnection(function(err, connection) {
                 if (err || typeof connection == 'undefined' || !connection) {
                     return reject(err);
                 }
 
                 var sql = 'DELETE FROM `exos` WHERE exo_id = ?';
-                connection.query(sql, [id], function (err, rows) {
+                connection.query(sql, [id], function(err, rows) {
                     connection.release();
                     if (err) reject(err);
                     resolve(rows);
@@ -90,8 +91,8 @@ module.exports = {
     // create user 
     createUser: function createUser(data) {
 
-        return new Promise(function (resolve, reject) {
-            pool.getConnection(function (err, connection) {
+        return new Promise(function(resolve, reject) {
+            pool.getConnection(function(err, connection) {
                 if (err || typeof connection == 'undefined' || !connection) {
                     return reject(err);
                 }
@@ -100,13 +101,13 @@ module.exports = {
                 var want_info = data.want_info ? 1 : 0;
                 var sql = 'INSERT INTO users (user_id, \n                    first_name, last_name, password, email, \n                    employees, informed, company_name, \n                    phone, detail, want_info) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
 
-                connection.query(sql, [id, data.firstName, data.lastName, data.hash, data.workEmail, data.employVal, data.comeFromVal, data.companyName, data.phone, data.detail, want_info], function (err, rows) {
+                connection.query(sql, [id, data.firstName, data.lastName, data.hash, data.workEmail, data.employVal, data.comeFromVal, data.companyName, data.phone, data.detail, want_info], function(err, rows) {
 
                     connection.release();
                     if (err) reject('User exists');
-                    getUser(id).then(function (user) {
+                    getUser(id).then(function(user) {
                         return resolve(user);
-                    }).catch(function (err) {
+                    }).catch(function(err) {
                         return reject(err);
                     });
                 });
@@ -116,15 +117,16 @@ module.exports = {
 
     // delete user 
     deleteUser: function deleteUser(id) {
-        return new Promise(function (resolve, reject) {
-            pool.getConnection(function (err, connection) {
+        return new Promise(function(resolve, reject) {
+            pool.getConnection(function(err, connection) {
                 if (err || typeof connection == 'undefined' || !connection) {
                     return reject(err);
                 } else {
                     var sql = 'DELETE FROM `users` WHERE user_id = ?';
-                    connection.query(sql, [id], function (err, rows) {
+                    connection.query(sql, [id], function(err, rows) {
                         connection.release();
-                        if (err) reject('Faied to delete user');else {
+                        if (err) reject('Faied to delete user');
+                        else {
                             resolve(id);
                         }
                     });
@@ -135,27 +137,43 @@ module.exports = {
 
     // log user in
     loginUser: function loginUser(name, pass) {
-        return new Promise(function (resolve, reject) {
-            pool.getConnection(function (err, connection) {
+        return new Promise(function(resolve, reject) {
+            pool.getConnection(function(err, connection) {
                 if (err || typeof connection == 'undefined' || !connection) {
                     return reject(err);
                 }
                 var sql = 'SELECT * FROM `users` WHERE email = ?';
-                connection.query(sql, [name], function (err, rows) {
+                connection.query(sql, [name], function(err, rows) {
                     if (err || rows.length == 0) {
                         connection.release();
                         reject('email');
                     } else {
                         var _sql = 'SELECT * FROM `users` WHERE (email = ?) AND (password = ?)';
 
-                        connection.query(_sql, [name, pass], function (err, rows) {
+                        connection.query(_sql, [name, pass], function(err, rows) {
                             connection.release();
-                            if (err || rows.length == 0) reject('password');else {
+                            if (err || rows.length == 0) reject('password');
+                            else {
 
                                 resolve(rows);
                             }
                         });
                     }
+                });
+            });
+        });
+    },
+    didUserExist: function didUserExist(email) {
+        return new Promise(function(resolve, reject) {
+            pool.getConnection(function(err, connection) {
+                if (err || typeof connection == 'undefined' || !connection) {
+                    return reject(err);
+                }
+                var sql = 'SELECT `email` FROM `users` WHERE `email` = "' + email+'"';
+                connection.query(sql , function(err, rows) {
+                    connection.release();
+                    if (err) reject(err);
+                    resolve(rows);
                 });
             });
         });
