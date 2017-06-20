@@ -1,24 +1,14 @@
 module.exports = {
-    // config: {
-    //     connectionLimit : 1,
-    //     queueLimit      : 100,
-    //     aquireTimeout   : 5000,
-    //     host            : 'localhost',
-    //     port            : 3306,
-    //     user            : 'tmqrexowebuser',
-    //     password        : 'B92yVj',
-    //     database        : 'tmqrexo_db'
-
-    // }   
-        config: {
+    config: {
         connectionLimit : 1,
         queueLimit      : 100,
         aquireTimeout   : 5000,
-        host            : 'eu-cdbr-azure-west-b.cloudapp.net',
+        host            : 'localhost',
         port            : 3306,
-        user            : 'b20145b345f400',
-        password        : 'e26ae7df',
-        database        : 'tnqrexo_db'
+        user            : 'tmqrexowebuser',
+        password        : 'B92yVj',
+        database        : 'tmqrexo_db'
 
     }   
+
 }
