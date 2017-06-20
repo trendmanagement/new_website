@@ -2,10 +2,9 @@ export const apiEndpoint = 'http://66.70.157.69:28864';
 
 let port_data = window.location.port; 
 let port; 
-if (port_data != '') {
-	port = ':' + port_data;
-}
-
+port_data != undefined ? port = ':' + port_data : "";
+console.log('Port_data: ',port_data);
+console.log('Port: ',port);
 export const clientEndpoint = window.location.protocol + '//' + window.location.hostname + port
 //export const clientEndpoint = 'http://localhost:9000'; 
 
