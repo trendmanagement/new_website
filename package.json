@@ -19,7 +19,8 @@
     "recharts": "^0.20.8",
     "request": "^2.79.0",
     "simplebar": "^2.3.2",
-    "sweetalert": "^1.1.3"
+    "sweetalert": "^1.1.3",
+    "sweetalert2": "^6.6.5"
   },
   "scripts": {
     "start": "react-scripts start",
