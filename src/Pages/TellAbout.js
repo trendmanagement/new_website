@@ -78,7 +78,7 @@ export default class TellAbout extends Component {
         errorTrigger: false,
         emailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         wordRegex: /[a-zA-Z]+/,
-        numberRegex: /((\+)|(00[ ]?))(([\d][-. ]{0,1}){1}([-. ]{0,1}\(\d+\)[-. ]{0,1}){0,1}){7,30}/
+        numberRegex: /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/
     }; 
 
     invalid = false;
@@ -314,7 +314,7 @@ export default class TellAbout extends Component {
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <TextField
-                                        hintText="+12(34)56-78-912"
+                                        hintText="1(234)567-89-12"
                                         floatingLabelText="Phone number"
                                         floatingLabelStyle={styles.floatLabel}
                                         fullWidth={true}
@@ -342,8 +342,6 @@ export default class TellAbout extends Component {
                                         <MenuItem value={"Podcasts"} primaryText="Podcasts" />
                                         <MenuItem value={"TV"} primaryText="TV" />
                                         <MenuItem value={"Online Publication"} primaryText="Online Publication" />
-                                        <MenuItem value={"Current Betterment Customer"} primaryText="Current Betterment Customer" />
-                                        <MenuItem value={"Betterment Employee"} primaryText="Betterment Employee" />
                                         <MenuItem value={"Friend/Word of Mouth"} primaryText="Friend/Word of Mouth" />
                                         <MenuItem value={"Other"} primaryText="Other" />
                                     </SelectField>

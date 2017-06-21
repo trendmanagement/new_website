@@ -22,7 +22,9 @@ import {
   MyExos, 
   Signup, 
   Services,
-  GetstartedSlider
+  GetstartedSlider,
+  ForgPass,
+  ResetPass
 } from './Pages'; 
 
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';  
@@ -58,7 +60,9 @@ class App extends Component {
           <Route path="value-propositions" component={Services} />
           <Route path="alpha-project" component={Services} /> 
           <Route path="tech-services" component={Services} />
+          <Route path="forgot-password" component={ForgPass} />
           <Route path="getstrated-slider" component={GetstartedSlider}/>
+          <Route path="reset" component={ResetPass}/>
         </Route>
       </Router>
     );

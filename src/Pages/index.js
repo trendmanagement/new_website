@@ -17,7 +17,8 @@ import MyExos from './MyExos';
 import Signup from './Signup'; 
 import Services from './Services'; 
 import GetstartedSlider from './GetstartedSlider'; 
-
+import ForgPass from './ForgPass'
+import ResetPass from './ResetPass'
 module.exports = { 
     List, 
     Series, 
@@ -37,6 +38,7 @@ module.exports = {
     MyExos, 
     Signup, 
     Services,
-    GetstartedSlider
-
+    GetstartedSlider,
+    ForgPass,
+    ResetPass
 }
