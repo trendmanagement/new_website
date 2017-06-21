@@ -5,14 +5,16 @@ var router = express.Router();
 var path = require('path');
 var db = require('../utils/db_handler');
 var pass_handler = require('../utils/password_handler');
+var crypter = require('../utils/crypter');
 const nodemailer = require('nodemailer');
+var os = require("os");
 let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
     secure: true, // secure:true for port 465, secure:false for port 587
     auth: {
-        user: 'b.druzhynin@gmail.com',
-        pass: 'dinamicka123'
+        user: 'tmqrexo@gmail.com',
+        pass: 'setPassWord'
     }
 });
 /* GET home page. */
@@ -125,23 +127,68 @@ router.get('/logout', function(req, res) {
 //Forgot password
 router.post('/check-user', function(req, res) {
     db.didUserExist(req.body.email).then(
-        resolve => {
-            transporter.sendMail({
-                from: '"TMQREXO" <no-replay@tmqrexo.com>',
-                to: req.body.email,
-                subject: 'Password Remind',
-                html: '<b>Test</b>'
-            }, (error, info) => {
-                if (error) {
-                    res.status(400).json({ sendEmail: false });
-                    return console.log(error);
-                }
-                console.log('Message %s sent: %s', info.messageId, info.response);
-                res.status(400).json({ sendEmail: true });
-            });
+        resolveExisting => {
+            var hash = pass_handler.hashPassword(new Date().getTime());
+            db.registerHash(resolveExisting[0].user_id, req.body.email, hash).then(function(resolveRegister) {
+                    setTimeout(() => {
+                        console.log("start init Clearing... [user_id]:", resolveRegister)
+                        db.cleareHash(resolveRegister).then(function(resolveCleare) {
+                            console.log("Hashe cleared: ", resolveCleare)
+                        }).catch(function(rejectCleare) {
+                            console.log("Hash cleare - *error* : ", rejectCleare);
+                        })
+                        console.log("end init clearing...[user_id]:", resolveRegister)
+                    }, 7200000, resolveRegister)
+                    console.log('builded link: ', req.headers.origin + '/reset?h=' + hash)
+                    transporter.sendMail({
+                        from: '"TMQREXO" <no-replay@tmqrexo.com>',
+                        to: req.body.email,
+                        subject: 'Password Reset',
+                        html: '<p>Please use following link to <a href="' + req.headers.origin + '/reset?h=' + hash + '" target="_blank">reset your password</a><p><p>If you did not request this password change please feel freeto ignore this email.</p>'
+                    }, (error, info) => {
+                        if (error) {
+                            return console.log(error);
+                        }
+                        console.log('Message %s sent: %s', info.messageId, info.response);
+                    });
+                    res.status(200).json({ userExist: true, hashRegister: true })
+                })
+                .catch(function(err) {
+                    res.status(200).json({ userExist: true, hashRegister: false, error: err })
+                })
         },
         error => {
-            res.status(400).json({ redirected: false, ans: error })
+            res.status(400).json({ userExist: false, ans: error })
+        }
+    )
+
+});
+//reset check
+router.post('/reset', function(req, res) {
+    console.log("hash: ", req.body);
+    var pass_hash = pass_handler.hashPassword(req.body.password);
+    db.checkHash(req.body.hash).then(
+        resolveSend => {
+            console.log('resolveSend', resolveSend);
+            db.updatePass(resolveSend[0].user_id, pass_hash).then(
+                resolveUpdate => {
+                    console.log("start init Clearing... [user_id]:", resolveUpdate)
+                    db.cleareHash(resolveUpdate).then(function(resolveCleare) {
+                        console.log("Hashe cleared: ", resolveCleare)
+                    }).catch(function(rejectCleare) {
+                        console.log("Hash cleare - *error* : ", rejectCleare);
+                    })
+                    console.log("end init clearing...[user_id]:", resolveUpdate)
+                    res.status(200).json({ checkH: true, updatePass: true })
+                },
+                rejectUpdate => {
+                    res.status(200).json({ checkH: true, updatePass: false })
+                }
+            )
+        },
+        rejectSend => {
+            console.log('rejectSend', rejectSend);
+            res.status(200).json({ error: rejectSend });
         }
     )
 

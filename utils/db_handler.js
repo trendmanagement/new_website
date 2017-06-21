@@ -169,11 +169,74 @@ module.exports = {
                 if (err || typeof connection == 'undefined' || !connection) {
                     return reject(err);
                 }
-                var sql = 'SELECT `email` FROM `users` WHERE `email` = "' + email+'"';
-                connection.query(sql , function(err, rows) {
+                var sql = 'SELECT * FROM `users` WHERE `email` = "' + email + '"';
+                connection.query(sql, function(err, rows) {
                     connection.release();
                     if (err) reject(err);
                     resolve(rows);
+                });
+            });
+        });
+    },
+    registerHash: function registerHash(user_id, email, hash) {
+        return new Promise(function(resolve, reject) {
+            pool.getConnection(function(err, connection) {
+                if (err || typeof connection == 'undefined' || !connection) {
+                    return reject(err);
+                }
+                var sql = 'INSERT INTO hash_store (user_id, email, token_hash) values (?,?,?)';
+                connection.query(sql, [user_id, email, hash], function(err, rows) {
+                    connection.release();
+                    if (err) { reject('exist already');
+                        console.log("from 'registerHash' - : ", err) }
+                    console.log("from 'registerHash' + : ", user_id)
+                    resolve(user_id);
+
+                });
+            });
+        });
+    },
+    cleareHash: function cleareHash(user_id) {
+        return new Promise(function(resolve, reject) {
+            pool.getConnection(function(err, connection) {
+                if (err || typeof connection == 'undefined' || !connection) {
+                    return reject(err);
+                }
+                var sql = 'DELETE FROM hash_store WHERE user_id = ?';
+                connection.query(sql, [user_id], function(err, rows) {
+                    connection.release();
+                    if (err) reject(err);
+                    resolve(user_id);
+                });
+            });
+        });
+    },
+    checkHash: function checkHash(hash) {
+        return new Promise(function(resolve, reject) {
+            pool.getConnection(function(err, connection) {
+                if (err || typeof connection == 'undefined' || !connection) {
+                    return reject(err);
+                }
+                var sql = 'SELECT * FROM hash_store WHERE `token_hash` = ?';
+                connection.query(sql, [hash], function(err, rows) {
+                    connection.release();
+                    if (err || rows.length == 0) reject('expired');
+                    resolve(rows);
+                });
+            });
+        });
+    },
+    updatePass: function updatePass(user_id,pass) {
+        return new Promise(function(resolve, reject) {
+            pool.getConnection(function(err, connection) {
+                if (err || typeof connection == 'undefined' || !connection) {
+                    return reject(err);
+                }
+                var sql = 'UPDATE users SET password = ? WHERE user_id = ?';
+                connection.query(sql, [pass,user_id], function(err, rows) {
+                    connection.release();
+                    if (err || rows.length == 0) reject('error');
+                    resolve(user_id);
                 });
             });
         });

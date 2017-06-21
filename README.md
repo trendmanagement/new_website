@@ -26,7 +26,30 @@ module.exports = {
     }   
 }
 ```
+## Setting up email
+You should do next step
+1.  On your computer, open Gmail.
+2.  In the top right, click Settings Settings.
+3.  Click Settings.
+4.  Click the Forwarding and POP/IMAP tab.
+5.  In the "IMAP Access" section, select Enable IMAP.
+6.  Click Save Changes.
 
+https://support.google.com/mail/answer/7126229?hl=en
+
+In file 'routes/index.js', change "setPassWord" to password from your Gmail account.
+
+``` javascript
+let transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // secure:true for port 465, secure:false for port 587
+    auth: {
+        user: 'tmqrexo@gmail.com',
+        pass: 'setPassWord'
+    }
+});
+```
 ### Version used in development
 * Node - v7.10.0
 * NPM - v4.2.0
