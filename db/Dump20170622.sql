@@ -16,6 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `exos`
+--
+
+DROP TABLE IF EXISTS `exos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `exos` (
+  `exo_id` varchar(45) NOT NULL,
+  `exo_name` varchar(45) NOT NULL,
+  `starting_date` varchar(45) DEFAULT NULL,
+  `end_date` varchar(45) DEFAULT NULL,
+  `user_id` varchar(45) DEFAULT NULL,
+  `max_delta` varchar(45) DEFAULT NULL,
+  `total_number_of_trades` varchar(45) DEFAULT NULL,
+  `total_cost` varchar(45) DEFAULT NULL,
+  `avg_delta` varchar(45) DEFAULT NULL,
+  `max_drawdown` varchar(45) DEFAULT NULL,
+  `end_value` varchar(45) DEFAULT NULL,
+  `starting_value` varchar(45) DEFAULT NULL,
+  `description` mediumtext,
+  PRIMARY KEY (`exo_id`),
+  UNIQUE KEY `exo_id_UNIQUE` (`exo_id`),
+  KEY `user_id_idx` (`user_id`),
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `exos`
 --
 
@@ -26,6 +54,23 @@ INSERT INTO `exos` VALUES ('_415k2dfv7','CL_Bidirectional V3','2017-05-09','2017
 UNLOCK TABLES;
 
 --
+-- Table structure for table `hash_store`
+--
+
+DROP TABLE IF EXISTS `hash_store`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hash_store` (
+  `user_id` varchar(45) NOT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `token_hash` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_id_UNIQUE` (`user_id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `hash_store`
 --
 
@@ -33,6 +78,21 @@ LOCK TABLES `hash_store` WRITE;
 /*!40000 ALTER TABLE `hash_store` DISABLE KEYS */;
 /*!40000 ALTER TABLE `hash_store` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) unsigned NOT NULL,
+  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sessions`
@@ -45,6 +105,31 @@ INSERT INTO `sessions` VALUES ('3JSFCXnvyYNkcDYp7WWlWijWZIsLF3M2',1498228601,'{\
 UNLOCK TABLES;
 
 --
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `user_id` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `first_name` varchar(45) DEFAULT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `employees` varchar(45) NOT NULL,
+  `informed` varchar(45) DEFAULT NULL,
+  `company_name` varchar(45) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `detail` varchar(45) DEFAULT NULL,
+  `want_info` int(11) DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_id_UNIQUE` (`user_id`),
+  UNIQUE KEY `username_UNIQUE` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `users`
 --
 
@@ -53,10 +138,6 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES ('_00jf5asio','test111@test.test','1bbd886460827015e5d605ed44252251','test','test','100 - 500','Social Media','test','+12(35)34343','test',0),('_0olopzcoz','helloworld@ok.ok','1bbd886460827015e5d605ed44252251','test','test','Over 2000','Social Media','test','+90(36)45654','hello world',0),('_e7yoe2whm','info@dinamicka.com','b56ff73a79f1b2dd58402adc6c903c24','Oleksandr','Petryk','20 - 100','Friend/Word of Mouth','Dinamicka','+12(333)3333333','asd',1),('_fqbvieab6','test0@test.test','1bbd886460827015e5d605ed44252251','test','test','20 - 100','Current Betterment Customer','test','+12(23)45344','test test test!!!!!',0),('_gupbsrma8','test2@test.test','1bbd886460827015e5d605ed44252251','test','test','500 - 2000','Online Publication','test','+90(34)36534','no',0),('_mbjyjsbnc','hello@test.test','25d55ad283aa400af464c76d713c07ad','test','test','20 - 100','Social Media','test','+12(34)33423','',0),('_r5j6tqgf9','test@test.test','25d55ad283aa400af464c76d713c07ad','test','test','100 - 500','Podcasts','test','+23(23)354235','',0),('_vqg6cz73z','test1@test.test','1bbd886460827015e5d605ed44252251','test','test','100 - 500','Social Media','test','+12(34)34323','',0),('_xzr8gp7o2','b.druzhynin@dinamicka.com','b51e8dbebd4ba8a8f342190a4b9f08d7','Bogdan','Druzhynin','20 - 100','Social Media','Dinamicka','+80631199330','You are awesome!',1),('_zd5h71uj4','o.petryk@dinamicka.com','25d55ad283aa400af464c76d713c07ad','Oleksandr ','Petryk','20 - 100','Social Media','Dinamicka  Develpoment','+380501563356','no',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'tnqrexo_db'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -67,4 +148,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-21 21:29:02
+-- Dump completed on 2017-06-22 11:58:17
