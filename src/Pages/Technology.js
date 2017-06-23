@@ -55,7 +55,7 @@ export default class Technology extends Component {
                                 <div className="tech-description-container">
                                     <h1 className="tech-title">Technology</h1>
                                     <p className="tech-text">Our entire system resides on cloud based redundant servers. This removes most information technology threats to ensure a constant uptime. The technology behind our process begins with our models developed in the python programming language. Python lets us develop our strategies quickly and integrate into our real-time trading environment effectively.
-                                With Python we are able to take ideas and requests from development to a functioning strategy within a short time frame.</p>
+                                With python we are able to take ideas and requests from development to a functioning strategy within a short time frame.</p>
                                     <p className="tech-text">
                                         An integral part of our system has been the efficient storage of vast amounts of futures and options data. After pushing the limits of relational databases, we transitioned to NoSQL data storage. We have found MongoDB to have high performance and scalability.
                                 </p>

@@ -156,9 +156,9 @@ export default class EXOFacts extends Component {
                 <p className="exo-prompt">Example of index construction</p>
             </div>
             <div className="container-grid-block">
-                <p className="exo-legend">The EXO Bullish Collar consists of 1 ling put, 1 short call and 1 long future.</p>
+                <p className="exo-legend">The EXO Bullish Collar consists of 1 long put, 1 short call and 1 long future.</p>
                 <p className="exo-legend">The call and put are each out of money.</p>
-                <p className="exo-legend">"n" days before monthly expiration the expiring options are sold and the algorithmically determined new strikes and entered.</p>
+                <p className="exo-legend">"n" days before monthly expiration the expiring options are sold and the algorithmically determined new strikes are entered.</p>
                 <p className="exo-legend">The transcation period occurs overa specified period in the last hour of the roll day.</p>
             </div>
             </div>
