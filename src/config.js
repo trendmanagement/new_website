@@ -53,13 +53,15 @@ export const options = {
 		logo: `${process.env.PUBLIC_URL}/images/icons/fx.png`, 
 		items: [{value: '6E', label: 'Euro FX'}, 
 			{value: '6J', label: 'Japanese Yen'}, 
-			{value: '6B', label: 'British Pound'}], 
+			{value: '6B', label: 'British Pound'},
+			{value: '6C', label: 'Canadian Dollar'}], 
 		selected: null
 	}, 
 	metals: {
 		label: 'Metals', 
 		logo: `${process.env.PUBLIC_URL}/images/icons/metals.png`, 
-		items: [{value: 'SI', label: 'Silver'}],
+		items: [{value: 'SI', label: 'Silver'},
+			{value: 'GC', label: 'Gold'}],
 		selected: null
 	}
 } 
