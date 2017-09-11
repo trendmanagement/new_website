@@ -51,7 +51,8 @@ export const options = {
 	metals: {
 		label: 'Metals', 
 		logo: `${process.env.PUBLIC_URL}/images/icons/metals.png`, 
-		items: [{value: 'SI', label: 'Silver'}],
+		items: [{value: 'SI', label: 'Silver'},
+			{value: 'GC', label: 'Gold'}],
 		selected: null
 	}
 } 
