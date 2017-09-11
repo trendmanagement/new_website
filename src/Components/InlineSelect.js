@@ -20,9 +20,6 @@ class InlineSelect extends Component {
         </div>
     }
 
-    componentDidMount() {
-        console.log(this.props)
-    }
 
     handleClickOutside = evt => {
         this.setState({

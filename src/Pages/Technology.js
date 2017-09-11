@@ -15,26 +15,23 @@ export default class Technology extends Component {
         }
 
         this.stickyFooter = () => {
-            
             let rowheight = this.refs.text.offsetHeight;  
 
             let cont_height = this.refs.footer.refs.footerContainer.offsetHeight; 
             let pageHeight = this.refs.techContainer.offsetHeight + cont_height; 
-
-             
-            if (pageHeight < window.innerHeight) {
+			
+			if (pageHeight < window.innerHeight) { 
                 pageHeight = window.innerHeight
             }
 
             this.setState({
-                offset: pageHeight - cont_height, 
+                offset: pageHeight - cont_height,
                 rowheight: rowheight
             })
         }
     }
 
     componentDidMount() {
-        console.log(this)
         window.addEventListener('resize', this.stickyFooter); 
         this.stickyFooter(); 
     }

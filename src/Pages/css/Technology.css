@@ -16,6 +16,9 @@
     font-weight: 800; 
     color: #000; 
 } 
+.tech-text:last-child {
+	margin-bottom: 25px; 
+}
 
 .full-width-flex {
     width: 100%; 

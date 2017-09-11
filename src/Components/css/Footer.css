@@ -3,7 +3,8 @@
 }
 
 .who-we-are {
-    background: #fafafa; 
+    background: #fafafa;
+	min-height: 350px;	
 }
 .footer-container {
     position: absolute; 

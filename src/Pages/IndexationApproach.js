@@ -13,18 +13,17 @@ export default class IndexationApproach extends Component {
         }
 
         this.stickyFooter = () => {
-            console.log(this)
 
             let cont_height = this.refs.footer.refs.footerContainer.offsetHeight;
             let pageHeight = this.refs.textContainer.offsetHeight + cont_height;
-
-
+		
+			console.log(pageHeight, cont_height, window.innerHeight, this.refs.textContainer.offsetHeight)
             if (pageHeight < window.innerHeight) {
                 pageHeight = window.innerHeight
             }
 
             this.setState({
-                offset: pageHeight - cont_height,
+                offset: pageHeight - cont_height
             })
         }
     }
@@ -61,7 +60,7 @@ export default class IndexationApproach extends Component {
                             <li>Agricultural</li>
                             <li>Volatility</li>
                         </ul> 
-                        <p>TMQR EXO Index reveals a wide array of previously invisible or opaque sophisticated investment strategies which, newly documented, clarify the message when the market speaks.</p>
+                        <p className="padded-bottom">TMQR EXO Index reveals a wide array of previously invisible or opaque sophisticated investment strategies which, newly documented, clarify the message when the market speaks.</p>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12" ref="text">
                         <p>If a bullish TMQR EXO Index is in the ascendancy then the prevailing market view is directionally positive. If the trend is down the bullish TMQR EXO Index will be descending. If a neutral TMQR EXO Index is in the ascendancy then the prevailing market view is directionless. If the trend is directionally positive or negative the neutral TMQR EXO Index will be descending. The ability to track these different market views gives trend following traders many new potentially profitable opportunities.</p>

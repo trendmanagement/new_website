@@ -25,7 +25,7 @@ export default class Footer extends Component {
     } 
 
     componentDidMount() {
-        console.log(this)
+        
         if (window.location.pathname == '/' || 
         window.location.pathname == '/home') {
             if (!localStorage.getItem('disclaimer_shown')) {

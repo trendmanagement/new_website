@@ -165,7 +165,6 @@ export default class Container extends Component {
 
 
     render() { 
-        console.log(this.props.children)
         return (
             <div>
                 {React.cloneElement(this.props.children, 
