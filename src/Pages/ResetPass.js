@@ -161,7 +161,7 @@ export default class ResetPass extends Component {
                                     onChange={(e) => { this.handleChange(e.target.value, this.refs.pass1, 'pass1') }}
                                 />
                                 <TextField
-                                    floatingLabelText="repeat new password"
+                                    floatingLabelText="Repeat new password"
                                     fullWidth={true}
                                     type="text"
                                     ref="pass2"
@@ -179,7 +179,7 @@ export default class ResetPass extends Component {
                                     <RaisedButton onClick={this.submitForm} label="Reset my pass" fullWidth={true} primary={true} />
                                 </div>
                                 <p className="forgotPassword-form__signup-prompt">Don't have an account?
-                           <Link to="/signup">
+                                    <Link to="/signup">
                                         <span className="forgotPassword-form__signup-prompt__blue-label"> Sign Up</span>
                                     </Link>
                                 </p>
