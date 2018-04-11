@@ -80,7 +80,7 @@ export default class Footer extends Component {
                     </div>
                     <div className="container-grid-block">
                         <div className="copyright">
-                            © 2017 - TMQR EXO INDEX
+                            © 2018 - TMQR EXO INDEX
                             </div>
                     </div>
                 </div>
